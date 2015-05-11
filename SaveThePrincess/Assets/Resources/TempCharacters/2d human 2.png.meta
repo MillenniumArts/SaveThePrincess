@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: adb60ad7e7804274db3cde915423b3f1
+timeCreated: 1431380442
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Head
+    21300002: Thigh
+    21300004: Shoulder
+    21300006: Body
+    21300008: Calf
+    21300010: Hand
+    21300012: Shield
+    21300014: Sword
+    21300016: Item
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Head
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 389
+        width: 94
+        height: 101
+      alignment: 9
+      pivot: {x: .461820632, y: .194414198}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 384
+        width: 66
+        height: 95
+      alignment: 9
+      pivot: {x: .391246676, y: .771998048}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shoulder
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 396
+        width: 55
+        height: 79
+      alignment: 9
+      pivot: {x: .408647031, y: .763486087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Body
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 180
+        width: 104
+        height: 172
+      alignment: 9
+      pivot: {x: .50000006, y: .303864956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 251
+        width: 52
+        height: 69
+      alignment: 9
+      pivot: {x: .486196965, y: .718452811}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 254
+        width: 42
+        height: 88
+      alignment: 9
+      pivot: {x: .56835866, y: .867042899}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shield
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 23
+        width: 116
+        height: 116
+      alignment: 9
+      pivot: {x: .376246423, y: .487624794}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Sword
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 4
+        width: 25
+        height: 211
+      alignment: 9
+      pivot: {x: .643554688, y: .163225651}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Item
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 55
+        width: 35
+        height: 55
+      alignment: 9
+      pivot: {x: .517095089, y: .133210063}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

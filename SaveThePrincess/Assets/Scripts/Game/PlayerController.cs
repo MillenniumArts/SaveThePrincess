@@ -140,24 +140,17 @@ public class PlayerController: MonoBehaviour {
 	/// </summary>
 	void Start(){
 		// initialize player's Sprite
-		//* SHOULD THIS BE IN EDITOR?
-		this.body = this.gameObject.GetComponent<CreateCombination> ();
+
+		/** HELP HERE!! */
+		// I can't seem to set body to an object! :\
+
+		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
+
+		//Debug.Log (this.body.GetComponentInParent<PlayerController>().name);
 
 		// Stat setup
 		// THIS SHOULD BE DIFFERENT DEPENDING ON TYPE OF PLAYER!
-		this.totalHealth = 100;
-		this.remainingHealth = totalHealth;
-				
-		this.armor = 10;
-		this.physicalDamage = 15;
-		this.magicalDamage = 15;
-		this.totalMana = 25;
-		this.remainingMana = totalMana;
-		this.speed = 1;
-		
-		this.numArmorItems = 2;
-		this.numUsableItems = 2;
-		this.numWeaponItems = 2;
+
 		// Item Setup
 
 		// this.armorItems = new Item[numArmorItems];
@@ -168,9 +161,6 @@ public class PlayerController: MonoBehaviour {
 		// this.armorEnchants = new Item[numArmorItems];
 		// this.weaponEnchants = new Item[numWeaponItems];
 		// this.usableEnchants = new Item[numUsableItems];
-
-
-
 	}
 
 	#endregion MonoBehaviour

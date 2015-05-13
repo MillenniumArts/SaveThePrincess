@@ -4,7 +4,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public PlayerController leftPlayer, rightPlayer;
+	public PlayerController leftPlayer;
+	public PlayerController rightPlayer;
 	public GameObject gameObj;
 	public GameController gameController;
 
@@ -27,15 +28,9 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.leftHealthText.text = "";
-		this.rightHealthText.text = "";
-
-		leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
-		leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
-		rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
-		rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
-
+		// get game Objects to associate with code
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
 		} 
@@ -43,20 +38,52 @@ public class GameController : MonoBehaviour {
 			Debug.Log("Cannot find GameObject!");
 			return;
 		}
+		// HUD INIT
+		this.leftHealthText.text = "";
+		this.rightHealthText.text = "";
+		this.leftManaText.text = "";
+		this.rightManaText.text = "";
+		this.leftArmorText.text = "";
+		this.rightArmorText.text = "";
+		this.leftSpeedText.text = "";
+		this.rightSpeedText.text = "";
+		this.leftDamageIndText.text = "";
+		this.rightDamageIndText.text = "";
+		// BUTTON LISTENERS
+		this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
+		this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
 
+		this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
+		this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
 
-		if (this.gameObj != null) {
-			this.leftPlayer = this.gameObj.AddComponent<PlayerController> ();
-			this.rightPlayer = this.gameObj.AddComponent<PlayerController> ();
+		/** HELP HERE!!*/
+		// The body is not set to an instance of an object, and I can't figure out why!
 
-			this.leftPlayer.totalHealth = 100;
-			this.rightPlayer.totalHealth = 100;
+		// grab all CreateCombinations
+		CreateCombination[] bodies = GameObject.FindObjectsOfType<CreateCombination> ();
 
-			//this.leftPlayer.body.random = true;
-			//this.rightPlayer.body.random = true;
+		// iterate through each, assigning left to left, right to right
+		foreach (CreateCombination bod in bodies) {
 
-			UpdateText ();
-		} 
+			Debug.Log (bod.GetComponentInParent<PlayerController> ().name);
+			// get playerController 
+			PlayerController pc = bod.GetComponentInParent<PlayerController> ();
+			// check for left or Right
+			if (pc.name == "Left") {
+				// assign PC
+				this.leftPlayer = pc;
+				this.leftPlayer.body = bod;
+				//Debug.Log(this.leftPlayer);
+			} else if (pc.name == "Right") {
+				this.rightPlayer = pc;
+				this.rightPlayer.body = bod;
+				//Debug.Log(this.rightPlayer);
+			}
+		}
+
+		this.leftPlayer.body.random = true;
+
+		UpdateText ();
 
 	}
 
@@ -83,6 +110,8 @@ public class GameController : MonoBehaviour {
 	public void PlayerPhysicalAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
 
+		Debug.Log (attackingPlayer + " Physically Attacked " + attackedPlayer);
+
 		// animate sprites
 
 		// apply damage to player
@@ -93,7 +122,7 @@ public class GameController : MonoBehaviour {
 
 	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
-		
+		Debug.Log (attackingPlayer + " Magically Attacked " + attackedPlayer);
 		// animate sprites
 		
 		// apply damage to player

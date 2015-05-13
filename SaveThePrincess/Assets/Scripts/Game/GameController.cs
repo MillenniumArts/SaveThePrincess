@@ -8,18 +8,32 @@ public class GameController : MonoBehaviour {
 	public GameObject gameObj;
 	public GameController gameController;
 
-	// GUI
-	public GUIText leftHealthText, rightHealthText;
+	// GUI/HUD
+	public GUIText leftHealthText, 
+				   rightHealthText,
+				   leftManaText,
+				   rightManaText,
+				   leftArmorText,
+				   rightArmorText,
+				   leftSpeedText,
+				   rightSpeedText,
+				   leftDamageIndText,
+				   rightDamageIndText;
 	[SerializeField] 
-	private Button leftAttack = null, rightAttack = null; // assign in the editor
+	private Button leftPhysAttack = null,
+				   rightPhysAttack = null,
+				   leftMagAttack = null,
+				   rightMagAttack = null;
 
 	// Use this for initialization
 	void Start () {
 		this.leftHealthText.text = "";
 		this.rightHealthText.text = "";
 
-		leftAttack.onClick.AddListener (()=>{PlayerAttack(this.rightPlayer, 10);});
-		rightAttack.onClick.AddListener (()=>{PlayerAttack(this.leftPlayer, 10);});
+		leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
+		leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
+		rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
+		rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
 
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
 		if (gameControllerObject != null) {
@@ -27,6 +41,7 @@ public class GameController : MonoBehaviour {
 		} 
 		if (gameControllerObject == null) {
 			Debug.Log("Cannot find GameObject!");
+			return;
 		}
 
 
@@ -37,26 +52,52 @@ public class GameController : MonoBehaviour {
 			this.leftPlayer.totalHealth = 100;
 			this.rightPlayer.totalHealth = 100;
 
-			UpdateHealth ();
+			//this.leftPlayer.body.random = true;
+			//this.rightPlayer.body.random = true;
+
+			UpdateText ();
 		} 
 
 	}
 
-	void UpdateHealth(){
-		this.leftHealthText.text = "HEALTH: " + this.leftPlayer.remainingHealth;
-		this.rightHealthText.text = "HEALTH: " + this.rightPlayer.remainingHealth;
+	void UpdateText(){
+		this.leftHealthText.text = "HEALTH: " + this.leftPlayer.remainingHealth+"/"+this.leftPlayer.totalHealth;
+		this.rightHealthText.text = "HEALTH: " + this.rightPlayer.remainingHealth+"/"+this.rightPlayer.totalHealth;
+
+		this.leftManaText.text = "MANA: " + this.leftPlayer.remainingMana+"/"+this.leftPlayer.totalMana;
+		this.rightManaText.text = "MANA: " + this.rightPlayer.remainingMana + "/" + this.rightPlayer.totalMana;
+	
+		this.leftArmorText.text = "ARMOR: " + this.leftPlayer.armor;
+		this.rightArmorText.text = "ARMOR: " + this.rightPlayer.armor;
+
+		this.leftSpeedText.text = "SPEED: " + this.leftPlayer.speed;
+		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		UpdateHealth ();
+		UpdateText ();
 	}
 
 	// deal damage to a player (makeshift game call)
-	public void PlayerAttack(PlayerController attackedPlayer, int attackDamage){
+	public void PlayerPhysicalAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
-		//Debug.Log ("DAMAGING!");
-		attackedPlayer.TakeDamage (attackDamage);
+
+		// animate sprites
+
+		// apply damage to player
+		attackedPlayer.TakeDamage (attackingPlayer.physicalDamage);
+		
+		//UpdateHealth ();
+	}
+
+	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
+		// call player take damage to handle armor etc on the player object
+		
+		// animate sprites
+		
+		// apply damage to player
+		attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
 		//UpdateHealth ();
 	}
 }

@@ -56,9 +56,6 @@ public class GameController : MonoBehaviour {
 		this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
 		this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
 
-		/** HELP HERE!!*/
-		// The body is not set to an instance of an object, and I can't figure out why!
-
 		// grab all CreateCombinations
 		CreateCombination[] bodies = GameObject.FindObjectsOfType<CreateCombination> ();
 
@@ -73,18 +70,11 @@ public class GameController : MonoBehaviour {
 				// assign PC
 				this.leftPlayer = pc;
 				this.leftPlayer.body = bod;
-				//Debug.Log(this.leftPlayer);
 			} else if (pc.name == "Right") {
 				this.rightPlayer = pc;
 				this.rightPlayer.body = bod;
-				//Debug.Log(this.rightPlayer);
 			}
 		}
-
-		this.leftPlayer.body.random = true;
-
-		UpdateText ();
-
 	}
 
 	void UpdateText(){
@@ -110,8 +100,6 @@ public class GameController : MonoBehaviour {
 	public void PlayerPhysicalAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
 
-		Debug.Log (attackingPlayer + " Physically Attacked " + attackedPlayer);
-
 		// animate sprites
 
 		// apply damage to player
@@ -122,7 +110,7 @@ public class GameController : MonoBehaviour {
 
 	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
-		Debug.Log (attackingPlayer + " Magically Attacked " + attackedPlayer);
+
 		// animate sprites
 		
 		// apply damage to player

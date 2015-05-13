@@ -145,6 +145,7 @@ public class PlayerController: MonoBehaviour {
 		// I can't seem to set body to an object! :\
 
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
+		this.body.random = true;
 
 		//Debug.Log (this.body.GetComponentInParent<PlayerController>().name);
 

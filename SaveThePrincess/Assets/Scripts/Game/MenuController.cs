@@ -164,16 +164,20 @@ public class MenuController : MonoBehaviour {
 
 		// LOAD NEXT SCENE WITH THIS PLAYER
 		this.confirm.onClick.AddListener (()=>{
-			this.player.totalHealth = this.newHealth;
-			this.player.remainingHealth = this.newHealth;
-			this.player.physicalDamage = this.newDamage;
-			this.player.armor = this.newArmor;
-			this.player.magicalDamage = this.newMagic;
-			this.player.speed = this.newSpeed;
+			if (numCredits == 0){
+				this.player.totalHealth = this.newHealth;
+				this.player.remainingHealth = this.newHealth;
+				this.player.physicalDamage = this.newDamage;
+				this.player.armor = this.newArmor;
+				this.player.magicalDamage = this.newMagic;
+				this.player.speed = this.newSpeed;
 
-			DontDestroyOnLoad(this.player);
+				DontDestroyOnLoad(this.player);
 
-			Application.LoadLevel ("Testscene2");
+				Application.LoadLevel ("Testscene2");
+			}else{
+
+			}
 		});
 
 	}

@@ -9,7 +9,7 @@ public class SwapSprites : MonoBehaviour {
 	/// <summary>
 	/// This array will be filled with the combination that is passed to it.
 	/// </summary>
-	private Sprite[] customCombination;
+	public Sprite[] sprites;
 
 	/// <summary>
 	/// Loads the combination that is passed to it.
@@ -19,12 +19,12 @@ public class SwapSprites : MonoBehaviour {
 	/// <param name="types">String array containing the types of the sprite sheet.</param>
 	/// <param name="numberOfElements">Number of elements in the combination.</param>
 	public void LoadCombination(string folder, string name, int[] types, int numberOfElements){
-		customCombination = new Sprite[numberOfElements];
+		sprites = new Sprite[numberOfElements];
 		for(int i = 0; i < numberOfElements; i++){
 			/*var*/ Sprite[] subSprites = Resources.LoadAll<Sprite>(folder + "/" + name + types[i]);	// Sprites are loaded.
-			customCombination[i] = subSprites[i];														// And set in to a temporary array.
+			sprites[i] = subSprites[i];														// And set in to a temporary array.
 		}	
-		Swap(customCombination, numberOfElements);														// Swap function is called.
+		Swap(sprites, numberOfElements);														// Swap function is called.
 	}
 
 	/// <summary>

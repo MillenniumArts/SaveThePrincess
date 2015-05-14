@@ -5,74 +5,74 @@ using System.Collections;
 /// Sets combinations randomly, by custom input, or by saved input.
 /// </summary>
 public class CreateCombination : MonoBehaviour {
-
+	
 	#region Variables
 	/// <summary>
 	/// Reference to the SwapSprite script that should be attached to the same character as this script.
 	/// </summary>
 	[Tooltip("Plug in the character to which this is attached.")]
 	public SwapSprites character;
-
+	
 	/// <summary>
 	/// The number of elements on the sprite sheet of this character.
 	/// </summary>
 	[Tooltip("Number of elements on the sprite sheet of this character.")]
 	public int numOfElements;
-
+	
 	/// <summary>
 	/// The names of the sprite sheet elements.
 	/// </summary>
 	[Tooltip("Enter in the names of the sprite sheet elements. (Body part names)")]
 	public string[] spriteSheetElements;
-
+	
 	/// <summary>
 	/// Enter in the types of the elements. (Difference between sprite sheets). Example: "Fire", "Water", "Steel"
 	/// </summary>
 	[Tooltip("Enter in the types of the elements. (Difference between sprite sheets)")]
 	public string[] types;
-
+	
 	/// <summary>
 	/// The folder's name.
 	/// </summary>
 	[Tooltip("Enter in the name of the folder in which the sprites are contained.")]
 	public string folder;
-
+	
 	/// <summary>
 	/// The name of the sprite sheet.  Include spaces.  Do NOT include the number.
 	/// </summary>
 	[Tooltip("Enter in the name of the sprite sheet.  Include spaces, but do NOT include the number.)")]
 	public string spriteSheetName;
-
+	
 	/// <summary>
 	/// The integer value of the current combination.  Numbers are used to get the correct sprite sheet.
 	/// NOTE: set to public for testing purposes.
 	/// </summary>
 	private int[] combo;
-
+	
 	/// <summary>
 	/// Input in the inspector the custom combination.
 	/// </summary>
 	[Tooltip("Enter in the names of the types of the elements to create a custom combination")]
 	public string[] customCombo;
-
+	
 	/// <summary>
 	/// The current combination.
 	/// NOTE: set to public for testing purposes.
 	/// </summary>
 	private string[] currentCombo;
-
+	
 	/// <summary>
 	/// The saved combination.
 	/// NOTE: set to public for testing purposes.
 	/// </summary>
 	private string[] savedCombo;
-
+	
 	/// <summary>
 	///	Is there a saved combination?
 	/// </summary>
 	private bool isSaved = false;
 	#endregion Variables
-
+	
 	#region Monobehaviour
 	void Start(){
 		combo = new int[numOfElements];
@@ -80,14 +80,14 @@ public class CreateCombination : MonoBehaviour {
 		currentCombo = new string[numOfElements];
 		savedCombo = new string[numOfElements];
 	}
-
+	
 	#region For Testing
 	// The following is used for testing without creating buttons.
 	public bool random = false;		// Activate random combo.
 	public bool custom = false;		// Activate custom combo.
 	public bool saveCurrent = false;// Activate save current combo.
 	public bool useSaved = false;	// Activate use saved combo.
-
+	
 	void Update(){
 		if(random){
 			UseRandomCombo();
@@ -108,7 +108,7 @@ public class CreateCombination : MonoBehaviour {
 	}
 	#endregion For Testing
 	#endregion Monobehaviour
-
+	
 	#region Public Functions
 	/// <summary>
 	/// Gets the current combination and sets it to 1 string.
@@ -121,7 +121,7 @@ public class CreateCombination : MonoBehaviour {
 		}
 		return tempCurCombo;
 	}
-
+	
 	/// <summary>
 	/// Gets the current combination in its array form.
 	/// </summary>
@@ -129,7 +129,7 @@ public class CreateCombination : MonoBehaviour {
 	public string[] GetCurrentComboArray(){
 		return currentCombo;
 	}
-
+	
 	/// <summary>
 	/// Used to pass a custom combination to this script from an outside source.
 	/// </summary>
@@ -141,7 +141,7 @@ public class CreateCombination : MonoBehaviour {
 			Debug.Log ("Input is too large for " + this.gameObject.name + "'s combination array");
 		}
 	}
-
+	
 	/// <summary>
 	/// Saves the current combination.
 	/// </summary>
@@ -151,7 +151,7 @@ public class CreateCombination : MonoBehaviour {
 		}
 		isSaved = true;
 	}
-
+	
 	/// <summary>
 	///	Creates a random combination and sets the current combination to it.  Also calls the method to swap sprites.
 	/// </summary>
@@ -163,14 +163,14 @@ public class CreateCombination : MonoBehaviour {
 		}
 		SetCurrentCombo(temp);
 	}
-
+	
 	/// <summary>
 	/// Sets the current combination to the current combination.  Also calls the method to swap sprites.
 	/// </summary>
 	public void UseCustomCombo(){
 		SetCurrentCombo(customCombo);
 	}
-
+	
 	/// <summary>
 	/// Sets the current combintion to the saved combination.  Also calls the method to swap sprites.
 	/// </summary>
@@ -178,8 +178,9 @@ public class CreateCombination : MonoBehaviour {
 		if(isSaved)
 			SetCurrentCombo(savedCombo);
 	}
+	
 	#endregion Public Functions
-
+	
 	#region Private Functions
 	/// <summary>
 	/// Sets the current combination to whatever combination is passed to it.
@@ -192,7 +193,7 @@ public class CreateCombination : MonoBehaviour {
 		SetCombo(currentCombo);
 		character.LoadCombination(folder, spriteSheetName, combo, numOfElements);
 	}
-
+	
 	/// <summary>
 	/// Translates the combination that is palssed to it into integers.
 	/// </summary>

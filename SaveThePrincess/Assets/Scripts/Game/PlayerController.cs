@@ -106,7 +106,7 @@ public class PlayerController: MonoBehaviour {
 	/// <summary>
 	/// The base physical damage for this player (BEFORE ENCHANTMENTS) 
 	/// </summary>
-	public int physicalDamage;
+	public int physicalDamage ;
 
 	/// <summary>
 	/// The base magic damage for this player (BEFORE ENCHANTMENTS) 
@@ -129,6 +129,8 @@ public class PlayerController: MonoBehaviour {
 			this.remainingHealth = 0;
 	}
 
+
+
 	#endregion Public functions
 
 	#region Private functions
@@ -141,13 +143,8 @@ public class PlayerController: MonoBehaviour {
 	void Start(){
 		// initialize player's Sprite
 
-		/** HELP HERE!! */
-		// I can't seem to set body to an object! :\
-
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
 		this.body.random = true;
-
-		//Debug.Log (this.body.GetComponentInParent<PlayerController>().name);
 
 		// Stat setup
 		// THIS SHOULD BE DIFFERENT DEPENDING ON TYPE OF PLAYER!

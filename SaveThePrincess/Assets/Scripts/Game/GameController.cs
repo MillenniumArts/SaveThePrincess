@@ -61,16 +61,14 @@ public class GameController : MonoBehaviour {
 
 		// iterate through each, assigning left to left, right to right
 		foreach (CreateCombination bod in bodies) {
-
-			Debug.Log (bod.GetComponentInParent<PlayerController> ().name);
 			// get playerController 
 			PlayerController pc = bod.GetComponentInParent<PlayerController> ();
 			// check for left or Right
-			if (pc.name == "Left") {
+			if (pc.tag == "Player") {
 				// assign PC
 				this.leftPlayer = pc;
 				this.leftPlayer.body = bod;
-			} else if (pc.name == "Right") {
+			} else if (pc.tag == "Enemy") {
 				this.rightPlayer = pc;
 				this.rightPlayer.body = bod;
 			}
@@ -99,22 +97,15 @@ public class GameController : MonoBehaviour {
 	// deal damage to a player (makeshift game call)
 	public void PlayerPhysicalAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
-
 		// animate sprites
-
 		// apply damage to player
 		attackedPlayer.TakeDamage (attackingPlayer.physicalDamage);
-		
-		//UpdateHealth ();
 	}
 
 	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
-
 		// animate sprites
-		
 		// apply damage to player
 		attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
-		//UpdateHealth ();
 	}
 }

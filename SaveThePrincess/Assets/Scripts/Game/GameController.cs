@@ -53,11 +53,11 @@ public class GameController : MonoBehaviour {
 		this.leftDamageIndText.text = "";
 		this.rightDamageIndText.text = "";
 		// BUTTON LISTENERS
-		//this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
-		//this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
+		this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
+		this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
 
-		//this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
-		//this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
+		this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
+		this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
 
 		// grab all CreateCombinations
 		CreateCombination[] bodies = GameObject.FindObjectsOfType<CreateCombination> ();
@@ -92,23 +92,10 @@ public class GameController : MonoBehaviour {
 		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
 	}
 
-	void CheckTurn(){
-		
-		// player turn
-		if (playerTurn){
-			// BUTTON LISTENERS
-			this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
-			this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
-		}else {
-			this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
-			this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
-		}
-	}
 
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
-		CheckTurn ();
 
 		if (this.leftPlayer.remainingHealth > 0 && !playerTurn) {
 			if (Random.Range(0,1) == 1)
@@ -139,25 +126,28 @@ public class GameController : MonoBehaviour {
 		// apply damage to player
 		attackedPlayer.TakeDamage (attackingPlayer.physicalDamage);
 		if (attackingPlayer == this.leftPlayer) {
-			//this.leftPhysAttack.onClick.RemoveListener();
 			playerTurn = false;
 		}else {
 			playerTurn = true;
 		}
-		//Debug.Log ("physattack");
 	}
 
 	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
 		// call player take damage to handle armor etc on the player object
 		// animate sprites
 		// apply damage to player
-		attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
-		attackingPlayer.remainingMana -= 10;
-		if (attackingPlayer == this.leftPlayer) {
-			//this.leftPhysAttack.onClick.RemoveListener();
-			playerTurn = false;
+		if (attackingPlayer.remainingMana - 10 >= 0) {
+			attackingPlayer.remainingMana -= 10;
+		
+			attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
+
+			if (attackingPlayer == this.leftPlayer) {
+				playerTurn = false;
+			} else {
+				playerTurn = true;
+			}
 		} else {
-			playerTurn = true;
+			Debug.Log ("Not Enough Mana For That!");
 		}
 	}
 }

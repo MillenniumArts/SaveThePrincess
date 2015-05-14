@@ -35,7 +35,7 @@ public class PlayerController: MonoBehaviour {
 	/// </summary>
 	public int numUsableItems ;
 
-	#region Items
+	#region Inventory
 	///<summary>
 	///Player Armor - An array of Item objects that represents all armor objects for the player
 	///</summary>
@@ -50,7 +50,13 @@ public class PlayerController: MonoBehaviour {
 	///Player Usables - An array of Item objects that represents all usable objects for the player
 	///</summary>
 	//public Item[] usableItems;
-	#endregion Items
+
+	/// <summary>
+	/// The inventory of the player.
+	/// </summary>
+	public InventoryController inventory;
+
+	#endregion Inventory
 
 	#region Enchantments
 	///<summary>
@@ -127,6 +133,54 @@ public class PlayerController: MonoBehaviour {
 			this.remainingHealth -= incomingDamage;
 		else
 			this.remainingHealth = 0;
+	}
+
+	/// <summary>
+	/// Gets the back hand transform.
+	/// </summary>
+	/// <returns>The back hand transform.</returns>
+	public Transform GetBackHandTransform(){
+		//body.spriteSheetElements[5] = shield
+		// get all spriterenderers
+		SpriteRenderer[] s = this.body.character.GetComponentsInChildren<SpriteRenderer>();
+
+		// get sword name
+		string n = this.body.character.sprites [5].name;
+
+		Debug.Log (n);
+		// find spriteRenderer
+		Transform t=null;
+		for (int i=0; i<s.Length; i++) {
+			if (s[i].sprite.name == n){
+				t = s[i].transform;
+				return t;
+			}
+		}
+		return t;
+	}
+
+	/// <summary>
+	/// Gets the front hand transform.
+	/// </summary>
+	/// <returns>The front hand transform.</returns>
+	public Transform GetFrontHandTransform(){
+		//body.spriteSheetElements[7] = sword
+		// get all spriterenderers
+		SpriteRenderer[] s = this.body.character.GetComponentsInChildren<SpriteRenderer>();
+		
+		// get sword name
+		string n = this.body.character.sprites [7].name;
+		
+		Debug.Log (n);
+		// find spriteRenderer
+		Transform t=null;
+		for (int i=0; i<s.Length; i++) {
+			if (s[i].sprite.name == n){
+				t = s[i].transform;
+				return t;
+			}
+		}
+		return t;
 	}
 
 

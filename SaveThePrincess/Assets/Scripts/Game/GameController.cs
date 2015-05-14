@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 	public PlayerController rightPlayer;
 	public GameObject gameObj;
 	public GameController gameController;
+	private bool playerTurn ;
 
 	// GUI/HUD
 	public GUIText leftHealthText, 
@@ -28,8 +29,10 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerTurn = true;
 		// get game Objects to associate with code
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
+
 
 		if (gameControllerObject != null) {
 			gameController = gameControllerObject.GetComponent<GameController> ();
@@ -50,11 +53,11 @@ public class GameController : MonoBehaviour {
 		this.leftDamageIndText.text = "";
 		this.rightDamageIndText.text = "";
 		// BUTTON LISTENERS
-		this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
-		this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
+		//this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
+		//this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
 
-		this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
-		this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
+		//this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
+		//this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
 
 		// grab all CreateCombinations
 		CreateCombination[] bodies = GameObject.FindObjectsOfType<CreateCombination> ();
@@ -89,9 +92,44 @@ public class GameController : MonoBehaviour {
 		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
 	}
 
+	void CheckTurn(){
+		
+		// player turn
+		if (playerTurn){
+			// BUTTON LISTENERS
+			this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
+			this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
+		}else {
+			this.rightPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.rightPlayer, this.leftPlayer);});
+			this.rightMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.rightPlayer, this.leftPlayer);});
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
+		CheckTurn ();
+
+		if (this.leftPlayer.remainingHealth > 0 && !playerTurn) {
+			if (Random.Range(0,1) == 1)
+				PlayerPhysicalAttack(this.rightPlayer,this.leftPlayer);
+			else
+				PlayerMagicAttack(this.rightPlayer,this.leftPlayer);
+		}
+
+
+		if (this.leftPlayer.remainingHealth == 0) {
+			// player dead
+			Application.LoadLevel ("CharacterSelect");
+		} else if (this.rightPlayer.remainingHealth == 0) {
+			// enemy dead, fight another
+			this.leftPlayer.remainingHealth = this.leftPlayer.totalHealth;
+			this.leftPlayer.remainingMana = this.leftPlayer.totalMana;
+
+			DontDestroyOnLoad(this.leftPlayer);
+
+			Application.LoadLevel ("Testscene2");
+		}
 	}
 
 	// deal damage to a player (makeshift game call)
@@ -100,6 +138,13 @@ public class GameController : MonoBehaviour {
 		// animate sprites
 		// apply damage to player
 		attackedPlayer.TakeDamage (attackingPlayer.physicalDamage);
+		if (attackingPlayer == this.leftPlayer) {
+			//this.leftPhysAttack.onClick.RemoveListener();
+			playerTurn = false;
+		}else {
+			playerTurn = true;
+		}
+		//Debug.Log ("physattack");
 	}
 
 	public void PlayerMagicAttack(PlayerController attackingPlayer, PlayerController attackedPlayer){
@@ -107,5 +152,12 @@ public class GameController : MonoBehaviour {
 		// animate sprites
 		// apply damage to player
 		attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
+		attackingPlayer.remainingMana -= 10;
+		if (attackingPlayer == this.leftPlayer) {
+			//this.leftPhysAttack.onClick.RemoveListener();
+			playerTurn = false;
+		} else {
+			playerTurn = true;
+		}
 	}
 }

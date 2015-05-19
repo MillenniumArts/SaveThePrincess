@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 	public GameObject gameObj;
 	public GameController gameController;
 	private bool playerTurn ;
+	public int numEnemiesKilled;
 
 	// GUI/HUD
 	public GUIText leftHealthText, 
@@ -19,8 +20,7 @@ public class GameController : MonoBehaviour {
 				   rightArmorText,
 				   leftSpeedText,
 				   rightSpeedText,
-				   leftDamageIndText,
-				   rightDamageIndText;
+				   numEnemiesKilledText;
 	[SerializeField] 
 	private Button leftPhysAttack = null,
 				   rightPhysAttack = null,
@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 		// HUD INIT
+		this.numEnemiesKilled = PlayerPrefs.GetInt("score");
 		this.leftHealthText.text = "";
 		this.rightHealthText.text = "";
 		this.leftManaText.text = "";
@@ -50,8 +51,7 @@ public class GameController : MonoBehaviour {
 		this.rightArmorText.text = "";
 		this.leftSpeedText.text = "";
 		this.rightSpeedText.text = "";
-		this.leftDamageIndText.text = "";
-		this.rightDamageIndText.text = "";
+		this.numEnemiesKilledText.text = "";
 		// BUTTON LISTENERS
 		this.leftPhysAttack.onClick.AddListener (()=>{PlayerPhysicalAttack(this.leftPlayer, this.rightPlayer);});
 		this.leftMagAttack.onClick.AddListener (()=>{PlayerMagicAttack(this.leftPlayer, this.rightPlayer);});
@@ -78,6 +78,14 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	// increment counter and set local storage
+
+	void UpdateScore(){
+		if (this.rightPlayer.remainingHealth <=0)
+			this.numEnemiesKilled++;
+		PlayerPrefs.SetInt ("score", this.numEnemiesKilled);
+	}
+
 	void UpdateText(){
 		this.leftHealthText.text = "HEALTH: " + this.leftPlayer.remainingHealth+"/"+this.leftPlayer.totalHealth;
 		this.rightHealthText.text = "HEALTH: " + this.rightPlayer.remainingHealth+"/"+this.rightPlayer.totalHealth;
@@ -90,12 +98,15 @@ public class GameController : MonoBehaviour {
 
 		this.leftSpeedText.text = "SPEED: " + this.leftPlayer.speed;
 		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
+
+		this.numEnemiesKilledText.text = "SCORE: " + this.numEnemiesKilled;
 	}
 
 
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
+		UpdateScore();
 
 		if (this.leftPlayer.remainingHealth > 0 && !playerTurn) {
 			if (Random.Range(0,1) == 1)
@@ -107,15 +118,27 @@ public class GameController : MonoBehaviour {
 
 		if (this.leftPlayer.remainingHealth == 0) {
 			// player dead
-			Application.LoadLevel ("CharacterSelect");
-		} else if (this.rightPlayer.remainingHealth == 0) {
+			Destroy (this.leftPlayer);
+
+			// check for high score
+			if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore")){
+				// set new HighScore
+				PlayerPrefs.SetInt("hiscore", this.numEnemiesKilled);
+			}
+
+			// reset score
+			PlayerPrefs.SetInt("score", 0);
+			// load 
+			Application.LoadLevel ("DeathScene_LVP");
+		} else if (this.rightPlayer.remainingHealth <= 0) {
+			this.numEnemiesKilled++;
 			// enemy dead, fight another
 			this.leftPlayer.remainingHealth = this.leftPlayer.totalHealth;
 			this.leftPlayer.remainingMana = this.leftPlayer.totalMana;
 
 			DontDestroyOnLoad(this.leftPlayer);
 
-			Application.LoadLevel ("Testscene2");
+			Application.LoadLevel ("Battle_LVP");
 		}
 	}
 
@@ -124,7 +147,7 @@ public class GameController : MonoBehaviour {
 		// call player take damage to handle armor etc on the player object
 		// animate sprites
 		// apply damage to player
-		attackedPlayer.TakeDamage (attackingPlayer.physicalDamage);
+		attackingPlayer.PhysicalAttack (attackedPlayer);
 		if (attackingPlayer == this.leftPlayer) {
 			playerTurn = false;
 		}else {
@@ -136,18 +159,13 @@ public class GameController : MonoBehaviour {
 		// call player take damage to handle armor etc on the player object
 		// animate sprites
 		// apply damage to player
-		if (attackingPlayer.remainingMana - 10 >= 0) {
-			attackingPlayer.remainingMana -= 10;
-		
-			attackedPlayer.TakeDamage (attackingPlayer.magicalDamage);
 
-			if (attackingPlayer == this.leftPlayer) {
-				playerTurn = false;
-			} else {
-				playerTurn = true;
-			}
+		bool pass = attackingPlayer.MagicAttack (attackedPlayer);
+
+	if (attackingPlayer == this.leftPlayer && pass) {
+			playerTurn = false;
 		} else {
-			Debug.Log ("Not Enough Mana For That!");
+			playerTurn = true;
 		}
-	}
+	} 
 }

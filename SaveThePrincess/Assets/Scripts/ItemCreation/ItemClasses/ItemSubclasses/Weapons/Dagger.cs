@@ -2,22 +2,22 @@
 using System.Collections;
 
 /// <summary>
-/// Body armor class.
+/// Dagger class.
 /// </summary>
-public class BodyArmor : Armor {
+public class Dagger : Weapon {
 	/// <summary>
-	/// The body armor type options.
+	/// The dagger type options.
 	/// </summary>
-	public string[] bodyArmorOptionsTypes;
+	public string[] daggerOptionsTypes;
 	/// <summary>
-	/// The body armor type options' sprites.
+	/// The dagger type options sprites.
 	/// </summary>
-	public Sprite[] bodyArmorOptionsSprites;
+	public Sprite[] daggerOptionsSprites;
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
 	private int typeIndex;
-	// Minimums and maximums of the stats.
+	// The minimums and maximums of stats.
 	public int atkMin;
 	public int atkMax;
 	public int defMin;
@@ -28,23 +28,23 @@ public class BodyArmor : Armor {
 	public int hpMax;
 	public int manaMin;
 	public int manaMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
-		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Armor" + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, bodyArmorOptionsTypes[typeIndex],
-		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
+		GetDaggerType();
+		SetItem(className, NameRandomizer.instance.GetPart1() + daggerOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        daggerOptionsSprites[typeIndex], animationParameter, daggerOptionsTypes[typeIndex],
+		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
-
+	
 	/// <summary>
-	/// Gets the type of the body armor.
+	/// Gets the type of the sword.
 	/// </summary>
-	private void GetBodyArmorType(){
-		typeIndex = Random.Range(0, bodyArmorOptionsTypes.Length);
+	private void GetDaggerType(){
+		typeIndex = Random.Range(0, daggerOptionsTypes.Length);
 	}
 }

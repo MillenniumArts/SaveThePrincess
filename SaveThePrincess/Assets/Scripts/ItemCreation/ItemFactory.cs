@@ -42,6 +42,9 @@ public class ItemFactory : MonoBehaviour{
 	public Sword blankSwordPrefab;
 	public Axe blankAxePrefab;
 	public Bow blankBowPrefab;
+	public Hammer blankHammerPrefab;
+	public Dagger blankDaggerPrefab;
+	public Spear blankSpearPrefab;
 	public BodyArmor blankBodyArmorPrefab;
 	public AttackMagic blankAtkMagPrefab;
 	public HealMagic blankHealMagPrefab;
@@ -56,15 +59,21 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The weapon.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Item CreateWeapon(Transform spawnPoint){
-		int randomNum = Random.Range(0, 3);
-		Item w = blankSwordPrefab;
+	public Weapon CreateWeapon(Transform spawnPoint){
+		int randomNum = Random.Range(0, 6);
+		Weapon w = blankSwordPrefab;
 		switch(randomNum){
 		case 0: w = CreateSword(spawnPoint);
 			break;
 		case 1: w = CreateAxe(spawnPoint);
 			break;
 		case 2: w = CreateBow(spawnPoint);
+			break;
+		case 3: w = CreateHammer(spawnPoint);
+			break;
+		case 4: w = CreateDagger(spawnPoint);
+			break;
+		case 5: w = CreateSpear(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No weapons to create!");
@@ -78,9 +87,9 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The armor.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Item CreateArmor(Transform spawnPoint){
+	public Armor CreateArmor(Transform spawnPoint){
 		int randomNum = Random.Range(0, 3);
-		Item a = blankBodyArmorPrefab;
+		Armor a = blankBodyArmorPrefab;
 		switch(randomNum){
 		case 0: a = CreateBodyArmor(spawnPoint);
 			break;
@@ -122,9 +131,9 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The potion.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Item CreatePotion(Transform spawnPoint){
+	public Potion CreatePotion(Transform spawnPoint){
 		int randomNum = Random.Range(0, 3);
-		Item p = blankHealPotionPrefab;
+		Potion p = blankHealPotionPrefab;
 		switch(randomNum){
 		case 0: p = CreateHealPotion(spawnPoint);
 			break;
@@ -140,38 +149,50 @@ public class ItemFactory : MonoBehaviour{
 	}
 
 	// Weapon Creators
-	private Item CreateSword(Transform spawnPoint){
-		Item i = Instantiate(blankSwordPrefab, spawnPoint.position, Quaternion.identity) as Weapon;
+	private Weapon CreateSword(Transform spawnPoint){
+		Weapon i = Instantiate(blankSwordPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
 		return i;
 	}
-	private Item CreateAxe(Transform spawnPoint){
-		Item i = Instantiate(blankAxePrefab, spawnPoint.position, Quaternion.identity) as Weapon;
+	private Weapon CreateAxe(Transform spawnPoint){
+		Weapon i = Instantiate(blankAxePrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
 		return i;
 	}
-	private Item CreateBow(Transform spawnPoint){
-		Item i = Instantiate(blankBowPrefab, spawnPoint.position, Quaternion.identity) as Weapon;
+	private Weapon CreateBow(Transform spawnPoint){
+		Weapon i = Instantiate(blankBowPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
+		return i;
+	}
+	private Weapon CreateHammer(Transform spawnPoint){
+		Weapon i = Instantiate(blankHammerPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
+		return i;
+	}
+	private Weapon CreateDagger(Transform spawnPoint){
+		Weapon i = Instantiate(blankDaggerPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
+		return i;
+	}
+	private Weapon CreateSpear(Transform spawnPoint){
+		Weapon i = Instantiate(blankSpearPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
 		return i;
 	}
 
 	// Armor Creators
-	private Item CreateBodyArmor(Transform spawnPoint){
-		Item i = Instantiate(blankBodyArmorPrefab, spawnPoint.position, Quaternion.identity) as Armor;
+	private Armor CreateBodyArmor(Transform spawnPoint){
+		Armor i = Instantiate(blankBodyArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Armor;
 		return i;
 	}
 
 	// Magic Creators
 	private Item CreateAttackMagic(Transform spawnPoint){
-		Item i = Instantiate(blankAtkMagPrefab, spawnPoint.position, Quaternion.identity) as Magic;
+		Item i = Instantiate(blankAtkMagPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Magic;
 		return i;
 	}
 	private Item CreateHealMagic(Transform spawnPoint){
-		Item i = Instantiate(blankHealMagPrefab, spawnPoint.position, Quaternion.identity) as Magic;
+		Item i = Instantiate(blankHealMagPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Magic;
 		return i;
 	}
 
 	// Potion Creators
-	private Item CreateHealPotion(Transform spawnPoint){
-		Item i = Instantiate(blankHealPotionPrefab, spawnPoint.position, Quaternion.identity) as Potion;
+	private Potion CreateHealPotion(Transform spawnPoint){
+		Potion i = Instantiate(blankHealPotionPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Potion;
 		return i;
 	}
 	#endregion  Item Creation

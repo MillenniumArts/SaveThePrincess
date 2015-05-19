@@ -2,22 +2,22 @@
 using System.Collections;
 
 /// <summary>
-/// Body armor class.
+/// Spear class.
 /// </summary>
-public class BodyArmor : Armor {
+public class Spear : Weapon {
 	/// <summary>
-	/// The body armor type options.
+	/// The spear type options.
 	/// </summary>
-	public string[] bodyArmorOptionsTypes;
+	public string[] spearOptionsTypes;
 	/// <summary>
-	/// The body armor type options' sprites.
+	/// The spear type options sprites.
 	/// </summary>
-	public Sprite[] bodyArmorOptionsSprites;
+	public Sprite[] spearOptionsSprites;
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
 	private int typeIndex;
-	// Minimums and maximums of the stats.
+	// The minimums and maximums of stats.
 	public int atkMin;
 	public int atkMax;
 	public int defMin;
@@ -28,23 +28,23 @@ public class BodyArmor : Armor {
 	public int hpMax;
 	public int manaMin;
 	public int manaMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
-		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Armor" + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, bodyArmorOptionsTypes[typeIndex],
-		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
+		GetSpearType();
+		SetItem(className, NameRandomizer.instance.GetPart1() + spearOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        spearOptionsSprites[typeIndex], animationParameter, spearOptionsTypes[typeIndex],
+		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
-
+	
 	/// <summary>
-	/// Gets the type of the body armor.
+	/// Gets the type of the spear.
 	/// </summary>
-	private void GetBodyArmorType(){
-		typeIndex = Random.Range(0, bodyArmorOptionsTypes.Length);
+	private void GetSpearType(){
+		typeIndex = Random.Range(0, spearOptionsTypes.Length);
 	}
 }

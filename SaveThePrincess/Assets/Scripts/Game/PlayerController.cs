@@ -183,10 +183,37 @@ public class PlayerController: MonoBehaviour {
 		return t;
 	}
 
+	// deal damage to a player (makeshift game call)
+	public void PhysicalAttack(PlayerController attackedPlayer){
+		// call player take damage to handle armor etc on the player object
+		// animate sprites
+		// apply damage to player
+		attackedPlayer.TakeDamage (this.physicalDamage);
+	}
+	
+	public bool MagicAttack(PlayerController attackedPlayer){
+		// call player take damage to handle armor etc on the player object
+		// animate sprites
+		// apply damage to player
+		if (this.remainingMana - 10 >= 0) {
+			this.remainingMana -= 10;
+			attackedPlayer.TakeDamage (this.magicalDamage);
+			return true;
+		} else {
+			Debug.Log ("Not Enough Mana For That!");
+			return false;
+		}
+	}
+
 
 
 	#endregion Public functions
-
+	private IEnumerator SpawnWeapon(){
+		yield return new WaitForSeconds(0.5f);
+		Item w = ItemFactory.instance.CreateWeapon(GetFrontHandTransform());
+		w.transform.parent = GetFrontHandTransform();
+		w.transform.localScale = new Vector3(1,1,1);
+	}
 	#region Private functions
 	#endregion Private functions
 
@@ -199,7 +226,7 @@ public class PlayerController: MonoBehaviour {
 
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
 		this.body.random = true;
-
+		SpawnWeapon ();
 		// Stat setup
 		// THIS SHOULD BE DIFFERENT DEPENDING ON TYPE OF PLAYER!
 

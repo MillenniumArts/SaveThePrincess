@@ -37,7 +37,8 @@ public class HealPotion : Potion {
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetHealPotionType();
-		SetItem(className, "HealPotion Name", healPotionOptionsSprites[typeIndex], animationParameter, healPotionOptionsTypes[typeIndex],
+		SetItem(className, NameRandomizer.instance.GetPart1() + "Potion" + NameRandomizer.instance.GetPart2(),
+		        healPotionOptionsSprites[typeIndex], animationParameter, healPotionOptionsTypes[typeIndex],
 		        "none", factory.GetHealPwr(healMin, healMax), 0, 0, 0, 0, 0);
 	}
 

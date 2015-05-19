@@ -10,15 +10,10 @@ public class InventoryController : MonoBehaviour {
 	/// <summary>
 	/// The Item factory reference.
 	/// </summary>
-	public ItemFactory _itemFactory = null;
+	public ItemFactory _itemFactory;
 
 	/// <summary>
 	/// The items in the inventory.
-	/// 0 - Weapon
-	/// 1 - Armor
-	/// 2 - Magic
-	/// 3 - Potion
-	/// 4 - Potion
 	/// </summary>
 	public Item[] _items;
 
@@ -30,36 +25,54 @@ public class InventoryController : MonoBehaviour {
 	/// <summary>
 	/// The class of item that each inventory slot can hold.
 	/// </summary>
-	public string[] itemClasses = { "Weapon", "Armor", "Magic", "Potion", "Potion"};
-
-	/// <summary>
-	/// The number of items.
-	/// </summary>
-	public int _numItems;
+	public string[] itemClasses = {"Weapon", "Armor", "Magic", "Potion", "Potion"};
 	#endregion Variables
 
 	#region Public Functions
 	/// <summary>
-	/// Replaces the slot at index provided with item provided
+	/// Replaces the slot1.
 	/// </summary>
-	/// <param name="slot">Index to out item into.</param>
 	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot(int slot, Item item){
+	public void ReplaceSlot1(Item item){
 		StoreTempItem(item);
-		Replace (slot);
+		Replace (0);
 	}
+
 	/// <summary>
-	/// Gets the item at provided index.
+	/// Replaces the slot2.
 	/// </summary>
-	/// <returns>The item at provided index.</returns>
-	/// <param name="index">Index to get item from.</param>
-	public Item getItem(int index){
-		if (index < _numItems)
-			return _items [index];
-		else 
-			return null;
+	/// <param name="item">Item to be put in the slot.</param>
+	public void ReplaceSlot2(Item item){
+		StoreTempItem(item);
+		Replace(1);
 	}
-	
+
+	/// <summary>
+	/// Replaces the slot3.
+	/// </summary>
+	/// <param name="item">Item to be put in the slot.</param>
+	public void ReplaceSlot3(Item item){
+		StoreTempItem(item);
+		Replace (2);
+	}
+
+	/// <summary>
+	/// Replaces the slot4.
+	/// </summary>
+	/// <param name="item">Item to be put in the slot.</param>
+	public void ReplaceSlot4(Item item){
+		StoreTempItem(item);
+		Replace (3);
+	}
+
+	/// <summary>
+	/// Replaces the slot5.
+	/// </summary>
+	/// <param name="item">Item to be put in the slot.</param>
+	public void ReplaceSlot5(Item item){
+		StoreTempItem(item);
+		Replace (4);
+	}
 	#endregion Public Functions
 
 	#region Private Functions
@@ -84,25 +97,5 @@ public class InventoryController : MonoBehaviour {
 		tempItem.SwapTo(i);
 	}
 	#endregion Private Functions
-
-	#region MonoBehaviour
-		
-	void Start(){
-		// itemFactory instance set in editor
-		// set array size
-		_numItems = 5;
-		// temp item null until needed
-		tempItem = null;
-		// create array
-		_items = new Item[_numItems];
-		// go through array and fill with appropriate Item Children
-		_items [0] = null;	// weapon
-		_items [1] = null;	// armor
-		_items [2] = null;	// magic
-		_items [3] = null;	// potion
-		_items [4] = null;	// potion
-	}
-
-	#endregion MonoBehaviour
 
 }

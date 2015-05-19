@@ -15,18 +15,16 @@ public class MenuController : MonoBehaviour {
 				   damageDown = null,
 				   armorUp = null, 
 				   armorDown= null, 
-				   magicUp = null, 
-				   magicDown = null, 
-				   speedUp = null, 
-				   speedDown = null,
 				   confirm = null;
 
-	private int baseHealth, baseArmor, baseMagic, baseSpeed, baseDamage, 
-				healthInc, armorInc, magicInc, speedInc, damageInc,
-				newHealth, newArmor, newMagic, newSpeed, newDamage;
+	private int baseHealth, baseArmor, baseDamage, 
+				healthInc, armorInc, damageInc,
+				newHealth, newArmor, newDamage;
 
-	public GUIText healthAmt, armorAmt, magicAmt, speedAmt, damageAmt, creditText;
+	public GUIText healthAmt, armorAmt, damageAmt, creditText;
 	public int numCredits;
+
+	public ItemFactory itemFactory;
 
 
 	// Use this for initialization
@@ -48,33 +46,35 @@ public class MenuController : MonoBehaviour {
 			this.player = bod.GetComponentInParent<PlayerController> ();
 		}
 
-		this.player.body.random = false;
+		if (this.player == null) {
+			Debug.Log ("HUUH");
+		}
+
+		this.player.body.random = true;
+
+
 
 		// credits to upgrade character
-		this.numCredits = 10;
+		//this.numCredits = null; // set in editor
 		// value per credit:
 		this.healthInc = 10;
 		this.damageInc = 5;
 		this.armorInc = 2;
-		this.magicInc = 2;
-		this.speedInc = 1;
+
 		// base stats
 		this.baseHealth = this.player.totalHealth;
 		this.baseDamage = this.player.physicalDamage;
 		this.baseArmor = this.player.armor;
-		this.baseMagic = this.player.magicalDamage;
-		this.baseSpeed = this.player.speed;
+
 		// variables to be changed
 		this.newHealth = this.baseHealth;
 		this.newDamage = this.baseDamage;
 		this.newArmor = this.baseArmor;
-		this.newMagic = this.baseMagic;
-		this.newSpeed = this.baseSpeed;
+
 
 		this.healthAmt.text = this.newHealth.ToString();
 		this.armorAmt.text = this.newArmor.ToString();
-		this.magicAmt.text = this.newMagic.ToString();
-		this.speedAmt.text = this.newSpeed.ToString();
+
 		this.damageAmt.text = this.newDamage.ToString ();
 		this.creditText.text = "CREDITS: " + numCredits;
 
@@ -95,18 +95,6 @@ public class MenuController : MonoBehaviour {
 			if (this.numCredits > 0){
 				numCredits--;
 				this.newArmor += this.armorInc;
-			}
-		});
-		this.magicUp.onClick.AddListener (()=>{
-			if (this.numCredits > 0){
-				numCredits--;
-				this.newMagic += this.magicInc;
-			}
-		});
-		this.speedUp.onClick.AddListener (()=>{
-			if (this.numCredits > 0){
-				numCredits--;
-				this.newSpeed += this.speedInc;
 			}
 		});
 
@@ -141,26 +129,6 @@ public class MenuController : MonoBehaviour {
 				}
 			}
 		});
-		this.magicDown.onClick.AddListener (()=>{
-			if (this.numCredits < 10){
-				if (this.newMagic - this.magicInc < this.baseMagic)	// make sure they can't go below base stats
-					this.newMagic = this.baseMagic;
-				else{
-					this.newMagic -= this.magicInc;
-					numCredits++;
-				}
-			}
-		});
-		this.speedDown.onClick.AddListener (()=>{
-			if (this.numCredits < 10){
-				if (this.newSpeed - this.speedInc < this.baseSpeed)	// make sure they can't go below base stats
-					this.newSpeed = this.baseSpeed;
-				else{
-					this.newSpeed -= this.magicInc;
-					numCredits++;
-				}
-			}
-		});
 
 		// LOAD NEXT SCENE WITH THIS PLAYER
 		this.confirm.onClick.AddListener (()=>{
@@ -169,12 +137,10 @@ public class MenuController : MonoBehaviour {
 				this.player.remainingHealth = this.newHealth;
 				this.player.physicalDamage = this.newDamage;
 				this.player.armor = this.newArmor;
-				this.player.magicalDamage = this.newMagic;
-				this.player.speed = this.newSpeed;
 
 				DontDestroyOnLoad(this.player);
 
-				Application.LoadLevel ("Testscene2");
+				Application.LoadLevel ("Battle_LVP");
 			}else{
 
 			}
@@ -185,8 +151,6 @@ public class MenuController : MonoBehaviour {
 	void UpdateText(){
 		this.healthAmt.text = this.newHealth.ToString();
 		this.armorAmt.text =  this.newArmor.ToString();
-		this.magicAmt.text =  this.newMagic.ToString();
-		this.speedAmt.text =  this.newSpeed.ToString();
 		this.damageAmt.text = this.newDamage.ToString ();
 		this.creditText.text = "CREDITS: " + numCredits;
 	}

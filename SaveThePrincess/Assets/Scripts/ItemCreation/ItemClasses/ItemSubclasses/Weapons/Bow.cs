@@ -2,17 +2,17 @@
 using System.Collections;
 
 /// <summary>
-/// Body armor class.
+/// Bow class.
 /// </summary>
-public class BodyArmor : Armor {
+public class Bow : Weapon{
 	/// <summary>
-	/// The body armor type options.
+	/// The bow type options.
 	/// </summary>
-	public string[] bodyArmorOptionsTypes;
+	public string[] bowOptionsTypes;
 	/// <summary>
-	/// The body armor type options' sprites.
+	/// The bow type options' sprites.
 	/// </summary>
-	public Sprite[] bodyArmorOptionsSprites;
+	public Sprite[] bowOptionsSprites;
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
@@ -34,17 +34,17 @@ public class BodyArmor : Armor {
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
-		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Armor" + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, bodyArmorOptionsTypes[typeIndex],
-		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
+		GetBowType();
+		SetItem(className, NameRandomizer.instance.GetPart1() + bowOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        bowOptionsSprites[typeIndex], animationParameter, bowOptionsTypes[typeIndex],
+		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
 
 	/// <summary>
-	/// Gets the type of the body armor.
+	/// Gets the type of the bow.
 	/// </summary>
-	private void GetBodyArmorType(){
-		typeIndex = Random.Range(0, bodyArmorOptionsTypes.Length);
+	private void GetBowType(){
+		typeIndex = Random.Range(0, bowOptionsTypes.Length);
 	}
 }

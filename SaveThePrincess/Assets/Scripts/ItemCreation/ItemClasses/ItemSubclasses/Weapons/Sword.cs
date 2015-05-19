@@ -2,22 +2,22 @@
 using System.Collections;
 
 /// <summary>
-/// Body armor class.
+/// Sword class.
 /// </summary>
-public class BodyArmor : Armor {
+public class Sword : Weapon {
 	/// <summary>
-	/// The body armor type options.
+	/// The sword type options.
 	/// </summary>
-	public string[] bodyArmorOptionsTypes;
+	public string[] swordOptionsTypes;
 	/// <summary>
-	/// The body armor type options' sprites.
+	/// The sword type options sprites.
 	/// </summary>
-	public Sprite[] bodyArmorOptionsSprites;
+	public Sprite[] swordOptionsSprites;
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
 	private int typeIndex;
-	// Minimums and maximums of the stats.
+	// The minimums and maximums of stats.
 	public int atkMin;
 	public int atkMax;
 	public int defMin;
@@ -34,17 +34,17 @@ public class BodyArmor : Armor {
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
-		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Armor" + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, bodyArmorOptionsTypes[typeIndex],
-		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
+		GetSwordType();
+		SetItem(className, NameRandomizer.instance.GetPart1() + swordOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        swordOptionsSprites[typeIndex], animationParameter, swordOptionsTypes[typeIndex],
+		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
 
 	/// <summary>
-	/// Gets the type of the body armor.
+	/// Gets the type of the sword.
 	/// </summary>
-	private void GetBodyArmorType(){
-		typeIndex = Random.Range(0, bodyArmorOptionsTypes.Length);
+	private void GetSwordType(){
+		typeIndex = Random.Range(0, swordOptionsTypes.Length);
 	}
 }

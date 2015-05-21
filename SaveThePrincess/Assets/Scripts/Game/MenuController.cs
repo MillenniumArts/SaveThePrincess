@@ -46,13 +46,7 @@ public class MenuController : MonoBehaviour {
 			this.player = bod.GetComponentInParent<PlayerController> ();
 		}
 
-		if (this.player == null) {
-			Debug.Log ("HUUH");
-		}
-
-		this.player.body.random = true;
-
-
+		this.player.body.random = false;
 
 		// credits to upgrade character
 		//this.numCredits = null; // set in editor

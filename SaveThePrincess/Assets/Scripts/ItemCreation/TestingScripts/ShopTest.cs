@@ -18,15 +18,15 @@ public class ShopTest : MonoBehaviour {
 	}
 
 	public void BuyItem1(){
-		inventory.ReplaceSlot1(storeItems[0]);
+		inventory.ReplaceSlot(storeItems[0],0);
 	}
 
 	public void BuyItem2(){
-		inventory.ReplaceSlot1(storeItems[1]);
+		inventory.ReplaceSlot(storeItems[1],0);
 	}
 
 	public void BuyItem3(){
-		inventory.ReplaceSlot1(storeItems[2]);
+		inventory.ReplaceSlot(storeItems[2],0);
 	}
 
 	private void PopulateStore(){

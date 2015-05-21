@@ -29,50 +29,16 @@ public class InventoryController : MonoBehaviour {
 	#endregion Variables
 
 	#region Public Functions
+
 	/// <summary>
 	/// Replaces the slot1.
 	/// </summary>
 	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot1(Item item){
+	public void ReplaceSlot(Item item, int index){
 		StoreTempItem(item);
-		Replace (0);
+		Replace (index);
 	}
-
-	/// <summary>
-	/// Replaces the slot2.
-	/// </summary>
-	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot2(Item item){
-		StoreTempItem(item);
-		Replace(1);
-	}
-
-	/// <summary>
-	/// Replaces the slot3.
-	/// </summary>
-	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot3(Item item){
-		StoreTempItem(item);
-		Replace (2);
-	}
-
-	/// <summary>
-	/// Replaces the slot4.
-	/// </summary>
-	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot4(Item item){
-		StoreTempItem(item);
-		Replace (3);
-	}
-
-	/// <summary>
-	/// Replaces the slot5.
-	/// </summary>
-	/// <param name="item">Item to be put in the slot.</param>
-	public void ReplaceSlot5(Item item){
-		StoreTempItem(item);
-		Replace (4);
-	}
+	
 	#endregion Public Functions
 
 	#region Private Functions

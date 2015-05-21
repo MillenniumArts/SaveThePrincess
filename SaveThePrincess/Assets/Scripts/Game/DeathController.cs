@@ -11,7 +11,11 @@ public class DeathController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		this.player = FindObjectOfType<PlayerController> ();
+
 		this.restartButton.onClick.AddListener (()=>{
+			Destroy(this.player);
 			Application.LoadLevel("StartMenu_LVP");
 		});
 	

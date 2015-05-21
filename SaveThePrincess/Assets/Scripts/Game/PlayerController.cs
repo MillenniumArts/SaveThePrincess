@@ -130,7 +130,7 @@ public class PlayerController: MonoBehaviour {
 	/// <param name="incomingDamage">int Incoming damage applied to the player</param>
 	public void TakeDamage(int incomingDamage){
 		if (this.remainingHealth - incomingDamage > 0)
-			this.remainingHealth -= incomingDamage;
+			this.remainingHealth -= incomingDamage - armor/* * DAMAGE_REDUCTION_FACTOR */;
 		else
 			this.remainingHealth = 0;
 	}
@@ -147,7 +147,7 @@ public class PlayerController: MonoBehaviour {
 		// get sword name
 		string n = this.body.character.sprites [5].name;
 
-		Debug.Log (n);
+		//Debug.Log (n);
 		// find spriteRenderer
 		Transform t=null;
 		for (int i=0; i<s.Length; i++) {
@@ -225,21 +225,9 @@ public class PlayerController: MonoBehaviour {
 		// initialize player's Sprite
 
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
-		this.body.random = true;
+		//this.body.random = true;
 		SpawnWeapon ();
-		// Stat setup
-		// THIS SHOULD BE DIFFERENT DEPENDING ON TYPE OF PLAYER!
 
-		// Item Setup
-
-		// this.armorItems = new Item[numArmorItems];
-		// this.weaponItems = new Item[numWeaponItems];
-		// this.usableItems = new Item[numUsableItems];
-
-		// Enchant Setup
-		// this.armorEnchants = new Item[numArmorItems];
-		// this.weaponEnchants = new Item[numWeaponItems];
-		// this.usableEnchants = new Item[numUsableItems];
 	}
 
 	#endregion MonoBehaviour

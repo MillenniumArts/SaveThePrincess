@@ -326,9 +326,11 @@ public class GameController : MonoBehaviour {
 			EndGame ();
 		} else if (this.rightPlayer.remainingHealth <= 0/* && (PlayerPrefs.GetInt("score") % 5 != 0) */) {
 			LoadNextLevel ();
-		} else {
+		} /*else if (this.rightPlayer.remainingHealth <= 0 && (PlayerPrefs.GetInt("score") % 5 != 0) ){
+			//Debug.Log ("STORE!?");
+
 			// CHANGE THIS TO LOADING TOWN!
-			LoadNextLevel ();
-		}
+			//LoadNextLevel ();
+		}*/
 	}	
 }

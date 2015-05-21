@@ -30,17 +30,17 @@ public class HealMagic : Magic {
 	public int manaMax;
 	public int healMin;
 	public int healMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetHealMagicType();
-		SetItem(className, "HealMagic Name", healMagicOptionsSprites[typeIndex], animationParameter, healMagicOptionsTypes[typeIndex],
+		SetItem(className, "HealMagic Name", healMagicOptionsSprites[typeIndex], animationParameter, "HealMagic", healMagicOptionsTypes[typeIndex],
 		        "none", factory.GetHealPwr(healMin, healMax), 0, 0, 0, 0, 0);
 	}
-
+	
 	/// <summary>
 	/// Gets the type of the heal magic.
 	/// </summary>

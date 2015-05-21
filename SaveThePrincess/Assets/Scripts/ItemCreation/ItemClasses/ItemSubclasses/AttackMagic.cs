@@ -28,18 +28,18 @@ public class AttackMagic : Magic {
 	public int hpMax;
 	public int manaMin;
 	public int manaMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetAttackMagicType();
-		SetItem(className, "AttackMagic Name", attackMagicOptionsSprites[typeIndex], animationParameter, attackMagicOptionsTypes[typeIndex],
+		SetItem(className, "AttackMagic Name", attackMagicOptionsSprites[typeIndex], animationParameter, "AttackMagic", attackMagicOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
-
+	
 	/// <summary>
 	/// Gets the type of the attack magic.
 	/// </summary>

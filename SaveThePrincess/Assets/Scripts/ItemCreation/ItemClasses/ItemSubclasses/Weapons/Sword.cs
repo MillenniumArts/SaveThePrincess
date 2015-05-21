@@ -36,7 +36,7 @@ public class Sword : Weapon {
 		factory = FindObjectOfType<ItemFactory>();
 		GetSwordType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + swordOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        swordOptionsSprites[typeIndex], animationParameter, swordOptionsTypes[typeIndex],
+		        swordOptionsSprites[typeIndex], animationParameter, "Sword", swordOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

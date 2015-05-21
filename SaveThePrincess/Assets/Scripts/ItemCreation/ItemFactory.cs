@@ -59,21 +59,27 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The weapon.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Weapon CreateWeapon(Transform spawnPoint){
-		int randomNum = Random.Range(0, 6);
+	/// <summary>
+	/// Creates a random weapon from available weapon types.
+	/// </summary>
+	/// <returns>The weapon.</returns>
+	/// <param name="spawnPoint">Spawn point.</param>
+	/// <param name="num">Number dictates the type of weapon created.  0 Sword, 1 Axe, 2 Bow, 3 Hammer, 4 Dagger, 5 Spear.</para>
+	public Weapon CreateWeapon(Transform spawnPoint, string name){
+		//int randomNum = Random.Range(0, 6);
 		Weapon w = blankSwordPrefab;
-		switch(randomNum){
-		case 0: w = CreateSword(spawnPoint);
+		switch(name){
+		case "Sword": w = CreateSword(spawnPoint);
 			break;
-		case 1: w = CreateAxe(spawnPoint);
+		case "Axe": w = CreateAxe(spawnPoint);
 			break;
-		case 2: w = CreateBow(spawnPoint);
+		case "Bow": w = CreateBow(spawnPoint);
 			break;
-		case 3: w = CreateHammer(spawnPoint);
+		case "Hammer": w = CreateHammer(spawnPoint);
 			break;
-		case 4: w = CreateDagger(spawnPoint);
+		case "Dagger": w = CreateDagger(spawnPoint);
 			break;
-		case 5: w = CreateSpear(spawnPoint);
+		case "Spear": w = CreateSpear(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No weapons to create!");
@@ -81,21 +87,21 @@ public class ItemFactory : MonoBehaviour{
 		}
 		return w;
 	}
-
+	
 	/// <summary>
 	/// Creates a random armor from available armor types.
 	/// </summary>
 	/// <returns>The armor.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Armor CreateArmor(Transform spawnPoint){
-		int randomNum = Random.Range(0, 3);
+	public Armor CreateArmor(Transform spawnPoint, string name){
+		//int randomNum = Random.Range(0, 3);
 		Armor a = blankBodyArmorPrefab;
-		switch(randomNum){
-		case 0: a = CreateBodyArmor(spawnPoint);
+		switch(name){
+		case "Armor": a = CreateBodyArmor(spawnPoint);
 			break;
-		case 1: a = CreateBodyArmor(spawnPoint);
+		case "other": a = CreateBodyArmor(spawnPoint);
 			break;
-		case 2: a = CreateBodyArmor(spawnPoint);
+		case "other2": a = CreateBodyArmor(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No armor to create!");

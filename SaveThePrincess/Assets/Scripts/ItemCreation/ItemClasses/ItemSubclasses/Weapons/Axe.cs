@@ -16,7 +16,7 @@ public class Axe : Weapon {
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
-	private int typeIndex;
+	private int subClassIndex;
 	// Minimums and maximums of the stats.
 	public int atkMin;
 	public int atkMax;
@@ -35,8 +35,8 @@ public class Axe : Weapon {
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetAxeType();
-		SetItem(className,NameRandomizer.instance.GetPart1() + axeOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        axeOptionsSprites[typeIndex], animationParameter, axeOptionsTypes[typeIndex],
+		SetItem(className,NameRandomizer.instance.GetPart1() + axeOptionsTypes[subClassIndex] + NameRandomizer.instance.GetPart2(),
+		        axeOptionsSprites[subClassIndex], animationParameter, "Axe", axeOptionsTypes[subClassIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
@@ -45,6 +45,6 @@ public class Axe : Weapon {
 	/// Gets the type of the axe.
 	/// </summary>
 	private void GetAxeType(){
-		typeIndex = Random.Range(0, axeOptionsTypes.Length);
+		subClassIndex = Random.Range(0, axeOptionsTypes.Length);
 	}
 }

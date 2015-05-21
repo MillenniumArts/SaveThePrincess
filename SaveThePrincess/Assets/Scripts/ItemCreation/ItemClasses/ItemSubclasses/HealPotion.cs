@@ -30,18 +30,18 @@ public class HealPotion : Potion {
 	public int manaMax;
 	public int healMin;
 	public int healMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetHealPotionType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Potion" + NameRandomizer.instance.GetPart2(),
-		        healPotionOptionsSprites[typeIndex], animationParameter, healPotionOptionsTypes[typeIndex],
+		SetItem(className, NameRandomizer.instance.GetPart1() +  healPotionOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        healPotionOptionsSprites[typeIndex], animationParameter, "HealPotion", healPotionOptionsTypes[typeIndex],
 		        "none", factory.GetHealPwr(healMin, healMax), 0, 0, 0, 0, 0);
 	}
-
+	
 	/// <summary>
 	/// Gets the type of the heal potion.
 	/// </summary>

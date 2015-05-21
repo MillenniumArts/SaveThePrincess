@@ -36,7 +36,7 @@ public class Hammer : Weapon {
 		factory = FindObjectOfType<ItemFactory>();
 		GetHammerType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + hammerOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        hammerOptionsSprites[typeIndex], animationParameter, hammerOptionsTypes[typeIndex],
+		        hammerOptionsSprites[typeIndex], animationParameter, "Hammer", hammerOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

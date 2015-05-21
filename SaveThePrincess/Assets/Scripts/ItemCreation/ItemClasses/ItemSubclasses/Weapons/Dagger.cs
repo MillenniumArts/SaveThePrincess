@@ -36,7 +36,7 @@ public class Dagger : Weapon {
 		factory = FindObjectOfType<ItemFactory>();
 		GetDaggerType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + daggerOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        daggerOptionsSprites[typeIndex], animationParameter, daggerOptionsTypes[typeIndex],
+		        daggerOptionsSprites[typeIndex], animationParameter, "Dagger", daggerOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

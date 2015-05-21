@@ -28,19 +28,19 @@ public class BodyArmor : Armor {
 	public int hpMax;
 	public int manaMin;
 	public int manaMax;
-
+	
 	/// <summary>
 	/// Sets up this instance of the class.
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + "Armor" + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, bodyArmorOptionsTypes[typeIndex],
+		SetItem(className, NameRandomizer.instance.GetPart1() + bodyArmorOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+		        bodyArmorOptionsSprites[typeIndex], animationParameter, "Armor", bodyArmorOptionsTypes[typeIndex],
 		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}
-
+	
 	/// <summary>
 	/// Gets the type of the body armor.
 	/// </summary>

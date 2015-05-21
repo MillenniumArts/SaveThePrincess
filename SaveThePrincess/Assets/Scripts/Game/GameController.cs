@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour {
 
 			//HARD CODED MAGIC SCROLL USE
 			bool pass = this.leftPlayer.MagicAttack(this.rightPlayer);
-			if (!pass){
+			if (pass){
 				ToggleInventory ();
 				NextTurn();
 			}
@@ -213,8 +213,8 @@ public class GameController : MonoBehaviour {
 		if (this.rightPlayer.remainingHealth <= 0 && turn == 0) {
 			//this.numEnemiesKilled++;
 			PlayerPrefs.SetInt ("score", (PlayerPrefs.GetInt("score")+1) );
-			Debug.Log ("Score");
-			NextTurn();
+			//Debug.Log ("Score");
+			//NextTurn();
 		}
 	}
 	/// <summary>
@@ -240,11 +240,10 @@ public class GameController : MonoBehaviour {
 	/// Does the enemy AI Behaviour.
 	/// </summary>
 	/// <returns>The enemy action.</returns>
-	void DoEnemyAction(){
-		if (PlayerPrefs.GetInt ("turn") == 1) {
-			//yield return new WaitForSeconds (0.05f);
+	IEnumerator DoEnemyAction(){
+		yield return new WaitForSeconds (0.05f);
 			// player alive and enemy turn
-			if (this.leftPlayer.remainingHealth > 0) {
+			if (this.leftPlayer.remainingHealth > 0 && turn == 1) {
 				//enemy health < 40% , 50% chance of healing
 				if (this.rightPlayer.remainingHealth > (0.4 * this.rightPlayer.totalHealth) && Random.Range (0, 1) == 0) {
 					//50% chance of physical vs magic
@@ -281,7 +280,7 @@ public class GameController : MonoBehaviour {
 				NextTurn ();
 			}
 		}
-	}
+
 	/// <summary>
 	/// Ends the game.
 	/// </summary>
@@ -316,21 +315,29 @@ public class GameController : MonoBehaviour {
 		Application.LoadLevel ("Battle_LVP");
 	}
 
+	void GoToStore(){
+		UpdateText ();
+		UpdateScore();
+		DontDestroyOnLoad(this.leftPlayer);
+		Application.LoadLevel ("Store_LVP");
+	}
+
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
 		UpdateScore();
 		// ENEMY BEHAVIOUR FUNCTION HERE
-		DoEnemyAction ();
+		StartCoroutine("DoEnemyAction");
 		if (this.leftPlayer.remainingHealth <= 0) {
 			EndGame ();
 		} else if (this.rightPlayer.remainingHealth <= 0/* && (PlayerPrefs.GetInt("score") % 5 != 0) */) {
-			LoadNextLevel ();
-		} /*else if (this.rightPlayer.remainingHealth <= 0 && (PlayerPrefs.GetInt("score") % 5 != 0) ){
+			GoToStore();
+			//LoadNextLevel ();
+		} else if (this.rightPlayer.remainingHealth <= 0 && (PlayerPrefs.GetInt("score") == 1 ) ){
 			//Debug.Log ("STORE!?");
 
 			// CHANGE THIS TO LOADING TOWN!
-			//LoadNextLevel ();
-		}*/
+
+		}
 	}	
 }

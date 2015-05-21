@@ -5,13 +5,15 @@ using System.Collections;
 /// The Item class.  Holds all the information about items be they Weapons, Armor, Magic, or Potions.
 /// </summary>
 public class Item : MonoBehaviour {
-
+	
 	#region Variables
 	/// <summary>
 	/// Reference to the ItemFactory.
 	/// </summary>
 	protected ItemFactory factory;
+	
 	/* Right now the variables are public so that we can see them in the inspector. To be fixed. */
+	
 	/// <summary>
 	/// The item class.  Weapon, Armor, Magic, Potion.  More item classes can be added later.
 	/// Needs a better name so as to not be confused with C# classes.
@@ -30,9 +32,13 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	public string animParameter;
 	/// <summary>
-	/// The type of the item. From the item class of Weapon we have Sword, Axe, Bow, etc.
+	/// The sub class of the item. From the item class of Weapon we have Sword, Axe, Bow, etc.
 	/// </summary>
-	public string itemType;
+	public string itemSubClass;
+	/// <summary>
+	/// The sub sub class of the item.  From the Sword class we have Katana, Broadsword, Lightsaber, etc.
+	/// </summary>
+	public string itemSubSubClass;
 	/// <summary>
 	/// The status effect of the weapon. Poisoned sword, Fire sword, Ice sword, for example. 
 	/// </summary>
@@ -62,7 +68,7 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	public int manaMod;
 	#endregion Variables
-
+	
 	#region Item manipulation
 	/// <summary>
 	/// Sets the item.  Somewhat replaces a constructor.
@@ -71,7 +77,8 @@ public class Item : MonoBehaviour {
 	/// <param name="n">Item name.</param>
 	/// <param name="s">The Sprite.</param>
 	/// <param name="a">The animation parameter.</param>
-	/// <param name="t">The type of item with an item class. Within Weapon, "Sword", "Axe", "Bow".</param>
+	/// <param name="sC">The sub-class of item with an item class. Within Weapon, "Sword", "Axe", "Bow".</param>
+	/// <param name="ssC">The sub-sub-class of item with an item class. Within Sword, "Katana", "Broadsword", "Lightsaber".</param>
 	/// <param name="st">Status effect of the item.</param>
 	/// <param name="h">The healing power if it is a potion or healing spell.</param>
 	/// <param name="atk">Atk modifier.  Adds to the player's base stats.</param>
@@ -79,12 +86,13 @@ public class Item : MonoBehaviour {
 	/// <param name="spd">Spd modifier.  Adds to the player's base stats.</param>
 	/// <param name="hp">Hp modifier.  Adds to the player's base stats.</param>
 	/// <param name="mana">Mana modifier.  Adds to the player's base stats.</param>
-	public void SetItem(string c, string n, Sprite s, string a, string t, string st, int h, int atk, int def, int spd, int hp, int mana){
+	public void SetItem(string c, string n, Sprite s, string a, string sC, string ssC, string st, int h, int atk, int def, int spd, int hp, int mana){
 		itemClass = c;
 		itemName = n;
 		image = s;
 		animParameter = a;
-		itemType = t;
+		itemSubClass = sC;
+		itemSubSubClass = ssC;
 		statusEffect = st;
 		healEffect = h;
 		atkMod = atk;
@@ -93,7 +101,7 @@ public class Item : MonoBehaviour {
 		hpMod = hp;
 		manaMod = mana;
 	}
-
+	
 	/// <summary>
 	/// Clears the stats.
 	/// </summary>
@@ -102,7 +110,8 @@ public class Item : MonoBehaviour {
 		itemName = "";
 		image = null;
 		animParameter = "";
-		itemType = "";
+		itemSubClass = "";
+		itemSubSubClass = "";
 		statusEffect = "";
 		healEffect = 0;
 		atkMod = 0;
@@ -117,21 +126,26 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	/// <param name="i2">Item to copy data from</param>
 	public void SwapTo(Item i2){
-		itemClass = i2.itemClass;
-		itemName = i2.itemName;
-		image = i2.image;
-		animParameter = i2.animParameter;
-		itemType = i2.itemType;
-		statusEffect = i2.statusEffect;
-		healEffect = i2.healEffect;
-		atkMod = i2.atkMod;
-		defMod = i2.defMod;
-		spdMod = i2.spdMod;
-		hpMod = i2.hpMod;
-		manaMod = i2.manaMod;
+		itemClass = i2.GetItemClass();
+		itemName = i2.GetName();
+		image = i2.GetSprite();
+		animParameter = i2.GetAnimParameter();
+		itemSubClass = i2.GetItemSubClass();
+		itemSubSubClass = i2.GetSubSubClass();
+		statusEffect = i2.GetStatusEffect();
+		healEffect = i2.GetHealEffect();
+		atkMod = i2.GetAtkMod();
+		defMod = i2.GetDefMod();
+		spdMod = i2.GetSpdMod();
+		hpMod = i2.GetHpMod();
+		manaMod = i2.GetManaMod();
+		// If the intance of the item has a Sprite Renderer, swap the sprite.
+		if(this.GetComponent<SpriteRenderer>() == true){
+			this.GetComponent<SpriteRenderer>().sprite = image;
+		}
 	}
 	#endregion Item manipulation
-
+	
 	#region Getters
 	public string GetItemClass(){
 		return itemClass;
@@ -148,11 +162,17 @@ public class Item : MonoBehaviour {
 	public string GetAnimParameter(){
 		return animParameter;
 	}
-	public string GetItemType(){
-		return itemType;
+	public string GetItemSubClass(){
+		return itemSubClass;
+	}
+	public string GetSubSubClass(){
+		return itemSubSubClass;
 	}
 	public string GetStatusEffect(){
 		return statusEffect;
+	}
+	public int GetHealEffect(){
+		return healEffect;
 	}
 	public int GetAtkMod(){
 		return atkMod;
@@ -170,5 +190,5 @@ public class Item : MonoBehaviour {
 		return manaMod;
 	}
 	#endregion Getters
-
+	
 }

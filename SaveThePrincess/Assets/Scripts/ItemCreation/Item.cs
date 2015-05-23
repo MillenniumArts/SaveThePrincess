@@ -67,6 +67,11 @@ public class Item : MonoBehaviour {
 	/// The mana modifier.  Adds to the player's base stats.
 	/// </summary>
 	public int manaMod;
+	/// <summary>
+	/// The dollar cost of the item in the store.
+	/// </summary>
+	public int dollarCost;
+
 	#endregion Variables
 	
 	#region Item manipulation
@@ -119,6 +124,7 @@ public class Item : MonoBehaviour {
 		spdMod = 0;
 		hpMod = 0;
 		manaMod = 0;
+		dollarCost = 0;
 	}
 	
 	/// <summary>
@@ -144,6 +150,13 @@ public class Item : MonoBehaviour {
 			this.GetComponent<SpriteRenderer>().sprite = image;
 		}
 	}
+	/// <summary>
+	/// Sets the price, called by ItemFactory on creation.
+	/// </summary>
+	public void setCost(int cost){
+		this.dollarCost = cost;
+	}
+
 	#endregion Item manipulation
 	
 	#region Getters

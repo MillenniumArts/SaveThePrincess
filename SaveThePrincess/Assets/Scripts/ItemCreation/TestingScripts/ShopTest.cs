@@ -6,6 +6,7 @@ public class ShopTest : MonoBehaviour {
 	public Button[] buttons;
 	public Button exitStore;
 	public Text[] buttonText;
+	public Text playerBalance;
 	public Item[] shopItems;
 	public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
 	private InventoryController inventory;
@@ -14,22 +15,22 @@ public class ShopTest : MonoBehaviour {
 	private Vector3 prevPos;
 	void Start(){
 		this.player = FindObjectOfType<PlayerController>();
-
 		this.prevPos = this.player.gameObject.transform.localPosition;
+
 		// relocate player
 		Vector3 newSpot = new Vector3 (-7.25f, -3.5f);
 		this.player.gameObject.transform.localPosition = newSpot;
 
-		for(int i = 0; i < buttonText.Length; i++){
-			buttonText[i].text = "Buy";
-		}
+		this.playerBalance.text = this.player.dollarBalance.ToString ();
+		
 		factory = FindObjectOfType<ItemFactory>();
 		inventory = FindObjectOfType<InventoryController>();
 		Populateshop();
 
-		this.exitStore.onClick.AddListener(()=>{
-			ExitStore();
-		});
+		for(int i = 0; i < buttonText.Length; i++){
+			buttonText[i].text = "$" + shopItems [i].dollarCost;
+			//Debug.Log (shopItems[i].GetName());
+		}
 	}
 
 	public void ExitStore(){
@@ -39,13 +40,17 @@ public class ShopTest : MonoBehaviour {
 	}
 
 	public void BuyWeapon(int buttonNum){
-		inventory.ReplaceSlot(shopItems[buttonNum], 0);
-		player.CallSetWeapon(shopItems[buttonNum].GetItemSubClass());
+		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
+			inventory.ReplaceSlot (shopItems [buttonNum], 0);
+			player.CallSetWeapon (shopItems [buttonNum].GetItemSubClass ());
+		}
 	}
 	
 	public void BuyArmour(int buttonNum){
-		inventory.ReplaceSlot(shopItems[buttonNum], 1);
-		player.CallSetArmor(shopItems[buttonNum].GetItemSubClass());
+		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
+			inventory.ReplaceSlot (shopItems [buttonNum], 1);
+			player.CallSetArmor (shopItems [buttonNum].GetItemSubClass ());
+		}
 	}
 	
 	private void Populateshop(){
@@ -56,5 +61,12 @@ public class ShopTest : MonoBehaviour {
 		shopItems[4] = factory.CreateArmor(spawn5, "Armor");
 		shopItems[5] = factory.CreateArmor(spawn6, "Armor");
 	}
-	
+
+	public void UpdateText(){
+		this.playerBalance.text = "Remaining Balance: $" + this.player.dollarBalance.ToString ();
+	}
+
+	public void Update(){
+		UpdateText ();
+	}
 }

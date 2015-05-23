@@ -33,12 +33,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		turn = 0;
-		// player turn stored in local, 0 for playerTurn
-		PlayerPrefs.SetInt ("turn", turn);
-
+		PlayerPrefs.SetInt("turn",turn);
 		// enemy has not healed yet
 		enemyHasHealed = false;
-
+		this.score = PlayerPrefs.GetInt ("score");
 		// not showing inventory
 		inventoryOn = false;
 
@@ -210,11 +208,10 @@ public class GameController : MonoBehaviour {
 
 	// increment counter and set local storage
 	void UpdateScore(){
-		if (this.rightPlayer.remainingHealth <= 0 && turn == 0) {
-			//this.numEnemiesKilled++;
-			PlayerPrefs.SetInt ("score", (PlayerPrefs.GetInt("score")+1) );
-			//Debug.Log ("Score");
-			//NextTurn();
+		if (this.rightPlayer.remainingHealth <= 0 ) {
+			Debug.Log ("Score " + score);
+			this.score++;
+			PlayerPrefs.SetInt ("score", score );
 		}
 	}
 	/// <summary>
@@ -233,7 +230,7 @@ public class GameController : MonoBehaviour {
 		this.leftSpeedText.text = "SPEED: " + this.leftPlayer.speed;
 		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
 
-		this.numEnemiesKilledText.text = "SCORE: " + PlayerPrefs.GetInt ("score");
+		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}
 
 	/// <summary>
@@ -241,9 +238,9 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	/// <returns>The enemy action.</returns>
 	IEnumerator DoEnemyAction(){
-		yield return new WaitForSeconds (0.05f);
+		yield return new WaitForSeconds (1.95f);
 			// player alive and enemy turn
-			if (this.leftPlayer.remainingHealth > 0 && turn == 1) {
+		if (this.leftPlayer.remainingHealth > 0 && this.rightPlayer.remainingHealth > 0 && turn == 1) {
 				//enemy health < 40% , 50% chance of healing
 				if (this.rightPlayer.remainingHealth > (0.4 * this.rightPlayer.totalHealth) && Random.Range (0, 1) == 0) {
 					//50% chance of physical vs magic
@@ -287,7 +284,7 @@ public class GameController : MonoBehaviour {
 	void EndGame(){
 		// player dead
 		UpdateText ();
-		UpdateScore();
+		//UpdateScore();
 		//Destroy (this.leftPlayer);
 		
 		// check for high score
@@ -307,8 +304,12 @@ public class GameController : MonoBehaviour {
 	/// Loads the next level.
 	/// </summary>
 	void LoadNextLevel(){
+		turn = 0;
+		// player turn stored in local, 0 for playerTurn
+		PlayerPrefs.SetInt ("turn", turn);
+
 		UpdateText ();
-		UpdateScore();
+		//UpdateScore();
 		// enemy dead, fight another and keep player on screen
 		DontDestroyOnLoad(this.leftPlayer);
 		// reload battle scene
@@ -317,9 +318,15 @@ public class GameController : MonoBehaviour {
 
 	void GoToStore(){
 		UpdateText ();
-		UpdateScore();
+		//UpdateScore();
 		DontDestroyOnLoad(this.leftPlayer);
 		Application.LoadLevel ("Store_LVP");
+	}
+	/// <summary>
+	/// Dropsa random amount of money after enemy dies.
+	/// </summary>
+	private int DropMoney(){
+		return Random.Range ((score+1),((score+1)*2));
 	}
 
 	// Update is called once per frame
@@ -328,9 +335,14 @@ public class GameController : MonoBehaviour {
 		UpdateScore();
 		// ENEMY BEHAVIOUR FUNCTION HERE
 		StartCoroutine("DoEnemyAction");
+
 		if (this.leftPlayer.remainingHealth <= 0) {
 			EndGame ();
 		} else if (this.rightPlayer.remainingHealth <= 0/* && (PlayerPrefs.GetInt("score") % 5 != 0) */) {
+			//get enemy moneydrop
+			int moneyDrop = DropMoney ();
+			Debug.Log ("Dropped " + moneyDrop + " gold");
+			this.leftPlayer.dollarBalance += moneyDrop;
 			GoToStore();
 			//LoadNextLevel ();
 		} else if (this.rightPlayer.remainingHealth <= 0 && (PlayerPrefs.GetInt("score") == 1 ) ){

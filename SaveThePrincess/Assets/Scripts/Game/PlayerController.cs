@@ -118,6 +118,12 @@ public class PlayerController: MonoBehaviour {
 	/// The base magic damage for this player (BEFORE ENCHANTMENTS) 
 	/// </summary>
 	public int magicalDamage;
+
+	/// <summary>
+	/// The player's dollar balance usable at the store.
+	/// </summary>
+	public int dollarBalance;
+
 	
 	#endregion STATS
 	#endregion Variables
@@ -134,12 +140,7 @@ public class PlayerController: MonoBehaviour {
 		else
 			this.remainingHealth = 0;
 	}
-	
-	/// <summary>
-	/// The amount of money a player has to spend at the store.
-	/// </summary>
-	public int dollarBalance;
-	
+
 	/// <summary>
 	/// Gets the back hand transform.
 	/// </summary>
@@ -248,7 +249,21 @@ public class PlayerController: MonoBehaviour {
 			return false;
 		}
 	}
-	
+	/// <summary>
+	/// Purchases the item.
+	/// </summary>
+	/// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
+	/// <param name="itemCost">Item cost.</param>
+	public bool PurchaseItem(int itemCost){
+		if (this.dollarBalance - itemCost >= 0) {
+			this.dollarBalance -= itemCost;
+			return true;
+		} else {
+			Debug.Log ("Not enough money for that!");
+			return false;
+		}
+	}
+
 	#endregion Public functions
 	
 	#region Private functions
@@ -303,6 +318,7 @@ public class PlayerController: MonoBehaviour {
 		
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
 		this.body.random = true;
+		this.dollarBalance = 50;
 		
 		//Item item = ItemFactory.instance.CreateWeapon(playerHand);
 		

@@ -85,6 +85,9 @@ public class ItemFactory : MonoBehaviour{
 			Debug.Log ("No weapons to create!");
 			break;
 		}
+		// HARDCODED FOR NOW
+		w.dollarCost = getRandomDollarValue(15,25);
+
 		return w;
 	}
 	
@@ -107,6 +110,7 @@ public class ItemFactory : MonoBehaviour{
 			Debug.Log ("No armor to create!");
 			break;
 		}
+		a.dollarCost = getRandomDollarValue(15,25);
 		return a;
 	}
 
@@ -129,6 +133,9 @@ public class ItemFactory : MonoBehaviour{
 			Debug.Log ("No magic to create!");
 			break;
 		}
+
+		m.dollarCost = getRandomDollarValue(15,25);
+
 		return m;
 	}
 
@@ -151,6 +158,9 @@ public class ItemFactory : MonoBehaviour{
 			Debug.Log ("No potion to create!");
 			break;
 		}
+
+		p.dollarCost = getRandomDollarValue(15,25);
+
 		return p;
 	}
 
@@ -234,5 +244,15 @@ public class ItemFactory : MonoBehaviour{
 		string e = statusTypes[Random.Range(0, statusTypes.Length)];
 		return e;
 	}
+	/// <summary>
+	/// Gets the random dollar value to attach to an item.
+	/// </summary>
+	/// <returns>The random dollar value.</returns>
+	/// <param name="min">Minimum value.</param>
+	/// <param name="max">Max value.</param>
+	public int getRandomDollarValue(int min, int max){
+		return Random.Range (min, max);
+	}
+
 	#endregion Randomizers
 }

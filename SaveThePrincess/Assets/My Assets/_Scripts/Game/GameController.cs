@@ -14,14 +14,14 @@ public class GameController : MonoBehaviour {
 
 
 	// GUI/HUD
-	public GUIText leftHealthText, 
+	public Text leftHealthText, 
 				   rightHealthText,
 				   leftManaText,
 				   rightManaText,
 				   leftArmorText,
 				   rightArmorText,
-				   leftSpeedText,
-				   rightSpeedText,
+				   leftDamageText,
+				   rightDamageText,
 				   numEnemiesKilledText;
 	[SerializeField] 
 	private Button leftPhysAttack = null,
@@ -168,7 +168,7 @@ public class GameController : MonoBehaviour {
 		this.rightArmorText.gameObject.SetActive (false);
 
 		//this.leftSpeedText.gameObject.SetActive (false);
-		this.rightSpeedText.gameObject.SetActive (false);
+		this.rightDamageText.gameObject.SetActive (false);
 		this.numEnemiesKilledText.gameObject.SetActive (false);
 
 		// disable enemy
@@ -193,7 +193,7 @@ public class GameController : MonoBehaviour {
 		this.rightHealthText.gameObject.SetActive (true);
 		this.rightManaText.gameObject.SetActive (true);
 		this.rightArmorText.gameObject.SetActive (true);
-		this.rightSpeedText.gameObject.SetActive (true);
+		this.rightDamageText.gameObject.SetActive (true);
 		this.numEnemiesKilledText.gameObject.SetActive (true);
 
 		// reenable enemy
@@ -230,8 +230,8 @@ public class GameController : MonoBehaviour {
 		this.leftArmorText.text = "ARMOR: " + this.leftPlayer.armor;
 		this.rightArmorText.text = "ARMOR: " + this.rightPlayer.armor;
 
-		this.leftSpeedText.text = "SPEED: " + this.leftPlayer.speed;
-		this.rightSpeedText.text = "SPEED: " + this.rightPlayer.speed;
+		this.leftDamageText.text = "SPEED: " + this.leftPlayer.physicalDamage;
+		this.rightDamageText.text = "SPEED: " + this.rightPlayer.physicalDamage;
 
 		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}
@@ -241,7 +241,7 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	/// <returns>The enemy action.</returns>
 	private IEnumerator DoEnemyAction(){
-		yield return new WaitForSeconds (1.95f);
+		yield return new WaitForSeconds (0.95f);
 			// player alive and enemy turn
 		if (this.leftPlayer.remainingHealth > 0 && this.rightPlayer.remainingHealth > 0 && turn == 1) {
 				//enemy health < 40% , 50% chance of healing

@@ -36,8 +36,6 @@ public class ShopController : MonoBehaviour {
 
 		PopulateShop();
 
-
-
 		for(int i = 0; i < buttonText.Length; i++){
 			buttonText[i].text = "$" + shopItems [i].dollarCost + " " + shopItems[i].GetName();
 			//Debug.Log (shopItems[i].GetName());

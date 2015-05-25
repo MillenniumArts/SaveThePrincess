@@ -7,7 +7,7 @@ public class DeathController : MonoBehaviour {
 	public Button restartButton = null; 	// assign in editor
 	public PlayerController player;
 
-	public GUIText healthText, magicText, armorText, damageText, hiScoreText;
+	public Text healthText, magicText, armorText, damageText, moneyText, hiScoreText;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +24,7 @@ public class DeathController : MonoBehaviour {
 		this.magicText.text = "";
 		this.damageText.text = "";
 		this.hiScoreText.text = "";
+		this.moneyText.text = "";
 
 		UpdateText ();
 
@@ -37,8 +38,10 @@ public class DeathController : MonoBehaviour {
 		this.armorText.text = "ARMOR: " + this.player.armor;
 		
 		this.damageText.text = "DAMAGE: " + this.player.physicalDamage;
+
+		this.moneyText.text = "MONEY: " + this.player.dollarBalance;
 		
-		this.hiScoreText.text = "HI SCORE:" + PlayerPrefs.GetInt("hiscore");
+		this.hiScoreText.text = "HI SCORE: " + PlayerPrefs.GetInt("hiscore");
 	}
 
 	// Update is called once per frame

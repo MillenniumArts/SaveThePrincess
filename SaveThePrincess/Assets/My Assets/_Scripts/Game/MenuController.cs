@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour {
 				healthInc, armorInc, damageInc,
 				newHealth, newArmor, newDamage;
 
-	public GUIText healthAmt, armorAmt, damageAmt, creditText;
+	public Text healthAmt, damageAmt, armorAmt, creditText;
 	public int numCredits;
 
 	public ItemFactory itemFactory;

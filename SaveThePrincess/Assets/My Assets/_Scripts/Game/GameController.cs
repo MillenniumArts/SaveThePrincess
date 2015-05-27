@@ -8,10 +8,9 @@ public class GameController : MonoBehaviour {
 	public PlayerController rightPlayer;
 	public GameObject gameObj;
 	public GameController gameController;
-	public bool inventoryOn, enemyHasHealed;
+	public bool enemyHasHealed;
 	public int score, turn;
 	public static float TRANSFER_PCT = 0.2f;
-
 
 	// GUI/HUD
 	public Text leftHealthText, 
@@ -23,13 +22,11 @@ public class GameController : MonoBehaviour {
 				   leftDamageText,
 				   rightDamageText,
 				   numEnemiesKilledText;
+
 	[SerializeField] 
-	private Button leftPhysAttack = null,
-				   playerInventory = null,
-				   useSlot1 = null,
-				   useSlot2 = null,
-				   useSlot3 = null,
-				   cancelInventory=null;
+	public Button leftPhysAttack = null;
+
+	private Image background;
 
 	// Use this for initialization
 	void Start () {
@@ -38,9 +35,7 @@ public class GameController : MonoBehaviour {
 		// enemy has not healed yet
 		enemyHasHealed = false;
 		this.score = PlayerPrefs.GetInt ("score");
-		// not showing inventory
-		inventoryOn = false;
-
+			
 		// get game Object
 		GameObject gameControllerObject = GameObject.FindWithTag ("GameController");
 		if (gameControllerObject != null) {
@@ -72,27 +67,19 @@ public class GameController : MonoBehaviour {
 		ButtonInit ();
 		// get previous carryover Gold
 		this.leftPlayer.dollarBalance += PlayerPrefs.GetInt ("carryover");
+
+		// reset carryover
+		PlayerPrefs.SetInt ("carryover", 0);
 	}
-	/// <summary>
-	/// Toggles the inventory.
-	/// </summary>
-	public void ToggleInventory(){
-		if (!inventoryOn) {
-			ShowInventory ();
-			inventoryOn = true;
-		} else {
-			HideInventory ();
-			inventoryOn = false;
-		}
-	}
+
 	/// <summary>
 	/// Starts next turn.
 	/// </summary>
 	public void NextTurn(){
-		if (PlayerPrefs.GetInt ("turn") == 0) {
+		if (turn == 0) {
 			PlayerPrefs.SetInt("turn" , 1);
 			turn = 1;
-		} else if (PlayerPrefs.GetInt ("turn") == 1) {
+		} else if (turn == 1) {
 			PlayerPrefs.SetInt("turn" , 0);
 			turn = 0;
 		}
@@ -102,111 +89,11 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	void ButtonInit(){
 		this.leftPhysAttack.onClick.AddListener (()=>{
-			if (PlayerPrefs.GetInt("turn") == 0){
+			if (turn == 0){
 				this.leftPlayer.PhysicalAttack(this.rightPlayer);
 				NextTurn();
 			}
 		});
-
-		this.playerInventory.onClick.AddListener (()=>{
-			// MENU TOGGLE ON
-			ToggleInventory();
-		});
-		
-		this.useSlot1.onClick.AddListener (()=>{
-
-			// HARD CODED HEALTH POTION
-
-			if (this.leftPlayer.remainingHealth + 25 <= this.leftPlayer.totalHealth)
-				this.leftPlayer.remainingHealth += 25;
-			else
-				this.leftPlayer.remainingHealth = this.leftPlayer.totalHealth;
-
-			NextTurn();
-			ToggleInventory ();
-		});
-		
-		this.useSlot2.onClick.AddListener (()=>{
-			// HARD CODED MANA POTION
-			
-			if (this.leftPlayer.remainingMana + 10 <= this.leftPlayer.totalMana)
-				this.leftPlayer.remainingMana += 10;
-			else
-				this.leftPlayer.remainingMana = this.leftPlayer.totalMana;
-
-			NextTurn();
-			ToggleInventory ();
-		});
-		
-		this.useSlot3.onClick.AddListener (()=>{
-
-			//HARD CODED MAGIC SCROLL USE
-			bool pass = this.leftPlayer.MagicAttack(this.rightPlayer);
-			if (pass){
-				ToggleInventory ();
-				NextTurn();
-			}
-
-		});
-		
-		this.cancelInventory.onClick.AddListener (()=>{
-			ToggleInventory();
-		});
-	}
-	/// <summary>
-	/// Shows the inventory.
-	/// </summary>
-	public void ShowInventory(){
-		// disable battle HUD
-		//this.leftHealthText.gameObject.SetActive (false);
-		this.rightHealthText.gameObject.SetActive (false);
-
-		//this.leftManaText.gameObject.SetActive (false);
-		this.rightManaText.gameObject.SetActive (false);
-
-		//this.leftArmorText.gameObject.SetActive (false);
-		this.rightArmorText.gameObject.SetActive (false);
-
-		//this.leftSpeedText.gameObject.SetActive (false);
-		this.rightDamageText.gameObject.SetActive (false);
-		this.numEnemiesKilledText.gameObject.SetActive (false);
-
-		// disable enemy
-		this.rightPlayer.gameObject.SetActive (false);
-		// disable buttons
-		this.leftPhysAttack.gameObject.SetActive (false);
-		this.playerInventory.gameObject.SetActive (false);
-
-		//ENABLE BATTLE INVENTORY
-		//this.battleInventory.gameObject.SetActive (true);
-		this.useSlot1.gameObject.SetActive (true);
-		this.useSlot2.gameObject.SetActive (true);
-		this.useSlot3.gameObject.SetActive (true);
-		this.cancelInventory.gameObject.SetActive (true);
-	}
-
-	/// <summary>
-	/// Hides the inventory.
-	/// </summary>
-	public void HideInventory(){
-		// reenable Battle HUD
-		this.rightHealthText.gameObject.SetActive (true);
-		this.rightManaText.gameObject.SetActive (true);
-		this.rightArmorText.gameObject.SetActive (true);
-		this.rightDamageText.gameObject.SetActive (true);
-		this.numEnemiesKilledText.gameObject.SetActive (true);
-
-		// reenable enemy
-		this.rightPlayer.gameObject.SetActive (true);
-		// reenable buttons
-		this.leftPhysAttack.gameObject.SetActive (true);
-		this.playerInventory.gameObject.SetActive (true);
-
-		// button deactivation
-		this.useSlot1.gameObject.SetActive (false);
-		this.useSlot3.gameObject.SetActive (false);
-		this.useSlot2.gameObject.SetActive (false);
-		this.cancelInventory.gameObject.SetActive (false);
 	}
 
 	// increment counter and set local storage
@@ -294,7 +181,8 @@ public class GameController : MonoBehaviour {
 			// set new HighScore
 			PlayerPrefs.SetInt("hiscore", PlayerPrefs.GetInt("score"));
 		}
-		
+
+		this.leftPlayer.inventory.gameObject.SetActive (false);
 		// reset score
 		PlayerPrefs.SetInt("score", 0);
 		PlayerPrefs.SetInt("turn", 0);

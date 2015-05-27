@@ -36,7 +36,7 @@ public class Bow : Weapon{
 		factory = FindObjectOfType<ItemFactory>();
 		GetBowType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + bowOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        bowOptionsSprites[typeIndex], animationParameter, "Bow", bowOptionsTypes[typeIndex],
+		        bowOptionsSprites[typeIndex], animationParameter, idleAnimParameter, "Bow", bowOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

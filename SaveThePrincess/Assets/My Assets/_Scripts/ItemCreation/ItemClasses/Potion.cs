@@ -13,4 +13,5 @@ public class Potion : Item {
 	/// The animation parameter for the Potion class.
 	/// </summary>
 	public string animationParameter;
+
 }

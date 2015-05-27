@@ -11,7 +11,6 @@ public class Item : MonoBehaviour {
 	/// Reference to the ItemFactory.
 	/// </summary>
 	protected ItemFactory factory;
-	
 	/* Right now the variables are public so that we can see them in the inspector. To be fixed. */
 	
 	/// <summary>
@@ -31,6 +30,14 @@ public class Item : MonoBehaviour {
 	/// The animation parameter.
 	/// </summary>
 	public string animParameter;
+	/// <summary>
+	/// The idle animation parameter.
+	/// </summary>
+	public string idleAnimParameter;
+	/// <summary>
+	/// The state of the idle animation.
+	/// </summary>
+	public bool idleState;
 	/// <summary>
 	/// The sub class of the item. From the item class of Weapon we have Sword, Axe, Bow, etc.
 	/// </summary>
@@ -82,6 +89,7 @@ public class Item : MonoBehaviour {
 	/// <param name="n">Item name.</param>
 	/// <param name="s">The Sprite.</param>
 	/// <param name="a">The animation parameter.</param>
+	/// <param name="ia">The idle animation parameter.</param>
 	/// <param name="sC">The sub-class of item with an item class. Within Weapon, "Sword", "Axe", "Bow".</param>
 	/// <param name="ssC">The sub-sub-class of item with an item class. Within Sword, "Katana", "Broadsword", "Lightsaber".</param>
 	/// <param name="st">Status effect of the item.</param>
@@ -91,10 +99,11 @@ public class Item : MonoBehaviour {
 	/// <param name="spd">Spd modifier.  Adds to the player's base stats.</param>
 	/// <param name="hp">Hp modifier.  Adds to the player's base stats.</param>
 	/// <param name="mana">Mana modifier.  Adds to the player's base stats.</param>
-	public void SetItem(string c, string n, Sprite s, string a, string sC, string ssC, string st, int h, int atk, int def, int spd, int hp, int mana){
+	public void SetItem(string c, string n, Sprite s, string a, string ia, string sC, string ssC, string st, int h, int atk, int def, int spd, int hp, int mana){
 		itemClass = c;
 		itemName = n;
 		image = s;
+		idleAnimParameter = ia;
 		animParameter = a;
 		itemSubClass = sC;
 		itemSubSubClass = ssC;

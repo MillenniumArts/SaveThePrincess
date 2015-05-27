@@ -17,14 +17,17 @@ public class ShopController : MonoBehaviour {
 	private PlayerController player;
 	private Vector3 prevPos;
 
+	private bool start;
 
 	void Start(){
+		start = true;
 		this.player = FindObjectOfType<PlayerController>();
 		this.prevPos = this.player.gameObject.transform.localPosition;
 
 		// relocate player
 		Vector3 newSpot = new Vector3 (-7.25f, -3.5f);
 		this.player.gameObject.transform.localPosition = newSpot;
+		this.player.inventory.gameObject.SetActive (false);
 
 		this.playerBalance.text = this.player.dollarBalance.ToString ();
 		
@@ -36,36 +39,47 @@ public class ShopController : MonoBehaviour {
 
 		PopulateShop();
 
-		for(int i = 0; i < buttonText.Length; i++){
-			buttonText[i].text = "$" + shopItems [i].dollarCost + " " + shopItems[i].GetName();
-			//Debug.Log (shopItems[i].GetName());
+	}
+
+	private void DoOnFirstTick(){
+		if(start){
+			for(int i = 0; i < buttonText.Length; i++){
+				buttonText[i].text = "$" + shopItems [i].dollarCost + "\n" + shopItems[i].GetName();
+			}
+			start = false;
 		}
 	}
 
 	public void ExitStore(){
 		this.player.gameObject.transform.localPosition = prevPos;
+		this.player.inventory.gameObject.SetActive (true);
 		DontDestroyOnLoad (this.player);
 		Application.LoadLevel ("Battle_LVP");
 	}
 
 	public void BuyWeapon(int buttonNum){
 		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			inventory.ReplaceSlot (shopItems [buttonNum], 0);
-			player.CallSetWeapon (shopItems [buttonNum].GetItemSubClass ());
+			this.player.playerWeapon = (Weapon)shopItems [buttonNum];
+			//inventory.ReplaceSlot (shopItems [buttonNum], 0);
+			player.TransferPurchasedWeapon(shopItems[buttonNum]);
+			player.CallSetWeapon(this.player.playerWeapon.GetItemSubClass());
 		}
 	}
-	
+
+	//
 	public void BuyArmour(int buttonNum){
 		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			inventory.ReplaceSlot (shopItems [buttonNum], 1);
-			player.CallSetArmor (shopItems [buttonNum].GetItemSubClass ());
+			this.player.playerArmor = (Armor)shopItems [buttonNum];
+			//inventory.ReplaceSlot (shopItems [buttonNum], 1);
+			player.CallSetArmor (this.player.playerArmor.GetItemSubClass());
+
 		}
 	}
 	
 	private void PopulateShop(){
 		shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
 		shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
-		shopItems[2] = factory.CreateWeapon(spawn3, "Dagger");
+		shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
 		shopItems[3] = factory.CreateArmor(spawn4, "Armor");
 		shopItems[4] = factory.CreateArmor(spawn5, "Armor");
 		shopItems[5] = factory.CreateArmor(spawn6, "Armor");
@@ -81,6 +95,7 @@ public class ShopController : MonoBehaviour {
 	}
 
 	public void Update(){
+		DoOnFirstTick();
 		UpdateText ();
 	}
 }

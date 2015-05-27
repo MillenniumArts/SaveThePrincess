@@ -51,7 +51,8 @@ public class ShopTest : MonoBehaviour {
 	public void BuyWeapon(int buttonNum){
 		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
 			inventory.ReplaceSlot (shopItems [buttonNum], 0);
-			player.CallSetWeapon (shopItems [buttonNum].GetItemSubClass ());
+			//player.CallSetWeapon (shopItems [buttonNum].GetItemSubClass ());
+			player.TransferPurchasedWeapon(shopItems[buttonNum]);
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class ShopTest : MonoBehaviour {
 	private void PopulateShop(){
 		shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
 		shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
-		shopItems[2] = factory.CreateWeapon(spawn3, "Dagger");
+		shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
 		shopItems[3] = factory.CreateArmor(spawn4, "Armor");
 		shopItems[4] = factory.CreateArmor(spawn5, "Armor");
 		shopItems[5] = factory.CreateArmor(spawn6, "Armor");

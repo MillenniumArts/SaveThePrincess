@@ -23,9 +23,13 @@ public class InventoryController : MonoBehaviour {
 	public Item tempItem;
 
 	/// <summary>
-	/// The class of item that each inventory slot can hold.
+	/// The MAX Inventory Size.
 	/// </summary>
-	public string[] itemClasses = {"Weapon", "Armor", "Magic", "Potion", "Potion"};
+	public int MAX_INVENTORY_SIZE = 5;
+	/// <summary>
+	/// The player.
+	/// </summary>
+	public PlayerController player;
 	#endregion Variables
 
 	#region Public Functions
@@ -47,12 +51,8 @@ public class InventoryController : MonoBehaviour {
 	/// </summary>
 	/// <param name="num">Number.</param>
 	private void Replace(int num){
-		if(tempItem.GetItemClass() != itemClasses[num]){
-			Debug.Log("Only " + itemClasses[num] + " in this slot");
-		}else{
 			_items[num].SwapTo(tempItem);
 			tempItem.ClearStats();
-		}
 	}
 
 	/// <summary>
@@ -64,4 +64,14 @@ public class InventoryController : MonoBehaviour {
 	}
 	#endregion Private Functions
 
+	#region MonoBehaviour
+	void Start(){
+
+
+	}
+
+	void Update(){
+
+	}
+	#endregion MonoBehaviour
 }

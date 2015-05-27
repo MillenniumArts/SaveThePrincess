@@ -36,7 +36,7 @@ public class Spear : Weapon {
 		factory = FindObjectOfType<ItemFactory>();
 		GetSpearType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + spearOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        spearOptionsSprites[typeIndex], animationParameter, "Spear", spearOptionsTypes[typeIndex],
+		        spearOptionsSprites[typeIndex], animationParameter, idleAnimParameter, "Spear", spearOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

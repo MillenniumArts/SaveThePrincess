@@ -35,7 +35,7 @@ public class AttackMagic : Magic {
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetAttackMagicType();
-		SetItem(className, "AttackMagic Name", attackMagicOptionsSprites[typeIndex], animationParameter, "AttackMagic", attackMagicOptionsTypes[typeIndex],
+		SetItem(className, "AttackMagic Name", attackMagicOptionsSprites[typeIndex], animationParameter, idleAnimParameter, "AttackMagic", attackMagicOptionsTypes[typeIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

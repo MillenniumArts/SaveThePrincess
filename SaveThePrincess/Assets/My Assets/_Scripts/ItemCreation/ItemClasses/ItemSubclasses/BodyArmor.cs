@@ -36,7 +36,7 @@ public class BodyArmor : Armor {
 		factory = FindObjectOfType<ItemFactory>();
 		GetBodyArmorType();
 		SetItem(className, NameRandomizer.instance.GetPart1() + bodyArmorOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, "Armor", bodyArmorOptionsTypes[typeIndex],
+		        bodyArmorOptionsSprites[typeIndex], animationParameter, idleAnimParameter, "Armor", bodyArmorOptionsTypes[typeIndex],
 		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
 	}

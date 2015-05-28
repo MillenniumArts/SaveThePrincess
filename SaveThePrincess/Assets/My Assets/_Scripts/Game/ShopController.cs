@@ -33,7 +33,7 @@ public class ShopController : MonoBehaviour {
 		factory = FindObjectOfType<ItemFactory>();
 		// min and max for cost rand
 		this.LO_DOLLAR_VALUE = 15;
-		this.HI_DOLLAR_VALUE = Mathf.FloorToInt(PlayerPrefs.GetInt ("score")*5.5f) + this.LO_DOLLAR_VALUE;
+		this.HI_DOLLAR_VALUE = Mathf.FloorToInt(PlayerPrefs.GetInt ("score")*1.5f) + this.LO_DOLLAR_VALUE;
 
 		PopulateShop();
 
@@ -57,10 +57,7 @@ public class ShopController : MonoBehaviour {
 
 	public void BuyWeapon(int buttonNum){
 		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			this.player.playerWeapon = (Weapon)shopItems [buttonNum];
-			//inventory.ReplaceSlot (shopItems [buttonNum], 0);
 			player.TransferPurchasedWeapon(shopItems[buttonNum]);
-			player.CallSetWeapon(this.player.playerWeapon.GetItemSubClass());
 		}
 	}
 

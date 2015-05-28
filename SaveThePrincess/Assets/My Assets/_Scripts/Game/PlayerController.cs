@@ -76,27 +76,7 @@ public class PlayerController: MonoBehaviour {
 	public InventoryGUIController inventory;
 	
 	#endregion Inventory
-	
-	#region Enchantments
-	///<summary>
-	///Player Armor - An array of Item objects that represents all armor objects for the player
-	///</summary>
-	//public Item[] armorEnchants;
-	
-	///<summary>
-	///Player Weapons - An array of Item objects that represents all weapon objects for the player
-	///</summary>
-	//public Item[] weaponEnchants;
-	
-	///<summary>
-	///Player Usables - An array of Item objects that represents all usable objects for the player
-	///</summary>
-	//public Item[] usableEnchants;
-	
-	
-	#endregion Enchantments
-	
-	
+		
 	#region STATS
 	/// <summary>
 	/// The Maximum health for this player
@@ -332,11 +312,9 @@ public class PlayerController: MonoBehaviour {
 	/// <param name="w">The weapon to be transfered.</param>
 	public void TransferPurchasedWeapon(Item w){
 		this.playerWeapon.SwapTo(w);							// Swaps all the stats.
-		//this.playerWeapon = w;
 		this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
 		this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
 		this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
-		w.transform.parent = this.transform;
 	}
 
 	#endregion Public functions

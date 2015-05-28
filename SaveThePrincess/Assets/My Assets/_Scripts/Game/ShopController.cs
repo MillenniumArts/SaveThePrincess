@@ -9,7 +9,6 @@ public class ShopController : MonoBehaviour {
 	public Text playerBalance;
 	public Item[] shopItems;
 	public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
-	private InventoryController inventory;
 	public int HI_DOLLAR_VALUE;
 	public int LO_DOLLAR_VALUE;
 
@@ -32,7 +31,6 @@ public class ShopController : MonoBehaviour {
 		this.playerBalance.text = this.player.dollarBalance.ToString ();
 		
 		factory = FindObjectOfType<ItemFactory>();
-		inventory = FindObjectOfType<InventoryController>();
 		// min and max for cost rand
 		this.LO_DOLLAR_VALUE = 15;
 		this.HI_DOLLAR_VALUE = Mathf.FloorToInt(PlayerPrefs.GetInt ("score")*5.5f) + this.LO_DOLLAR_VALUE;

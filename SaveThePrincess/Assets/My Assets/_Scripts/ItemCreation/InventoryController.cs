@@ -26,10 +26,7 @@ public class InventoryController : MonoBehaviour {
 	/// The MAX Inventory Size.
 	/// </summary>
 	public int MAX_INVENTORY_SIZE = 5;
-	/// <summary>
-	/// The player.
-	/// </summary>
-	public PlayerController player;
+
 	#endregion Variables
 
 	#region Public Functions

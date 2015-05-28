@@ -47,6 +47,7 @@ public class MenuController : MonoBehaviour {
 		}
 
 		this.player.body.random = false;
+		//this.player.inventory.gameObject.SetActive (false);
 
 		// credits to upgrade character
 		//this.numCredits = null; // set in editor

@@ -139,6 +139,11 @@ public class PlayerController: MonoBehaviour {
 	public int magicalDamage;
 
 	/// <summary>
+	/// The heal per turn.
+	/// </summary>
+	public int healPerTurn;
+
+	/// <summary>
 	/// The player's dollar balance usable at the store.
 	/// </summary>
 	public int dollarBalance;
@@ -154,10 +159,54 @@ public class PlayerController: MonoBehaviour {
 	/// </summary>
 	/// <param name="incomingDamage">int Incoming damage applied to the player</param>
 	public void TakeDamage(int incomingDamage){
-		if (this.remainingHealth - incomingDamage > 0)
-			this.remainingHealth -= incomingDamage;
-		else
-			this.remainingHealth = 0;
+		if ((incomingDamage - Mathf.FloorToInt(this.armor*0.5f)) > 0) {		// if damage is going to apply after armor
+			if (this.remainingHealth - (incomingDamage - Mathf.FloorToInt(this.armor*0.5f)) > 0)
+				this.remainingHealth -= (incomingDamage - Mathf.FloorToInt(this.armor*0.5f));
+			else
+				this.remainingHealth = 0;
+		}
+	}
+	/// <summary>
+	/// Heals the player for specified amount.
+	/// </summary>
+	/// <param name="amount">Amount.</param>
+	public void HealPlayer(int amount){
+		if (this.remainingHealth + amount > this.totalHealth) {
+			this.remainingHealth = this.totalHealth;
+		} else {
+			this.remainingHealth += amount;
+		}
+		Debug.Log (this.name + " healed for " + amount + " " + this.remainingHealth);
+	}
+	/// <summary>
+	/// Gives the specified amount of mana.
+	/// </summary>
+	/// <param name="amount">Amount.</param>
+	public void GiveMana(int amount){
+		if (this.remainingMana + amount >= this.totalMana) {
+			this.remainingMana = this.totalMana;
+		} else {
+			this.remainingMana += amount;
+		}
+	}
+
+	/// <summary>
+	/// Uses the item at specified index.
+	/// </summary>
+	/// <param name="index">Index.</param>
+	public void UseItem(int index){
+		if (this.inventory == null) {
+			this.inventory = GameObject.FindObjectOfType<InventoryGUIController>();
+			this.inventory._items [index].ApplyEffect (this);
+			// only use once if potion
+			if (this.inventory._items [index].GetItemClass() == "Potion")
+				this.inventory._items [index].used = true;
+		}else{
+			this.inventory._items [index].ApplyEffect (this);
+			// only use once if potion
+			if (this.inventory._items [index].GetItemClass() == "Potion")
+				this.inventory._items [index].used = true;
+		}
 	}
 
 	/// <summary>

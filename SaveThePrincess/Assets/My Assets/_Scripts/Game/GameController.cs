@@ -63,14 +63,20 @@ public class GameController : MonoBehaviour {
 				this.rightPlayer.body = bod;
 			}
 		}
+
+		// get inventory
+		this.leftPlayer.inventory = GameObject.FindObjectOfType<InventoryGUIController> ();
+		// initate player inventory
+		InventoryInit ();
 		// initiate buttons
 		ButtonInit ();
 		// get previous carryover Gold
 		this.leftPlayer.dollarBalance += PlayerPrefs.GetInt ("carryover");
-
 		// reset carryover
 		PlayerPrefs.SetInt ("carryover", 0);
 	}
+
+	// END START
 
 	/// <summary>
 	/// Starts next turn.
@@ -84,6 +90,24 @@ public class GameController : MonoBehaviour {
 			turn = 0;
 		}
 	}
+
+	public void InventoryInit(){
+		if (!this.leftPlayer.inventory.initialized)
+			this.leftPlayer.inventory.PopulateInventory ();
+	}
+
+
+
+	/// <summary>
+	/// Player Uses the item in inventory specified at index.
+	/// </summary>
+	/// <param name="index">Index.</param>
+	public void UseItem(int index){
+		this.leftPlayer.UseItem (index);
+		this.leftPlayer.inventory.DisableButtonsIfUsed ();
+
+	}
+
 	/// <summary>
 	/// Initiates all buttons needed.
 	/// </summary>
@@ -94,6 +118,26 @@ public class GameController : MonoBehaviour {
 				NextTurn();
 			}
 		});
+		InitInventoryButtons ();
+	}
+	/// <summary>
+	/// Initiates Inventory buttons.
+	/// </summary>
+	void InitInventoryButtons(){
+		GameObject a = GameObject.FindWithTag ("InventoryGUI");
+		Button[] but = a.GetComponentsInChildren<Button> ();
+		Text[] t = a.GetComponentsInChildren<Text> ();
+		for (int i=0; i < this.leftPlayer.inventory._items.Length; i++) {
+				this.leftPlayer.inventory.clickables [i] = but [i];
+				this.leftPlayer.inventory.buttonText [i] = t [i];
+				this.leftPlayer.inventory.buttonText [i].text = "USE";
+			if (this.leftPlayer.inventory._items[i].used){
+				this.leftPlayer.inventory.clickables[i].gameObject.SetActive(false);
+				this.leftPlayer.inventory.drawLocations[i].gameObject.SetActive(false);
+			}
+
+		}
+		//this.leftPlayer.inventory.DisableButtonsIfUsed ();
 	}
 
 	// increment counter and set local storage
@@ -117,8 +161,8 @@ public class GameController : MonoBehaviour {
 		this.leftArmorText.text = "ARMOR: " + this.leftPlayer.armor;
 		this.rightArmorText.text = "ARMOR: " + this.rightPlayer.armor;
 
-		this.leftDamageText.text = "SPEED: " + this.leftPlayer.physicalDamage;
-		this.rightDamageText.text = "SPEED: " + this.rightPlayer.physicalDamage;
+		this.leftDamageText.text = "DAMAGE: " + this.leftPlayer.physicalDamage;
+		this.rightDamageText.text = "DAMAGE: " + this.rightPlayer.physicalDamage;
 
 		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}

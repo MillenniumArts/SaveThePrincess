@@ -78,7 +78,10 @@ public class Item : MonoBehaviour {
 	/// The dollar cost of the item in the store.
 	/// </summary>
 	public int dollarCost;
-
+	/// <summary>
+	/// whether or not the item has been used.
+	/// </summary>
+	public bool used;
 	#endregion Variables
 	
 	#region Item manipulation
@@ -167,7 +170,35 @@ public class Item : MonoBehaviour {
 	}
 
 	#endregion Item manipulation
-	
+
+	#region Effects
+
+	public void ApplyEffect(PlayerController p){
+		if (this.GetItemClass () == "Potion") {
+			if (this.GetItemSubClass() == "HealPotion"){
+				p.HealPlayer(this.GetHealEffect ());
+			}else if (this.GetItemSubClass() == "ManaPotion"){
+				p.GiveMana (this.GetManaMod());
+			}
+			this.used = true;
+
+		} else if (this.GetItemClass () == "Magic") {
+			if (this.GetItemSubClass() == "HealMagic"){
+				p.HealPlayer(this.GetHealEffect ());
+			}else if (this.GetItemSubClass() == "AttackMagic"){
+				// get enemy
+				GameController g = FindObjectOfType<GameController>();
+				PlayerController e = g.rightPlayer;
+				Debug.Log (e.name);
+				p.MagicAttack(e);
+			}
+		}
+	}
+
+	#endregion Effects
+
+
+
 	#region Getters
 	public string GetItemClass(){
 		return itemClass;

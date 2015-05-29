@@ -119,6 +119,7 @@ public class CreateCombination : MonoBehaviour {
 	#endregion Monobehaviour
 	
 	#region Public Functions
+	
 	/// <summary>
 	/// Gets the current combination and sets it to 1 string.
 	/// </summary>
@@ -195,7 +196,7 @@ public class CreateCombination : MonoBehaviour {
 	/// Sets the current combination to whatever combination is passed to it.
 	/// </summary>
 	/// <param name="c">string array of a combination.</param>
-	void SetCurrentCombo(string[] c){
+	public void SetCurrentCombo(string[] c){
 		for(int i = 0; i < numOfElements; i++){
 			currentCombo[i] = c[i];
 		}
@@ -207,7 +208,7 @@ public class CreateCombination : MonoBehaviour {
 	/// Translates the combination that is palssed to it into integers.
 	/// </summary>
 	/// <param name="stringCombo">String combo.</param>
-	void SetCombo(string[] stringCombo){
+	public void SetCombo(string[] stringCombo){
 		for(int i = 0; i < stringCombo.Length; i++){
 			for(int j = 0; j < types.Length; j++){
 				if(stringCombo[i] == types[j]){

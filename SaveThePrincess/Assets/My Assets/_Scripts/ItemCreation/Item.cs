@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -117,6 +117,7 @@ public class Item : MonoBehaviour {
 		spdMod = spd;
 		hpMod = hp;
 		manaMod = mana;
+		//dollarCost = 0;
 	}
 	
 	/// <summary>
@@ -157,6 +158,7 @@ public class Item : MonoBehaviour {
 		spdMod = i2.GetSpdMod();
 		hpMod = i2.GetHpMod();
 		manaMod = i2.GetManaMod();
+		dollarCost = i2.GetDollarCost ();
 		// If the intance of the item has a Sprite Renderer, swap the sprite.
 		if(this.GetComponent<SpriteRenderer>() == true){
 			this.GetComponent<SpriteRenderer>().sprite = image;
@@ -173,10 +175,10 @@ public class Item : MonoBehaviour {
 
 	#region Effects
 
-	public void ApplyEffect(PlayerController p){
+	public void ApplyEffect(PawnController p){
 		if (this.GetItemClass () == "Potion") {
 			if (this.GetItemSubClass() == "HealPotion"){
-				p.HealPlayer(this.GetHealEffect ());
+				p.HealForAmount(this.GetHealEffect ());
 			}else if (this.GetItemSubClass() == "ManaPotion"){
 				p.GiveMana (this.GetManaMod());
 			}
@@ -184,11 +186,11 @@ public class Item : MonoBehaviour {
 
 		} else if (this.GetItemClass () == "Magic") {
 			if (this.GetItemSubClass() == "HealMagic"){
-				p.HealPlayer(this.GetHealEffect ());
+				p.HealForAmount(this.GetHealEffect ());
 			}else if (this.GetItemSubClass() == "AttackMagic"){
 				// get enemy
 				GameController g = FindObjectOfType<GameController>();
-				PlayerController e = g.rightPlayer;
+				BaseEnemyController e = g.rightPlayer;
 				Debug.Log (e.name);
 				p.MagicAttack(e);
 			}
@@ -241,6 +243,9 @@ public class Item : MonoBehaviour {
 	}
 	public int GetManaMod(){
 		return manaMod;
+	}
+	public int GetDollarCost(){
+		return dollarCost;
 	}
 	#endregion Getters
 	

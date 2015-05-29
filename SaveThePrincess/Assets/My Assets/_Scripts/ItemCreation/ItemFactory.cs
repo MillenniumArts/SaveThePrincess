@@ -115,15 +115,15 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The magic.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Item CreateMagic(Transform spawnPoint){
-		int randomNum = Random.Range(0, 3);
+	public Item CreateMagic(Transform spawnPoint, string name){
+		//int randomNum = Random.Range(0, 3);
 		Item m = blankAtkMagPrefab;
-		switch(randomNum){
-		case 0: m = CreateAttackMagic(spawnPoint);
+		switch(name){
+		case "AttackMagic": m = CreateAttackMagic(spawnPoint);
 			break;
-		case 1: m = CreateHealMagic(spawnPoint);
+		case "HealMagic": m = CreateHealMagic(spawnPoint);
 			break;
-		case 2: m = CreateAttackMagic(spawnPoint);
+		case "ManaHealMagic": m = CreateHealMagic(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No magic to create!");
@@ -137,15 +137,15 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The potion.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Potion CreatePotion(Transform spawnPoint){
-		int randomNum = Random.Range(0, 3);
+	public Potion CreatePotion(Transform spawnPoint, string name){
+		//int randomNum = Random.Range(0, 3);
 		Potion p = blankHealPotionPrefab;
-		switch(randomNum){
-		case 0: p = CreateHealPotion(spawnPoint);
+		switch(name){
+		case "HealPotion": p = CreateHealPotion(spawnPoint);
 			break;
-		case 1: p = CreateHealPotion(spawnPoint);
+		case "other": p = CreateHealPotion(spawnPoint);
 			break;
-		case 2: p = CreateHealPotion(spawnPoint);
+		case "other2": p = CreateHealPotion(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No potion to create!");

@@ -21,10 +21,10 @@ public class InventoryGUIController : InventoryController {
 
 		for (int i=0; i < MAX_INVENTORY_SIZE; i++) {
 			if (i%2==0){
-				this._items[i] = _itemFactory.CreatePotion(drawLocations[i]);
+				this._items[i] = _itemFactory.CreatePotion(drawLocations[i], "HealPotion");
 				this._items[i].transform.localScale = new Vector3(1.5f,1.5f,1.5f);
 			}else{
-				this._items[i] = _itemFactory.CreateMagic(drawLocations[i]);
+				this._items[i] = _itemFactory.CreateMagic(drawLocations[i], "HealMagic");
 				this._items[i].transform.localScale = new Vector3(1f,1f,1f);
 			}
 			this._items[i].transform.parent = this.drawLocations[i].transform;		// anchor to parent
@@ -37,8 +37,6 @@ public class InventoryGUIController : InventoryController {
 			if (this._items[i].used){
 				this.clickables[i].gameObject.SetActive(false);
 				this._items[i].gameObject.SetActive(false);
-			}else{
-				//this.clickables[i].gameObject.SetActive(true);
 			}
 		}
 	}

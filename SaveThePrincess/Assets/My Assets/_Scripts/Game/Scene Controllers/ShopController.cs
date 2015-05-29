@@ -52,25 +52,19 @@ public class ShopController : MonoBehaviour {
 		Application.LoadLevel ("Battle_LVP");
 	}
 
-	public void BuyWeapon(int buttonNum){
-		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			player.TransferPurchasedWeapon(shopItems[buttonNum]);
-		}
-	}
-
-
-	public void BuyArmour(int buttonNum){
-		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			player.TransferPurchasedArmor(shopItems[buttonNum]);
-		}
-	}
 
 	public void BuyItem(int buttonNum){
-		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {
-			if(shopItems[buttonNum].GetItemClass() == "Armor"){
+		if (this.player.PurchaseItem (shopItems [buttonNum].dollarCost)) {	// can afford
+			if(shopItems[buttonNum].GetItemClass() == "Armor"){				// Armor
 				player.TransferPurchasedArmor(shopItems[buttonNum]);
-			}else if(shopItems[buttonNum].GetItemClass() == "Weapon"){
+			}else if(shopItems[buttonNum].GetItemClass() == "Weapon"){		// Weapon
 				player.TransferPurchasedWeapon(shopItems[buttonNum]);
+			}else if (shopItems[buttonNum].GetItemClass() == "Potion"){		// Potion
+			
+			}else if (shopItems[buttonNum].GetItemClass() == "Magic"){		// Magic
+				
+			}else{															// Other
+				Debug.Log (shopItems[buttonNum].GetItemClass() + " is not a recognized Item Class!");
 			}
 		}
 	}

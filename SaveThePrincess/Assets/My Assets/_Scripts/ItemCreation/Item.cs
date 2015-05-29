@@ -190,7 +190,7 @@ public class Item : MonoBehaviour {
 			}else if (this.GetItemSubClass() == "AttackMagic"){
 				// get enemy
 				GameController g = FindObjectOfType<GameController>();
-				BaseEnemyController e = g.rightPlayer;
+				BaseEnemyController e = g.enemy;
 				Debug.Log (e.name);
 				p.MagicAttack(e);
 			}

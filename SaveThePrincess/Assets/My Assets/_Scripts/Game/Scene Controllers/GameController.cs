@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour {
 	/// Initiates Player Inventory.
 	/// </summary>
 	public void InventoryInit(){
+
 		if (!this.player.inventory.initialized)
 			this.player.inventory.PopulateInventory ();
 		InitInventoryButtons ();

@@ -186,7 +186,7 @@ public class Item : MonoBehaviour {
 
 		} else if (this.GetItemClass () == "Magic") {
 			if (this.GetItemSubClass() == "HealMagic"){
-				p.HealForAmount(this.GetHealEffect ());
+				p.HealForPercent((this.GetHealEffect () * 0.01f));
 			}else if (this.GetItemSubClass() == "AttackMagic"){
 				// get enemy
 				GameController g = FindObjectOfType<GameController>();

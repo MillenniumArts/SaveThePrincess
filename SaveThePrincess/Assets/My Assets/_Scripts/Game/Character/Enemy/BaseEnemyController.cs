@@ -19,7 +19,6 @@ public class BaseEnemyController : PawnController {
 	
 	#region Public functions
 	
-	
 	/// <summary>
 	/// Uses the item at specified index.
 	/// </summary>
@@ -75,9 +74,17 @@ public class BaseEnemyController : PawnController {
 			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 		}
 	}
+
 	
 	#endregion Public functions
-	
+
+	#region Protected Functions
+
+
+	#endregion Protected Functions
+
+
+
 	#region Private functions
 	
 	

@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 	public GameController gameController;
 	public bool enemyHasHealed, waiting, scoredThisRound;
 	public int score, turn;
-	public static float MONEY_TRANSFER_PCT = 0.2f;
+	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.5f;
 	public float cooldownValue;
 
 	// GUI/HUD
@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour {
 		} else if (turn == 1) {
 			PlayerPrefs.SetInt("turn" , 0);
 			turn = 0;
+			waiting=false;
 		}
 	}
 
@@ -80,7 +81,6 @@ public class GameController : MonoBehaviour {
 	/// Initiates Player Inventory.
 	/// </summary>
 	public void InventoryInit(){
-
 		if (!this.player.inventory.initialized)
 			this.player.inventory.PopulateInventory ();
 		InitInventoryButtons ();
@@ -92,6 +92,7 @@ public class GameController : MonoBehaviour {
 	/// <param name="index">Index.</param>
 	public void UseItem(int index){
 		this.player.UseItem (index);
+		this.player.TriggerAnimation(this.player.inventory._items[index].GetItemClass());
 		this.player.inventory.DisableButtonsIfUsed ();
 	}
 
@@ -107,9 +108,8 @@ public class GameController : MonoBehaviour {
 				if (!this.player.inventory._items[i].used)
 					this.player.inventory.clickables[i].gameObject.SetActive(false);
 			}
-			
 			this.player.PhysicalAttack(this.enemy);
-			StartCooldown(waiting, 1.0f);
+			StartCooldown(waiting, COOLDOWN_LENGTH);
 		}
 	}
 
@@ -117,7 +117,7 @@ public class GameController : MonoBehaviour {
 	/// called when animation is finished
 	/// </summary>
 	public void OnWaitComplete(){
-		if (turn == 0) {
+		waiting = false;
 			this.leftPhysAttack.gameObject.SetActive(true);
 			for (int i=0; i<this.player.inventory.clickables.Length; i++){
 				if (!this.player.inventory._items[i].used)
@@ -125,11 +125,7 @@ public class GameController : MonoBehaviour {
 			}
 			this.player.inventory.gameObject.SetActive(true);
 			NextTurn();
-		}
 	}
-	/// <summary>
-
-
 
 	/// <summary>
 	/// Initiates Inventory buttons.
@@ -139,9 +135,10 @@ public class GameController : MonoBehaviour {
 		Button[] but = a.GetComponentsInChildren<Button> ();
 		Text[] t = a.GetComponentsInChildren<Text> ();
 		for (int i=0; i < this.player.inventory._items.Length; i++) {
-				this.player.inventory.clickables [i] = but [i];
-				this.player.inventory.buttonText [i] = t [i];
-				this.player.inventory.buttonText [i].text = "USE";
+			this.player.inventory.clickables [i] = but [i];
+			this.player.inventory.buttonText [i] = t [i];
+			this.player.inventory.buttonText [i].text = "+" + this.player.inventory._items[i].GetHealEffect()+ "HP";
+
 			if (this.player.inventory._items[i].used){
 				this.player.inventory.clickables[i].gameObject.SetActive(false);
 				this.player.inventory.drawLocations[i].gameObject.SetActive(false);
@@ -149,13 +146,9 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	private bool EnemyIsDead(BaseEnemyController e){
-		return e.remainingHealth <= 0;
-	}
-
 	// increment counter and set local storage
 	private void UpdateScore(){
-		if (EnemyIsDead(this.enemy) && !scoredThisRound) {
+		if (this.enemy.IsDead() && !scoredThisRound) {
 			this.score++;
 			scoredThisRound = true;
 			PlayerPrefs.SetInt ("score", score );
@@ -184,49 +177,58 @@ public class GameController : MonoBehaviour {
 	/// Does the enemy AI Behaviour.
 	/// </summary>
 	/// <returns>The enemy action.</returns>
-	private IEnumerator DoEnemyAction(){
-		yield return new WaitForSeconds (0.75f);
+	private void DoEnemyAction(){
+		//yield return new WaitForSeconds (0.75f);
 			// player alive and enemy turn
-		if (this.player.remainingHealth > 0 && this.enemy.remainingHealth > 0 && turn == 1) {
-				//enemy health < 25% , 50% chance of healing
-				if (this.enemy.remainingHealth > (0.25 * this.enemy.totalHealth) && Random.Range (0, 1) == 0) {
-					//50% chance of physical vs magic
-					if (Random.Range (0, 1) == 1) {
-						// physical
-						Debug.Log (this.enemy.name +" attacks!");
-						this.enemy.PhysicalAttack (this.player);
-					} else {
-						//Magical	
-						Debug.Log (this.enemy.name +" uses a Magic Attack!");
-						bool pass = this.enemy.MagicAttack (this.player);
-						// if there is not enough mana to cast a magic attack
-						if (!pass) {
-							//50% chance of mana potion or physical attack instead
-							if (Random.Range (0, 1) == 0) {
-								Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
-								this.enemy.PhysicalAttack (this.player);
-							} else {
-								Debug.Log ("Mana restored by 10");
-								this.enemy.remainingMana += 10;
-							}
+		if (!this.player.IsDead () && !this.enemy.IsDead () && turn == 1 && !waiting) {
+			//StartCooldown (waiting, COOLDOWN_LENGTH);
+			//enemy health < 25% , 50% chance of healing
+			if (this.enemy.remainingHealth > (0.25 * this.enemy.totalHealth) && Random.Range (0, 1) == 0) {
+				//50% chance of physical vs magic
+				if (Random.Range (0, 1) == 1) {
+					// physical
+					Debug.Log (this.enemy.name + " attacks!");
+					this.enemy.PhysicalAttack (this.player);
+				} else {
+					//Magical	
+					Debug.Log (this.enemy.name + " uses a Magic Attack!");
+					bool pass = this.enemy.MagicAttack (this.player);
+					// if there is not enough mana to cast a magic attack
+					if (!pass) {
+						//50% chance of mana potion or physical attack instead
+						if (Random.Range (0, 1) == 0) {
+							Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
+							this.enemy.PhysicalAttack (this.player);
+						} else {
+							Debug.Log ("Mana restored by 10");
+							this.enemy.remainingMana += 10;
 						}
 					}
-				} else {
-					// chance to heal if enemy has potion
-					if (!enemyHasHealed) {
-						Debug.Log (this.enemy.name + "Healed self for 25 hp");
-						this.enemy.remainingHealth += 25;
-						this.enemyHasHealed = true;
-					} else {
-					// no potions to heal, LAST RESORT ATTACK!
-						Debug.Log (this.enemy.name +" attacks!");
-						this.enemy.PhysicalAttack (this.player);
-					}
 				}
-				// end computer turn
-				NextTurn ();
+			} else {
+				// chance to heal if enemy has potion
+				if (!enemyHasHealed) {
+					Debug.Log (this.enemy.name + "Healed self for 25 hp");
+					this.enemy.TriggerAnimation ("potion");
+					this.enemy.remainingHealth += 25;
+					this.enemyHasHealed = true;
+				} else {
+					// no potions to heal, LAST RESORT ATTACK!
+					Debug.Log (this.enemy.name + " attacks!");
+					this.enemy.PhysicalAttack (this.player);
+				}
+			}
+			// end computer turn
+			NextTurn ();
+		} else {
+
+			if (this.enemy.IsDead ()){
+				Debug.Log ("enemy Dead");
+				this.enemy.TriggerAnimation("death");
+				//StartCooldown (waiting, COOLDOWN_LENGTH);
 			}
 		}
+	}
 
 	/// <summary>
 	/// Ends the game.
@@ -235,7 +237,9 @@ public class GameController : MonoBehaviour {
 		// player dead
 		UpdateText ();
 		TransferGold ();
-		
+		if (this.player.IsDead() && !waiting){
+			this.player.TriggerAnimation("death");
+		}
 		// check for high score
 		if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore")){
 			// set new HighScore
@@ -288,10 +292,10 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerPrefs.SetInt ("carryover" , goldAmount);
 	}
-
+	/// <summary>
 	/// Starts the cooldown for specified boolean.
 	/// </summary>
-	/// <param name="toggle">If set to <c>true</c> toggle.</param>
+	/// <param name="toggle"><c>true</c>if boolean is ON cooldown.</param>
 	/// <param name="time">Time.</param>
 	public void StartCooldown(bool toggle, float time){
 		cooldownValue = time;
@@ -302,10 +306,11 @@ public class GameController : MonoBehaviour {
 	/// Cooldown counter.
 	/// </summary>
 	private void Cooldown(){
+			//Debug.Log (waiting);
 		if (waiting) {
 			this.cooldownValue -= 0.01f;
 			if (this.cooldownValue <= 0){
-				this.cooldownValue = 0;
+				this.cooldownValue = 0.0f;
 				this.waiting = false;
 				this.OnWaitComplete();
 			}
@@ -317,23 +322,21 @@ public class GameController : MonoBehaviour {
 		UpdateText ();
 		UpdateScore();
 
-		StartCoroutine("DoEnemyAction");
-
 		Cooldown ();
 		if (!waiting) {
-			if (this.player.remainingHealth <= 0) {
+			DoEnemyAction();
+			if (this.player.IsDead()) {
 				// player dead
 				EndGame ();
-			} else if (EnemyIsDead (this.enemy)/* && (PlayerPrefs.GetInt("score") % 5 != 0) */) {
+			} else if (this.enemy.IsDead ()) {
 				// enemy dead
 				//get enemy moneydrop
 				int moneyDrop = DropMoney ();
-				Debug.Log ("Dropped " + moneyDrop + " gold");
 				this.player.dollarBalance += moneyDrop;
 
 				GoToStore ();
 				//LoadNextLevel ();
-			} else if (EnemyIsDead (this.enemy)) {
+			} else if (this.enemy.IsDead()) {
 				// CHANGE THIS TO LOADING TOWN!
 
 			}

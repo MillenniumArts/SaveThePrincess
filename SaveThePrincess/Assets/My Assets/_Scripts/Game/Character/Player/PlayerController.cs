@@ -18,7 +18,6 @@ public class PlayerController: PawnController {
 	#endregion Variables
 	
 	#region Public functions
-	
 
 	/// <summary>
 	/// Uses the item at specified index.
@@ -33,8 +32,6 @@ public class PlayerController: PawnController {
 		if (this.inventory._items [index].GetItemClass() == "Potion")
 			this.inventory._items [index].used = true;
 	}
-	
-
 
 	/// <summary>
 	/// Purchases the item.

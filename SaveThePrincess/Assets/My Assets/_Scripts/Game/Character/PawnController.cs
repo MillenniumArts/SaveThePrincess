@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PawnController : MonoBehaviour {
@@ -127,13 +127,34 @@ public class PawnController : MonoBehaviour {
 	/// Heals the player for specified amount.
 	/// </summary>
 	/// <param name="amount">Amount.</param>
-	public void HealForAmount(int amount){
+	public virtual void HealForAmount(int amount){
 		if (this.remainingHealth + amount > this.totalHealth) {
 			this.remainingHealth = this.totalHealth;
 		} else {
 			this.remainingHealth += amount;
 		}
-		//Debug.Log (this.name + " healed for " + amount + " " + this.remainingHealth);
+		this.PerformPotionBehaviour ();
+	}
+	/// <summary>
+	/// Heals for percent.
+	/// </summary>
+	/// <param name="percent">Percent (from 0.01f to 0.99).</param>
+	public virtual void HealForPercent(float percent){
+		this.PerformHealMagicBehaviour ();
+		if (this.remainingHealth + Mathf.FloorToInt(this.remainingHealth * percent) > this.totalHealth) {
+			this.remainingHealth = this.totalHealth;
+		} else {
+			this.remainingHealth += Mathf.FloorToInt(this.remainingHealth * percent);
+		}
+
+	}
+
+	/// <summary>
+	/// Determines whether this instance is dead.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is dead; otherwise, <c>false</c>.</returns>
+	public bool IsDead(){
+		return this.remainingHealth <= 0;
 	}
 
 	/// <summary>
@@ -142,15 +163,16 @@ public class PawnController : MonoBehaviour {
 	/// <param name="attackedPlayer">Attacked player.</param>
 	public void PhysicalAttack(PawnController attackedPlayer){
 		// apply damage to player
+		this.PerformAttackBehaviour ();
 		attackedPlayer.TakeDamage (this.physicalDamage);
-		// animate sprites
-		this.playerAnimator.SetTrigger(this.playerWeapon.GetAnimParameter());
+		// animate sprites		
+		this.PerformAttackBehaviour ();
 	}
 	
 	public bool MagicAttack(PawnController attackedPlayer){
-		// call player take damage to handle armor etc on the player object
 		// animate sprites
-		// apply damage to player
+		this.PerformMagicBehaviour ();
+
 		if (this.remainingMana - 10 >= 0) {
 			this.remainingMana -= 10;
 			attackedPlayer.TakeDamage (this.magicalDamage);
@@ -211,6 +233,60 @@ public class PawnController : MonoBehaviour {
 		this.playerArmor = ItemFactory.instance.CreateArmor(playerBody, name);	// Spawn specified weapon.
 		this.playerArmor.transform.parent = playerBody;								// Make it the child of the hand.
 		this.playerArmor.transform.localScale = new Vector3(1,1,1);							// Fix the scale.
+	}
+
+	/// <summary>
+	/// Triggers the animation.
+	/// </summary>
+	/// <param name="state">State.</param>
+	public void TriggerAnimation(string state){
+		switch (state) {
+		case "attack": 
+			this.playerAnimator.SetTrigger(this.playerWeapon.GetAnimParameter());
+			break;
+		case "AtkMagic": 
+			this.playerAnimator.Play ("magic up");
+			break;
+		case "potion": 
+			this.playerAnimator.Play ("human_Use item");
+			break;
+		case "death": 
+			this.playerAnimator.Play ("human_Knee death");
+			break;
+		case "HealMagic": 
+			this.playerAnimator.Play ("heal magic");
+			break;
+		}
+	}
+	/// <summary>
+	/// Performs the potion behaviour.
+	/// </summary>
+	protected virtual void PerformPotionBehaviour(){
+		TriggerAnimation ("potion");
+	}
+	/// <summary>
+	/// Performs the attack behaviour.
+	/// </summary>
+	protected virtual void PerformAttackBehaviour(){
+		TriggerAnimation ("attack");
+	}
+	/// <summary>
+	/// Performs the death behaviour.
+	/// </summary>
+	protected virtual void PerformDeathBehaviour(){
+		TriggerAnimation ("death");
+	}
+	/// <summary>
+	/// Performs the magic behaviour.
+	/// </summary>
+	protected virtual void PerformMagicBehaviour(){
+		TriggerAnimation ("AtkMagic");
+	}
+	/// <summary>
+	/// Performs the heal magic behaviour.
+	/// </summary>
+	protected virtual void PerformHealMagicBehaviour(){
+		TriggerAnimation ("HealMagic");
 	}
 
 	#endregion protected Functions
@@ -290,8 +366,6 @@ public class PawnController : MonoBehaviour {
 
 	//set up default parameters here for all characters in game
 	void Start () {
-		//this.dollarBalance = 50;
-
 
 	}
 	

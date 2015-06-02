@@ -57,6 +57,9 @@ public class PlayerController: PawnController {
 		this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
 		this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
 		this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
+		this.physicalDamage = physicalDamage - damageMod;
+		this.damageMod = w.GetAtkMod();
+		this.physicalDamage += damageMod;
 	}
 
 	/// <summary>
@@ -65,6 +68,9 @@ public class PlayerController: PawnController {
 	/// <param name="a">The armour to be transfered.</param>
 	public void TransferPurchasedArmor(Item a){
 		this.playerArmor.SwapTo(a);
+		this.armor = armor - armorMod;
+		this.armorMod = a.GetDefMod();
+		this.armor += armorMod;
 		if(this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false){
 			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 		}
@@ -83,19 +89,12 @@ public class PlayerController: PawnController {
 	///Initialize the player with values	
 	/// </summary>
 	void Start(){
-		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
-		this.playerAnimator = GetComponentInChildren<Animator>();
-		this.spawnWithWeapon = false;
-		// initialize weapon if player is supposed to have one
-		CallSetWeapon("Sword");
-		CallSetArmor("Armor");
-		if (!spawnWithWeapon) {			//
-			this.weaponComboScript.AllOff ();	// Creates a weapon, sets it to the player's hand and makes it invisible.
-			this.weaponComboScript.SwapNow ();
-			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-		}
-
+		PawnControllerStart();
 		this.dollarBalance = 25;
+	}
+
+	void Update(){
+		DoOnFirstTick();
 	}
 	#endregion MonoBehaviour
 }

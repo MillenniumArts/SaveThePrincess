@@ -4,6 +4,7 @@ using System.Collections;
 
 public class MenuController : MonoBehaviour {
 	// used to handle menu options
+	public string firstSceneToLoad;
 
 	public PlayerController player;
 	public MenuController menuController;
@@ -135,7 +136,7 @@ public class MenuController : MonoBehaviour {
 
 				DontDestroyOnLoad(this.player);
 
-				Application.LoadLevel ("Battle_LVP");
+				Application.LoadLevel (firstSceneToLoad);
 			}else{
 
 			}

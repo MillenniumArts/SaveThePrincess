@@ -96,23 +96,11 @@ public class BaseEnemyController : PawnController {
 	///Initialize the Enemy with values	
 	/// </summary>
 	void Start(){
-		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
-
-		this.playerAnimator = GetComponentInChildren<Animator>();
-		this.spawnWithWeapon = true;
-
-		// initialize weapon if player is supposed to have one
-		CallSetWeapon("Sword");
-		CallSetArmor("Armor");
-		if (!spawnWithWeapon) {			//
-			this.weaponComboScript.AllOff ();	// Creates a weapon, sets it to the player's hand and makes it invisible.
-			this.weaponComboScript.SwapNow ();
-			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-		}
+		PawnControllerStart();
 	}
 
 	void Update(){
-
+		DoOnFirstTick();
 	}
 	#endregion MonoBehaviour
 

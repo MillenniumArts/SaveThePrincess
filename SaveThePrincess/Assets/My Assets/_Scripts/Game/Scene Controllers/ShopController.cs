@@ -26,7 +26,9 @@ public class ShopController : MonoBehaviour {
 		// relocate player
 		Vector3 newSpot = new Vector3 (-7.25f, -3.5f);
 		this.player.gameObject.transform.localPosition = newSpot;
-		this.player.inventory.gameObject.SetActive (false);
+
+		if(player.inventory)
+			this.player.inventory.gameObject.SetActive (false);
 
 		this.playerBalance.text = this.player.dollarBalance.ToString ();
 		
@@ -47,9 +49,10 @@ public class ShopController : MonoBehaviour {
 
 	public void ExitStore(){
 		this.player.gameObject.transform.localPosition = prevPos;
-		this.player.inventory.gameObject.SetActive (true);
+		if(player.inventory != null)
+			this.player.inventory.gameObject.SetActive (true);
 		DontDestroyOnLoad (this.player);
-		Application.LoadLevel ("Battle_LVP");
+		Application.LoadLevel ("Town_LVP");
 	}
 
 

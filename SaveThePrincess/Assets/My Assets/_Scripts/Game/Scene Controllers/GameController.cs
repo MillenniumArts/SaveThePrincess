@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 	public GameController gameController;
 	public bool enemyHasHealed, waiting, scoredThisRound;
 	public int score, turn;
-	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.5f;
+	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.0f;
 	public float cooldownValue;
 
 	// GUI/HUD
@@ -81,8 +81,11 @@ public class GameController : MonoBehaviour {
 	/// Initiates Player Inventory.
 	/// </summary>
 	public void InventoryInit(){
+		if (!this.player.inventory.isActiveAndEnabled)
+			this.player.gameObject.SetActive (true);
 		if (!this.player.inventory.initialized)
 			this.player.inventory.PopulateInventory ();
+
 		InitInventoryButtons ();
 	}
 
@@ -220,14 +223,7 @@ public class GameController : MonoBehaviour {
 			}
 			// end computer turn
 			NextTurn ();
-		} else {
-
-			if (this.enemy.IsDead ()){
-				Debug.Log ("enemy Dead");
-				this.enemy.TriggerAnimation("death");
-				//StartCooldown (waiting, COOLDOWN_LENGTH);
-			}
-		}
+		} 
 	}
 
 	/// <summary>
@@ -330,9 +326,11 @@ public class GameController : MonoBehaviour {
 				EndGame ();
 			} else if (this.enemy.IsDead ()) {
 				// enemy dead
-				//get enemy moneydrop
+				this.enemy.TriggerAnimation("death");
 				int moneyDrop = DropMoney ();
 				this.player.dollarBalance += moneyDrop;
+
+
 
 				GoToStore ();
 				//LoadNextLevel ();

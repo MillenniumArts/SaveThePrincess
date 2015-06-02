@@ -86,12 +86,16 @@ public class PawnController : MonoBehaviour {
 	/// The Armor for this player, used for damage reduction on hit
 	/// </summary>
 	public int armor;
+
+	public int armorMod;
 	
 	/// <summary>
 	/// The base physical damage for this player (BEFORE ENCHANTMENTS) 
 	/// </summary>
-	public int physicalDamage ;
-	
+	public int physicalDamage;
+
+	public int damageMod;
+
 	/// <summary>
 	/// The base magic damage for this player (BEFORE ENCHANTMENTS) 
 	/// </summary>
@@ -364,6 +368,47 @@ public class PawnController : MonoBehaviour {
 	#endregion SpriteCustomization
 
 
+	#region Constructors
+
+	public void PawnControllerStart(){
+		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
+		
+		this.playerAnimator = GetComponentInChildren<Animator>();
+
+		// initialize weapon if player is supposed to have one
+		CallSetWeapon("Sword");
+		CallSetArmor("Armor");
+		if (!spawnWithWeapon) {			//
+			this.weaponComboScript.AllOff ();	// Creates a weapon, sets it to the player's hand and makes it invisible.
+			this.weaponComboScript.SwapNow ();
+			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+		}
+
+		if(playerWeapon != null){
+			damageMod = playerWeapon.GetAtkMod();
+			physicalDamage += damageMod;
+		}
+		if(playerArmor != null){
+			armorMod = playerWeapon.GetDefMod();
+			armor += armorMod;
+		}
+		
+
+	}
+
+	public void DoOnFirstTick(){
+		if(physicalDamage != 0){
+			this.physicalDamage = physicalDamage - damageMod;
+			this.damageMod = playerWeapon.GetAtkMod();
+			this.physicalDamage += damageMod;
+			this.armor = armor - armorMod;
+			this.armorMod = playerArmor.GetDefMod();
+			this.armor += armorMod;
+		}
+	}
+
+	#endregion Constructors
+
 	//set up default parameters here for all characters in game
 	void Start () {
 
@@ -371,6 +416,6 @@ public class PawnController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }

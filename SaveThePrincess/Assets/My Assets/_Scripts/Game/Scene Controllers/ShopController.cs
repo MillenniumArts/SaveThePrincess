@@ -49,8 +49,8 @@ public class ShopController : MonoBehaviour {
 
 	public void ExitStore(){
 		this.player.gameObject.transform.localPosition = prevPos;
-		if(player.inventory != null)
-			this.player.inventory.gameObject.SetActive (true);
+		//if(player.inventory != null)
+		//	this.player.inventory.gameObject.SetActive (true);
 		DontDestroyOnLoad (this.player);
 		Application.LoadLevel ("Town_LVP");
 	}

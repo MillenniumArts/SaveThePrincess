@@ -153,6 +153,15 @@ public class PawnController : MonoBehaviour {
 
 	}
 
+	public bool UseMana (int amount){
+		if (this.remainingMana - amount <= 0)
+			return false;
+		else {
+			this.remainingMana -= amount;
+			return true;
+		}
+	}
+
 	/// <summary>
 	/// Determines whether this instance is dead.
 	/// </summary>
@@ -172,14 +181,18 @@ public class PawnController : MonoBehaviour {
 		// animate sprites		
 		this.PerformAttackBehaviour ();
 	}
-	
+
+	/// <summary>
+	/// Performs Magic attack.
+	/// </summary>
+	/// <returns><c>true</c>, if magic attack was cast, <c>false</c> otherwise.</returns>
+	/// <param name="attackedPlayer">Attacked player.</param>
 	public bool MagicAttack(PawnController attackedPlayer){
 		// animate sprites
-		this.PerformMagicBehaviour ();
-
 		if (this.remainingMana - 10 >= 0) {
 			this.remainingMana -= 10;
 			attackedPlayer.TakeDamage (this.magicalDamage);
+			this.PerformMagicBehaviour ();
 			return true;
 		} else {
 			Debug.Log ("Not Enough Mana For That!");
@@ -392,8 +405,6 @@ public class PawnController : MonoBehaviour {
 			armorMod = playerWeapon.GetDefMod();
 			armor += armorMod;
 		}
-		
-
 	}
 
 	public void DoOnFirstTick(){

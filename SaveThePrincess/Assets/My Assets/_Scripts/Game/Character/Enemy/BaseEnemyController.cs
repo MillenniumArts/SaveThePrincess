@@ -87,8 +87,17 @@ public class BaseEnemyController : PawnController {
 
 	#region Private functions
 	
-	
-	
+	private void EnemyStart(){
+		this.dollarBalance = 25;
+	}
+
+	/// <summary>
+	/// Drops a random amount of money after enemy dies.
+	/// </summary>
+	public int DropMoney(){
+		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) , this.dollarBalance);
+	}
+
 	#endregion Private functions
 	
 	#region MonoBehaviour 

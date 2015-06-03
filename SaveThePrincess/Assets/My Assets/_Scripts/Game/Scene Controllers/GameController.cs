@@ -8,10 +8,12 @@ public class GameController : MonoBehaviour {
 	public BaseEnemyController enemy;
 	public GameObject gameObj;
 	public GameController gameController;
-	public bool enemyHasHealed, waiting, scoredThisRound;
+	public bool enemyHasHealed, waiting, scoredThisRound, enemyHasAttacked;
 	public int score, turn;
-	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.0f;
+	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.25f;
 	public float cooldownValue;
+
+	public Slider playerHealth, playerMana, enemyHealth, enemyMana; 
 
 	// GUI/HUD
 	public Text leftHealthText, 
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour {
 		PlayerPrefs.SetInt("turn",turn);
 		// enemy has not healed yet
 		enemyHasHealed = false;
+		enemyHasAttacked = false;
 		this.score = PlayerPrefs.GetInt ("score");
 			
 		// get game Object
@@ -62,7 +65,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	// END START
-
+	
 	/// <summary>
 	/// Starts next turn.
 	/// </summary>
@@ -88,15 +91,43 @@ public class GameController : MonoBehaviour {
 
 		InitInventoryButtons ();
 	}
+	
+	/// <summary>
+	/// Disables the buttons.
+	/// </summary>
+	private void DisableButtons(){
+		this.leftPhysAttack.gameObject.SetActive(false);
+		for (int i=0; i<this.player.inventory.clickables.Length; i++){
+			if (!this.player.inventory._items[i].used)
+				this.player.inventory.clickables[i].gameObject.SetActive(false);
+		}
+		this.player.inventory.gameObject.SetActive(false);
+	}
+
+	/// <summary>
+	/// Enables the buttons.
+	/// </summary>
+	private void EnableButtons(){
+		this.leftPhysAttack.gameObject.SetActive(true);
+		for (int i=0; i<this.player.inventory.clickables.Length; i++){
+			if (!this.player.inventory._items[i].used)
+				this.player.inventory.clickables[i].gameObject.SetActive(true);
+		}
+		this.player.inventory.gameObject.SetActive(true);
+
+	}
 
 	/// <summary>
 	/// Player Uses the item in inventory specified at index.
 	/// </summary>
 	/// <param name="index">Index.</param>
 	public void UseItem(int index){
-		this.player.UseItem (index);
-		this.player.TriggerAnimation(this.player.inventory._items[index].GetItemClass());
-		this.player.inventory.DisableButtonsIfUsed ();
+		if (turn == 0) {
+			waiting = true;
+			DisableButtons();
+			this.player.UseItem (index);
+			StartCooldown (waiting, COOLDOWN_LENGTH);
+		}
 	}
 
 	/// <summary>
@@ -106,11 +137,7 @@ public class GameController : MonoBehaviour {
 	public void OnActionUsed(PawnController attacked){
 		if (turn == 0){
 			waiting = true;
-			this.leftPhysAttack.gameObject.SetActive(false);
-			for (int i=0; i<this.player.inventory.clickables.Length; i++){
-				if (!this.player.inventory._items[i].used)
-					this.player.inventory.clickables[i].gameObject.SetActive(false);
-			}
+			DisableButtons();
 			this.player.PhysicalAttack(this.enemy);
 			StartCooldown(waiting, COOLDOWN_LENGTH);
 		}
@@ -121,14 +148,63 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public void OnWaitComplete(){
 		waiting = false;
-			this.leftPhysAttack.gameObject.SetActive(true);
-			for (int i=0; i<this.player.inventory.clickables.Length; i++){
-				if (!this.player.inventory._items[i].used)
-					this.player.inventory.clickables[i].gameObject.SetActive(true);
-			}
-			this.player.inventory.gameObject.SetActive(true);
-			NextTurn();
+		EnableButtons ();
+		NextTurn();
 	}
+
+	/// <summary>
+	/// the enemy action used event.
+	/// </summary>
+	/// <param name="attacked">Attacked.</param>
+	public void OnEnemyActionUsed(PawnController attacked){
+		if (turn == 1){
+			enemyHasAttacked = true;
+			waiting = true;
+			DisableButtons();
+			//this.player.PhysicalAttack(this.enemy);
+			StartCooldown(waiting, COOLDOWN_LENGTH);
+		}
+	}
+
+	/// <summary>
+	///  the enemy wait complete event.
+	/// </summary>
+	public void OnEnemyWaitComplete(){
+		waiting = false;
+		enemyHasAttacked = false;
+		EnableButtons ();
+		NextTurn ();
+	}
+
+	/// <summary>
+	/// Starts the cooldown for specified boolean.
+	/// </summary>
+	/// <param name="toggle"><c>true</c>if boolean is ON cooldown.</param>
+	/// <param name="time">Time.</param>
+	public void StartCooldown(bool toggle, float time){
+		cooldownValue = time;
+		toggle = !toggle;
+	}
+	
+	/// <summary>
+	/// Cooldown counter.
+	/// </summary>
+	private void Cooldown(){
+		//Debug.Log (waiting);
+		if (waiting) {
+			this.cooldownValue -= 0.01f;
+			if (this.cooldownValue <= 0){
+				this.cooldownValue = 0.0f;
+				this.waiting = false;
+				if (turn == 0)
+					this.OnWaitComplete();
+				else if (turn == 1)
+					this.OnEnemyWaitComplete();
+			}
+		}
+	}
+
+
 
 	/// <summary>
 	/// Initiates Inventory buttons.
@@ -149,6 +225,27 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void UpdateButtonText(){
+		for (int i=0; i < this.player.inventory._items.Length; i++) {
+			this.player.inventory.buttonText [i].text = "+" + this.player.inventory._items [i].GetHealEffect () + "HP";
+			if (this.player.inventory._items [i].GetHealEffect () == 0)
+				this.player.inventory.buttonText [i].text = this.player.inventory._items[i].GetAtkMod() + " DMG";
+		}
+	}
+	/// <summary>
+	/// Updates the UI Health/mana bars.
+	/// </summary>
+	public void UpdateBars (){
+		this.playerHealth.maxValue = this.player.totalHealth;
+		this.playerHealth.value = this.player.remainingHealth;
+		this.playerMana.maxValue = this.player.totalMana;
+		this.playerMana.value = this.player.remainingMana;
+		this.enemyHealth.maxValue = this.enemy.totalHealth;
+		this.enemyHealth.value = this.enemy.remainingHealth;
+		this.enemyMana.maxValue = this.enemy.totalMana;
+		this.enemyMana.value = this.enemy.remainingMana;
+	}
+
 	// increment counter and set local storage
 	private void UpdateScore(){
 		if (this.enemy.IsDead() && !scoredThisRound) {
@@ -161,17 +258,17 @@ public class GameController : MonoBehaviour {
 	/// Updates the text for HUD in battle.
 	/// </summary>
 	private void UpdateText(){
-		this.leftHealthText.text = "HEALTH: " + this.player.remainingHealth+"/"+this.player.totalHealth;
-		this.rightHealthText.text = "HEALTH: " + this.enemy.remainingHealth+"/"+this.enemy.totalHealth;
+		this.leftHealthText.text = this.player.remainingHealth+"/"+this.player.totalHealth;
+		this.rightHealthText.text = this.enemy.remainingHealth+"/"+this.enemy.totalHealth;
 
-		this.leftManaText.text = "MANA: " + this.player.remainingMana+"/"+this.player.totalMana;
-		this.rightManaText.text = "MANA: " + this.enemy.remainingMana + "/" + this.enemy.totalMana;
+		this.leftManaText.text = this.player.remainingMana+"/"+this.player.totalMana;
+		this.rightManaText.text = this.enemy.remainingMana + "/" + this.enemy.totalMana;
 	
-		this.leftArmorText.text = "ARMOR: " + this.player.armor;
-		this.rightArmorText.text = "ARMOR: " + this.enemy.armor;
+		this.leftArmorText.text = "AMR: " + this.player.armor;
+		this.rightArmorText.text = "AMR: " + this.enemy.armor;
 
-		this.leftDamageText.text = "DAMAGE: " + this.player.physicalDamage;
-		this.rightDamageText.text = "DAMAGE: " + this.enemy.physicalDamage;
+		this.leftDamageText.text = "DMG: " + this.player.physicalDamage;
+		this.rightDamageText.text = "DMG: " + this.enemy.physicalDamage;
 
 		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}
@@ -181,49 +278,51 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	/// <returns>The enemy action.</returns>
 	private void DoEnemyAction(){
-		//yield return new WaitForSeconds (0.75f);
+		if (!enemyHasAttacked && !waiting) {
 			// player alive and enemy turn
-		if (!this.player.IsDead () && !this.enemy.IsDead () && turn == 1 && !waiting) {
-			//StartCooldown (waiting, COOLDOWN_LENGTH);
-			//enemy health < 25% , 50% chance of healing
-			if (this.enemy.remainingHealth > (0.25 * this.enemy.totalHealth) && Random.Range (0, 1) == 0) {
-				//50% chance of physical vs magic
-				if (Random.Range (0, 1) == 1) {
-					// physical
-					Debug.Log (this.enemy.name + " attacks!");
-					this.enemy.PhysicalAttack (this.player);
-				} else {
-					//Magical	
-					Debug.Log (this.enemy.name + " uses a Magic Attack!");
-					bool pass = this.enemy.MagicAttack (this.player);
-					// if there is not enough mana to cast a magic attack
-					if (!pass) {
-						//50% chance of mana potion or physical attack instead
-						if (Random.Range (0, 1) == 0) {
-							Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
-							this.enemy.PhysicalAttack (this.player);
-						} else {
-							Debug.Log ("Mana restored by 10");
-							this.enemy.remainingMana += 10;
+			if (!this.player.IsDead () && !this.enemy.IsDead () && turn == 1) {
+				//enemy health < 25% 
+				int r = Random.Range (0, 10);
+				if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth)) {
+					//50% chance of physical vs magic
+					r = Random.Range (0, 10);
+					if (r > 5) {
+						// physical
+						Debug.Log (this.enemy.name + " attacks!");
+						this.enemy.PhysicalAttack (this.player);
+					} else if (r <= 5) {
+						//Magical	
+						Debug.Log (this.enemy.name + " uses a Magic Attack!");
+						bool pass = this.enemy.MagicAttack (this.player);
+						// if there is not enough mana to cast a magic attack
+						if (!pass) {
+							//50% chance of mana potion or physical attack instead
+							r = Random.Range (0, 10);
+							if (r > 5) {
+								Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
+								this.enemy.PhysicalAttack (this.player);
+							} else {
+								Debug.Log ("Mana restored by 10");
+								this.enemy.remainingMana += 10;
+							}
 						}
 					}
-				}
-			} else {
-				// chance to heal if enemy has potion
-				if (!enemyHasHealed) {
-					Debug.Log (this.enemy.name + "Healed self for 25 hp");
-					this.enemy.TriggerAnimation ("potion");
-					this.enemy.remainingHealth += 25;
-					this.enemyHasHealed = true;
 				} else {
-					// no potions to heal, LAST RESORT ATTACK!
-					Debug.Log (this.enemy.name + " attacks!");
-					this.enemy.PhysicalAttack (this.player);
+					// chance to heal if enemy has potion
+					if (!enemyHasHealed) {
+						Debug.Log (this.enemy.name + " healed for 25 hp");
+						this.enemy.TriggerAnimation ("potion");
+						this.enemy.HealForAmount (25);
+						this.enemyHasHealed = true;
+					} else {
+						// no potions to heal, LAST RESORT ATTACK!
+						Debug.Log (this.enemy.name + " attacks!");
+						this.enemy.PhysicalAttack (this.player);
+					}
 				}
-			}
-			// end computer turn
-			NextTurn ();
-		} 
+				OnEnemyActionUsed (this.player);
+			} 
+		}
 	}
 
 	/// <summary>
@@ -265,17 +364,15 @@ public class GameController : MonoBehaviour {
 		Application.LoadLevel ("Battle_LVP");
 	}
 
-	void GoToStore(){
+	void GoToTown(){
 		UpdateText ();
+		this.enemy.TriggerAnimation("death");
+		this.enemy.DropMoney ();
+		this.player.dollarBalance += this.enemy.DropMoney ();
 		DontDestroyOnLoad(this.player);
-		Application.LoadLevel ("Store_LVP");
+		Application.LoadLevel ("Town_LVP");
 	}
-	/// <summary>
-	/// Drops a random amount of money after enemy dies.
-	/// </summary>
-	private int DropMoney(){
-		return Random.Range ((score+1),((score+1)*2));
-	}
+
 
 	/// <summary>
 	/// Transfers a portion of player's gold to next game.
@@ -288,52 +385,24 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerPrefs.SetInt ("carryover" , goldAmount);
 	}
-	/// <summary>
-	/// Starts the cooldown for specified boolean.
-	/// </summary>
-	/// <param name="toggle"><c>true</c>if boolean is ON cooldown.</param>
-	/// <param name="time">Time.</param>
-	public void StartCooldown(bool toggle, float time){
-		cooldownValue = time;
-		toggle = !toggle;
-	}
-
-	/// <summary>
-	/// Cooldown counter.
-	/// </summary>
-	private void Cooldown(){
-			//Debug.Log (waiting);
-		if (waiting) {
-			this.cooldownValue -= 0.01f;
-			if (this.cooldownValue <= 0){
-				this.cooldownValue = 0.0f;
-				this.waiting = false;
-				this.OnWaitComplete();
-			}
-		}
-	}
 
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
 		UpdateScore();
-
+		UpdateButtonText ();
+		UpdateBars ();
 		Cooldown ();
+
 		if (!waiting) {
 			DoEnemyAction();
 			if (this.player.IsDead()) {
 				// player dead
+				this.player.TriggerAnimation("death");
 				EndGame ();
-			} else if (this.enemy.IsDead ()) {
+			} else if (this.enemy.IsDead () && !waiting) {
 				// enemy dead
-				this.enemy.TriggerAnimation("death");
-				int moneyDrop = DropMoney ();
-				this.player.dollarBalance += moneyDrop;
-
-
-
-				GoToStore ();
-				//LoadNextLevel ();
+				GoToTown ();
 			} else if (this.enemy.IsDead()) {
 				// CHANGE THIS TO LOADING TOWN!
 

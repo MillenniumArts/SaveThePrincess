@@ -31,6 +31,9 @@ public class PlayerController: PawnController {
 		// only use once if potion
 		if (this.inventory._items [index].GetItemClass() == "Potion")
 			this.inventory._items [index].used = true;
+
+		this.TriggerAnimation (this.inventory._items [index].GetItemClass ());
+		this.inventory.DisableButtonsIfUsed ();
 	}
 
 	/// <summary>

@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TownController : MonoBehaviour {
 	public PlayerController player;
 
-
+	public Text playerBalance;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,6 @@ public class TownController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+		this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
 	}
 }

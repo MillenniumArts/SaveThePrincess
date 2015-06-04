@@ -270,11 +270,11 @@ public class GameController : MonoBehaviour {
 		this.leftManaText.text = this.player.remainingMana+"/"+this.player.totalMana;
 		this.rightManaText.text = this.enemy.remainingMana + "/" + this.enemy.totalMana;
 	
-		this.leftArmorText.text = "AMR: " + this.player.armor;
-		this.rightArmorText.text = "AMR: " + this.enemy.armor;
+		this.leftArmorText.text = "AMR: " + this.player.GetTotalArmor();
+		this.rightArmorText.text = "AMR: " + this.enemy.GetTotalArmor();
 
-		this.leftDamageText.text = "DMG: " + this.player.physicalDamage;
-		this.rightDamageText.text = "DMG: " + this.enemy.physicalDamage;
+		this.leftDamageText.text = "DMG: " + this.player.GetTotalDamage();
+		this.rightDamageText.text = "DMG: " + this.enemy.GetTotalDamage();
 
 		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}
@@ -344,6 +344,7 @@ public class GameController : MonoBehaviour {
 		UpdateText ();
 		TransferGold ();
 		this.player.transform.localPosition = this.prevPos;
+
 		if (this.player.IsDead() && !waiting){
 			this.player.TriggerAnimation("death");
 		}
@@ -352,8 +353,7 @@ public class GameController : MonoBehaviour {
 			// set new HighScore
 			PlayerPrefs.SetInt("hiscore", PlayerPrefs.GetInt("score"));
 		}
-
-
+		DifficultyLevel.GetInstance ().ResetDifficulty ();
 		this.player.inventory.gameObject.SetActive (false);
 		// reset score
 		PlayerPrefs.SetInt("score", 0);
@@ -370,6 +370,7 @@ public class GameController : MonoBehaviour {
 		// player turn stored in local, 0 for playerTurn
 		PlayerPrefs.SetInt ("turn", turn);
 		this.player.transform.localPosition = this.prevPos;
+		DifficultyLevel.GetInstance ().IncreaseDifficulty ();
 
 		UpdateText ();
 		// enemy dead, fight another and keep player on screen

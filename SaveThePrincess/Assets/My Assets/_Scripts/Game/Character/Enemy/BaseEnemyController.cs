@@ -39,21 +39,6 @@ public class BaseEnemyController : PawnController {
 	}
 
 	/// <summary>
-	/// Purchases the item.
-	/// </summary>
-	/// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
-	/// <param name="itemCost">Item cost.</param>
-	public bool PurchaseItem(int itemCost){
-		if (this.dollarBalance - itemCost >= 0) {
-			this.dollarBalance -= itemCost;
-			return true;
-		} else {
-			Debug.Log ("Not enough money for that!");
-			return false;
-		}
-	}
-	
-	/// <summary>
 	/// Transfers the purchased weapon to the player's hand.
 	/// </summary>
 	/// <param name="w">The weapon to be transfered.</param>
@@ -75,6 +60,13 @@ public class BaseEnemyController : PawnController {
 		}
 	}
 
+	public int GetTotalArmor(){
+		return this.armor + this.playerArmor.GetDefMod () + this.playerWeapon.GetDefMod ();
+	}
+	
+	public int GetTotalDamage(){
+		return this.physicalDamage + this.playerArmor.GetAtkMod () + this.playerWeapon.GetAtkMod ();
+	}
 	
 	#endregion Public functions
 
@@ -82,8 +74,6 @@ public class BaseEnemyController : PawnController {
 
 
 	#endregion Protected Functions
-
-
 
 	#region Private functions
 	

@@ -93,9 +93,9 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The armor.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	public Armor CreateArmor(Transform spawnPoint, string name){
+	public BodyArmor CreateArmor(Transform spawnPoint, string name){
 		//int randomNum = Random.Range(0, 3);
-		Armor a = blankBodyArmorPrefab;
+		BodyArmor a = blankBodyArmorPrefab;
 		switch(name){
 		case "Armor": a = CreateBodyArmor(spawnPoint);
 			break;
@@ -181,8 +181,8 @@ public class ItemFactory : MonoBehaviour{
 	}
 
 	// Armor Creators
-	private Armor CreateBodyArmor(Transform spawnPoint){
-		Armor i = Instantiate(blankBodyArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Armor;
+	private BodyArmor CreateBodyArmor(Transform spawnPoint){
+		BodyArmor i = Instantiate(blankBodyArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
 		return i;
 	}
 
@@ -213,7 +213,7 @@ public class ItemFactory : MonoBehaviour{
 	/// <param name="M">Maximum value.</param>
 	public int GetModPwr(int m, int M){
 		// Minimum and maximum is multiplied by the dificulty level.
-		int mod = Random.Range(m * DifficultyLevel.GetInstance().DifficultyMultiplier(), M * DifficultyLevel.GetInstance().DifficultyMultiplier());
+		int mod = Random.Range(m * DifficultyLevel.GetInstance().GetDifficultyMultiplier(), M * DifficultyLevel.GetInstance().GetDifficultyMultiplier());
 		return mod;
 	}
 	/// <summary>

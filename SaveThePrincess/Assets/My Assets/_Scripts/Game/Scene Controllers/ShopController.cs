@@ -13,6 +13,7 @@ public class ShopController : MonoBehaviour {
 	public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
 	public int HI_DOLLAR_VALUE;
 	public int LO_DOLLAR_VALUE;
+	private bool firstTick;
 
 	public Text currentStatDisplay;
 	public Text selectedItemStats;
@@ -24,6 +25,7 @@ public class ShopController : MonoBehaviour {
 	//private bool start;
 
 	void Start(){
+		firstTick = false;
 		//start = true;
 		this.player = FindObjectOfType<PlayerController>();
 		this.prevPos = this.player.gameObject.transform.localPosition;
@@ -39,11 +41,9 @@ public class ShopController : MonoBehaviour {
 		
 		factory = FindObjectOfType<ItemFactory>();
 		// min and max for cost rand
-		this.LO_DOLLAR_VALUE = 15;
-		this.HI_DOLLAR_VALUE = (int)((Mathf.FloorToInt(PlayerPrefs.GetInt ("score")*2.0f) / 2) + this.LO_DOLLAR_VALUE);
+
 
 		PopulateShop();
-
 	}
 
 	private void ItemNameUpdate(){
@@ -91,7 +91,7 @@ public class ShopController : MonoBehaviour {
 			}
 			DestroyItem(selectedItem);
 		}
-		selectedItemStats.text = "";//shopItems[selectedItem].GetStatsString();
+		selectedItemStats.text = "";
 		selectedItem = -1;
 	}
 
@@ -101,6 +101,7 @@ public class ShopController : MonoBehaviour {
 	}
 	
 	private void PopulateShop(){
+
 		shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
 		shopItems[0].transform.parent = spawn1.transform;
 		shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
@@ -113,12 +114,21 @@ public class ShopController : MonoBehaviour {
 		shopItems[4].transform.parent = spawn5.transform;
 		shopItems[5] = factory.CreateArmor(spawn6, "Armor");
 		shopItems[5].transform.parent = spawn6.transform;
+	}
 
-		// randomize cost
+	/// <summary>
+	/// Randomizes the cost of item.
+	/// </summary>
+	private void RandomizeCost(){
 		for (int i=0; i < shopItems.Length; i++) {
+			int totalStats = shopItems[i].GetDefMod() + shopItems[i].GetAtkMod() 
+				+ shopItems[i].GetHpMod() + shopItems[i].GetManaMod() + shopItems[i].GetSpdMod();
+			this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();	
+			this.HI_DOLLAR_VALUE = (int)((Mathf.FloorToInt(PlayerPrefs.GetInt ("score")*1.5f) / 2) + this.LO_DOLLAR_VALUE);
 			shopItems[i].dollarCost = Random.Range (LO_DOLLAR_VALUE, HI_DOLLAR_VALUE);
 		}
 	}
+
 
 	public void UpdateText(){
 		this.playerBalance.text = "Remaining Balance: $" + this.player.dollarBalance.ToString ();
@@ -130,9 +140,17 @@ public class ShopController : MonoBehaviour {
 			"AMR: " +  player.playerArmor.GetDefMod() ;
 	}
 
+	private void DoOnFirstTick(){
+		firstTick = true;
+		RandomizeCost ();
+
+	}
+
 	public void Update(){
 		ItemNameUpdate();
 		UpdateText ();
+		if (!firstTick)
+			DoOnFirstTick ();
 		if(selectedItem < 0){
 			buyButton.enabled = false;
 		}

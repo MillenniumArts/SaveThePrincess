@@ -17,7 +17,7 @@ public class DifficultyLevel{
 
 	private int difficulty = 1;
 
-	public int DifficultyMultiplier(){
+	public int GetDifficultyMultiplier(){
 		return difficulty;
 	}
 

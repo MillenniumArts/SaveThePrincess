@@ -11,6 +11,8 @@ public class SwapSprites : MonoBehaviour {
 	/// </summary>
 	public Sprite[] sprites;
 
+	public string tagName;
+
 	/// <summary>
 	/// Loads the combination that is passed to it.
 	/// </summary>
@@ -36,12 +38,14 @@ public class SwapSprites : MonoBehaviour {
 		// For each Sprite Renderer in this objects children the search and replace is done.
 		foreach (/*var*/ SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
 		{
-			string spriteName = renderer.sprite.name;			// Get the sprite name temporarily.
-			for(int i = 0; i < spriteCombination.Length; i++){	// For loop search.
-				Sprite newSprite = spriteCombination[i];		// Stores the current search item for comparison.
-				if(spriteName == newSprite.name){				// If the sprite renderer's sprite name = the searched sprite name.
-					renderer.sprite = newSprite;				// The searched sprite is now the sprite renderer'd new sprite.
-					break;										// Break out of the for loop search
+			if(renderer.gameObject.CompareTag(tagName)){
+				string spriteName = renderer.sprite.name;			// Get the sprite name temporarily.
+				for(int i = 0; i < spriteCombination.Length; i++){	// For loop search.
+					Sprite newSprite = spriteCombination[i];		// Stores the current search item for comparison.
+					if(spriteName == newSprite.name){				// If the sprite renderer's sprite name = the searched sprite name.
+						renderer.sprite = newSprite;				// The searched sprite is now the sprite renderer'd new sprite.
+						break;										// Break out of the for loop search
+					}
 				}
 			}
 		}

@@ -17,7 +17,13 @@ public class PawnController : MonoBehaviour {
 	/// The player's body.
 	/// </summary>
 	public Transform playerBody;
-	
+
+	public Transform playerHead;
+
+	public Transform playerBackShoulder;
+
+	public Transform playerFrontShoulder;
+
 	/// <summary>
 	/// The player's hand.
 	/// </summary>
@@ -31,7 +37,7 @@ public class PawnController : MonoBehaviour {
 	///<summary>
 	///Player Armor - An array of Item objects that represents all armor objects for the player
 	///</summary>
-	public Armor playerArmor = null;
+	public BodyArmor playerArmor = null;
 
 	///<summary>
 	///Player Weapons - An array of Item objects that represents all weapon objects for the player
@@ -253,7 +259,8 @@ public class PawnController : MonoBehaviour {
 	}
 	
 	protected void SetArmor(string name){
-		GameObject body = GetBodyTransform().gameObject;	// Gets a reference for the body to see if there..
+		// JAKE I CHANGED THIS LINE HERE.
+		GameObject body = playerBody.gameObject;//GetBodyTransform().gameObject;	// Gets a reference for the body to see if there..
 		//Debug.Log (body);												// .. is a an armor on the character's body.
 		if(body.GetComponentInChildren<Armor>() == true){				// If there is Armor on the body..
 			Destroy(body.GetComponentInChildren<Armor>().gameObject);	// .. Destroy it.
@@ -261,6 +268,11 @@ public class PawnController : MonoBehaviour {
 		this.playerArmor = ItemFactory.instance.CreateArmor(playerBody, name);	// Spawn specified weapon.
 		this.playerArmor.transform.parent = playerBody;								// Make it the child of the hand.
 		this.playerArmor.transform.localScale = new Vector3(1,1,1);							// Fix the scale.
+		if(spawnWithArmor){
+			this.playerHead.gameObject.GetComponent<SpriteRenderer>().sprite = playerArmor.helmetArmorOptionsSprites[playerArmor.typeIndex];
+			this.playerFrontShoulder.gameObject.GetComponent<SpriteRenderer>().sprite = playerArmor.frontShoulderArmorOptionsSprites[playerArmor.typeIndex];
+			this.playerBackShoulder.gameObject.GetComponent<SpriteRenderer>().sprite = playerArmor.backShoulderArmorOptionsSprites[playerArmor.typeIndex];
+		}
 	}
 
 	/// <summary>

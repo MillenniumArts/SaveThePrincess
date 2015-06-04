@@ -13,10 +13,13 @@ public class BodyArmor : Armor {
 	/// The body armor type options' sprites.
 	/// </summary>
 	public Sprite[] bodyArmorOptionsSprites;
+	public Sprite[] helmetArmorOptionsSprites;
+	public Sprite[] backShoulderArmorOptionsSprites;
+	public Sprite[] frontShoulderArmorOptionsSprites;
 	/// <summary>
 	/// The index of the type.
 	/// </summary>
-	private int typeIndex;
+	public int typeIndex;
 	// Minimums and maximums of the stats.
 	public int atkMin;
 	public int atkMax;

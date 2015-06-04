@@ -79,10 +79,23 @@ public class PlayerController: PawnController {
 		}
 	}
 
+	public int GetTotalArmor(){
+		return this.armor + this.playerArmor.GetDefMod () + this.playerWeapon.GetDefMod ();
+	}
+
+	public int GetTotalDamage(){
+		return this.physicalDamage + this.playerArmor.GetAtkMod () + this.playerWeapon.GetAtkMod ();
+	}
 	#endregion Public functions
 	
 	#region Private functions
-	
+	/// <summary>
+	/// Clean up player stats for restart on last tick.
+	/// </summary>
+	private void DoOnLastTick(){
+		this.playerArmor.ClearStats ();
+		this.playerWeapon.ClearStats ();
+	}
 
 	
 	#endregion Private functions
@@ -94,11 +107,20 @@ public class PlayerController: PawnController {
 	void Start(){
 		PawnControllerStart();
 		this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
-		this.dollarBalance = 25;
+		this.dollarBalance = 50;
+		this.armorMod = playerArmor.GetDefMod();
+		this.armor = armor - armorMod;
+		this.armor += armorMod;
+		playerArmor.ClearStats();
+		playerArmor.itemName = "None";
+		armorMod = 0;
 	}
 
 	void Update(){
 		DoOnFirstTick();
+		if (IsDead ()) {
+			DoOnLastTick();
+		}
 	}
 	#endregion MonoBehaviour
 }

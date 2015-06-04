@@ -27,6 +27,7 @@ public class PawnController : MonoBehaviour {
 	/// The player animator.
 	/// </summary>
 	public Animator playerAnimator;
+	
 	///<summary>
 	///Player Armor - An array of Item objects that represents all armor objects for the player
 	///</summary>
@@ -41,6 +42,11 @@ public class PawnController : MonoBehaviour {
 	/// whether or not player will spawn with weapon.
 	/// </summary>
 	public bool spawnWithWeapon;
+
+	/// <summary>
+	/// whether or not player will spawn with weapon.
+	/// </summary>
+	public bool spawnWithArmor;
 	#endregion Rendering
 
 	#region Inventory
@@ -87,6 +93,9 @@ public class PawnController : MonoBehaviour {
 	/// </summary>
 	public int armor;
 
+	/// <summary>
+	/// The armor stat modifier.
+	/// </summary>
 	public int armorMod;
 	
 	/// <summary>
@@ -94,6 +103,9 @@ public class PawnController : MonoBehaviour {
 	/// </summary>
 	public int physicalDamage;
 
+	/// <summary>
+	/// physicalDamage stat modifier.
+	/// </summary>
 	public int damageMod;
 
 	/// <summary>
@@ -120,11 +132,11 @@ public class PawnController : MonoBehaviour {
 	/// </summary>
 	/// <param name="incomingDamage">int Incoming damage applied to the player</param>
 	public void TakeDamage(int incomingDamage){
-		if ((incomingDamage - Mathf.FloorToInt(this.armor*0.5f)) > 0) {		// if damage is going to apply after armor
-			if (this.remainingHealth - (incomingDamage - Mathf.FloorToInt(this.armor*0.5f)) > 0)
-				this.remainingHealth -= (incomingDamage - Mathf.FloorToInt(this.armor*0.5f));
+		if ((incomingDamage - this.armor) > 0) {		// if damage is going to apply after armor
+			if (this.remainingHealth - (incomingDamage - this.armor) > 0)	// and it doesn't kill the player
+				this.remainingHealth -= (incomingDamage - this.armor);		// take damage
 			else
-				this.remainingHealth = 0;
+				this.remainingHealth = 0;									// die
 		}
 	}
 	/// <summary>
@@ -150,7 +162,6 @@ public class PawnController : MonoBehaviour {
 		} else {
 			this.remainingHealth += Mathf.FloorToInt(this.remainingHealth * percent);
 		}
-
 	}
 
 	public bool UseMana (int amount){
@@ -385,8 +396,7 @@ public class PawnController : MonoBehaviour {
 
 	public void PawnControllerStart(){
 		this.body = GameObject.FindWithTag (this.tag).GetComponentInChildren<CreateCombination> ();
-		
-		this.playerAnimator = GetComponentInChildren<Animator>();
+		this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
 
 		// initialize weapon if player is supposed to have one
 		CallSetWeapon("Sword");
@@ -394,27 +404,41 @@ public class PawnController : MonoBehaviour {
 		if (!spawnWithWeapon) {			//
 			this.weaponComboScript.AllOff ();	// Creates a weapon, sets it to the player's hand and makes it invisible.
 			this.weaponComboScript.SwapNow ();
+		}
+		if (!spawnWithArmor) {
 			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-		}
-
-		if(playerWeapon != null){
-			damageMod = playerWeapon.GetAtkMod();
-			physicalDamage += damageMod;
-		}
-		if(playerArmor != null){
-			armorMod = playerWeapon.GetDefMod();
-			armor += armorMod;
 		}
 	}
 
+	public bool firstTick = true;
+	
 	public void DoOnFirstTick(){
-		if(physicalDamage != 0){
-			this.physicalDamage = physicalDamage - damageMod;
-			this.damageMod = playerWeapon.GetAtkMod();
-			this.physicalDamage += damageMod;
-			this.armor = armor - armorMod;
-			this.armorMod = playerArmor.GetDefMod();
-			this.armor += armorMod;
+		if(firstTick){
+			if(spawnWithWeapon){							// Enemy
+				if(playerWeapon != null){
+					damageMod = playerWeapon.GetAtkMod();
+					physicalDamage += damageMod;
+				}
+				if(playerArmor != null){
+					armorMod = playerWeapon.GetDefMod();
+					armor += armorMod;
+				}
+			}else{
+				this.damageMod = playerWeapon.GetAtkMod();	// Player
+				this.physicalDamage = physicalDamage - damageMod;
+				this.physicalDamage += damageMod;
+				this.armorMod = playerArmor.GetDefMod();
+				this.armor = armor - armorMod;
+				this.armor += armorMod;
+				playerWeapon.ClearStats();
+				playerArmor.ClearStats();
+				playerWeapon.itemName = "None";
+				playerArmor.itemName = "None";
+				damageMod = 0;
+				armorMod = 0;
+				this.playerWeapon.animParameter = "OneHandAttack";
+			}
+			firstTick = false;
 		}
 	}
 

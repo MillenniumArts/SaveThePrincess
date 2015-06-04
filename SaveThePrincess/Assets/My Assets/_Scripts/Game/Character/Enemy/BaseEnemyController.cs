@@ -105,6 +105,7 @@ public class BaseEnemyController : PawnController {
 	///Initialize the Enemy with values	
 	/// </summary>
 	void Start(){
+		EnemyStart();
 		PawnControllerStart();
 	}
 

@@ -56,13 +56,13 @@ public class PlayerController: PawnController {
 	/// </summary>
 	/// <param name="w">The weapon to be transfered.</param>
 	public void TransferPurchasedWeapon(Item w){
+		this.physicalDamage = physicalDamage - damageMod;
 		this.playerWeapon.SwapTo(w);							// Swaps all the stats.
 		this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
 		this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
 		this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
-		this.physicalDamage = physicalDamage - damageMod;
 		this.damageMod = w.GetAtkMod();
-		this.physicalDamage += damageMod;
+		this.physicalDamage = physicalDamage + damageMod;
 	}
 
 	/// <summary>
@@ -70,8 +70,8 @@ public class PlayerController: PawnController {
 	/// </summary>
 	/// <param name="a">The armour to be transfered.</param>
 	public void TransferPurchasedArmor(Item a){
+		this.armor -= armorMod;
 		this.playerArmor.SwapTo(a);
-		this.armor = armor - armorMod;
 		this.armorMod = a.GetDefMod();
 		this.armor += armorMod;
 		if(this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false){
@@ -93,6 +93,7 @@ public class PlayerController: PawnController {
 	/// </summary>
 	void Start(){
 		PawnControllerStart();
+		this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
 		this.dollarBalance = 25;
 	}
 

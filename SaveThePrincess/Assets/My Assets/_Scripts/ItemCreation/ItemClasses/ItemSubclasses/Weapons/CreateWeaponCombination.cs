@@ -8,7 +8,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 	public bool dagger, hammer, axe, sword, spear;
 	
 	void Start(){
-		onOff = new bool[10];
+		onOff = new bool[11];
 	}
 	
 	void Update(){
@@ -72,6 +72,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = false;
 		onOff[8] = true;
 		onOff[9] = false;
+		onOff[10] = false;
 	}
 	
 	public void IsAxe(){
@@ -85,6 +86,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = true;
 		onOff[8] = false;
 		onOff[9] = false;
+		onOff[10] = false;
 	}
 	
 	public void IsHammer(){
@@ -98,6 +100,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = true;
 		onOff[8] = false;
 		onOff[9] = false;
+		onOff[10] = false;
 	}
 	
 	public void IsSword(){
@@ -111,6 +114,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = false;
 		onOff[8] = true;
 		onOff[9] = false;
+		onOff[10] = false;
 	}
 	
 	public void IsSpear(){
@@ -124,6 +128,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = true;
 		onOff[8] = false;
 		onOff[9] = false;
+		onOff[10] = true;
 	}
 	
 	public void IsOff(){
@@ -137,5 +142,6 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[7] = false;
 		onOff[8] = false;
 		onOff[9] = false;
+		onOff[10] = false;
 	}
 }

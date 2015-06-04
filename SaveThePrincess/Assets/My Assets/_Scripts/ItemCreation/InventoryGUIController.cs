@@ -25,10 +25,10 @@ public class InventoryGUIController : InventoryController {
 				this._items [i].transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 			} else if (i == 1) {
 				this._items [i] = _itemFactory.CreateMagic (drawLocations [i], "AttackMagic");
-				this._items [i].transform.localScale = new Vector3 (1f, 1f, 1f);
+				this._items [i].transform.localScale = new Vector3 (0.5f, 0.5f);
 			} else if (i == 3) {
 				this._items [i] = _itemFactory.CreateMagic (drawLocations [i], "HealMagic");
-				this._items [i].transform.localScale = new Vector3 (1f, 1f, 1f);
+				this._items [i].transform.localScale = new Vector3 (0.5f, 0.5f);
 			}
 			this._items [i].transform.parent = this.drawLocations [i].transform;		// anchor to parent
 		}

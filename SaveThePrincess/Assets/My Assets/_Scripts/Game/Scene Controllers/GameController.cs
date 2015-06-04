@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	public float cooldownValue;
 
 	public Slider playerHealth, playerMana, enemyHealth, enemyMana; 
+	private Vector3 prevPos;
 
 	// GUI/HUD
 	public Text leftHealthText, 
@@ -57,6 +58,10 @@ public class GameController : MonoBehaviour {
 		this.player.inventory = GameObject.FindObjectOfType<InventoryGUIController> ();
 		this.player.dollarBalance += PlayerPrefs.GetInt ("carryover");
 		PlayerPrefs.SetInt ("carryover", 0);
+		this.prevPos = this.player.transform.localPosition;
+		Vector3 newSpot = new Vector3 (-2.5f, -2.5f);
+		this.player.gameObject.transform.localPosition = newSpot;
+
 		// get enemy
 		this.enemy = FindObjectOfType<BaseEnemyController>();
 
@@ -91,6 +96,25 @@ public class GameController : MonoBehaviour {
 
 		InitInventoryButtons ();
 	}
+
+	/// <summary>
+	/// Initiates Inventory buttons.
+	/// </summary>
+	void InitInventoryButtons(){
+		GameObject a = GameObject.FindWithTag ("InventoryGUI");
+		Button[] but = a.GetComponentsInChildren<Button> ();
+		Text[] t = a.GetComponentsInChildren<Text> ();
+		for (int i=0; i < this.player.inventory._items.Length; i++) {
+			this.player.inventory.clickables [i] = but [i];
+			this.player.inventory.buttonText [i] = t [i];
+			this.player.inventory.buttonText [i].text = "+" + this.player.inventory._items[i].GetHealEffect()+ "HP";
+			
+			if (this.player.inventory._items[i].used){
+				this.player.inventory.clickables[i].gameObject.SetActive(false);
+				this.player.inventory.drawLocations[i].gameObject.SetActive(false);
+			}
+		}
+	}
 	
 	/// <summary>
 	/// Disables the buttons.
@@ -98,8 +122,8 @@ public class GameController : MonoBehaviour {
 	private void DisableButtons(){
 		this.leftPhysAttack.gameObject.SetActive(false);
 		for (int i=0; i<this.player.inventory.clickables.Length; i++){
-			if (!this.player.inventory._items[i].used)
-				this.player.inventory.clickables[i].gameObject.SetActive(false);
+			this.player.inventory.clickables[i].gameObject.SetActive(false);
+			this.player.inventory.buttonText[i].gameObject.SetActive(false);
 		}
 		this.player.inventory.gameObject.SetActive(false);
 	}
@@ -110,8 +134,10 @@ public class GameController : MonoBehaviour {
 	private void EnableButtons(){
 		this.leftPhysAttack.gameObject.SetActive(true);
 		for (int i=0; i<this.player.inventory.clickables.Length; i++){
-			if (!this.player.inventory._items[i].used)
+			if (!this.player.inventory._items[i].used){
 				this.player.inventory.clickables[i].gameObject.SetActive(true);
+				this.player.inventory.buttonText[i].gameObject.SetActive(true);
+			}
 		}
 		this.player.inventory.gameObject.SetActive(true);
 
@@ -204,26 +230,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-
-
-	/// <summary>
-	/// Initiates Inventory buttons.
-	/// </summary>
-	void InitInventoryButtons(){
-		GameObject a = GameObject.FindWithTag ("InventoryGUI");
-		Button[] but = a.GetComponentsInChildren<Button> ();
-		Text[] t = a.GetComponentsInChildren<Text> ();
-		for (int i=0; i < this.player.inventory._items.Length; i++) {
-			this.player.inventory.clickables [i] = but [i];
-			this.player.inventory.buttonText [i] = t [i];
-			this.player.inventory.buttonText [i].text = "+" + this.player.inventory._items[i].GetHealEffect()+ "HP";
-
-			if (this.player.inventory._items[i].used){
-				this.player.inventory.clickables[i].gameObject.SetActive(false);
-				this.player.inventory.drawLocations[i].gameObject.SetActive(false);
-			}
-		}
-	}
 
 	void UpdateButtonText(){
 		for (int i=0; i < this.player.inventory._items.Length; i++) {
@@ -321,7 +327,12 @@ public class GameController : MonoBehaviour {
 					}
 				}
 				OnEnemyActionUsed (this.player);
-			} 
+			} else{
+				if (this.enemy.IsDead()){
+					this.enemy.TriggerAnimation("death");
+				}
+
+			}
 		}
 	}
 
@@ -332,6 +343,7 @@ public class GameController : MonoBehaviour {
 		// player dead
 		UpdateText ();
 		TransferGold ();
+		this.player.transform.localPosition = this.prevPos;
 		if (this.player.IsDead() && !waiting){
 			this.player.TriggerAnimation("death");
 		}
@@ -340,6 +352,7 @@ public class GameController : MonoBehaviour {
 			// set new HighScore
 			PlayerPrefs.SetInt("hiscore", PlayerPrefs.GetInt("score"));
 		}
+
 
 		this.player.inventory.gameObject.SetActive (false);
 		// reset score
@@ -356,6 +369,7 @@ public class GameController : MonoBehaviour {
 		turn = 0;
 		// player turn stored in local, 0 for playerTurn
 		PlayerPrefs.SetInt ("turn", turn);
+		this.player.transform.localPosition = this.prevPos;
 
 		UpdateText ();
 		// enemy dead, fight another and keep player on screen
@@ -367,6 +381,7 @@ public class GameController : MonoBehaviour {
 	void GoToTown(){
 		UpdateText ();
 		this.enemy.TriggerAnimation("death");
+		this.player.transform.localPosition = this.prevPos;
 		this.enemy.DropMoney ();
 		this.player.dollarBalance += this.enemy.DropMoney ();
 		DontDestroyOnLoad(this.player);
@@ -402,6 +417,7 @@ public class GameController : MonoBehaviour {
 				EndGame ();
 			} else if (this.enemy.IsDead () && !waiting) {
 				// enemy dead
+
 				GoToTown ();
 			} else if (this.enemy.IsDead()) {
 				// CHANGE THIS TO LOADING TOWN!

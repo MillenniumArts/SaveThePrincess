@@ -187,6 +187,7 @@ public class Item : MonoBehaviour {
 		} else if (this.GetItemClass () == "Magic") {
 			if (this.GetItemSubClass() == "HealMagic"){
 				p.HealForPercent((this.GetHealEffect () * 0.01f));
+				p.UseMana(10);
 			}else if (this.GetItemSubClass() == "AttackMagic"){
 				// get enemy
 				GameController g = FindObjectOfType<GameController>();
@@ -246,6 +247,14 @@ public class Item : MonoBehaviour {
 	}
 	public int GetDollarCost(){
 		return dollarCost;
+	}
+	public string GetStatsString(){
+		string statsString = GetName () + "\n" +
+			//"Type: " + GetItemSubClass() + "\n" +
+				"DMG: +" + GetAtkMod() + " | " + 
+				"AMR: +" + GetDefMod() + "\n" +
+				"Cost: $" + GetDollarCost() + "\n";
+		return statsString;
 	}
 	#endregion Getters
 	

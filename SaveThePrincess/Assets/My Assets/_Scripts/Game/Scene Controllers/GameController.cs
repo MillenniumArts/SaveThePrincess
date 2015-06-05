@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 	public GameController gameController;
 	public bool enemyHasHealed, waiting, scoredThisRound, enemyHasAttacked;
 	public int score, turn;
-	public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.5f;
+	public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.75f;
 	public float cooldownValue;
 
 	public Slider playerHealth, playerMana, enemyHealth, enemyMana; 
@@ -173,21 +173,77 @@ public class GameController : MonoBehaviour {
 	/// called when animation is finished
 	/// </summary>
 	public void OnWaitComplete(){
+		this.enemy.TakeDamage ();
 		waiting = false;
 		EnableButtons ();
 		NextTurn();
 	}
 
 	/// <summary>
-	/// the enemy action used event.
+	/// Does the enemy AI Behaviour.
+	/// </summary>
+	/// <returns>The enemy action.</returns>
+	private void DoEnemyAction(){
+		if (!enemyHasAttacked && !waiting) {
+			// player/enemy alive and enemy turn
+			if (!this.player.IsDead () && !this.enemy.IsDead () && turn == 1) {
+				int r = Random.Range (0, 10);
+				//enemy health < 25% 
+				if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth)) {
+					//50% chance of physical vs magic
+					r = Random.Range (0, 10);
+					if (r > 5) {
+						// physical
+						Debug.Log (this.enemy.name + " attacks!");
+						this.enemy.PhysicalAttack (this.player);
+					} else if (r <= 5) {
+						//Magical	
+						Debug.Log (this.enemy.name + " uses a Magic Attack!");
+						bool pass = this.enemy.MagicAttack (this.player);
+						// if there is not enough mana to cast a magic attack
+						if (!pass) {
+							//50% chance of mana potion or physical attack instead
+							r = Random.Range (0, 10);
+							if (r > 5) {
+								Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
+								this.enemy.PhysicalAttack (this.player);
+							} else {
+								Debug.Log ("Mana restored by 10");
+								this.enemy.remainingMana += 10;
+							}
+						}
+					}
+				} else {
+					// chance to heal if enemy has potion
+					if (!enemyHasHealed) {
+						Debug.Log (this.enemy.name + " healed for 25 hp");
+						this.enemy.TriggerAnimation ("potion");
+						this.enemy.HealForAmount (25);
+						this.enemyHasHealed = true;
+					} else {
+						// no potions to heal, LAST RESORT ATTACK!
+						Debug.Log (this.enemy.name + " attacks!");
+						this.enemy.PhysicalAttack (this.player);
+					}
+				}
+				OnEnemyActionUsed (this.player);
+			} else {
+
+			}
+		}
+	}
+
+	/// <summary>
+	/// called after AI sequence has finished.
 	/// </summary>
 	/// <param name="attacked">Attacked.</param>
 	public void OnEnemyActionUsed(PawnController attacked){
 		if (turn == 1){
+			StartCooldown(waiting, COOLDOWN_LENGTH);
 			enemyHasAttacked = true;
 			waiting = true;
 			DisableButtons();
-			StartCooldown(waiting, COOLDOWN_LENGTH);
+
 		}
 	}
 
@@ -195,6 +251,7 @@ public class GameController : MonoBehaviour {
 	///  the enemy wait complete event.
 	/// </summary>
 	public void OnEnemyWaitComplete(){
+		this.player.TakeDamage ();
 		waiting = false;
 		enemyHasAttacked = false;
 		EnableButtons ();
@@ -229,7 +286,9 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-
+	/// <summary>
+	/// Updates the button text.
+	/// </summary>
 	void UpdateButtonText(){
 		for (int i=0; i < this.player.inventory._items.Length; i++) {
 			this.player.inventory.buttonText [i].text = "+" + this.player.inventory._items [i].GetHealEffect () + "HP";
@@ -278,62 +337,7 @@ public class GameController : MonoBehaviour {
 		this.numEnemiesKilledText.text = "SCORE: " + score;
 	}
 
-	/// <summary>
-	/// Does the enemy AI Behaviour.
-	/// </summary>
-	/// <returns>The enemy action.</returns>
-	private void DoEnemyAction(){
-		if (!enemyHasAttacked && !waiting) {
-			// player alive and enemy turn
-			if (!this.player.IsDead () && !this.enemy.IsDead () && turn == 1) {
-				//enemy health < 25% 
-				int r = Random.Range (0, 10);
-				if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth)) {
-					//50% chance of physical vs magic
-					r = Random.Range (0, 10);
-					if (r > 5) {
-						// physical
-						Debug.Log (this.enemy.name + " attacks!");
-						this.enemy.PhysicalAttack (this.player);
-					} else if (r <= 5) {
-						//Magical	
-						Debug.Log (this.enemy.name + " uses a Magic Attack!");
-						bool pass = this.enemy.MagicAttack (this.player);
-						// if there is not enough mana to cast a magic attack
-						if (!pass) {
-							//50% chance of mana potion or physical attack instead
-							r = Random.Range (0, 10);
-							if (r > 5) {
-								Debug.Log ("Instead of casting Magic, " + this.enemy.name + " attacks!");
-								this.enemy.PhysicalAttack (this.player);
-							} else {
-								Debug.Log ("Mana restored by 10");
-								this.enemy.remainingMana += 10;
-							}
-						}
-					}
-				} else {
-					// chance to heal if enemy has potion
-					if (!enemyHasHealed) {
-						Debug.Log (this.enemy.name + " healed for 25 hp");
-						this.enemy.TriggerAnimation ("potion");
-						this.enemy.HealForAmount (25);
-						this.enemyHasHealed = true;
-					} else {
-						// no potions to heal, LAST RESORT ATTACK!
-						Debug.Log (this.enemy.name + " attacks!");
-						this.enemy.PhysicalAttack (this.player);
-					}
-				}
-				OnEnemyActionUsed (this.player);
-			} else{
-				if (this.enemy.IsDead()){
-					this.enemy.TriggerAnimation("death");
-				}
 
-			}
-		}
-	}
 
 	/// <summary>
 	/// Ends the game.
@@ -415,12 +419,13 @@ public class GameController : MonoBehaviour {
 				// player dead
 				this.player.TriggerAnimation("death");
 				EndGame ();
-			} else if (this.enemy.IsDead () && !waiting) {
+			} else if (this.enemy.IsDead ()) {
 				// enemy dead
-
-				GoToTown ();
+				StartCooldown(waiting, COOLDOWN_LENGTH);
+				this.enemy.TriggerAnimation("death");
+				if (!waiting)
+					GoToTown ();
 			} else if (this.enemy.IsDead()) {
-				// CHANGE THIS TO LOADING TOWN!
 
 			}
 		}

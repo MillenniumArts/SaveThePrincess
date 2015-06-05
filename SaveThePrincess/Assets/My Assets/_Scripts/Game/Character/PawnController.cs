@@ -128,7 +128,11 @@ public class PawnController : MonoBehaviour {
 	/// The player's dollar balance usable at the store.
 	/// </summary>
 	public int dollarBalance;
-	
+
+	/// <summary>
+	/// The damage to take next turn.
+	/// </summary>
+	public int damageToTake;
 	
 	#endregion STATS
 
@@ -137,17 +141,36 @@ public class PawnController : MonoBehaviour {
 	/// Used to pass a custom combination to this script from an outside source.
 	/// </summary>
 	/// <param name="incomingDamage">int Incoming damage applied to the player</param>
-	public void TakeDamage(int incomingDamage){
-		if ((incomingDamage - this.armor) > 0) {		// if damage is going to apply after armor
-			PerformDamageBehaviour ();
-			if (this.remainingHealth - (incomingDamage - this.armor) > 0)	// and it doesn't kill the player
-				this.remainingHealth -= (incomingDamage - this.armor);		// take damage
-			else
-				this.remainingHealth = 0;									// die
-		} else {
+	public void TakeDamage(){
+		if (damageToTake > 0) {
+			if ((damageToTake - this.armor) > Mathf.FloorToInt(this.totalHealth * 0.1f)) {		// if damage is more than 10% of player health
+				if (this.remainingHealth - (damageToTake - this.armor) > 0){	// and it doesn't kill the player
+					this.remainingHealth -= (damageToTake - this.armor);		// take damage
+				}else{
+					this.remainingHealth = 0;									// die
+				}
+				PerformDamageBehaviour ();									// only reacts if damage applies over 10%
+			} else if ((damageToTake - this.armor) <= Mathf.FloorToInt(this.totalHealth * 0.1f)){	// if damage is less than 10% of player health
+				if (this.remainingHealth - (damageToTake - this.armor) > 0){	// and it doesn't kill the player
+						this.remainingHealth -= (damageToTake - this.armor);		// take damage
+				}else{
+					this.remainingHealth = 0;									// die
+				}
+				PerformBlockBehaviour ();									// block animation under 10% damage
+			}
 			Debug.Log (this.name + " laughs at the lack of damage!");
 		}
+		this.damageToTake = 0;
 	}
+
+	/// <summary>
+	/// Sets the damage to be applied next turn.
+	/// </summary>
+	/// <param name="damage">Damage.</param>
+	public void SetDamage(int damage){
+		this.damageToTake = damage;
+	}
+
 	/// <summary>
 	/// Heals the player for specified amount.
 	/// </summary>
@@ -198,9 +221,7 @@ public class PawnController : MonoBehaviour {
 	/// <param name="attackedPlayer">Attacked player.</param>
 	public void PhysicalAttack(PawnController attackedPlayer){
 		// apply damage to player
-		this.PerformAttackBehaviour ();
-		attackedPlayer.TakeDamage (this.physicalDamage);
-		// animate sprites		
+		attackedPlayer.damageToTake = this.physicalDamage;
 		this.PerformAttackBehaviour ();
 	}
 
@@ -213,7 +234,7 @@ public class PawnController : MonoBehaviour {
 		// animate sprites
 		if (this.remainingMana - 10 >= 0) {
 			this.remainingMana -= 10;
-			attackedPlayer.TakeDamage (this.magicalDamage);
+			attackedPlayer.damageToTake = this.magicalDamage;
 			this.PerformMagicBehaviour ();
 			return true;
 		} else {
@@ -265,7 +286,7 @@ public class PawnController : MonoBehaviour {
 	
 	protected void SetArmor(string name){
 		// JAKE I CHANGED THIS LINE HERE.
-		// THANKS Carlo
+		// THANKS Carlo! :)
 		GameObject body = playerBody.gameObject;	// Gets a reference for the body to see if there..
 													// .. is a an armor on the character's body.
 		if(body.GetComponentInChildren<Armor>() == true){				// If there is Armor on the body..
@@ -305,6 +326,9 @@ public class PawnController : MonoBehaviour {
 		case "damage": 
 			this.playerAnimator.Play ("human_Hit2");
 			break;
+		case "block":
+			this.playerAnimator.Play ("human_Block");
+			break;
 		}
 	}
 	/// <summary>
@@ -337,14 +361,18 @@ public class PawnController : MonoBehaviour {
 	protected virtual void PerformHealMagicBehaviour(){
 		TriggerAnimation ("HealMagic");
 	}
-	
 	/// <summary>
 	/// Performs the damage behaviour.
 	/// </summary>
 	protected virtual void PerformDamageBehaviour(){
 		TriggerAnimation ("damage");
 	}
-
+	/// <summary>
+	/// Performs the block behaviour.
+	/// </summary>
+	protected virtual void PerformBlockBehaviour(){
+		TriggerAnimation ("block");
+	}
 	#endregion protected Functions
 
 	#region skeletonTransform
@@ -442,7 +470,7 @@ public class PawnController : MonoBehaviour {
 	
 	public void DoOnFirstTick(){
 		if(firstTick){
-			if(spawnWithWeapon){							// Enemy
+			if(spawnWithWeapon){							
 				if(playerWeapon != null){
 					damageMod = playerWeapon.GetAtkMod();
 					physicalDamage += damageMod;
@@ -452,11 +480,11 @@ public class PawnController : MonoBehaviour {
 					armor += armorMod;
 				}
 			}else{
-				this.damageMod = playerWeapon.GetAtkMod();	// Player
-				this.physicalDamage = physicalDamage - damageMod;
+				this.damageMod = playerWeapon.GetAtkMod();	
+				//this.physicalDamage = physicalDamage - damageMod;
 				this.physicalDamage += damageMod;
 				this.armorMod = playerArmor.GetDefMod();
-				this.armor = armor - armorMod;
+				//this.armor = armor - armorMod;
 				this.armor += armorMod;
 				playerWeapon.ClearStats();
 				playerArmor.ClearStats();

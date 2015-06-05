@@ -64,7 +64,7 @@ public class ItemFactory : MonoBehaviour{
 	/// </summary>
 	/// <returns>The weapon.</returns>
 	/// <param name="spawnPoint">Spawn point.</param>
-	/// <param name="num">Number dictates the type of weapon created.  0 Sword, 1 Axe, 2 Bow, 3 Hammer, 4 Dagger, 5 Spear.</para>
+	/// <param name="name">string dictates the type of weapon created.  </para>
 	public Weapon CreateWeapon(Transform spawnPoint, string name){
 		//int randomNum = Random.Range(0, 6);
 		Weapon w = blankSwordPrefab;

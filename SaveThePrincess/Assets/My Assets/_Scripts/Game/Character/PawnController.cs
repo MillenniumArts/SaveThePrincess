@@ -139,10 +139,13 @@ public class PawnController : MonoBehaviour {
 	/// <param name="incomingDamage">int Incoming damage applied to the player</param>
 	public void TakeDamage(int incomingDamage){
 		if ((incomingDamage - this.armor) > 0) {		// if damage is going to apply after armor
+			PerformDamageBehaviour ();
 			if (this.remainingHealth - (incomingDamage - this.armor) > 0)	// and it doesn't kill the player
 				this.remainingHealth -= (incomingDamage - this.armor);		// take damage
 			else
 				this.remainingHealth = 0;									// die
+		} else {
+			Debug.Log (this.name + " laughs at the lack of damage!");
 		}
 	}
 	/// <summary>
@@ -150,12 +153,14 @@ public class PawnController : MonoBehaviour {
 	/// </summary>
 	/// <param name="amount">Amount.</param>
 	public virtual void HealForAmount(int amount){
-		if (this.remainingHealth + amount > this.totalHealth) {
-			this.remainingHealth = this.totalHealth;
-		} else {
-			this.remainingHealth += amount;
+		if (this.remainingHealth < this.totalHealth) {
+			this.PerformPotionBehaviour ();
+			if (this.remainingHealth + amount > this.totalHealth) {
+				this.remainingHealth = this.totalHealth;
+			} else {
+				this.remainingHealth += amount;
+			}
 		}
-		this.PerformPotionBehaviour ();
 	}
 	/// <summary>
 	/// Heals for percent.
@@ -260,8 +265,9 @@ public class PawnController : MonoBehaviour {
 	
 	protected void SetArmor(string name){
 		// JAKE I CHANGED THIS LINE HERE.
-		GameObject body = playerBody.gameObject;//GetBodyTransform().gameObject;	// Gets a reference for the body to see if there..
-		//Debug.Log (body);												// .. is a an armor on the character's body.
+		// THANKS Carlo
+		GameObject body = playerBody.gameObject;	// Gets a reference for the body to see if there..
+													// .. is a an armor on the character's body.
 		if(body.GetComponentInChildren<Armor>() == true){				// If there is Armor on the body..
 			Destroy(body.GetComponentInChildren<Armor>().gameObject);	// .. Destroy it.
 		}
@@ -296,6 +302,9 @@ public class PawnController : MonoBehaviour {
 		case "HealMagic": 
 			this.playerAnimator.Play ("heal magic");
 			break;
+		case "damage": 
+			this.playerAnimator.Play ("human_Hit2");
+			break;
 		}
 	}
 	/// <summary>
@@ -327,6 +336,13 @@ public class PawnController : MonoBehaviour {
 	/// </summary>
 	protected virtual void PerformHealMagicBehaviour(){
 		TriggerAnimation ("HealMagic");
+	}
+	
+	/// <summary>
+	/// Performs the damage behaviour.
+	/// </summary>
+	protected virtual void PerformDamageBehaviour(){
+		TriggerAnimation ("damage");
 	}
 
 	#endregion protected Functions

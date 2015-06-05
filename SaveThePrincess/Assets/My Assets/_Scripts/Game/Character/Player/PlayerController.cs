@@ -120,6 +120,7 @@ public class PlayerController: PawnController {
 		DoOnFirstTick();
 		if (IsDead ()) {
 			DoOnLastTick();
+			this.TriggerAnimation("death");
 		}
 	}
 	#endregion MonoBehaviour

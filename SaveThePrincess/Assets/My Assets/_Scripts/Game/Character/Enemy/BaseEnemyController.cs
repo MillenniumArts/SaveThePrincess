@@ -101,6 +101,9 @@ public class BaseEnemyController : PawnController {
 
 	void Update(){
 		DoOnFirstTick();
+		if (IsDead ()) {
+			this.TriggerAnimation("death");
+		}
 	}
 	#endregion MonoBehaviour
 

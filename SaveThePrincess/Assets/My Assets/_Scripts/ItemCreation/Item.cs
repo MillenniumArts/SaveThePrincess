@@ -183,7 +183,6 @@ public class Item : MonoBehaviour {
 				p.GiveMana (this.GetManaMod());
 			}
 			this.used = true;
-
 		} else if (this.GetItemClass () == "Magic") {
 			if (this.GetItemSubClass() == "HealMagic"){
 				p.HealForPercent((this.GetHealEffect () * 0.01f));
@@ -192,8 +191,10 @@ public class Item : MonoBehaviour {
 				// get enemy
 				GameController g = FindObjectOfType<GameController>();
 				BaseEnemyController e = g.enemy;
-				Debug.Log (e.name);
-				p.MagicAttack(e);
+				bool pass = p.MagicAttack(e);
+				if (!pass){
+
+				}
 			}
 		}
 	}

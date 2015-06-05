@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 	public GameController gameController;
 	public bool enemyHasHealed, waiting, scoredThisRound, enemyHasAttacked;
 	public int score, turn;
-	public static float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.25f;
+	public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.5f;
 	public float cooldownValue;
 
 	public Slider playerHealth, playerMana, enemyHealth, enemyMana; 
@@ -164,8 +164,8 @@ public class GameController : MonoBehaviour {
 		if (turn == 0){
 			waiting = true;
 			DisableButtons();
-			this.player.PhysicalAttack(this.enemy);
 			StartCooldown(waiting, COOLDOWN_LENGTH);
+			this.player.PhysicalAttack(this.enemy);
 		}
 	}
 
@@ -187,7 +187,6 @@ public class GameController : MonoBehaviour {
 			enemyHasAttacked = true;
 			waiting = true;
 			DisableButtons();
-			//this.player.PhysicalAttack(this.enemy);
 			StartCooldown(waiting, COOLDOWN_LENGTH);
 		}
 	}

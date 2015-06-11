@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class StartMenuController : MonoBehaviour {
-
+    
 	public Button startButton = null,
 				  resetHiScore = null,
 				  resetScore = null;
@@ -13,6 +13,10 @@ public class StartMenuController : MonoBehaviour {
 	void Start () {
 
 	}
+
+    void Awake()
+    {
+    }
 
 	public void StartGame(){
 		Application.LoadLevel("CharacterSelect_LVP");

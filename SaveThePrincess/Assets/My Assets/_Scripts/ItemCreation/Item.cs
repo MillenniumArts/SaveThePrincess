@@ -174,31 +174,94 @@ public class Item : MonoBehaviour {
 	#endregion Item manipulation
 
 	#region Effects
-
-	public void ApplyEffect(PawnController p){
+	/// <summary>
+	/// Determines whether this instance can apply effects on the specified player.
+	/// </summary>
+	/// <returns><c>true</c> if this instance can apply effects the specified p; otherwise, <c>false</c>.</returns>
+	/// <param name="p">P.</param>
+	public bool CanApplyEffectsToSelf(PawnController p){
 		if (this.GetItemClass () == "Potion") {
 			if (this.GetItemSubClass() == "HealPotion"){
-				p.HealForAmount(this.GetHealEffect ());
+				if (p.remainingHealth < p.totalHealth){
+					return true;
+				}
 			}else if (this.GetItemSubClass() == "ManaPotion"){
-				p.GiveMana (this.GetManaMod());
-			}
-			this.used = true;
-		} else if (this.GetItemClass () == "Magic") {
-			if (this.GetItemSubClass() == "HealMagic"){
-				p.HealForPercent((this.GetHealEffect () * 0.01f));
-				p.UseMana(10);
-			}else if (this.GetItemSubClass() == "AttackMagic"){
-				// get enemy
-				GameController g = FindObjectOfType<GameController>();
-				BaseEnemyController e = g.enemy;
-				bool pass = p.MagicAttack(e);
-				if (!pass){
-
+				if (p.remainingMana < p.totalMana){
+					return true;
 				}
 			}
+		} else if (this.GetItemClass () == "Magic") {
+			if (this.GetItemSubClass() == "HealMagic"){
+				if (p.remainingHealth < p.totalHealth){
+					return true;
+				}
+			}else if (this.GetItemSubClass() == "AttackMagic"){
+				return false;
+			}
 		}
+		return false;
 	}
 
+	/// <summary>
+	/// Applies the effect.
+	/// </summary>
+	/// <returns><c>true</c>, if effect was applied, <c>false</c> otherwise.</returns>
+	/// <param name="p">P.</param>
+    public bool ApplyEffect(PawnController p)
+    {
+        if (this.GetItemClass() == "Potion")
+        {
+            if (this.GetItemSubClass() == "HealPotion")
+            {
+                if (p.remainingHealth < p.totalHealth)
+                {
+                    p.HealForAmount(this.GetHealEffect());
+                    this.used = true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else if (this.GetItemSubClass() == "ManaPotion")
+            {
+                if (p.remainingMana < p.totalMana)
+                {
+                    p.GiveMana(this.GetManaMod());
+                    this.used = true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            // end potions
+        }
+        else if (this.GetItemClass() == "Magic")
+        {
+            if (p.CanUseMana(10))
+            {
+                if (this.GetItemSubClass() == "HealMagic")
+                {
+                    p.HealForPercent((this.GetHealEffect() / 100f));
+                    p.remainingMana -= 10;
+                }
+                else if (this.GetItemSubClass() == "AttackMagic")
+                {
+                    // apply damage to player
+                    p.SetDamage(this.GetAtkMod());
+                    p.remainingMana -= 10;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+		} else {
+			Debug.Log ("Unable to Apply Effect of " + this.itemName);
+			return false;
+		}
+		return false;
+	}
 	#endregion Effects
 
 

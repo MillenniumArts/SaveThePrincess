@@ -14,6 +14,8 @@ public class BaseEnemyController : PawnController {
 	/// The number of usable items for this player
 	/// </summary>
 	public int numUsableItems ;
+
+    public bool isAnimating;
 	
 	#endregion Variables
 	
@@ -98,6 +100,11 @@ public class BaseEnemyController : PawnController {
 		EnemyStart();
 		PawnControllerStart();
 	}
+
+    void Awake()
+    {
+        isAnimating = false;
+    }
 
 	void Update(){
 		DoOnFirstTick();

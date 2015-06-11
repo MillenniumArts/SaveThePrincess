@@ -45,10 +45,14 @@ public class ItemFactory : MonoBehaviour{
 	public Hammer blankHammerPrefab;
 	public Dagger blankDaggerPrefab;
 	public Spear blankSpearPrefab;
-	public BodyArmor blankBodyArmorPrefab;
+	public BodyArmor blankArmorPrefab;
+	public BodyArmor blankHeavyArmorPrefab;
+	public BodyArmor blankMediumArmorPrefab;
+	public BodyArmor blankLightArmorPrefab;
 	public AttackMagic blankAtkMagPrefab;
 	public HealMagic blankHealMagPrefab;
 	public HealPotion blankHealPotionPrefab;
+	public ManaPotion blankManaPotionPrefab;
 	#endregion Variables
 
 	#region Item Creation
@@ -95,13 +99,15 @@ public class ItemFactory : MonoBehaviour{
 	/// <param name="spawnPoint">Spawn point.</param>
 	public BodyArmor CreateArmor(Transform spawnPoint, string name){
 		//int randomNum = Random.Range(0, 3);
-		BodyArmor a = blankBodyArmorPrefab;
+		BodyArmor a = blankHeavyArmorPrefab;
 		switch(name){
-		case "Armor": a = CreateBodyArmor(spawnPoint);
+		case "HeavyArmor": a = CreateHeavyArmor(spawnPoint);
 			break;
-		case "other": a = CreateBodyArmor(spawnPoint);
+		case "MediumArmor": a = CreateMediumArmor(spawnPoint);
 			break;
-		case "other2": a = CreateBodyArmor(spawnPoint);
+		case "LightArmor": a = CreateLightArmor(spawnPoint);
+			break;
+		case "BlankArmor": a = CreateBlankArmor(spawnPoint);
 			break;
 		default:
 			Debug.Log ("No armor to create!");
@@ -143,7 +149,7 @@ public class ItemFactory : MonoBehaviour{
 		switch(name){
 		case "HealPotion": p = CreateHealPotion(spawnPoint);
 			break;
-		case "other": p = CreateHealPotion(spawnPoint);
+		case "ManaPotion": p = CreateManaPotion(spawnPoint);
 			break;
 		case "other2": p = CreateHealPotion(spawnPoint);
 			break;
@@ -181,8 +187,20 @@ public class ItemFactory : MonoBehaviour{
 	}
 
 	// Armor Creators
-	private BodyArmor CreateBodyArmor(Transform spawnPoint){
-		BodyArmor i = Instantiate(blankBodyArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
+	private BodyArmor CreateHeavyArmor(Transform spawnPoint){
+		BodyArmor i = Instantiate(blankHeavyArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
+		return i;
+	}
+	private BodyArmor CreateMediumArmor(Transform spawnPoint){
+		BodyArmor i = Instantiate(blankMediumArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
+		return i;
+	}
+	private BodyArmor CreateLightArmor(Transform spawnPoint){
+		BodyArmor i = Instantiate(blankLightArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
+		return i;
+	}
+	private BodyArmor CreateBlankArmor(Transform spawnPoint){
+		BodyArmor i = Instantiate(blankArmorPrefab, spawnPoint.position, spawnPoint.transform.rotation) as BodyArmor;
 		return i;
 	}
 
@@ -201,6 +219,11 @@ public class ItemFactory : MonoBehaviour{
 		Potion i = Instantiate(blankHealPotionPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Potion;
 		return i;
 	}
+	private Potion CreateManaPotion(Transform spawnPoint){
+		Potion i = Instantiate(blankManaPotionPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Potion;
+		return i;
+	}
+
 	#endregion  Item Creation
 	
 
@@ -226,6 +249,18 @@ public class ItemFactory : MonoBehaviour{
 		int h = Random.Range (m,M);
 		return h;
 	}
+
+	/// <summary>
+	/// Gets the healing power modifier.
+	/// </summary>
+	/// <returns>The heal power modifier.</returns>
+	/// <param name="m">Minimum value.</param>
+	/// <param name="M">Maximum value.</param>
+	public int GetManaPwr(int m, int M){
+		int h = Random.Range (m,M);
+		return h;
+	}
+
 	/// <summary>
 	/// Gets a random status effect.
 	/// </summary>

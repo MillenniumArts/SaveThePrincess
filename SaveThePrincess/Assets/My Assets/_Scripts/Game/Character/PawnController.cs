@@ -340,28 +340,28 @@ public class PawnController : MonoBehaviour
         switch (state)
         {
             case "attack":
-                this.playerAnimator.SetTrigger(this.playerWeapon.GetAnimParameter());
+                this.playerAnimator.SetTrigger("One_Hand_Attack");
                 break;
             case "AttackMagic":
-                this.playerAnimator.Play("magic up");
+                this.playerAnimator.SetTrigger("Magic_Attack");
                 break;
             case "ManaPotion":
-                this.playerAnimator.Play("human_Use item");
+                this.playerAnimator.SetTrigger("Magic_Heal");
                 break;
             case "HealPotion":
-                this.playerAnimator.Play("human_Use item");
+                this.playerAnimator.SetTrigger("Use_Item");
                 break;
             case "death":
-                this.playerAnimator.Play("human_Knee death");
+                this.playerAnimator.SetTrigger("Death");
                 break;
             case "HealMagic":
-                this.playerAnimator.Play("heal magic");
+                this.playerAnimator.SetTrigger("Magic_Up");
                 break;
             case "damage":
-                this.playerAnimator.Play("human_Hit2");
+                this.playerAnimator.SetTrigger("Take_Damage");
                 break;
             case "block":
-                this.playerAnimator.Play("human_Block");
+                this.playerAnimator.SetTrigger("Block");
                 break;
             case "victory":
                 if (this.remainingHealth / this.totalHealth > 0.75)

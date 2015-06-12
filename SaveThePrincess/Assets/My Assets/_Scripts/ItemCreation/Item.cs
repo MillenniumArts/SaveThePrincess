@@ -27,11 +27,11 @@ public class Item : MonoBehaviour {
 	/// </summary>
 	public Sprite image;
 	/// <summary>
-	/// The animation parameter.
+	/// The animation parameter for item use.
 	/// </summary>
 	public string animParameter;
 	/// <summary>
-	/// The idle animation parameter.
+    /// The idle animation parameter (TwoHandedIdle versus OneHandedIdle).
 	/// </summary>
 	public string idleAnimParameter;
 	/// <summary>
@@ -242,13 +242,11 @@ public class Item : MonoBehaviour {
                 if (this.GetItemSubClass() == "HealMagic")
                 {
                     p.HealForPercent((this.GetHealEffect() / 100f));
-                    p.remainingMana -= 10;
                 }
                 else if (this.GetItemSubClass() == "AttackMagic")
                 {
                     // apply damage to player
                     p.SetDamage(this.GetAtkMod());
-                    p.remainingMana -= 10;
                 }
                 return true;
             }
@@ -263,8 +261,6 @@ public class Item : MonoBehaviour {
 		return false;
 	}
 	#endregion Effects
-
-
 
 	#region Getters
 	public string GetItemClass(){

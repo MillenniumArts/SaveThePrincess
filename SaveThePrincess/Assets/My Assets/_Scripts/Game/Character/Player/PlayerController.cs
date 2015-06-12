@@ -55,6 +55,7 @@ public class PlayerController : PawnController
                 if (e != null)
                 {
                     this.inventory._items[index].ApplyEffect(e);
+                    this.remainingMana -= 10;
                     this.TriggerAnimation(this.inventory._items[index].GetItemSubClass());
                     this.inventory.DisableButtonsIfUsed();
                 }

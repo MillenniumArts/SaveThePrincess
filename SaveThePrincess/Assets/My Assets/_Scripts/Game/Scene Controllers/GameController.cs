@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -480,6 +480,7 @@ public class GameController : MonoBehaviour
         // transfer money
         this.enemy.DropMoney();
         this.player.dollarBalance += this.enemy.DropMoney();
+        DifficultyLevel.GetInstance().IncreaseDifficulty();
 
         DontDestroyOnLoad(this.player);
         if (!waiting)

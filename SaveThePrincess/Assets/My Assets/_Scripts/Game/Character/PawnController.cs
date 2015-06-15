@@ -133,11 +133,18 @@ public class PawnController : MonoBehaviour
     /// <summary>
     /// The damage to take next turn.
     /// </summary>
-    public int damageToTake;
+    public int physicalDamageToTake;
+
+    /// <summary>
+    /// The magical damage to take next turn
+    /// </summary>
+    public int magicalDamageToTake;
+
     /// <summary>
     /// The Damage Reduction Factor for armor
     /// </summary>
     public float DMG_REDUCTION_FACTOR;
+
     /// <summary>
     /// The Base Damage if armor nullifies attack.
     /// </summary>
@@ -151,9 +158,12 @@ public class PawnController : MonoBehaviour
     /// </summary>
     public void TakeDamage()
     {
-        if (damageToTake > 0)
+        int defecit;
+        if (physicalDamageToTake > 0)
         {
-            int defecit = (damageToTake - Mathf.FloorToInt(this.armor * DMG_REDUCTION_FACTOR));
+            // armor reduction
+             defecit = (physicalDamageToTake - Mathf.FloorToInt(this.armor * DMG_REDUCTION_FACTOR));
+
             // ensure min damage is always applied
             if (defecit < BASE_DMG)
                 defecit = BASE_DMG;
@@ -198,17 +208,36 @@ public class PawnController : MonoBehaviour
                 Debug.Log(this.name + " laughs at the lack of damage!");
 
             }
+        this.physicalDamageToTake = 0;
         }
-        this.damageToTake = 0;
+        if (this.magicalDamageToTake > 0)
+        {
+            // IF WE WANT MAGIC RESIST!!!
+            /*defecit = this.magicalDamageToTake - this.magicResist */
+
+            // just take straight damage
+            if (this.remainingHealth - this.magicalDamageToTake >= 0)
+            {
+                this.remainingHealth -= this.magicalDamageToTake;
+            }
+            else
+            {
+                this.remainingHealth = 0;
+            }
+            PerformDamageBehaviour();
+        }
     }
 
     /// <summary>
     /// Sets the damage to be applied next turn.
     /// </summary>
     /// <param name="damage">Damage.</param>
-    public void SetDamage(int damage)
+    public void SetDamage(int damage, bool physical)
     {
-        this.damageToTake = damage;
+        if (physical)
+            this.physicalDamageToTake = damage;
+        else
+            this.magicalDamageToTake = damage;
     }
 
     /// <summary>
@@ -264,6 +293,22 @@ public class PawnController : MonoBehaviour
         return this.remainingHealth <= 0;
     }
 
+    public void Attack(PawnController attackedPlayer)
+    {
+        // Check Weapon type for behavior
+        if (this.playerWeapon.GetItemClass() == "Weapon"){
+            PhysicalAttack(attackedPlayer);
+
+        }
+        else if (this.playerWeapon.GetItemClass() == "Magic")
+        {
+            MagicAttack(attackedPlayer);
+
+        }else{
+
+        }
+    }
+
     /// <summary>
     /// Deals Damage to specified player.
     /// </summary>
@@ -271,7 +316,7 @@ public class PawnController : MonoBehaviour
     public void PhysicalAttack(PawnController attackedPlayer)
     {
         // apply damage to player
-        attackedPlayer.damageToTake = this.physicalDamage;
+        attackedPlayer.physicalDamageToTake = this.physicalDamage;
         this.PerformAttackBehaviour();
     }
 
@@ -285,7 +330,7 @@ public class PawnController : MonoBehaviour
         //Debug.Log ("Attacked Player :" + attackedPlayer.name + " this: " +this.name );
         if (this.CanUseMana(10))
         {
-            attackedPlayer.damageToTake = this.magicalDamage;
+            attackedPlayer.magicalDamageToTake = this.magicalDamage;
             this.remainingMana -= 10;
             this.PerformMagicBehaviour();
             return true;

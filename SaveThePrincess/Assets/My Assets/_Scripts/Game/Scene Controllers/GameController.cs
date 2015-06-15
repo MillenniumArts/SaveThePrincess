@@ -14,7 +14,8 @@ public class GameController : MonoBehaviour
                 waiting, 
                 scoredThisRound, 
                 enemyHasAttacked,
-                playerAttacking;
+                playerHasAttacked,
+                attackBarMoving;
     public int score, turn;
     public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.75f;
     public float cooldownValue;
@@ -81,7 +82,10 @@ public class GameController : MonoBehaviour
         InventoryInit();
         // combat control start
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+        // Set Attack Meter Amount
+        this.attackMeter.maxValue = 100;
         this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
+        
     }
 
     /// <summary>
@@ -115,6 +119,7 @@ public class GameController : MonoBehaviour
                 this.player.inventory.buttonText[i].gameObject.SetActive(false);
             }
         }
+        this.attackMeter.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -129,6 +134,7 @@ public class GameController : MonoBehaviour
             this.player.inventory.buttonText[i].gameObject.SetActive(false);
         }
         this.player.inventory.gameObject.SetActive(false);
+        this.attackMeter.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -182,14 +188,28 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        if (combatController.currentState == CombatController.BattleStates.PLAYERCHOICE)
+        // toggle movement on click
+        if (!attackBarMoving)
+        {
+            // starts attackBar movement in updateAttackBar
+            attackBarMoving = true;
+            this.attackMeter.gameObject.SetActive(true);
+        }
+        else
+        {
+            // second click
+            attackBarMoving = false;
+            playerHasAttacked = true;
+        }
+        // After second click
+        if (!attackBarMoving && playerHasAttacked)
         {
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             waiting = true;
             StartCooldown(waiting, COOLDOWN_LENGTH);
             this.player.PhysicalAttack(attacked);
-        }
+        }  
     }
 
     /// <summary>
@@ -199,8 +219,6 @@ public class GameController : MonoBehaviour
     {
         this.enemy.TakeDamage();
         combatController.setState(CombatController.BattleStates.ENEMYTAKEDAMAGE);
-
-        waiting = false;
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
@@ -284,6 +302,7 @@ public class GameController : MonoBehaviour
         {
             StartCooldown(waiting, COOLDOWN_LENGTH);
             enemyHasAttacked = true;
+            
             waiting = true;
             // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
@@ -298,6 +317,7 @@ public class GameController : MonoBehaviour
         this.player.TakeDamage();
         waiting = false;
         enemyHasAttacked = false;
+        playerHasAttacked = false;
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
 
@@ -378,49 +398,44 @@ public class GameController : MonoBehaviour
         this.enemyHealth.value = this.enemy.remainingHealth;
         this.enemyMana.maxValue = this.enemy.totalMana;
         this.enemyMana.value = this.enemy.remainingMana;
-  
+
+        //this.attackMeter.gameObject.SetActive(attackBarMoving);
     }
 
         bool increasing = true;
     public void UpdateAttackBar()
-    {
-        // Set Attack Meter Amount
-        this.attackMeter.maxValue = 100;
-        
+    {       
         int counter = 0;
-        if (playerAttacking)
+        if (attackBarMoving)
         {
-        Debug.Log("HEY GUYS");
             if (increasing && counter % 60 == 0)
             {
                 this.attackMeter.value++;
-                Debug.Log("INCREASING " + counter);
             }
             else if (!increasing && counter % 60 == 0)
             {
                 this.attackMeter.value--;
-                Debug.Log("DECREASING " + counter);
             }
             else
             {
-                Debug.Log("NO " + counter);
-                counter++;
                 if (counter >= 60)
                     counter = 0;   
             }
+                counter++;
 
             // limit the values
             if (this.attackMeter.value >= this.attackMeter.maxValue)
             {
-                Debug.Log("OKAY DONE");
-                //this.attackMeter.value = this.attackMeter.maxValue;
+                this.attackMeter.value = this.attackMeter.maxValue;
                 increasing = false;
             }
             else if (this.attackMeter.value <= 0 )
             {
                 this.attackMeter.value = 0;
                 increasing = true;
-            }            
+            } 
+            // set final value
+            this.attackAmount = this.attackMeter.value;
         }
     }
 

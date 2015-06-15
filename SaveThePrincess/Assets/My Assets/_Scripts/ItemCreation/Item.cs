@@ -246,7 +246,7 @@ public class Item : MonoBehaviour {
                 else if (this.GetItemSubClass() == "AttackMagic")
                 {
                     // apply damage to player
-                    p.SetDamage(this.GetAtkMod());
+                    p.SetDamage(this.GetAtkMod(), false);
                 }
                 return true;
             }

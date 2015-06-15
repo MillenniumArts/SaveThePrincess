@@ -466,6 +466,12 @@ public class PawnController : MonoBehaviour
         return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
+    public int GetTotalStats()
+    {
+        int total = GetTotalArmor() + GetTotalDamage() + totalEnergy + totalHealth;
+        return total;
+    }
+
     #endregion Public Functions
 
     #region protected functions
@@ -496,6 +502,7 @@ public class PawnController : MonoBehaviour
             StartCoroutine("RenderArmorAtEoF");
         }
     }
+
     /// <summary>
     /// Wait until the end of the frame before rendering the armor.
     /// </summary>
@@ -672,65 +679,6 @@ public class PawnController : MonoBehaviour
         {
             CallSetArmor("BlankArmor");
             this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        }
-    }
-
-    public bool firstTick = true;
-
-    public void DoOnFirstTick()
-    {
-        if (firstTick)
-        {
-            if (spawnWithWeapon || spawnWithArmor)
-            {
-                if (spawnWithWeapon)
-                {
-                    if (playerWeapon != null)
-                    {
-                        damageMod = playerWeapon.GetAtkMod();
-                        physicalDamage += damageMod;
-                    }
-                }
-                else
-                {
-                    playerWeapon.ClearStats();
-                    playerWeapon.itemName = "None";
-                }
-
-                if (spawnWithArmor)
-                {
-                    if (playerArmor != null)
-                    {
-                        armorMod = playerArmor.GetDefMod();
-                        armor += armorMod;
-                    }
-                }
-                else
-                {
-                    playerArmor.ClearStats();
-                    playerArmor.itemName = "None";
-                }
-            }
-            else
-            {
-                this.damageMod = playerWeapon.GetAtkMod();
-                //this.physicalDamage = physicalDamage - damageMod;
-                this.physicalDamage += damageMod;
-                this.armorMod = playerArmor.GetDefMod();
-                //this.armor = armor - armorMod;
-                this.armor += armorMod;
-                playerWeapon.ClearStats();
-                playerArmor.ClearStats();
-                playerWeapon.itemName = "None";
-                playerArmor.itemName = "None";
-                damageMod = 0;
-                armorMod = 0;
-                this.playerWeapon.animParameter = "OneHandAttack";
-            }
-            this.DMG_REDUCTION_FACTOR = 0.25f;
-            this.BASE_DMG = 10;
-
-            firstTick = false;
         }
     }
 

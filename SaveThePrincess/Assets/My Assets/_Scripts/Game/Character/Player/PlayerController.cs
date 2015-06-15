@@ -138,6 +138,67 @@ public class PlayerController : PawnController
     #endregion Public functions
 
     #region Private functions
+    private bool firstTick = true;
+    /// <summary>
+    /// Things to do on the first tick for the player.
+    /// </summary>
+    private void DoOnFirstTick()
+    {
+        if (firstTick)
+        {
+            if (spawnWithWeapon || spawnWithArmor)
+            {
+                if (spawnWithWeapon)
+                {
+                    if (playerWeapon != null)
+                    {
+                        damageMod = playerWeapon.GetAtkMod();
+                        physicalDamage += damageMod;
+                    }
+                }
+                else
+                {
+                    playerWeapon.ClearStats();
+                    playerWeapon.itemName = "None";
+                }
+
+                if (spawnWithArmor)
+                {
+                    if (playerArmor != null)
+                    {
+                        armorMod = playerArmor.GetDefMod();
+                        armor += armorMod;
+                    }
+                }
+                else
+                {
+                    playerArmor.ClearStats();
+                    playerArmor.itemName = "None";
+                }
+            }
+            else
+            {
+                this.damageMod = playerWeapon.GetAtkMod();
+                //this.physicalDamage = physicalDamage - damageMod;
+                this.physicalDamage += damageMod;
+                this.armorMod = playerArmor.GetDefMod();
+                //this.armor = armor - armorMod;
+                this.armor += armorMod;
+                playerWeapon.ClearStats();
+                playerArmor.ClearStats();
+                playerWeapon.itemName = "None";
+                playerArmor.itemName = "None";
+                damageMod = 0;
+                armorMod = 0;
+                this.playerWeapon.animParameter = "OneHandAttack";
+            }
+            this.DMG_REDUCTION_FACTOR = 0.25f;
+            this.BASE_DMG = 10;
+
+            firstTick = false;
+        }
+    }
+
     /// <summary>
     /// Clean up player stats for restart on last tick.
     /// </summary>

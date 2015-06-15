@@ -16,7 +16,11 @@ public class BaseEnemyController : PawnController {
 	public int numUsableItems ;
 
     public bool isAnimating;
-	
+
+    private PlayerController player;
+
+    private int totalStats;
+
 	#endregion Variables
 	
 	#region Public functions
@@ -51,9 +55,32 @@ public class BaseEnemyController : PawnController {
 	#endregion Protected Functions
 
 	#region Private functions
-	
+
+    /// <summary>
+    /// Creates the ememy's stats based on the player stats.
+    /// </summary>
+    private void CreateStats()
+    {
+        int playerTotalStats = player.GetTotalStats();
+        totalStats = playerTotalStats + Mathf.FloorToInt((playerTotalStats * Random.Range(-0.2f, 0.1f)));
+        totalHealth = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
+        totalEnergy = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
+        int remainingStats = totalStats - totalHealth - totalEnergy;
+        physicalDamage = Mathf.FloorToInt(remainingStats * Random.Range(0.3f, 0.7f));
+        armor = remainingStats - physicalDamage;
+        Debug.Log("PlayerTotalStats: " + playerTotalStats + 
+            " EnemyTotalStats: " + totalStats + 
+            " EnemyTotalHealth: " + totalHealth + 
+            " EnemyTotalEnergy: " + totalEnergy +
+            " EnemyPhysicalDamaga: " + physicalDamage + 
+            " EnemyArmor: " + armor);
+    }
+
 	private void EnemyStart(){
 		this.dollarBalance = 25;
+        CreateStats();
+        remainingEnergy = totalEnergy;
+        remainingHealth = totalHealth;
 	}
 
 	/// <summary>
@@ -76,11 +103,11 @@ public class BaseEnemyController : PawnController {
 
     void Awake()
     {
+        player = FindObjectOfType<PlayerController>();
         isAnimating = false;
     }
 
 	void Update(){
-		DoOnFirstTick();
 		if (IsDead ()) {
 			this.TriggerAnimation("death");
 		}

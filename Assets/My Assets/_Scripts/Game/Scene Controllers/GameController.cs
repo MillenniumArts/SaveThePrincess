@@ -16,7 +16,8 @@ public class GameController : MonoBehaviour
                 enemyHasAttacked,
                 playerHasAttacked,
                 attackBarMoving,
-                someoneIsDead;
+                someoneIsDead,
+                finalFrame;
 
     public int score,
                turn,
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour
         MAGIC_LENGTH = 1.5f;
 
         someoneIsDead = false;
+        finalFrame = false;
 
         // enemy has not healed or attacked yet
         enemyHasHealed = false;
@@ -97,7 +99,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("carryover", 0);
         // reposition player
         this.prevPos = this.player.transform.localPosition;
-        Vector3 newSpot = new Vector3(-2.5f, -2.5f);
+        Vector3 newSpot = new Vector3(-4.5f, -2.5f);
         this.player.gameObject.transform.localPosition = newSpot;
 
         // get enemy reference
@@ -111,8 +113,6 @@ public class GameController : MonoBehaviour
         // combat starts after initialization is finished
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
-
-
 
     /// <summary>
     /// Disables the buttons.
@@ -268,8 +268,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                // someone is dead
-                //StartCooldown(5.0f);
+                
             }
         }
     }
@@ -317,7 +316,6 @@ public class GameController : MonoBehaviour
         startTime = curTime;
         endTime = startTime + amount;
         waiting = true;
-        Debug.Log("****************Cooldown Starts :" + curTime + " end Time: " + endTime);
     }
 
     /// <summary>
@@ -329,7 +327,7 @@ public class GameController : MonoBehaviour
         {
             if (curTime >= endTime)
             {
-                Debug.Log("WAITING DONE! endTime:" + endTime + "curTime: " + curTime);
+                //Debug.Log("WAITING DONE! endTime:" + endTime + "curTime: " + curTime);
                 this.endTime = curTime;
                 this.waiting = false;
                 if (!someoneIsDead)
@@ -348,13 +346,29 @@ public class GameController : MonoBehaviour
                 else
                 {
                     // do when someone is dead
-                    OnSomeoneDead();
+                    if (!finalFrame)
+                    {
+                        finalFrame = true;
+
+                        if (this.enemy.IsDead())
+                        {
+                            this.player.TriggerAnimation("victory");
+                            this.enemy.TriggerAnimation("death");
+                        }
+
+                        if (this.player.IsDead())
+                        {
+                            this.enemy.TriggerAnimation("victory");
+                            this.player.TriggerAnimation("death");
+                        }
+                        StartCooldown(COOLDOWN_LENGTH);
+                    }
+                        OnSomeoneDead();
                 }
             }
         }
     }
-
-
+    
     /// <summary>
     /// Updates the UI Health/mana bars.
     /// </summary>
@@ -437,8 +451,6 @@ public class GameController : MonoBehaviour
         this.numEnemiesKilledText.text = "SCORE: " + score;
     }
 
-
-
     /// <summary>
     /// Ends the game.
     /// </summary>
@@ -447,12 +459,7 @@ public class GameController : MonoBehaviour
         // player dead
         TransferGold();
         this.player.transform.localPosition = this.prevPos;
-        // animate death
-        if (this.player.IsDead() && !waiting)
-        {
-            this.player.TriggerAnimation("death");
-            this.enemy.TriggerAnimation("victory");
-        }
+        
         // check for high score
         if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore"))
         {
@@ -478,7 +485,6 @@ public class GameController : MonoBehaviour
     private void LoadNextLevel()
     {
         // VICTORY ANIMATION
-        this.player.TriggerAnimation("victory");
         turn = 0;
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
@@ -500,8 +506,6 @@ public class GameController : MonoBehaviour
     void GoToTown()
     {
         // VICTORY ANIMATION
-        this.player.TriggerAnimation("victory");
-
         // reset position
         this.player.transform.localPosition = this.prevPos;
         // transfer money
@@ -515,8 +519,7 @@ public class GameController : MonoBehaviour
             Application.LoadLevel("Town_LVP");
         }
     }
-
-
+    
     /// <summary>
     /// Transfers a portion of player's gold to next game.
     /// </summary>
@@ -552,7 +555,6 @@ public class GameController : MonoBehaviour
         else if (this.enemy.IsDead())
         {
             // enemy dead
-            this.enemy.TriggerAnimation("death");
             GoToTown();
         }        
     }

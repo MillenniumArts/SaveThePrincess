@@ -65,9 +65,11 @@ public class BaseEnemyController : PawnController {
         totalStats = playerTotalStats + Mathf.FloorToInt((playerTotalStats * Random.Range(-0.2f, 0.1f)));
         totalHealth = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
         totalEnergy = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
+
         int remainingStats = totalStats - totalHealth - totalEnergy;
         physicalDamage = Mathf.FloorToInt(remainingStats * Random.Range(0.3f, 0.7f));
         armor = remainingStats - physicalDamage;
+
         Debug.Log("PlayerTotalStats: " + playerTotalStats + 
             " EnemyTotalStats: " + totalStats + 
             " EnemyTotalHealth: " + totalHealth + 
@@ -108,9 +110,6 @@ public class BaseEnemyController : PawnController {
     }
 
 	void Update(){
-		if (IsDead ()) {
-			this.TriggerAnimation("death");
-		}
         playerAnimator.SetInteger("Health", remainingHealth);
 	}
 	#endregion MonoBehaviour

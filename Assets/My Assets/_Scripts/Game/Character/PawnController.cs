@@ -687,7 +687,6 @@ public class PawnController : MonoBehaviour
     //set up default parameters here for all characters in game
     void Start()
     {
-        this.totalEnergy = 100;
     }
 
     // Update is called once per frame

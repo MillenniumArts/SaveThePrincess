@@ -206,6 +206,7 @@ public class PlayerController : PawnController
     {
         this.playerArmor.ClearStats();
         this.playerWeapon.ClearStats();
+        //this.TriggerAnimation("death");
     }
 
 
@@ -234,7 +235,6 @@ public class PlayerController : PawnController
         if (IsDead())
         {
             DoOnLastTick();
-            this.TriggerAnimation("death");
         }
         playerAnimator.SetInteger("Health", remainingHealth);
     }

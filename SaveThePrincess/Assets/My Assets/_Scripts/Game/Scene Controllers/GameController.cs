@@ -10,25 +10,26 @@ public class GameController : MonoBehaviour
     public GameController gameController;
     public CombatController combatController;
 
-    public bool enemyHasHealed, 
-                waiting, 
-                scoredThisRound, 
+    public bool enemyHasHealed,
+                waiting,
+                scoredThisRound,
                 enemyHasAttacked,
                 playerHasAttacked,
-                attackBarMoving;
+                attackBarMoving,
+                someoneIsDead;
 
-    public int score, 
+    public int score,
                turn,
                ENERGY_REGEN_AMT = 10;
 
     public float MONEY_TRANSFER_PCT = 0.2f,
-                 COOLDOWN_LENGTH = 1.75f;
+                 COOLDOWN_LENGTH = 0.0f,
+                 ATTACK_LENGTH,
+                 MAGIC_LENGTH;
 
-    public float cooldownValue;
-
-    public Slider playerHealth, 
-                  playerMana, 
-                  enemyHealth, 
+    public Slider playerHealth,
+                  playerMana,
+                  enemyHealth,
                   enemyMana;
     public Slider attackMeter;
 
@@ -51,6 +52,8 @@ public class GameController : MonoBehaviour
 
     private Image background;
 
+    public float startTime, endTime, curTime;
+
     // Use this for initialization
     void Awake()
     {
@@ -63,7 +66,12 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
         this.score = PlayerPrefs.GetInt("score");
-        this.cooldownValue = 0.0f;
+
+        COOLDOWN_LENGTH = 2.0f;
+        ATTACK_LENGTH = 1.85f;
+        MAGIC_LENGTH = 1.5f;
+
+        someoneIsDead = false;
 
         // enemy has not healed or attacked yet
         enemyHasHealed = false;
@@ -81,11 +89,9 @@ public class GameController : MonoBehaviour
             return;
         }
 
-
-
         // get playerController 
         this.player = FindObjectOfType<PlayerController>();
-        
+
         // carry over previous balance
         this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
         PlayerPrefs.SetInt("carryover", 0);
@@ -100,17 +106,7 @@ public class GameController : MonoBehaviour
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
         this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
-        
-      // ENEMY SET UP
-
-        // ENEMY ARMOR
-
-        // ENEMY WEAPON
-
-        // ENEMY STATS
-
-        // ENEMY INVENTORY
-
+        this.attackMeter.gameObject.SetActive(false);
 
         // combat starts after initialization is finished
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
@@ -179,10 +175,9 @@ public class GameController : MonoBehaviour
         {
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-            waiting = true;
-            StartCooldown(waiting, COOLDOWN_LENGTH);
+            StartCooldown(COOLDOWN_LENGTH);
             this.player.Attack(attacked, attackAmount);
-        }  
+        }
     }
 
     /// <summary>
@@ -190,8 +185,9 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnWaitComplete()
     {
+        //  Debug.Log("OnWaitComplete. " + curTime);
         this.enemy.TakeDamage();
-        combatController.setState(CombatController.BattleStates.ENEMYTAKEDAMAGE);
+        //combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         this.enemy.GiveEnergy(ENERGY_REGEN_AMT);
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
@@ -203,7 +199,8 @@ public class GameController : MonoBehaviour
     /// <returns>The enemy action.</returns>
     private void DoEnemyAction()
     {
-        if (!waiting && !enemyHasAttacked 
+        float cdReq = COOLDOWN_LENGTH * MAGIC_LENGTH;
+        if (!waiting && !enemyHasAttacked
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
             // determine crit chance for enemy
@@ -222,6 +219,7 @@ public class GameController : MonoBehaviour
                     {
                         // physical
                         Debug.Log(this.enemy.name + " attacks!");
+                        cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, attackAmount);
                     }
                     else if (r <= 5)
@@ -237,12 +235,14 @@ public class GameController : MonoBehaviour
                             if (r > 5)
                             {
                                 Debug.Log("Instead of casting Magic, " + this.enemy.name + " attacks!");
+                                cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                                 this.enemy.Attack(this.player, attackAmount);
                             }
                             else
                             {
-                                Debug.Log("Mana restored by 10");
-                                this.enemy.remainingEnergy += 10;
+                                Debug.Log("Enemy Uses a mana potion");
+                                this.enemy.TriggerAnimation("HealPotion");
+                                this.enemy.GiveEnergy(10);
                             }
                         }
                     }
@@ -253,7 +253,7 @@ public class GameController : MonoBehaviour
                     if (!enemyHasHealed)
                     {
                         Debug.Log(this.enemy.name + " healed for 25 hp");
-                        this.enemy.TriggerAnimation("potion");
+                        this.enemy.TriggerAnimation("HealPotion");
                         this.enemy.HealForAmount(25);
                         this.enemyHasHealed = true;
                     }
@@ -264,8 +264,12 @@ public class GameController : MonoBehaviour
                         this.enemy.Attack(this.player, attackAmount);
                     }
                 }
-                this.enemy.UseEnergy(30);
-                OnEnemyActionUsed(this.player);
+                OnEnemyActionUsed(this.player, cdReq);
+            }
+            else
+            {
+                // someone is dead
+                //StartCooldown(5.0f);
             }
         }
     }
@@ -274,14 +278,14 @@ public class GameController : MonoBehaviour
     /// called after AI sequence has finished.
     /// </summary>
     /// <param name="attacked">Attacked.</param>
-    public void OnEnemyActionUsed(PawnController attacked)
+    /// <param name="requiredCooldownLength">Cooldown length needed for animation.</param>
+    public void OnEnemyActionUsed(PawnController attacked, float requiredCooldownLength)
     {
         if (combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
-            StartCooldown(waiting, COOLDOWN_LENGTH);
+           // waiting = true;
             enemyHasAttacked = true;
-            
-            waiting = true;
+            StartCooldown(requiredCooldownLength);
             // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
@@ -292,12 +296,15 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnEnemyWaitComplete()
     {
+        combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+        this.enemy.UseEnergy(30);
         this.player.TakeDamage();
-        waiting = false;
+        this.player.GiveEnergy(ENERGY_REGEN_AMT);
         enemyHasAttacked = false;
         playerHasAttacked = false;
-        this.player.GiveEnergy(ENERGY_REGEN_AMT);
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+        if (!this.enemy.IsDead())
+            waiting = false;
     }
 
     /// <summary>
@@ -305,10 +312,12 @@ public class GameController : MonoBehaviour
     /// </summary>
     /// <param name="toggle"><c>true</c>if boolean is ON cooldown.</param>
     /// <param name="time">Time.</param>
-    public void StartCooldown(bool toggle, float time)
+    public void StartCooldown(float amount)
     {
-        cooldownValue = time;
-        toggle = !toggle;
+        startTime = curTime;
+        endTime = startTime + amount;
+        waiting = true;
+        Debug.Log("****************Cooldown Starts :" + curTime + " end Time: " + endTime);
     }
 
     /// <summary>
@@ -316,22 +325,30 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void Cooldown()
     {
-        //Debug.Log (waiting);
         if (waiting)
         {
-            this.cooldownValue -= 0.01f;
-            if (this.cooldownValue <= 0)
+            if (curTime >= endTime)
             {
-                this.cooldownValue = 0.0f;
+                Debug.Log("WAITING DONE! endTime:" + endTime + "curTime: " + curTime);
+                this.endTime = curTime;
                 this.waiting = false;
-                if (combatController.currentState == CombatController.BattleStates.PLAYERANIMATE){
-                    combatController.setState(CombatController.BattleStates.ENEMYTAKEDAMAGE);
-                    this.OnWaitComplete();
-                }
-                else if (combatController.currentState == CombatController.BattleStates.ENEMYANIMATE)
+                if (!someoneIsDead)
                 {
-                    combatController.setState(CombatController.BattleStates.PLAYERTAKEDAMAGE);
-                    this.OnEnemyWaitComplete();
+                    if (combatController.currentState == CombatController.BattleStates.PLAYERANIMATE)
+                    {
+                        combatController.setState(CombatController.BattleStates.ENEMYTAKEDAMAGE);
+                        this.OnWaitComplete();
+                    }
+                    else if (combatController.currentState == CombatController.BattleStates.ENEMYANIMATE)
+                    {
+                        combatController.setState(CombatController.BattleStates.PLAYERTAKEDAMAGE);
+                        this.OnEnemyWaitComplete();
+                    }
+                }
+                else
+                {
+                    // do when someone is dead
+                    OnSomeoneDead();
                 }
             }
         }
@@ -353,9 +370,9 @@ public class GameController : MonoBehaviour
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
 
-        bool increasing = true;
+    bool increasing = true;
     public void UpdateAttackBar()
-    {       
+    {
         int counter = 0;
         if (attackBarMoving)
         {
@@ -370,9 +387,9 @@ public class GameController : MonoBehaviour
             else
             {
                 if (counter >= 60)
-                    counter = 0;   
+                    counter = 0;
             }
-                counter++;
+            counter++;
 
             // limit the values
             if (this.attackMeter.value >= this.attackMeter.maxValue)
@@ -380,11 +397,11 @@ public class GameController : MonoBehaviour
                 this.attackMeter.value = this.attackMeter.maxValue;
                 increasing = false;
             }
-            else if (this.attackMeter.value <= 0 )
+            else if (this.attackMeter.value <= 0)
             {
                 this.attackMeter.value = 0;
                 increasing = true;
-            } 
+            }
             // set final value
             this.attackAmount = this.attackMeter.value;
         }
@@ -428,13 +445,13 @@ public class GameController : MonoBehaviour
     private void EndGame()
     {
         // player dead
-        UpdateText();
         TransferGold();
         this.player.transform.localPosition = this.prevPos;
         // animate death
         if (this.player.IsDead() && !waiting)
         {
             this.player.TriggerAnimation("death");
+            this.enemy.TriggerAnimation("victory");
         }
         // check for high score
         if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore"))
@@ -460,7 +477,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void LoadNextLevel()
     {
-        UpdateDisplay();
+        // VICTORY ANIMATION
+        this.player.TriggerAnimation("victory");
         turn = 0;
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
@@ -468,10 +486,6 @@ public class GameController : MonoBehaviour
         DifficultyLevel.GetInstance().IncreaseDifficulty();
         // return to prev pos
         this.player.transform.localPosition = this.prevPos;
-
-        // VICTORY ANIMATION
-
-
         // enemy dead, fight another and keep player on screen
         DontDestroyOnLoad(this.player);
         if (!waiting)
@@ -485,10 +499,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     void GoToTown()
     {
-        UpdateDisplay();
-        this.player.TriggerAnimation("victory");
-        this.enemy.TriggerAnimation("death");
         // VICTORY ANIMATION
+        this.player.TriggerAnimation("victory");
 
         // reset position
         this.player.transform.localPosition = this.prevPos;
@@ -530,27 +542,43 @@ public class GameController : MonoBehaviour
         UpdateAttackBar();
     }
 
+    void OnSomeoneDead()
+    {
+        if (this.player.IsDead())
+        {
+            // player dead
+            EndGame();
+        }
+        else if (this.enemy.IsDead())
+        {
+            // enemy dead
+            this.enemy.TriggerAnimation("death");
+            GoToTown();
+        }        
+    }
+
+    void CheckDeath()
+    {
+        if (this.player.IsDead() || this.enemy.IsDead())
+            someoneIsDead = true;
+        else
+            someoneIsDead = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        curTime = Time.time;
         UpdateDisplay();
         Cooldown();
+        CheckDeath();
 
-        if (!waiting)
+        if (!waiting )
         {
             DoEnemyAction();
-            if (this.player.IsDead())
+            if (someoneIsDead)
             {
-                // player dead
-                EndGame();
-            }
-            else if (this.enemy.IsDead())
-            {
-                // enemy dead
-                StartCooldown(waiting, COOLDOWN_LENGTH);
-                this.enemy.TriggerAnimation("death");
-                if (!waiting)
-                    GoToTown();
+                StartCooldown(COOLDOWN_LENGTH);
             }
         }
     }

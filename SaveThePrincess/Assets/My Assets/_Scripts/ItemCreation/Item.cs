@@ -186,7 +186,7 @@ public class Item : MonoBehaviour {
 					return true;
 				}
 			}else if (this.GetItemSubClass() == "ManaPotion"){
-				if (p.remainingMana < p.totalMana){
+				if (p.remainingEnergy < p.totalEnergy){
 					return true;
 				}
 			}
@@ -224,9 +224,9 @@ public class Item : MonoBehaviour {
             }
             else if (this.GetItemSubClass() == "ManaPotion")
             {
-                if (p.remainingMana < p.totalMana)
+                if (p.remainingEnergy < p.totalEnergy)
                 {
-                    p.GiveMana(this.GetManaMod());
+                    p.GiveEnergy(this.GetManaMod());
                     this.used = true;
                     return true;
                 }
@@ -237,7 +237,7 @@ public class Item : MonoBehaviour {
         }
         else if (this.GetItemClass() == "Magic")
         {
-            if (p.CanUseMana(10))
+            if (p.CanUseEnergy(10))
             {
                 if (this.GetItemSubClass() == "HealMagic")
                 {

@@ -57,10 +57,7 @@ public class PawnController : MonoBehaviour
     #endregion Rendering
 
     #region Inventory
-    /// <summary>
-    /// The inventory of the player.
-    /// </summary>
-    public InventoryGUIController inventory;
+    
 
     #endregion Inventory
 
@@ -83,12 +80,12 @@ public class PawnController : MonoBehaviour
     /// <summary>
     /// The Maximum Mana for this player
     /// </summary>
-    public int totalMana;
+    public int totalEnergy;
 
     /// <summary>
     /// The Remaining Mana for this player
     /// </summary>
-    public int remainingMana;
+    public int remainingEnergy;
 
     /// <summary>
     /// The speed of the player, used for dodge probablility
@@ -150,6 +147,11 @@ public class PawnController : MonoBehaviour
     /// </summary>
     public int BASE_DMG;
 
+    /// <summary>
+    /// Base Energy Cost for any attack
+    /// </summary>
+    public int ATTACK_ENERGY_COST = 30;
+
     #endregion STATS
 
     #region Public Functions
@@ -206,7 +208,6 @@ public class PawnController : MonoBehaviour
                 }
                 PerformBlockBehaviour();									// block animation under 10% damage
                 Debug.Log(this.name + " laughs at the lack of damage!");
-
             }
         this.physicalDamageToTake = 0;
         }
@@ -224,6 +225,7 @@ public class PawnController : MonoBehaviour
             {
                 this.remainingHealth = 0;
             }
+            this.magicalDamageToTake = 0;
             PerformDamageBehaviour();
         }
     }
@@ -276,13 +278,6 @@ public class PawnController : MonoBehaviour
         }
     }
 
-    public bool CanUseMana(int amount)
-    {
-        if (remainingMana <= 0)
-            return false;
-        int defecit = this.remainingMana - amount;
-        return defecit >= 0;
-    }
 
     /// <summary>
     /// Determines whether this instance is dead.
@@ -293,27 +288,74 @@ public class PawnController : MonoBehaviour
         return this.remainingHealth <= 0;
     }
 
-    public void Attack(PawnController attackedPlayer)
+    /// <summary>
+    /// Uses amount of energy if possible
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UseEnergy(int amount)
+    {
+        if (CanUseEnergy(amount)){
+            this.remainingEnergy -= amount;
+        }
+    }
+    /// <summary>
+    /// Determines if player has enough mana
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    public bool CanUseEnergy(int amount)
+    {
+        if (remainingEnergy <= 0)
+            return false;
+        int defecit = this.remainingEnergy - amount;
+        return defecit >= 0;
+    }
+
+    /// <summary>
+    /// Attacks provided pawncontroller, passing in the amount from the attack bar in the Battle
+    /// </summary>
+    /// <param name="attackedPlayer">Player Being attacked</param>
+    /// <param name="attackAmount">the amount from the attack bar in the Battle</param>
+    public void Attack(PawnController attackedPlayer, float attackAmount)
     {
         // Check Weapon type for behavior
         if (this.playerWeapon.GetItemClass() == "Weapon"){
-            PhysicalAttack(attackedPlayer);
-
+            PhysicalAttack(attackedPlayer, attackAmount);
         }
         else if (this.playerWeapon.GetItemClass() == "Magic")
         {
-            MagicAttack(attackedPlayer);
+            MagicAttack(attackedPlayer, attackAmount);
 
         }else{
-
+            // other attack types?
         }
+        // all attacks always use energy
+        this.UseEnergy(ATTACK_ENERGY_COST);
+    }
+
+    /// <summary>
+    /// Gives the specified amount of energy.
+    /// </summary>
+    /// <param name="amount">Amount.</param>
+    public void GiveEnergy(int amount)
+    {
+        if (this.remainingEnergy + amount >= this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += amount;
+        }
+        Debug.Log(this.name + " Receieved " + amount + " Energy.");
     }
 
     /// <summary>
     /// Deals Damage to specified player.
     /// </summary>
     /// <param name="attackedPlayer">Attacked player.</param>
-    public void PhysicalAttack(PawnController attackedPlayer)
+    /// /// <param name="attackAmount">Amount on the AttackBar in the Battle Sequence.</param>
+    public void PhysicalAttack(PawnController attackedPlayer, float attackAmount)
     {
         // apply damage to player
         attackedPlayer.physicalDamageToTake = this.physicalDamage;
@@ -325,13 +367,11 @@ public class PawnController : MonoBehaviour
     /// </summary>
     /// <returns><c>true</c>, if magic attack was cast (had enough mana), <c>false</c> otherwise.</returns>
     /// <param name="attackedPlayer">Attacked player.</param>
-    public bool MagicAttack(PawnController attackedPlayer)
+    public bool MagicAttack(PawnController attackedPlayer, float attackAmount)
     {
-        //Debug.Log ("Attacked Player :" + attackedPlayer.name + " this: " +this.name );
-        if (this.CanUseMana(10))
+        if (this.CanUseEnergy(ATTACK_ENERGY_COST))
         {
             attackedPlayer.magicalDamageToTake = this.magicalDamage;
-            this.remainingMana -= 10;
             this.PerformMagicBehaviour();
             return true;
         }
@@ -339,22 +379,6 @@ public class PawnController : MonoBehaviour
         {
             Debug.Log("Not Enough Mana For That!");
             return false;
-        }
-    }
-
-    /// <summary>
-    /// Gives the specified amount of mana.
-    /// </summary>
-    /// <param name="amount">Amount.</param>
-    public void GiveMana(int amount)
-    {
-        if (this.remainingMana + amount >= this.totalMana)
-        {
-            this.remainingMana = this.totalMana;
-        }
-        else
-        {
-            this.remainingMana += amount;
         }
     }
 
@@ -424,6 +448,22 @@ public class PawnController : MonoBehaviour
                 }
                 break;
         }
+    }
+    /// <summary>
+    /// Get the total armor
+    /// </summary>
+    /// <returns></returns>
+    public int GetTotalArmor()
+    {
+        return this.armor + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
+    }
+    /// <summary>
+    /// Gets the total damage.
+    /// </summary>
+    /// <returns>The total damage.</returns>
+    public int GetTotalDamage()
+    {
+        return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
     #endregion Public Functions
@@ -699,6 +739,7 @@ public class PawnController : MonoBehaviour
     //set up default parameters here for all characters in game
     void Start()
     {
+        this.totalEnergy = 100;
     }
 
     // Update is called once per frame

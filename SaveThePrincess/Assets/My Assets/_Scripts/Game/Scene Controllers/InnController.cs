@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -38,7 +38,7 @@ public class InnController : MonoBehaviour {
 
 	private void UpdateText(){
 		this.healthText.text = "Health: " + this.player.remainingHealth + "/" + this.player.totalHealth;
-		this.manaText.text = "Mana: " + this.player.remainingMana + "/" + this.player.totalMana;
+		this.manaText.text = "Mana: " + this.player.remainingEnergy + "/" + this.player.totalEnergy;
 		this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
 		for (int i=0; i<buttonText.Length; i++) {
 			buttonText[i].text = "SLEEP FOR NIGHT: $" + prices[i] + " ";
@@ -47,12 +47,12 @@ public class InnController : MonoBehaviour {
 
 	public void SleepForNight(int index){
 		// if player needs health OR mana
-		if (player.remainingMana < player.totalMana || player.remainingHealth < player.totalHealth) {
+		if (player.remainingEnergy < player.totalEnergy || player.remainingHealth < player.totalHealth) {
 			// if can afford, purchase
 			if (player.PurchaseItem (prices [index])) {
 				// effects administered here
 				// USING SIMPLE MATH HERE FOR NOW, DOLLAR PER POINT OF MANA/HEALTH
-				player.GiveMana (prices [index]*2);
+				player.GiveEnergy (prices [index]*2);
 				player.HealForAmount (prices [index]*2);
 			}
 		} else {

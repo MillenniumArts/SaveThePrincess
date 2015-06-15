@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -9,18 +9,12 @@ public class TownController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.player = GameObject.FindObjectOfType<PlayerController> ();
-		if (this.player.inventory != null)
-			this.player.inventory.gameObject.SetActive (false);
+        this.player = GameObject.FindObjectOfType<PlayerController>();
 	}
 
 	public void GoToBattle(){
-		DontDestroyOnLoad (this.player);
-		if (this.player.inventory != null)
-			this.player.inventory.gameObject.SetActive (true);
+        DontDestroyOnLoad(this.player);
 		Application.LoadLevel ("Battle_LVP");
-
-		
 	}
 
 	public void GoToStore(){

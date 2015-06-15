@@ -36,9 +36,6 @@ public class ShopController : MonoBehaviour
         Vector3 newSpot = new Vector3(-5.7f, -2f);
         this.player.gameObject.transform.localPosition = newSpot;
 
-        if (player.inventory)
-            this.player.inventory.gameObject.SetActive(false);
-
         this.playerBalance.text = this.player.dollarBalance.ToString();
 
         factory = FindObjectOfType<ItemFactory>();

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BaseEnemyController : PawnController {
@@ -20,25 +20,6 @@ public class BaseEnemyController : PawnController {
 	#endregion Variables
 	
 	#region Public functions
-	
-	/// <summary>
-	/// Uses the item at specified index.
-	/// </summary>
-	/// <param name="index">Index.</param>
-	public void UseItem(int index){
-		if (this.inventory == null) {
-			this.inventory = GameObject.FindObjectOfType<InventoryGUIController>();
-			this.inventory._items [index].ApplyEffect (this);
-			// only use once if potion
-			if (this.inventory._items [index].GetItemClass() == "Potion")
-				this.inventory._items [index].used = true;
-		}else{
-			this.inventory._items [index].ApplyEffect (this);
-			// only use once if potion
-			if (this.inventory._items [index].GetItemClass() == "Potion")
-				this.inventory._items [index].used = true;
-		}
-	}
 
 	/// <summary>
 	/// Transfers the purchased weapon to the player's hand.
@@ -60,14 +41,6 @@ public class BaseEnemyController : PawnController {
 		if(this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false){
 			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 		}
-	}
-
-	public int GetTotalArmor(){
-		return this.armor + this.playerArmor.GetDefMod () + this.playerWeapon.GetDefMod ();
-	}
-	
-	public int GetTotalDamage(){
-		return this.physicalDamage + this.playerArmor.GetAtkMod () + this.playerWeapon.GetAtkMod ();
 	}
 	
 	#endregion Public functions

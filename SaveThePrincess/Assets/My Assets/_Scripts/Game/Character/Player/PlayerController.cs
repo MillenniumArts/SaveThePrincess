@@ -24,9 +24,9 @@ public class PlayerController : PawnController
     /// Uses the item at specified index.
     /// </summary>
     /// <param name="index">Index.</param>
-    public bool UseItem(int index)
+    public void UseItem(int index)
     {
-        bool ret = false;
+       /* bool ret = false;
         if (this.inventory == null)
         {
             this.inventory = GameObject.FindObjectOfType<InventoryGUIController>();
@@ -55,7 +55,7 @@ public class PlayerController : PawnController
                 if (e != null)
                 {
                     this.inventory._items[index].ApplyEffect(e);
-                    this.remainingMana -= 10;
+                    this.remainingEnergy -= 10;
                     this.TriggerAnimation(this.inventory._items[index].GetItemSubClass());
                     this.inventory.DisableButtonsIfUsed();
                 }
@@ -68,6 +68,7 @@ public class PlayerController : PawnController
             Debug.Log("Now is not the time to use that!");
         }
         return ret;
+       */
     }
 
     /// <summary>
@@ -133,18 +134,7 @@ public class PlayerController : PawnController
     /// Gets the total armor.
     /// </summary>
     /// <returns>The total armor.</returns>
-    public int GetTotalArmor()
-    {
-        return this.armor + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
-    }
-    /// <summary>
-    /// Gets the total damage.
-    /// </summary>
-    /// <returns>The total damage.</returns>
-    public int GetTotalDamage()
-    {
-        return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
-    }
+    
     #endregion Public functions
 
     #region Private functions

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -15,18 +15,21 @@ public class MenuController : MonoBehaviour {
 				   damageUp = null,
 				   damageDown = null,
 				   armorUp = null, 
-				   armorDown= null, 
+				   armorDown= null,
+                   energyUp= null,
+                   energyDown = null, 
 				   confirm = null;
 
-	private int baseHealth, baseArmor, baseDamage, 
-				healthInc, armorInc, damageInc,
-				newHealth, newArmor, newDamage;
+	private int baseHealth, baseArmor, baseDamage, baseEnergy, 
+				healthInc, armorInc, damageInc, energyInc,
+				newHealth, newArmor, newDamage, newEnergy;
 
-	public Text healthAmt, damageAmt, armorAmt, creditText;
+	public Text healthAmt, damageAmt, armorAmt, energyAmt, creditText;
+
 	public int numCredits;
+    public int MAX_CREDITS = 5;
 
 	public ItemFactory itemFactory;
-
 
 	// Use this for initialization
 	void Start () {
@@ -56,23 +59,26 @@ public class MenuController : MonoBehaviour {
 		this.healthInc = 10;
 		this.damageInc = 5;
 		this.armorInc = 2;
+        this.energyInc = 10;
 
 		// base stats
 		this.baseHealth = this.player.totalHealth;
 		this.baseDamage = this.player.physicalDamage;
 		this.baseArmor = this.player.armor;
+        this.baseEnergy = this.player.totalEnergy;
 
 		// variables to be changed
 		this.newHealth = this.baseHealth;
 		this.newDamage = this.baseDamage;
 		this.newArmor = this.baseArmor;
-
+        this.newEnergy = this.baseEnergy;
 
 		this.healthAmt.text = this.newHealth.ToString();
 		this.armorAmt.text = this.newArmor.ToString();
-
+        this.energyAmt.text = this.newEnergy.ToString();
 		this.damageAmt.text = this.newDamage.ToString ();
 		this.creditText.text = "CREDITS: " + numCredits;
+
 
 		// button handling - INCREASE
 		this.healthUp.onClick.AddListener (()=>{
@@ -93,10 +99,19 @@ public class MenuController : MonoBehaviour {
 				this.newArmor += this.armorInc;
 			}
 		});
+        this.energyUp.onClick.AddListener(() =>
+        {
+            if (this.numCredits > 0)
+            {
+                numCredits--;
+                this.newEnergy += this.energyInc;
+            }
+        });
+
 
 		// DECREASE STATS
 		this.healthDown.onClick.AddListener (()=>{
-			if (this.numCredits < 10){
+			if (this.numCredits < MAX_CREDITS){
 				if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
 					this.newHealth = this.baseHealth;
 				else{
@@ -126,12 +141,28 @@ public class MenuController : MonoBehaviour {
 			}
 		});
 
+        this.energyDown.onClick.AddListener(() =>
+        {
+            if (this.numCredits < 10)
+            {
+                if (this.newEnergy - this.energyInc < this.baseEnergy)	// make sure they can't go below base stats
+                    this.newEnergy = this.baseEnergy;
+                else
+                {
+                    this.newEnergy -= this.energyInc;
+                    numCredits++;
+                }
+            }
+        });
+        
 		// LOAD NEXT SCENE WITH THIS PLAYER
 		this.confirm.onClick.AddListener (()=>{
 			if (numCredits == 0){
 				this.player.totalHealth = this.newHealth;
 				this.player.remainingHealth = this.newHealth;
 				this.player.physicalDamage = this.newDamage;
+                this.player.totalEnergy = this.newEnergy;
+                this.player.remainingEnergy = this.newEnergy;
 				this.player.armor = this.newArmor;
 
 				DontDestroyOnLoad(this.player);
@@ -148,6 +179,7 @@ public class MenuController : MonoBehaviour {
 		this.healthAmt.text = this.newHealth.ToString();
 		this.armorAmt.text =  this.newArmor.ToString();
 		this.damageAmt.text = this.newDamage.ToString ();
+        this.energyAmt.text = this.newEnergy.ToString();
 		this.creditText.text = "CREDITS: " + numCredits;
 	}
 

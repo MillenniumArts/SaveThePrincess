@@ -4,39 +4,49 @@ using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-
     public PlayerController player;
     public BaseEnemyController enemy;
     public GameObject gameObj;
     public GameController gameController;
     public CombatController combatController;
+
     public bool enemyHasHealed, 
                 waiting, 
                 scoredThisRound, 
                 enemyHasAttacked,
                 playerHasAttacked,
                 attackBarMoving;
-    public int score, turn;
-    public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.75f;
+
+    public int score, 
+               turn,
+               ENERGY_REGEN_AMT = 10;
+
+    public float MONEY_TRANSFER_PCT = 0.2f,
+                 COOLDOWN_LENGTH = 1.75f;
+
     public float cooldownValue;
 
-    public Slider playerHealth, playerMana, enemyHealth, enemyMana;
+    public Slider playerHealth, 
+                  playerMana, 
+                  enemyHealth, 
+                  enemyMana;
     public Slider attackMeter;
+
     public float attackAmount;
+
     private Vector3 prevPos;
 
     // GUI/HUD
     public Text leftHealthText,
-                   rightHealthText,
-                   leftManaText,
-                   rightManaText,
-                   leftArmorText,
-                   rightArmorText,
-                   leftDamageText,
-                   rightDamageText,
-                   numEnemiesKilledText;
+                rightHealthText,
+                leftManaText,
+                rightManaText,
+                leftArmorText,
+                rightArmorText,
+                leftDamageText,
+                rightDamageText,
+                numEnemiesKilledText;
 
-    //[SerializeField] 
     public Button leftPhysAttack = null;
 
     private Image background;
@@ -44,16 +54,22 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        // Combat AI Controller reference
+        this.combatController = FindObjectOfType<CombatController>();
+        // INITIALIZE BATTLE SCENE
+        combatController.setState(CombatController.BattleStates.START);
+
         this.turn = 0;
-        this.scoredThisRound = false;
-        this.cooldownValue = 0.0f;
         PlayerPrefs.SetInt("turn", turn);
-        // enemy has not healed yet
+        this.scoredThisRound = false;
+        this.score = PlayerPrefs.GetInt("score");
+        this.cooldownValue = 0.0f;
+
+        // enemy has not healed or attacked yet
         enemyHasHealed = false;
         enemyHasAttacked = false;
-        this.score = PlayerPrefs.GetInt("score");
 
-        // get game Object
+        // get game Controller Object
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
         {
@@ -65,62 +81,42 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        this.combatController = FindObjectOfType<CombatController>();
+
+
         // get playerController 
         this.player = FindObjectOfType<PlayerController>();
-        this.player.inventory = GameObject.FindObjectOfType<InventoryGUIController>();
+        
+        // carry over previous balance
         this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
         PlayerPrefs.SetInt("carryover", 0);
+        // reposition player
         this.prevPos = this.player.transform.localPosition;
         Vector3 newSpot = new Vector3(-2.5f, -2.5f);
         this.player.gameObject.transform.localPosition = newSpot;
 
-        // get enemy
+        // get enemy reference
         this.enemy = FindObjectOfType<BaseEnemyController>();
 
-        // initate player inventory
-        InventoryInit();
-        // combat control start
-        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
         this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         
+      // ENEMY SET UP
+
+        // ENEMY ARMOR
+
+        // ENEMY WEAPON
+
+        // ENEMY STATS
+
+        // ENEMY INVENTORY
+
+
+        // combat starts after initialization is finished
+        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
 
-    /// <summary>
-    /// Initiates Player Inventory.
-    /// </summary>
-    public void InventoryInit()
-    {
-        if (!this.player.inventory.isActiveAndEnabled)
-            this.player.gameObject.SetActive(true);
-        if (!this.player.inventory.initialized)
-            this.player.inventory.PopulateInventory();
 
-        InitInventoryButtons();
-    }
-
-    /// <summary>
-    /// Initiates Inventory buttons.
-    /// </summary>
-    void InitInventoryButtons()
-    {
-        GameObject a = GameObject.FindWithTag("InventoryGUI");
-        Button[] but = a.GetComponentsInChildren<Button>();
-        Text[] t = a.GetComponentsInChildren<Text>();
-        for (int i = 0; i < this.player.inventory._items.Length; i++)
-        {
-            this.player.inventory.clickables[i] = but[i];
-            this.player.inventory.buttonText[i] = t[i];
-            if (this.player.inventory._items[i].used || this.player.inventory._items[i] == null)
-            {
-                this.player.inventory.clickables[i].gameObject.SetActive(false);
-                this.player.inventory.buttonText[i].gameObject.SetActive(false);
-            }
-        }
-        this.attackMeter.gameObject.SetActive(false);
-    }
 
     /// <summary>
     /// Disables the buttons.
@@ -128,12 +124,6 @@ public class GameController : MonoBehaviour
     public void DisableButtons()
     {
         this.leftPhysAttack.gameObject.SetActive(false);
-        for (int i = 0; i < this.player.inventory.clickables.Length; i++)
-        {
-            this.player.inventory.clickables[i].gameObject.SetActive(false);
-            this.player.inventory.buttonText[i].gameObject.SetActive(false);
-        }
-        this.player.inventory.gameObject.SetActive(false);
         this.attackMeter.gameObject.SetActive(false);
     }
 
@@ -143,23 +133,6 @@ public class GameController : MonoBehaviour
     public void EnableButtons()
     {
         this.leftPhysAttack.gameObject.SetActive(true);
-        for (int i = 0; i < this.player.inventory.clickables.Length; i++)
-        {
-            if (!this.player.inventory._items[i].used)
-            {
-                this.player.inventory.clickables[i].gameObject.SetActive(true);
-                this.player.inventory.buttonText[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                if (this.player.inventory._items[i].used || this.player.inventory._items[i] == null)
-                {
-                    this.player.inventory.clickables[i].gameObject.SetActive(false);
-                    this.player.inventory.buttonText[i].gameObject.SetActive(false);
-                }
-            }
-        }
-        this.player.inventory.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -168,9 +141,9 @@ public class GameController : MonoBehaviour
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
-        if (combatController.currentState == CombatController.BattleStates.PLAYERCHOICE)
+        /*if (combatController.currentState == CombatController.BattleStates.PLAYERCHOICE)
         {
-            bool pass = this.player.UseItem(index);
+            //bool pass = this.player.UseItem(index);
             if (pass)
             {
                 // start animation
@@ -179,7 +152,7 @@ public class GameController : MonoBehaviour
                 StartCooldown(waiting, COOLDOWN_LENGTH);
                 //this.player.inventory._items[index].used = true;
             }
-        }
+        }*/
     }
 
     /// <summary>
@@ -208,7 +181,7 @@ public class GameController : MonoBehaviour
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             waiting = true;
             StartCooldown(waiting, COOLDOWN_LENGTH);
-            this.player.PhysicalAttack(attacked);
+            this.player.Attack(attacked, attackAmount);
         }  
     }
 
@@ -219,6 +192,7 @@ public class GameController : MonoBehaviour
     {
         this.enemy.TakeDamage();
         combatController.setState(CombatController.BattleStates.ENEMYTAKEDAMAGE);
+        this.enemy.GiveEnergy(ENERGY_REGEN_AMT);
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
@@ -232,6 +206,9 @@ public class GameController : MonoBehaviour
         if (!waiting && !enemyHasAttacked 
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
+            // determine crit chance for enemy
+            float attackAmount = (Random.Range(25, 75) + (Random.Range(25, 75)) / 2);
+
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
             {
@@ -245,13 +222,13 @@ public class GameController : MonoBehaviour
                     {
                         // physical
                         Debug.Log(this.enemy.name + " attacks!");
-                        this.enemy.PhysicalAttack(this.player);
+                        this.enemy.Attack(this.player, attackAmount);
                     }
                     else if (r <= 5)
                     {
                         //Magical	
                         Debug.Log(this.enemy.name + " uses a Magic Attack!");
-                        bool pass = this.enemy.MagicAttack(this.player);
+                        bool pass = this.enemy.MagicAttack(this.player, attackAmount);
                         // if there is not enough mana to cast a magic attack
                         if (!pass)
                         {
@@ -260,12 +237,12 @@ public class GameController : MonoBehaviour
                             if (r > 5)
                             {
                                 Debug.Log("Instead of casting Magic, " + this.enemy.name + " attacks!");
-                                this.enemy.PhysicalAttack(this.player);
+                                this.enemy.Attack(this.player, attackAmount);
                             }
                             else
                             {
                                 Debug.Log("Mana restored by 10");
-                                this.enemy.remainingMana += 10;
+                                this.enemy.remainingEnergy += 10;
                             }
                         }
                     }
@@ -284,9 +261,10 @@ public class GameController : MonoBehaviour
                     {
                         // no potions to heal, LAST RESORT ATTACK!
                         Debug.Log(this.enemy.name + " attacks!");
-                        this.enemy.PhysicalAttack(this.player);
+                        this.enemy.Attack(this.player, attackAmount);
                     }
                 }
+                this.enemy.UseEnergy(30);
                 OnEnemyActionUsed(this.player);
             }
         }
@@ -318,6 +296,7 @@ public class GameController : MonoBehaviour
         waiting = false;
         enemyHasAttacked = false;
         playerHasAttacked = false;
+        this.player.GiveEnergy(ENERGY_REGEN_AMT);
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
 
@@ -358,33 +337,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Updates the button text.
-    /// </summary>
-    void UpdateButtonText()
-    {
-        for (int i = 0; i < this.player.inventory._items.Length; i++)
-        {
 
-            if (this.player.inventory._items[i].GetItemSubClass() == "AttackMagic")
-            {
-                this.player.inventory.buttonText[i].text = this.player.inventory._items[i].GetAtkMod() + " DMG";
-            }
-            else if (this.player.inventory._items[i].GetItemSubClass() == "HealPotion"
-                   || this.player.inventory._items[i].GetItemSubClass() == "HealMagic")
-            {
-                this.player.inventory.buttonText[i].text = "+" + this.player.inventory._items[i].GetHealEffect() + " HP";
-            }
-            else if (this.player.inventory._items[i].GetItemSubClass() == "ManaPotion")
-            {
-                this.player.inventory.buttonText[i].text = "+" + this.player.inventory._items[i].GetManaMod() + " MN";
-            }
-            else
-            {
-                this.player.inventory.buttonText[i].text = "";
-            }
-        }
-    }
     /// <summary>
     /// Updates the UI Health/mana bars.
     /// </summary>
@@ -392,14 +345,12 @@ public class GameController : MonoBehaviour
     {
         this.playerHealth.maxValue = this.player.totalHealth;
         this.playerHealth.value = this.player.remainingHealth;
-        this.playerMana.maxValue = this.player.totalMana;
-        this.playerMana.value = this.player.remainingMana;
+        this.playerMana.maxValue = this.player.totalEnergy;
+        this.playerMana.value = this.player.remainingEnergy;
         this.enemyHealth.maxValue = this.enemy.totalHealth;
         this.enemyHealth.value = this.enemy.remainingHealth;
-        this.enemyMana.maxValue = this.enemy.totalMana;
-        this.enemyMana.value = this.enemy.remainingMana;
-
-        //this.attackMeter.gameObject.SetActive(attackBarMoving);
+        this.enemyMana.maxValue = this.enemy.totalEnergy;
+        this.enemyMana.value = this.enemy.remainingEnergy;
     }
 
         bool increasing = true;
@@ -457,8 +408,8 @@ public class GameController : MonoBehaviour
         this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
 
-        this.leftManaText.text = this.player.remainingMana + "/" + this.player.totalMana;
-        this.rightManaText.text = this.enemy.remainingMana + "/" + this.enemy.totalMana;
+        this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
+        this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
 
         this.leftArmorText.text = "AMR: " + this.player.GetTotalArmor();
         this.rightArmorText.text = "AMR: " + this.enemy.GetTotalArmor();
@@ -496,8 +447,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("turn", 0);
         // reset difficulty
         DifficultyLevel.GetInstance().ResetDifficulty();
-        // disable inventory
-        this.player.inventory.gameObject.SetActive(false);
+
         if (!waiting)
         {
             // load death scene
@@ -576,7 +526,6 @@ public class GameController : MonoBehaviour
     {
         UpdateText();
         UpdateScore();
-        UpdateButtonText();
         UpdateBars();
         UpdateAttackBar();
     }

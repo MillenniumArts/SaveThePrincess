@@ -185,6 +185,7 @@ public class PlayerController : PawnController
             DoOnLastTick();
             this.TriggerAnimation("death");
         }
+        playerAnimator.SetInteger("Health", remainingHealth);
     }
     #endregion MonoBehaviour
 }

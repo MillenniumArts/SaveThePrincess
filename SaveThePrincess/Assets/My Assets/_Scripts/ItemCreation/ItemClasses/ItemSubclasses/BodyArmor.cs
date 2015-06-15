@@ -38,10 +38,10 @@ public class BodyArmor : Armor {
 	/// <param name="frontS">Front shoulder.</param>
 	/// <param name="head">Head/Helmet.</param>
 	public void RenderCompleteArmor(GameObject backS, GameObject frontS, GameObject head, BodyArmor body){
-		body.gameObject.GetComponent<SpriteRenderer>().sprite = bodyArmorOptionsSprites[0];
-		backS.GetComponent<SpriteRenderer>().sprite = backShoulderArmorOptionsSprites[0];
-		frontS.GetComponent<SpriteRenderer>().sprite = frontShoulderArmorOptionsSprites[0];
-		head.GetComponent<SpriteRenderer>().sprite = helmetArmorOptionsSprites[0];
+		body.gameObject.GetComponent<SpriteRenderer>().sprite = bodyArmorOptionsSprites[typeIndex];
+		backS.GetComponent<SpriteRenderer>().sprite = backShoulderArmorOptionsSprites[typeIndex];
+		frontS.GetComponent<SpriteRenderer>().sprite = frontShoulderArmorOptionsSprites[typeIndex];
+		head.GetComponent<SpriteRenderer>().sprite = helmetArmorOptionsSprites[typeIndex];
 	}
 	
 	/// <summary>

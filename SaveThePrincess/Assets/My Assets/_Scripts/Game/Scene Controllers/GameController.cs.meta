@@ -1,10 +1,30 @@
 fileFormatVersion: 2
 guid: 87fbb2989f8c2a643bbdab427e2a9fc8
-timeCreated: 1431445826
+timeCreated: 1434330594
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {fileID: 11461770, guid: 35aded749368d0c40a8123a9afe28201, type: 2}
+  - enemy: {fileID: 11439532, guid: d05dd4b155b76c04ea0e1ea27f40962a, type: 2}
+  - gameObj: {instanceID: 0}
+  - gameController: {instanceID: 0}
+  - combatController: {instanceID: 0}
+  - playerHealth: {instanceID: 0}
+  - playerMana: {instanceID: 0}
+  - enemyHealth: {instanceID: 0}
+  - enemyMana: {instanceID: 0}
+  - attackMeter: {instanceID: 0}
+  - leftHealthText: {instanceID: 0}
+  - rightHealthText: {instanceID: 0}
+  - leftManaText: {instanceID: 0}
+  - rightManaText: {instanceID: 0}
+  - leftArmorText: {instanceID: 0}
+  - rightArmorText: {instanceID: 0}
+  - leftDamageText: {instanceID: 0}
+  - rightDamageText: {instanceID: 0}
+  - numEnemiesKilledText: {instanceID: 0}
+  - leftPhysAttack: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

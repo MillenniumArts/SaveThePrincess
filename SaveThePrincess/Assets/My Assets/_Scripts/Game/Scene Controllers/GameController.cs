@@ -10,12 +10,18 @@ public class GameController : MonoBehaviour
     public GameObject gameObj;
     public GameController gameController;
     public CombatController combatController;
-    public bool enemyHasHealed, waiting, scoredThisRound, enemyHasAttacked;
+    public bool enemyHasHealed, 
+                waiting, 
+                scoredThisRound, 
+                enemyHasAttacked,
+                playerAttacking;
     public int score, turn;
     public float MONEY_TRANSFER_PCT = 0.2f, COOLDOWN_LENGTH = 1.75f;
     public float cooldownValue;
 
     public Slider playerHealth, playerMana, enemyHealth, enemyMana;
+    public Slider attackMeter;
+    public float attackAmount;
     private Vector3 prevPos;
 
     // GUI/HUD
@@ -75,7 +81,7 @@ public class GameController : MonoBehaviour
         InventoryInit();
         // combat control start
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
-
+        this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
     }
 
     /// <summary>
@@ -372,6 +378,50 @@ public class GameController : MonoBehaviour
         this.enemyHealth.value = this.enemy.remainingHealth;
         this.enemyMana.maxValue = this.enemy.totalMana;
         this.enemyMana.value = this.enemy.remainingMana;
+  
+    }
+
+        bool increasing = true;
+    public void UpdateAttackBar()
+    {
+        // Set Attack Meter Amount
+        this.attackMeter.maxValue = 100;
+        
+        int counter = 0;
+        if (playerAttacking)
+        {
+        Debug.Log("HEY GUYS");
+            if (increasing && counter % 60 == 0)
+            {
+                this.attackMeter.value++;
+                Debug.Log("INCREASING " + counter);
+            }
+            else if (!increasing && counter % 60 == 0)
+            {
+                this.attackMeter.value--;
+                Debug.Log("DECREASING " + counter);
+            }
+            else
+            {
+                Debug.Log("NO " + counter);
+                counter++;
+                if (counter >= 60)
+                    counter = 0;   
+            }
+
+            // limit the values
+            if (this.attackMeter.value >= this.attackMeter.maxValue)
+            {
+                Debug.Log("OKAY DONE");
+                //this.attackMeter.value = this.attackMeter.maxValue;
+                increasing = false;
+            }
+            else if (this.attackMeter.value <= 0 )
+            {
+                this.attackMeter.value = 0;
+                increasing = true;
+            }            
+        }
     }
 
     // increment counter and set local storage
@@ -513,6 +563,7 @@ public class GameController : MonoBehaviour
         UpdateScore();
         UpdateButtonText();
         UpdateBars();
+        UpdateAttackBar();
     }
 
     // Update is called once per frame

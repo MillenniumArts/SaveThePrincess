@@ -111,6 +111,7 @@ public class BaseEnemyController : PawnController {
 		if (IsDead ()) {
 			this.TriggerAnimation("death");
 		}
+        playerAnimator.SetInteger("Health", remainingHealth);
 	}
 	#endregion MonoBehaviour
 

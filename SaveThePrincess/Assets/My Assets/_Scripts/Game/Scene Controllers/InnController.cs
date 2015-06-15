@@ -52,8 +52,8 @@ public class InnController : MonoBehaviour {
 			if (player.PurchaseItem (prices [index])) {
 				// effects administered here
 				// USING SIMPLE MATH HERE FOR NOW, DOLLAR PER POINT OF MANA/HEALTH
-				player.GiveMana (prices [index]);
-				player.HealForAmount (prices [index]);
+				player.GiveMana (prices [index]*2);
+				player.HealForAmount (prices [index]*2);
 			}
 		} else {
 			Debug.Log ("You already have full stats! Go fight something!");

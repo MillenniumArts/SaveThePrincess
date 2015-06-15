@@ -15,14 +15,24 @@ public class CreateWeaponCombination : MonoBehaviour {
 		if(swapNow){
 			if(dagger){
 				IsDagger();
+                sprites[5].sortingLayerName = "Weapon1";
+                sprites[6].sortingLayerName = "Weapon1";
 			}else if(hammer){
 				IsHammer();
+                sprites[5].sortingLayerName = "Weapon2";
+                sprites[6].sortingLayerName = "Weapon2";
 			}else if(axe){
 				IsAxe();
+                sprites[5].sortingLayerName = "Weapon2";
+                sprites[6].sortingLayerName = "Weapon2";
 			}else if(sword){
 				IsSword();
+                sprites[5].sortingLayerName = "Weapon1";
+                sprites[6].sortingLayerName = "Weapon1";
 			}else if(spear){
 				IsSpear();
+                sprites[5].sortingLayerName = "Weapon2";
+                sprites[6].sortingLayerName = "Weapon2";
 			}else{
 				IsOff();
 			}

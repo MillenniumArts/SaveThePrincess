@@ -54,24 +54,40 @@ public class Armor : Item {
 		typeIndex = a.GetTypeIndex();
 	}
 
-	
+	/// <summary>
+	/// Gets the body sprite of the armor.
+	/// </summary>
+	/// <returns>Body armor sprite.</returns>
 	public Sprite GetArmorSprite(){
 		return bodyArmorOptionsSprites[typeIndex];
 	}
-
+    /// <summary>
+    /// Gets the helmet sprite of the armor.
+    /// </summary>
+    /// <returns>Helmet sprite.</returns>
 	public Sprite GetHelmetSprite(){
 		return helmetArmorOptionsSprites[typeIndex];
 	}
-
+    /// <summary>
+    /// Gets the front shoulder sprite of the armor.
+    /// </summary>
+    /// <returns>Front shoulder sprite.</returns>
 	public Sprite GetFrontShoulderSprite(){
 		return frontShoulderArmorOptionsSprites[typeIndex];
 	}
-
+    /// <summary>
+    /// Gets the back shoulder sprite of the armor.
+    /// </summary>
+    /// <returns>Back shoulder sprite.</returns>
 	public Sprite GetBackShoulderSprite(){
 		return backShoulderArmorOptionsSprites[typeIndex];
 	}
 
-		
+	/// <summary>
+	/// Swaps the sprites from an instantiated armor to another armor's sprite array(at index 0).
+    /// Currently used to move all the armor sprites to the sprite array of a ArmorBlank prefab.
+	/// </summary>
+	/// <param name="a">Armor</param>
 	public void SwapArmorSprites(Armor a){
 		bodyArmorOptionsSprites[0] = a.GetArmorSprite();
 		helmetArmorOptionsSprites[0] = a.GetHelmetSprite();

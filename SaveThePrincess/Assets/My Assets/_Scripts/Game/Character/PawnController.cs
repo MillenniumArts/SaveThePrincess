@@ -366,16 +366,16 @@ public class PawnController : MonoBehaviour
             case "victory":
                 if (this.remainingHealth / this.totalHealth > 0.75)
                 {
-                    this.playerAnimator.Play("human_winHigh");
+                    this.playerAnimator.SetTrigger("human_winHigh");
                 }
                 else if (this.remainingHealth / this.totalHealth < 0.75
                       && this.remainingHealth / this.totalHealth < 0.75)
                 {
-                    this.playerAnimator.Play("human_winMid");
+                    this.playerAnimator.SetTrigger("human_winMid");
                 }
                 else if (this.remainingHealth / this.totalHealth < 0.25)
                 {
-                    this.playerAnimator.Play("human_winLow");
+                    this.playerAnimator.SetTrigger("human_winLow");
                 }
                 break;
         }
@@ -399,22 +399,27 @@ public class PawnController : MonoBehaviour
     protected void SetArmor(string name)
     {
         GameObject body = playerBody.gameObject;	// Gets a reference for the body to see if there..
-        if (body.GetComponentInChildren<Armor>() == true)
-        {				// If there is Armor on the body..
+        if (body.GetComponentInChildren<Armor>() == true){				// If there is Armor on the body..
             Destroy(body.GetComponentInChildren<Armor>().gameObject);	// .. Destroy it.
         }
-        this.playerArmor = ItemFactory.instance.CreateArmor(playerBody, "BlankArmor");
+        this.playerArmor = ItemFactory.instance.CreateArmor(playerBody, name);	// Spawn specified Armor.
         this.playerArmor.transform.parent = playerBody;							// Make it the child of the body.
-        this.playerArmor.transform.localScale = new Vector3(1, 1, 1);				// Fix the scale.
-        BodyArmor _a = ItemFactory.instance.CreateArmor(playerBody, name);		// Spawn specified Armor.
-        this.playerArmor.SwapTo(_a);											// Swap new armor stats to blank player armor.
-        this.playerArmor.SwapArmorSprites(_a);									// Swap the sprites of the new armor to the player's armor.
-        Destroy(_a.gameObject);
+        this.playerArmor.transform.localScale = new Vector3(1, 1, 1);			// Fix the scale.
         if (spawnWithArmor)
         {
-            // Renders armor.
-            this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+            // Calls coroutine to that renders the armor.  Coroutine is the method below this one.
+            StartCoroutine("RenderArmorAtEoF");
         }
+    }
+    /// <summary>
+    /// Wait until the end of the frame before rendering the armor.
+    /// </summary>
+    /// <returns>WaitForEndOfFrame()</returns>
+    protected IEnumerator RenderArmorAtEoF()
+    {
+        yield return new WaitForEndOfFrame();
+        // Renders the armor.
+        this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
     }
 
     /// <summary>
@@ -443,7 +448,7 @@ public class PawnController : MonoBehaviour
     /// </summary>
     protected virtual void PerformMagicBehaviour()
     {
-        TriggerAnimation("AtkMagic");
+        TriggerAnimation("AttackMagic");
     }
     /// <summary>
     /// Performs the heal magic behaviour.
@@ -567,7 +572,16 @@ public class PawnController : MonoBehaviour
 
         if (spawnWithArmor)
         {
-            CallSetArmor("HeavyArmor");
+            int randomNum = Random.Range(0, 3);
+            switch (randomNum)
+            {
+                case 0: CallSetArmor("HeavyArmor");
+                    break;
+                case 1: CallSetArmor("MediumArmor");
+                    break;
+                case 2: CallSetArmor("LightArmor");
+                    break;
+            }
         }
         else
         {
@@ -645,6 +659,5 @@ public class PawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 }

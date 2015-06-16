@@ -9,7 +9,10 @@ public class MerchantController : MonoBehaviour {
     private PlayerController player;
 
     // items for sale 
-    public Dictionary<string,int> items;
+    public int[] items;
+    
+    // prices of items
+    public int[] prices;
 
     //number of items for sale
     public int numItemsForSale;
@@ -28,8 +31,19 @@ public class MerchantController : MonoBehaviour {
     public Text remainingBalanceText;
 
     // buttons for increase/decrease quantity
+    public Button increaseOne, 
+                  decreaseOne, 
+                  increaseTwo, 
+                  decreaseTwo, 
+                  increaseThree, 
+                  decreaseThree;
 
     // text to display amount of each item
+    public Text quantityOneText, 
+                quantityTwoText, 
+                quantityThreeText;
+
+    public int q_1, q_2, q_3;
 
     // purchase button
     public Button purchaseButton;
@@ -43,16 +57,14 @@ public class MerchantController : MonoBehaviour {
         this.player = FindObjectOfType<PlayerController>();
 
         // set up items list
-        this.items = new Dictionary<string, int>();
+        this.items = new int[numItemsForSale];
+        this.prices = new int[numItemsForSale];
 
-        // add Items to Dictionary 
-        this.items.Add("Apple", 0);
-        this.items.Add("Bread", 0);
-        this.items.Add("Cheese", 0);
-        this.items.Add("Large Health Potion", 0);
-        this.items.Add("Small Health Potion", 0);
-        this.items.Add("Large Energy Potion", 0);
-        this.items.Add("Small Energy Potion", 0);
+        // add Item counts to list and set prices
+        for (int i=0; i < items.Length; i++){
+            items[i] = 0;
+            prices[i] = 2 * i;
+        }
 	}
     /// <summary>
     /// Calculate Shop balances here to be updated
@@ -69,11 +81,29 @@ public class MerchantController : MonoBehaviour {
         this.remainingBalance = this.playerBalance - this.purchaseBalance;
     }
 
+    public void IncreaseAmount(int index)
+    {
+        //if player can afford another and has enough room in inventory
+        items[index]++;
+    }
+
+    public void DecreaseAmount(int index) {
+
+        if (items[index] - 1 <= 0)
+            items[index] = 0;
+        else
+            items[index]--;
+    }
+
     void UpdateText()
     {
         this.playerBalanceText.text = this.playerBalance.ToString();
         this.remainingBalanceText.text = this.remainingBalance.ToString();
         this.purchaseBalanceText.text = this.purchaseBalance.ToString();
+        
+        this.quantityOneText.text = this.items[0].ToString();
+        this.quantityTwoText.text = this.items[1].ToString();
+        this.quantityThreeText.text = this.items[2].ToString();
     }
 
 	void Update () {

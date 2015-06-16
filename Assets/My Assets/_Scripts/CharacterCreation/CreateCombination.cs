@@ -82,9 +82,9 @@ public class CreateCombination : MonoBehaviour {
 
 		// initiate all sprites
 		string[] temp = new string[numOfElements];
-		for(int i = 0; i < numOfElements; i++){
+		/*for(int i = 0; i < numOfElements; i++){
 			temp[i] = types[3];
-		}
+		}*/
 		SetCurrentCombo(temp);
 	}
 	

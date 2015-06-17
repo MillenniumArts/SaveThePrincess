@@ -66,8 +66,15 @@ public class MerchantController : MonoBehaviour {
             prices[i] = 2 * i;
         }
 	}
+
+    public void LeaveMerchant()
+    {
+        DontDestroyOnLoad(this.player);
+        Application.LoadLevel("Town_LVP");
+    }
+
     /// <summary>
-    /// Calculate Shop balances here to be updated
+    /// Calculate Shop balances to be updated on tick.
     /// </summary>
     void CalculateShop()
     {
@@ -75,7 +82,6 @@ public class MerchantController : MonoBehaviour {
         this.playerBalance = this.player.dollarBalance;
         
         // get item balance
-        //this.purchaseBalance = 
 
         // calculate player's remaining balance
         this.remainingBalance = this.playerBalance - this.purchaseBalance;

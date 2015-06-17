@@ -72,7 +72,7 @@ public class PlayerController : PawnController
     }
 
     /// <summary>
-    /// Purchases the item.
+    /// Purchases the item and returns true if player has enough money, returns false if not.
     /// </summary>
     /// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
     /// <param name="itemCost">Item cost.</param>

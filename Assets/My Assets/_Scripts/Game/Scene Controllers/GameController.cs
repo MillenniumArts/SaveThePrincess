@@ -588,7 +588,7 @@ public class GameController : MonoBehaviour
             DoEnemyAction();
             if (someoneIsDead)
             {
-                StartCooldown(COOLDOWN_LENGTH);
+                StartCooldown(COOLDOWN_LENGTH*1.5f);
             }
         }
     }

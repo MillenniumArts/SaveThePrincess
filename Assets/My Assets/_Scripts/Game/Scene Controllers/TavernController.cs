@@ -80,7 +80,6 @@ public class TavernController : MonoBehaviour
         {
             if (player.PurchaseItem(prices[index]))
             {
-                this.player.GiveEnergy(stats[index]);
                 this.player.HealForAmount(stats[index]);
             }
         }

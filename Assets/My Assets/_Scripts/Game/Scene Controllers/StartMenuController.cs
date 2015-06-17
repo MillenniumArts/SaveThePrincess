@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -21,6 +21,11 @@ public class StartMenuController : MonoBehaviour {
 	public void StartGame(){
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
+
+    public void HowToPlay()
+    {
+        Application.LoadLevel("HowToPlay_LVP");
+    }
 
 	public void ResetHiScore(){
 		PlayerPrefs.SetInt ("hiscore", 0);

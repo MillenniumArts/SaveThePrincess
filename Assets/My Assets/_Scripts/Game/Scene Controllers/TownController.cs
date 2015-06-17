@@ -10,6 +10,7 @@ public class TownController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.FindObjectOfType<PlayerController>();
+        // reset player energy any time they enter
 	}
 
 	public void GoToBattle(){

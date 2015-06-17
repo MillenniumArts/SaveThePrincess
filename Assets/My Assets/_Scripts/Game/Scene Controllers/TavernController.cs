@@ -2,15 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class InnController : MonoBehaviour {
+public class TavernController : MonoBehaviour {
 
 	public PlayerController player;
 	public int[] prices, stats;
-	public Button[] sleepButtons;
+
+	public Button[] foodButtons;
+    public Button sleepForNight;
 	public Text[] buttonText;
 	public Text healthText, manaText, playerBalance;
-	protected int BASE_ROOM_COST;
-	private Vector3 prevPos;
+	int BASE_ROOM_COST;
+	Vector3 prevPos;
 
 	// Use this for initialization
 	void Start () {

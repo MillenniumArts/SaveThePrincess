@@ -26,7 +26,7 @@ public class TownController : MonoBehaviour {
 
 	public void GoToInn(){
 		DontDestroyOnLoad (this.player);
-		Application.LoadLevel ("Inn_LVP");
+		Application.LoadLevel ("Tavern_LVP");
 
 
 	}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -7,7 +7,7 @@ public class DeathController : MonoBehaviour {
 	public Button restartButton = null; 	// assign in editor
 	public PlayerController player;
 
-	public Text healthText, magicText, armorText, damageText, moneyText, hiScoreText;
+	public Text healthText, energyText, armorText, damageText, moneyText, scoreText;
 
 	// Use this for initialization
 	void Start () {
@@ -21,9 +21,9 @@ public class DeathController : MonoBehaviour {
 	
 		this.healthText.text = "";
 		this.armorText.text = "";
-		this.magicText.text = "";
+		this.energyText.text = "";
 		this.damageText.text = "";
-		this.hiScoreText.text = "";
+		this.scoreText.text = "";
 		this.moneyText.text = "";
 
 		UpdateText ();
@@ -33,7 +33,7 @@ public class DeathController : MonoBehaviour {
 	void UpdateText(){
 		this.healthText.text = "HEALTH: " + this.player.totalHealth;
 		
-		this.magicText.text = "MAGIC: " + this.player.magicalDamage;
+		this.energyText.text = "ENERGY:: " + this.player.totalEnergy;
 		
 		this.armorText.text = "ARMOR: " + this.player.armor;
 		
@@ -41,7 +41,7 @@ public class DeathController : MonoBehaviour {
 
 		this.moneyText.text = "MONEY: " + this.player.dollarBalance;
 		
-		this.hiScoreText.text = "HI SCORE: " + PlayerPrefs.GetInt("hiscore");
+		this.scoreText.text = "SCORE: " + PlayerPrefs.GetInt("score");
 	}
 
 	// Update is called once per frame

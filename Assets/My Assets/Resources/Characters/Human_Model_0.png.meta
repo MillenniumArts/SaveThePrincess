@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: c0ae52bf136729642ac48c594d57e2ad
+timeCreated: 1434482544
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Shoulder_1
+    21300002: Head
+    21300004: Shoulder_2
+    21300006: Hand_1
+    21300008: Body
+    21300010: Hand_2
+    21300012: Thigh_1
+    21300014: Thigh_2
+    21300016: Calf_1
+    21300018: Calf_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Shoulder_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 394
+        width: 57
+        height: 82
+      alignment: 9
+      pivot: {x: .423840761, y: .852933943}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 379
+        width: 101
+        height: 114
+      alignment: 9
+      pivot: {x: .507163465, y: .233443141}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shoulder_2
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 392
+        width: 56
+        height: 81
+      alignment: 9
+      pivot: {x: .396640778, y: .857291162}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 245
+        width: 52
+        height: 93
+      alignment: 9
+      pivot: {x: .597395957, y: .826748431}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Body
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 197
+        width: 113
+        height: 149
+      alignment: 9
+      pivot: {x: .40395847, y: .286344886}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_2
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 245
+        width: 52
+        height: 86
+      alignment: 9
+      pivot: {x: .583482623, y: .802866757}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 93
+        width: 76
+        height: 98
+      alignment: 9
+      pivot: {x: .414321005, y: .787929296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh_2
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 94
+        width: 72
+        height: 98
+      alignment: 9
+      pivot: {x: .349268168, y: .787929296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 13
+        width: 65
+        height: 63
+      alignment: 9
+      pivot: {x: .438675702, y: .827540576}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf_2
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 15
+        width: 60
+        height: 68
+      alignment: 9
+      pivot: {x: .403531909, y: .840477228}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

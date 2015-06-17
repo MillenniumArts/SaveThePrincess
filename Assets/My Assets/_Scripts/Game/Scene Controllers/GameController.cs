@@ -496,6 +496,8 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.player);
         if (!waiting)
         {
+            // restore player mana after battle
+            this.player.remainingEnergy = this.player.totalEnergy;
             // reload battle scene
             Application.LoadLevel("Battle_LVP");
         }
@@ -516,6 +518,8 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.player);
         if (!waiting)
         {
+            // restore player mana after battle
+            this.player.remainingEnergy = this.player.totalEnergy;
             Application.LoadLevel("Town_LVP");
         }
     }
@@ -554,8 +558,12 @@ public class GameController : MonoBehaviour
         }
         else if (this.enemy.IsDead())
         {
+            // CHECK WHERE TO GO NEXT!
+            
             // enemy dead
             GoToTown();
+
+
         }        
     }
 

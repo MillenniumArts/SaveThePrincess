@@ -10,6 +10,7 @@ public class TownController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.FindObjectOfType<PlayerController>();
+        // reset player energy any time they enter
 	}
 
 	public void GoToBattle(){
@@ -26,7 +27,7 @@ public class TownController : MonoBehaviour {
 
 	public void GoToInn(){
 		DontDestroyOnLoad (this.player);
-		Application.LoadLevel ("Inn_LVP");
+		Application.LoadLevel ("Tavern_LVP");
 
 
 	}

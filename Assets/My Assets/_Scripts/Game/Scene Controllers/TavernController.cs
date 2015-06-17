@@ -40,7 +40,7 @@ public class TavernController : MonoBehaviour
         stats = new int[NUM_MEALS];
 
         //get total health missing on entry
-        totalStatsMissing = (this.player.totalHealth - this.player.remainingHealth) + (this.player.totalEnergy - this.player.remainingEnergy);
+        totalStatsMissing = (this.player.totalHealth - this.player.remainingHealth);
 
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)
@@ -86,6 +86,7 @@ public class TavernController : MonoBehaviour
         }
         else
         {
+            Handheld.Vibrate();
             Debug.Log("You already have full stats! Go fight something!");
         }
     }
@@ -103,6 +104,7 @@ public class TavernController : MonoBehaviour
         }
         else
         {
+            Handheld.Vibrate();
             Debug.Log("You already have full stats! Go fight something!");
         }
     }

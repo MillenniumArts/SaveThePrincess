@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f8b42b6a122cfce4284354e2d8d1b413
-timeCreated: 1434583952
+guid: a9d5e17e79fab614e87e92dbb8c6b03e
+timeCreated: 1434587634
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -29,7 +29,7 @@ TextureImporter:
   cubemapConvolutionSteps: 8
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -65,10 +65,10 @@ TextureImporter:
     - name: food_sprite_sheet_1
       rect:
         serializedVersion: 2
-        x: 1570
-        y: 748
-        width: 955
-        height: 653
+        x: 1567
+        y: 752
+        width: 972
+        height: 680
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -165,6 +165,8 @@ public class PawnController : MonoBehaviour
         {
             // only amount of damage over armor amount is true damage
             int trueDamage = this.physicalDamageToTake - this.armor;
+            if (trueDamage < 0)
+                trueDamage = 0;
             int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
 
             //amount of damage to take is the equivalent of:

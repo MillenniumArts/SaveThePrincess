@@ -474,9 +474,9 @@ public class PawnController : MonoBehaviour
         return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
-    public int GetTotalStats()
+    public int GetTotalHeatlhEnergyStats()
     {
-        int total = GetTotalArmor() + GetTotalDamage() + totalEnergy + totalHealth;
+        int total = totalEnergy + totalHealth;
         return total;
     }
 

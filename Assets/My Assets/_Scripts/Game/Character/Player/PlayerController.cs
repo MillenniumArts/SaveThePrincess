@@ -96,7 +96,7 @@ public class PlayerController : PawnController
     /// <param name="w">The weapon to be transfered.</param>
     public void TransferPurchasedWeapon(Item w)
     {
-        this.physicalDamage = physicalDamage - damageMod;
+        this.physicalDamage -= damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
         this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
         this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
@@ -110,7 +110,7 @@ public class PlayerController : PawnController
             playerAnimator.SetBool("IsSpearAttack", false);
         }
         this.damageMod = w.GetAtkMod();
-        this.physicalDamage = physicalDamage + damageMod;
+        this.physicalDamage += damageMod;
     }
 
     /// <summary>

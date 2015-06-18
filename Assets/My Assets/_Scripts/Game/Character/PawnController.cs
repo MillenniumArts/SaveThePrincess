@@ -163,9 +163,15 @@ public class PawnController : MonoBehaviour
         int defecit;
         if (physicalDamageToTake > 0)
         {
-            // armor reduction
-             defecit = (physicalDamageToTake - Mathf.FloorToInt(this.armor * DMG_REDUCTION_FACTOR));
+            // only amount of damage over armor amount is true damage
+            int trueDamage = this.physicalDamageToTake - this.armor;
+            int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
 
+            //amount of damage to take is the equivalent of:
+                // 50% of damage for each 'matched' point of armor
+                // 100% of damage for any left over points of armor
+            defecit = trueDamage + reducedDamage;            
+            
             // ensure min damage is always applied
             if (defecit < BASE_DMG)
                 defecit = BASE_DMG;

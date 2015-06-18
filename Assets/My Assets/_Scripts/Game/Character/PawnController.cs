@@ -463,7 +463,7 @@ public class PawnController : MonoBehaviour
     /// <returns></returns>
     public int GetTotalArmor()
     {
-        return this.armor + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
+        return this.armor;// + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
     }
     /// <summary>
     /// Gets the total damage.
@@ -471,7 +471,7 @@ public class PawnController : MonoBehaviour
     /// <returns>The total damage.</returns>
     public int GetTotalDamage()
     {
-        return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
+        return this.physicalDamage;// + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
     public int GetTotalHeatlhEnergyStats()

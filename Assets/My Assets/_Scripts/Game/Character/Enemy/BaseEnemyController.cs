@@ -110,9 +110,7 @@ public class BaseEnemyController : PawnController {
     }
 
 	void Update(){
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
 	}
 	#endregion MonoBehaviour
-
-
 }

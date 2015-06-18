@@ -515,6 +515,15 @@ public class PawnController : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets the animation parameter that determines if the idle animation is "tired" or not.
+    /// </summary>
+    protected void UpdateHealth()
+    {
+        float healthPercent = (float)remainingHealth / (float)totalHealth;
+        playerAnimator.SetFloat("Health", healthPercent);
+    }
+
+    /// <summary>
     /// Performs the potion behaviour.
     /// </summary>
     protected virtual void PerformPotionBehaviour()

@@ -62,15 +62,15 @@ public class BaseEnemyController : PawnController {
     private void CreateStats()
     {
         int totalHealthEnergy = player.GetTotalHeatlhEnergyStats();
-        healthEnergy = totalHealthEnergy + Mathf.FloorToInt((totalHealthEnergy * Random.Range(-0.2f, 0.1f)));
-        totalHealth = Mathf.FloorToInt(healthEnergy * Random.Range(0.45f, 0.65f));
+        healthEnergy = totalHealthEnergy + Mathf.FloorToInt((totalHealthEnergy * Random.Range(-0.2f, 0.2f)));
+        totalHealth = Mathf.FloorToInt(healthEnergy * Random.Range(0.45f, 0.75f));
         totalEnergy = healthEnergy - totalHealth;
-        physicalDamage = player.GetTotalArmor() + Mathf.FloorToInt(player.GetTotalArmor() * Random.Range(-0.2f, 0.1f));
-        armor = player.GetTotalDamage() + Mathf.FloorToInt(player.GetTotalDamage() * Random.Range(-0.2f, 0.1f));
+        physicalDamage = (int)(player.GetTotalArmor() + player.GetTotalArmor() * Random.Range(-0.2f, 0.1f));
+        armor = (int)(player.GetTotalDamage() + player.GetTotalDamage() * Random.Range(-0.2f, 0.1f));
 
-        Debug.Log( " EnemyTotalHealth: " + totalHealth + 
+        Debug.Log(" EnemyTotalHealth: " + totalHealth +
             " EnemyTotalEnergy: " + totalEnergy +
-            " EnemyPhysicalDamaga: " + physicalDamage + 
+            " EnemyPhysicalDamaga: " + physicalDamage +
             " EnemyArmor: " + armor);
     }
 

@@ -161,23 +161,31 @@ public class PawnController : MonoBehaviour
     public void TakeDamage()
     {
         int defecit;
-        if (physicalDamageToTake > 0)
+        if (this.physicalDamageToTake > 0)
         {
+            if (this.physicalDamageToTake > this.armor) // if true damage will apply after armor
+            {
             // only amount of damage over armor amount is true damage
-            int trueDamage = this.physicalDamageToTake - this.armor;
-            if (trueDamage < 0)
-                trueDamage = 0;
-            int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
-
+                int trueDamage = this.physicalDamageToTake - this.armor;
+                if (trueDamage < 0)
+                    trueDamage = 0;
+                int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
             //amount of damage to take is the equivalent of:
                 // 50% of damage for each 'matched' point of armor
                 // 100% of damage for any left over points of armor
-            defecit = trueDamage + reducedDamage;            
+            defecit = trueDamage + reducedDamage;
+            }
+            else
+            {
+                defecit = Mathf.FloorToInt(this.physicalDamage / 2);
+            }
+
             
             // ensure min damage is always applied
             if (defecit < BASE_DMG)
                 defecit = BASE_DMG;
 
+            //handle animation for damage
             if (defecit > Mathf.FloorToInt(this.totalHealth * 0.1f))
             {		// if damage is more than 10% of player health
                 if (this.remainingHealth - defecit > 0)

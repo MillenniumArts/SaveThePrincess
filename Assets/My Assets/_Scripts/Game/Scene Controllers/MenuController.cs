@@ -59,7 +59,7 @@ public class MenuController : MonoBehaviour {
 		// value per credit:
 		this.healthInc = 10;
 		this.damageInc = 5;
-		this.armorInc = 2;
+		this.armorInc = 5;
         this.energyInc = 10;
 
 		// base stats

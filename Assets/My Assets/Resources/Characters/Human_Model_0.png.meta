@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: c1a36e6b46a26e14f98fc0f72d7888d7
+timeCreated: 1434592630
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Hair
+    21300002: Head
+    21300004: Face
+    21300006: Shoulder_Back
+    21300008: Hand_Back
+    21300010: Body
+    21300012: Shoulder_Front
+    21300014: Thigh_Back
+    21300016: Hand_Front
+    21300018: Calf_Back
+    21300020: Calf_Front
+    21300022: Thigh_Front
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Hair
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 427
+        width: 127
+        height: 98
+      alignment: 9
+      pivot: {x: .698178113, y: .153847203}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 415
+        width: 101
+        height: 111
+      alignment: 9
+      pivot: {x: .556184232, y: .211965755}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Face
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 438
+        width: 103
+        height: 75
+      alignment: 9
+      pivot: {x: .808100402, y: .733447254}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shoulder_Back
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 304
+        width: 57
+        height: 82
+      alignment: 9
+      pivot: {x: .421710372, y: .847356677}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_Back
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 248
+        width: 52
+        height: 93
+      alignment: 9
+      pivot: {x: .583066821, y: .84502846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Body
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 217
+        width: 113
+        height: 149
+      alignment: 9
+      pivot: {x: .423142433, y: .279978305}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shoulder_Front
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 311
+        width: 56
+        height: 81
+      alignment: 9
+      pivot: {x: .526060939, y: .856667995}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh_Back
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 136
+        width: 70
+        height: 91
+      alignment: 9
+      pivot: {x: .464552194, y: .778128505}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_Front
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 183
+        width: 52
+        height: 86
+      alignment: 9
+      pivot: {x: .449999988, y: .980000019}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf_Back
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 28
+        width: 65
+        height: 63
+      alignment: 9
+      pivot: {x: .516478539, y: .904630125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf_Front
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 40
+        width: 60
+        height: 68
+      alignment: 9
+      pivot: {x: .425559729, y: .843009055}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh_Front
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 78
+        width: 72
+        height: 98
+      alignment: 9
+      pivot: {x: .362147868, y: .778517902}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

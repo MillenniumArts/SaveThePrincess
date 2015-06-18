@@ -72,7 +72,7 @@ public class PlayerController : PawnController
     }
 
     /// <summary>
-    /// Purchases the item.
+    /// Purchases the item and returns true if player has enough money, returns false if not.
     /// </summary>
     /// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
     /// <param name="itemCost">Item cost.</param>
@@ -101,6 +101,14 @@ public class PlayerController : PawnController
         this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
         this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
+        if (playerWeapon.GetItemSubClass() == "Spear")
+        {
+            playerAnimator.SetBool("IsSpearAttack", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsSpearAttack", false);
+        }
         this.damageMod = w.GetAtkMod();
         this.physicalDamage = physicalDamage + damageMod;
     }
@@ -236,7 +244,7 @@ public class PlayerController : PawnController
         {
             DoOnLastTick();
         }
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
     }
     #endregion MonoBehaviour
 }

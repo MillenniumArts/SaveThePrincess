@@ -11,14 +11,15 @@ public class MenuController : MonoBehaviour {
 
 	[SerializeField]
 	private Button healthUp = null, 
-				   healthDown= null,
+				   healthDown = null,
 				   damageUp = null,
 				   damageDown = null,
 				   armorUp = null, 
 				   armorDown= null,
                    energyUp= null,
                    energyDown = null, 
-				   confirm = null;
+				   confirm = null,
+                   backButton ;
 
 	private int baseHealth, baseArmor, baseDamage, baseEnergy, 
 				healthInc, armorInc, damageInc, energyInc,
@@ -174,6 +175,11 @@ public class MenuController : MonoBehaviour {
 		});
 
 	}
+
+    public void GoBack()
+    {
+        Application.LoadLevel("StartMenu_LVP");
+    }
 
 	void UpdateText(){
 		this.healthAmt.text = this.newHealth.ToString();

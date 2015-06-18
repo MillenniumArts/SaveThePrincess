@@ -79,7 +79,7 @@ public class BaseEnemyController : PawnController {
     }
 
 	private void EnemyStart(){
-		this.dollarBalance = 25;
+		this.dollarBalance = 35;
         CreateStats();
         remainingEnergy = totalEnergy;
         remainingHealth = totalHealth;
@@ -89,7 +89,7 @@ public class BaseEnemyController : PawnController {
 	/// Drops a random amount of money after enemy dies.
 	/// </summary>
 	public int DropMoney(){
-		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) , this.dollarBalance);
+		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) + 1 , this.dollarBalance);
 	}
 
 	#endregion Private functions
@@ -110,9 +110,7 @@ public class BaseEnemyController : PawnController {
     }
 
 	void Update(){
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
 	}
 	#endregion MonoBehaviour
-
-
 }

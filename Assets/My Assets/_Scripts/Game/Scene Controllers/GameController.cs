@@ -132,23 +132,50 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// Player Uses the item in inventory specified at index.
+    /// Player Uses the item in inventory specified at index, ends turn.
     /// </summary>
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
-        /*if (combatController.currentState == CombatController.BattleStates.PLAYERCHOICE)
-        {
-            //bool pass = this.player.UseItem(index);
-            if (pass)
-            {
-                // start animation
+        bool pass = false;
+        switch (index){
+            case 0:
+                pass = this.player.inventory.EatFood("Apple");
+                break;
+            case 1:
+                this.player.inventory.EatFood("Bread");
                 combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                waiting = true;
-                StartCooldown(waiting, COOLDOWN_LENGTH);
-                //this.player.inventory._items[index].used = true;
-            }
-        }*/
+                StartCooldown(COOLDOWN_LENGTH);
+                break;
+            case 2:
+                this.player.inventory.EatFood("Cheese");
+                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+                StartCooldown(COOLDOWN_LENGTH);
+                break;
+            case 3:
+                pass = this.player.inventory.UsePotion("Health");
+                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+                StartCooldown(COOLDOWN_LENGTH);
+                break;
+            case 4:
+                pass = this.player.inventory.UsePotion("Energy");
+                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+                StartCooldown(COOLDOWN_LENGTH);
+                break;
+            case 5:
+                this.player.inventory.UseCampKit();
+                break;
+            default:
+                break;
+
+                if (pass)
+                {
+                    combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+                    StartCooldown(COOLDOWN_LENGTH);
+
+                }
+
+        }
     }
 
     /// <summary>
@@ -562,7 +589,6 @@ public class GameController : MonoBehaviour
             
             // enemy dead
             GoToTown();
-
 
         }        
     }

@@ -278,9 +278,9 @@ public class PawnController : MonoBehaviour
         }
     }
     /// <summary>
-    /// Heals for percent.
+    /// Heals for percent specified by a float (0.01f - 0.99f)
     /// </summary>
-    /// <param name="percent">Percent (from 0.01f to 0.99).</param>
+    /// <param name="percent">Percent (from 0.01f to 0.99f).</param>
     public virtual void HealForPercent(float percent)
     {
         this.PerformHealMagicBehaviour();
@@ -294,6 +294,30 @@ public class PawnController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Heals for percent specified by Integer value (must be less than 100)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void HealForPercent(int percent)
+    {
+        this.PerformHealMagicBehaviour();
+        
+        // set to float to use
+        float newPercent = percent/ 100;
+        
+        // can't be over 100% heal
+        if (newPercent > 1)
+            newPercent = 1;
+
+        if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * newPercent) > this.totalHealth)
+        {
+            this.remainingHealth = this.totalHealth;
+        }
+        else
+        {
+            this.remainingHealth += Mathf.FloorToInt(this.totalHealth * newPercent);
+        }
+    }
 
     /// <summary>
     /// Determines whether this instance is dead.

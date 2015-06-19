@@ -4,60 +4,148 @@ using System.Collections;
 public class PlayerInventory : MonoBehaviour
 {
     #region variables
+    #region Player
+    private PlayerController _player;
+
+    public PlayerController Player
+    {
+        get { return _player; }
+        set { _player = value; }
+    }
+    
+    #endregion Player
+
+    #region inventoryLevel
+    /// <summary>
+    /// Inventory Level, used for resizing
+    /// </summary>
+    [SerializeField]
+    private int _inventoryLevel;
+
+    public int InventoryLevel
+    {
+        get { return _inventoryLevel; }
+        set { _inventoryLevel = value; }
+    }
+    #endregion inventoryLevel
+
+    #region Apple
     /// <summary>
     /// Apples.
     /// </summary>
     [SerializeField]
-    private int _apples;
+    private int _appleCount;
     public int Apples
     {
-        get { return _apples; }
-        set { _apples = value; }
+        get { return _appleCount; }
+        set { _appleCount = value; }
     }
+    /// <summary>
+    /// Percent of Player's health healed by Apple
+    /// </summary>
+    private int _applePercent;
+
+    public int ApplePercent
+    {
+        get { return _applePercent; }
+        set { _applePercent = value; }
+    }
+    #endregion Apple
+
+    #region Bread
     /// <summary>
     /// Bread.
     /// </summary>
     [SerializeField]
-    private int _bread;
+    private int _breadCount;
 
     public int Bread
     {
-        get { return _bread; }
-        set { _bread = value; }
+        get { return _breadCount; }
+        set { _breadCount = value; }
     }
+    /// <summary>
+    /// Percent of health healed by bread
+    /// </summary>
+    private int _breadPercent;
+
+    public int BreadPercent
+    {
+        get { return _breadPercent; }
+        set { _breadPercent = value; }
+    }
+    #endregion Bread
+
+    #region Cheese
     /// <summary>
     /// Cheese.
     /// </summary>
     [SerializeField]
-    private int _cheese;
+    private int _cheeseCount;
 
     public int Cheese
     {
-        get { return _cheese; }
-        set { _cheese = value; }
+        get { return _cheeseCount; }
+        set { _cheeseCount = value; }
     }
+    /// <summary>
+    /// Percent of health restored from Cheese
+    /// </summary>
+    private int _cheesePercent;
+
+    public int CheesePercent
+    {
+        get { return _cheesePercent; }
+        set { _cheesePercent = value; }
+    }
+    #endregion Cheese
+
+    #region HealthPotions
     /// <summary>
     /// Health Potions
     /// </summary>
     [SerializeField]
-    private int _healthPotions;
+    private int _healthPotionCount;
 
     public int HealthPotions
     {
-        get { return _healthPotions; }
-        set { _healthPotions = value; }
+        get { return _healthPotionCount; }
+        set { _healthPotionCount = value; }
     }
+
+    private int _healthPotionAmount;
+
+    public int HealthPotionAmount
+    {
+        get { return _healthPotionAmount; }
+        set { _healthPotionAmount = value; }
+    }
+    
+    #endregion HealthPotions
+
+    #region EnergyPotions
     /// <summary>
     /// Energy Potions
     /// </summary>
     [SerializeField]
-    private int _energyPotions;
+    private int _energyPotionCount;
 
     public int EnergyPotions
     {
-        get { return _energyPotions; }
-        set { _energyPotions = value; }
+        get { return _energyPotionCount; }
+        set { _energyPotionCount = value; }
     }
+    private int _energyPotionAmount;
+
+    public int EnergyPotionAmount
+    {
+        get { return _energyPotionAmount; }
+        set { _energyPotionAmount = value; }
+    }
+    
+    #endregion EnergyPotions
+    
+    #region CampKits
 
     /// <summary>
     /// Camp Kits.
@@ -70,7 +158,9 @@ public class PlayerInventory : MonoBehaviour
         get { return _campKits; }
         set { _campKits = value; }
     }
+    #endregion CampKits
 
+    #region item counters
     /// <summary>
     /// COUNTERS FOR ITEMS
     /// </summary>
@@ -79,6 +169,8 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Camp Kit Counters
     /// </summary>
+    [SerializeField]
+
     private int _totalCampKits;
     public int TotalCampKits
     {
@@ -97,6 +189,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Food Counters
     /// </summary>
+    [SerializeField]
     private int _totalFood;
 
     public int TotalFood
@@ -115,6 +208,7 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Potions Counters
     /// </summary>
+    [SerializeField]
     private int _totalPotions;
 
     public int TotalPotions
@@ -129,7 +223,8 @@ public class PlayerInventory : MonoBehaviour
         get { return _maxPotions; }
         set { _maxPotions = value; }
     }
-    
+    #endregion item counters
+
     #endregion variables
 
     #region buying items
@@ -217,24 +312,105 @@ public class PlayerInventory : MonoBehaviour
 
     #endregion buying items
 
+    #region using items
+
+    public bool EatFood(string food)
+    {
+        if (food == "Apple")
+        {
+            if (Apples > 0)
+            {
+                this.Player.HealForPercent(ApplePercent);
+                this.Apples--;
+                return true;
+            }
+
+        }else if (food == "Bread"){
+            if (Bread > 0)
+            {
+                this.Player.HealForPercent(BreadPercent);
+                this.Bread--;
+                return true;
+            }
+        }else if (food == "Cheese"){
+            if (Cheese < 0) { 
+                this.Player.HealForPercent(CheesePercent);
+                this.Cheese--;
+                return true;
+            }
+        }
+        else
+        {
+            Debug.Log("Unknow food type "+ food);
+            return false;
+        }
+        return false;
+    }
+
+    public bool UsePotion(string potion)
+    {
+        if (potion == "Health")
+        {
+            if (this.Player.remainingHealth < this.Player.remainingHealth)
+            {
+                this.Player.HealForAmount(HealthPotionAmount);
+                return true;
+            }
+        }
+        else if (potion == "Energy")
+        {
+            if (this.Player.remainingEnergy < this.Player.totalHealth)
+            {
+                this.Player.HealForAmount(EnergyPotionAmount);
+                return true;
+            }
+        }
+        else
+        {
+            Debug.Log("Unknow potion type " + potion);
+            return false;
+        }
+        return false;
+    }
+
+    public void UseCampKit()
+    {
+
+    }
+
+    #endregion using items
+    #region monobehaviour
     // Use this for initialization
-	void Start () {
-        this.Apples = 0;
-        this.Bread = 0;
-        this.Cheese = 0;
+	void Awake () {
+        // get player
+        this.Player = FindObjectOfType<PlayerController>();
+        // inventory level 
+        this.InventoryLevel = 1;
+        // item counts
+        this.Apples = 1;
+        this.Bread = 1;
+        this.Cheese = 1;
         this.HealthPotions = 0;
         this.EnergyPotions = 0;
+        // totals
         this.TotalFood = 0;
         this.TotalPotions = 0;
         this.TotalCampKits = 0;
+        // max counts
         this.MaxFood = 3;
         this.MaxPotions = 3;
+        // percent per food item
+        this.ApplePercent = 10;
+        this.BreadPercent = 15;
+        this.CheesePercent = 20;
+        // amount per potion
+        this.HealthPotionAmount = 30;
+        this.EnergyPotionAmount = 30;
 	}
 	
-    
-
 	// Update is called once per frame
 	void Update () {
         SetCounts();
 	}
 }
+#endregion monobehaviour

@@ -16,6 +16,10 @@ public class PlayerController : PawnController
     /// </summary>
     public int numUsableItems;
 
+    /// <summary>
+    /// The player's Inventory
+    /// </summary>
+    public PlayerInventory inventory;
     #endregion Variables
 
     #region Public functions

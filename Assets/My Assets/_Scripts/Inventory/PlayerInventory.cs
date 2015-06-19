@@ -239,7 +239,6 @@ public class PlayerInventory : MonoBehaviour
     public bool HasRoomInInventoryFor(string itemType, int quantity)
     {
         itemType = itemType.ToLower();
-        Debug.Log(itemType);
         if (itemType == "food"){
             return quantity < ( MaxFood - TotalFood );
         }
@@ -407,6 +406,10 @@ public class PlayerInventory : MonoBehaviour
         this.Cheese = 0;
         this.HealthPotions = 1;
         this.EnergyPotions = 1;
+        //max counts
+        this.MaxFood = 3;
+        this.MaxPotions = 3;
+        this.MaxCampKits = 1;
         // totals
         this.TotalFood = 0;
         this.TotalPotions = 0;

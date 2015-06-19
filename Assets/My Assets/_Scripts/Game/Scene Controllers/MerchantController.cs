@@ -66,8 +66,19 @@ public class MerchantController : MonoBehaviour {
         // add Item counts to list and set prices
         for (int i=0; i < items.Length; i++){
             items[i] = 0;
-            prices[i] = 2 * i;
+            prices[i] = 2 * i + 1;
         }
+        // get palyer balance
+        this.playerBalance = this.player.dollarBalance;
+
+        // get item balance
+        for (int i = 0; i < items.Length; i++)
+        {
+            this.purchaseBalance = items[i] * prices[i]; 
+        }
+
+        // calculate player's remaining balance
+        this.remainingBalance = this.playerBalance - this.purchaseBalance;
 	}
 
     public void LeaveMerchant()
@@ -83,11 +94,12 @@ public class MerchantController : MonoBehaviour {
     {
         // get palyer balance
         this.playerBalance = this.player.dollarBalance;
-        
+
+        this.purchaseBalance = 0;
         // get item balance
         for (int i = 0; i < items.Length; i++)
         {
-            this.purchaseBalance += prices[i];
+            this.purchaseBalance += items[i] * prices[i];
         }
 
         // calculate player's remaining balance
@@ -101,7 +113,6 @@ public class MerchantController : MonoBehaviour {
             items[index]+=1;
             numItemsPurchased+=1;
         }
-        CalculateShop();
     }
 
     public void DecreaseAmount(int index) {
@@ -115,7 +126,6 @@ public class MerchantController : MonoBehaviour {
             items[index]-=1;
             numItemsPurchased--;
         }
-        CalculateShop();
     }
 
     void UpdateText()
@@ -127,9 +137,12 @@ public class MerchantController : MonoBehaviour {
         this.quantityOneText.text = this.items[0].ToString();
         this.quantityTwoText.text = this.items[1].ToString();
         this.quantityThreeText.text = this.items[2].ToString();
+
+
     }
 
 	void Update () {
         UpdateText();
+        CalculateShop();
 	}
 }

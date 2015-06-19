@@ -33,7 +33,7 @@ public class DeathController : MonoBehaviour {
 	void UpdateText(){
 		this.healthText.text = "HEALTH: " + this.player.totalHealth;
 		
-		this.energyText.text = "ENERGY:: " + this.player.totalEnergy;
+		this.energyText.text = "ENERGY:  " + this.player.totalEnergy;
 		
 		this.armorText.text = "ARMOR: " + this.player.armor;
 		

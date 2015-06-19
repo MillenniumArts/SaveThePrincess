@@ -55,55 +55,28 @@ public class MerchantController : MonoBehaviour {
     // exit button
     public Button exitButton;
 
-	void Start () {
-        // get player
-        this.player = FindObjectOfType<PlayerController>();
-
-        // set up items list
-        this.items = new int[numItemsForSale];
-        this.prices = new int[numItemsForSale];
-
-        // add Item counts to list and set prices
-        for (int i=0; i < items.Length; i++){
-            items[i] = 0;
-            prices[i] = 2 * i + 1;
-        }
-        // get palyer balance
-        this.playerBalance = this.player.dollarBalance;
-
-        // get item balance
+    public void CancelPurchase()
+    {
         for (int i = 0; i < items.Length; i++)
         {
-            this.purchaseBalance = items[i] * prices[i]; 
+            items[i] = 0;
+            numItemsPurchased = 0;
         }
+    }
 
-        // calculate player's remaining balance
-        this.remainingBalance = this.playerBalance - this.purchaseBalance;
-	}
+    public void ConfirmPurchase()
+    {
+        if (this.player.PurchaseItem(purchaseBalance)){
+            this.player.inventory.Apples = this.items[0];
+            this.player.inventory.Bread = this.items[1];
+            this.player.inventory.Cheese = this.items[2];
+        }
+    }
 
     public void LeaveMerchant()
     {
         DontDestroyOnLoad(this.player);
         Application.LoadLevel("Town_LVP");
-    }
-
-    /// <summary>
-    /// Calculate Shop balances to be updated on tick.
-    /// </summary>
-    void CalculateShop()
-    {
-        // get palyer balance
-        this.playerBalance = this.player.dollarBalance;
-
-        this.purchaseBalance = 0;
-        // get item balance
-        for (int i = 0; i < items.Length; i++)
-        {
-            this.purchaseBalance += items[i] * prices[i];
-        }
-
-        // calculate player's remaining balance
-        this.remainingBalance = this.playerBalance - this.purchaseBalance;
     }
 
     public void IncreaseAmount(int index)
@@ -141,6 +114,52 @@ public class MerchantController : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Calculate Shop balances to be updated on tick.
+    /// </summary>
+    void CalculateShop()
+    {
+        // get palyer balance
+        this.playerBalance = this.player.dollarBalance;
+
+        this.purchaseBalance = 0;
+        // get item balance
+        for (int i = 0; i < items.Length; i++)
+        {
+            this.purchaseBalance += items[i] * prices[i];
+        }
+
+        // calculate player's remaining balance
+        this.remainingBalance = this.playerBalance - this.purchaseBalance;
+    }
+
+    void Start()
+    {
+        // get player
+        this.player = FindObjectOfType<PlayerController>();
+
+        // set up items list
+        this.items = new int[numItemsForSale];
+        this.prices = new int[numItemsForSale];
+
+        // add Item counts to list and set prices
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i] = 0;
+            prices[i] = 2 * i + 1;
+        }
+        // get palyer balance
+        this.playerBalance = this.player.dollarBalance;
+
+        // get item balance
+        for (int i = 0; i < items.Length; i++)
+        {
+            this.purchaseBalance = items[i] * prices[i];
+        }
+
+        // calculate player's remaining balance
+        this.remainingBalance = this.playerBalance - this.purchaseBalance;
+    }
 	void Update () {
         UpdateText();
         CalculateShop();

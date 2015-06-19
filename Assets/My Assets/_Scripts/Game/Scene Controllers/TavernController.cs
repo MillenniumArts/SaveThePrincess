@@ -14,10 +14,10 @@ public class TavernController : MonoBehaviour
     public Text[] buttonText;
     // stats
     public int[] prices, stats;
-    public Text healthText, energyText, playerBalance;
+    public Text healthText, playerBalance;
     // Variables
     int BASE_MEAL_COST, NUM_MEALS;
-    int totalStatsMissing;
+    int totalHealthMissing;
 
     // Use this for initialization
     void Start()
@@ -32,7 +32,6 @@ public class TavernController : MonoBehaviour
         this.player.gameObject.transform.localPosition = newSpot;
         //init texts
         this.healthText.text = "";
-        this.energyText.text = "";
         this.playerBalance.text = "";
         this.sleepText.text = "";
 
@@ -40,7 +39,7 @@ public class TavernController : MonoBehaviour
         stats = new int[NUM_MEALS];
 
         //get total health missing on entry
-        totalStatsMissing = (this.player.totalHealth - this.player.remainingHealth);
+        totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
 
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)
@@ -53,9 +52,8 @@ public class TavernController : MonoBehaviour
 
     private void UpdateText()
     {
-        this.totalStatsMissing = (this.player.totalHealth - this.player.remainingHealth);
+        this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
         this.healthText.text = "Health: " + this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.energyText.text = "Energy: " + this.player.remainingEnergy + "/" + this.player.totalEnergy;
         this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
 
         for (int i = 0; i < buttonText.Length; i++)
@@ -63,9 +61,9 @@ public class TavernController : MonoBehaviour
             buttonText[i].text = "Meal: $" + prices[i] + " ";
         }
 
-        if (totalStatsMissing > 0)
+        if (totalHealthMissing > 0)
         {
-            this.sleepText.text = "Sleep: $" + totalStatsMissing;
+            this.sleepText.text = "Sleep: $" + totalHealthMissing;
         }
         else
         {
@@ -77,7 +75,7 @@ public class TavernController : MonoBehaviour
 
     public void PurchaseMeal(int index)
     {
-        if (totalStatsMissing > 0)
+        if (totalHealthMissing > 0)
         {
             if (player.PurchaseItem(prices[index]))
             {
@@ -94,10 +92,10 @@ public class TavernController : MonoBehaviour
     public void SleepForNight()
     {
         // if player needs health OR mana
-        if (totalStatsMissing > 0)
+        if (totalHealthMissing > 0)
         {
             // if can afford, purchase
-            if (player.PurchaseItem(totalStatsMissing))
+            if (player.PurchaseItem(totalHealthMissing))
             {
                 Debug.Log(this.player.name + " is refreshed after a night of sleep!");
             }

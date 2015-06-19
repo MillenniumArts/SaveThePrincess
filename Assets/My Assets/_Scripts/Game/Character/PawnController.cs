@@ -454,7 +454,7 @@ public class PawnController : MonoBehaviour
             case "AttackMagic":
                 this.playerAnimator.SetTrigger("Magic_Attack");
                 break;
-            case "ManaPotion":
+            case "EnergyPotion":
                 this.playerAnimator.SetTrigger("Magic_Heal");
                 break;
             case "HealPotion":

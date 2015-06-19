@@ -341,7 +341,7 @@ public class PlayerInventory : MonoBehaviour
         }
         else
         {
-            Debug.Log("Unknow food type "+ food);
+            Debug.Log("Unknown food type "+ food);
             return false;
         }
         return false;
@@ -351,23 +351,27 @@ public class PlayerInventory : MonoBehaviour
     {
         if (potion == "Health")
         {
-            if (this.Player.remainingHealth < this.Player.remainingHealth)
+            if (this.Player.remainingHealth < this.Player.totalHealth)
             {
                 this.Player.HealForAmount(HealthPotionAmount);
+                this.HealthPotions--;
+                this.Player.TriggerAnimation("healPotion");
                 return true;
             }
         }
         else if (potion == "Energy")
         {
-            if (this.Player.remainingEnergy < this.Player.totalHealth)
+            if (this.Player.remainingEnergy < this.Player.totalEnergy)
             {
                 this.Player.GiveEnergy(EnergyPotionAmount);
+                this.EnergyPotions--;
+                this.Player.TriggerAnimation("EnergyPotion");
                 return true;
             }
         }
         else
         {
-            Debug.Log("Unknow potion type " + potion);
+            Debug.Log("Unknown potion type " + potion);
             return false;
         }
         return false;
@@ -390,8 +394,8 @@ public class PlayerInventory : MonoBehaviour
         this.Apples = 1;
         this.Bread = 1;
         this.Cheese = 1;
-        this.HealthPotions = 0;
-        this.EnergyPotions = 0;
+        this.HealthPotions = 1;
+        this.EnergyPotions = 1;
         // totals
         this.TotalFood = 0;
         this.TotalPotions = 0;

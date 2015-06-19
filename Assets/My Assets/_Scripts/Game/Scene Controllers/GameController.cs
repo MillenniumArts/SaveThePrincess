@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject gameObj;
     public GameController gameController;
     public CombatController combatController;
+    public InventoryAnimation invAnim;
 
     public bool enemyHasHealed,
                 waiting,
@@ -62,6 +63,8 @@ public class GameController : MonoBehaviour
     {
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();
+        // inventory animator
+        this.invAnim = FindObjectOfType<InventoryAnimation>();
         // INITIALIZE BATTLE SCENE
         combatController.setState(CombatController.BattleStates.START);
 
@@ -165,6 +168,7 @@ public class GameController : MonoBehaviour
         }
         if (pass)
         {
+            invAnim.OpenClose();
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
 

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
 guid: a9d5e17e79fab614e87e92dbb8c6b03e
-timeCreated: 1434587634
+timeCreated: 1434727566
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: food_sprite_sheet_0
-    21300002: food_sprite_sheet_1
-    21300004: food_sprite_sheet_2
+    21300000: Apple
+    21300002: Bread
+    21300004: Cheese
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,7 +52,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: food_sprite_sheet_0
+    - name: Apple
       rect:
         serializedVersion: 2
         x: 384
@@ -60,9 +60,9 @@ TextureImporter:
         width: 536
         height: 571
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: food_sprite_sheet_1
+    - name: Bread
       rect:
         serializedVersion: 2
         x: 1567
@@ -70,9 +70,9 @@ TextureImporter:
         width: 972
         height: 680
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: food_sprite_sheet_2
+    - name: Cheese
       rect:
         serializedVersion: 2
         x: 3079
@@ -80,7 +80,7 @@ TextureImporter:
         width: 1085
         height: 707
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

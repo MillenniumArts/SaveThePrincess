@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour
                 leftDamageText,
                 rightDamageText,
                 numEnemiesKilledText;
+    // Inventory Text
+    public Text apples, bread, cheese, hPots, ePots, campKits;
 
     public Button leftPhysAttack = null;
 
@@ -144,36 +146,27 @@ public class GameController : MonoBehaviour
                 break;
             case 1:
                 this.player.inventory.EatFood("Bread");
-                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                StartCooldown(COOLDOWN_LENGTH);
                 break;
             case 2:
-                this.player.inventory.EatFood("Cheese");
-                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                StartCooldown(COOLDOWN_LENGTH);
+                pass = this.player.inventory.EatFood("Cheese");
                 break;
             case 3:
                 pass = this.player.inventory.UsePotion("Health");
-                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                StartCooldown(COOLDOWN_LENGTH);
                 break;
             case 4:
                 pass = this.player.inventory.UsePotion("Energy");
-                combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                StartCooldown(COOLDOWN_LENGTH);
                 break;
             case 5:
-                this.player.inventory.UseCampKit();
+                //this.player.inventory.UseCampKit();
+                Debug.Log("Now is not the time to use that!");
                 break;
             default:
                 break;
-
-                if (pass)
-                {
-                    combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-                    StartCooldown(COOLDOWN_LENGTH);
-
-                }
+        }
+        if (pass)
+        {
+            combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+            StartCooldown(COOLDOWN_LENGTH);
 
         }
     }
@@ -463,19 +456,26 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void UpdateText()
     {
+        // Battle stats
         this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
-
         this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
         this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
-
         this.leftArmorText.text = "AMR: " + this.player.GetTotalArmor();
         this.rightArmorText.text = "AMR: " + this.enemy.GetTotalArmor();
-
         this.leftDamageText.text = "DMG: " + this.player.GetTotalDamage();
         this.rightDamageText.text = "DMG: " + this.enemy.GetTotalDamage();
 
+        // score stat
         this.numEnemiesKilledText.text = "SCORE: " + score;
+
+        // inventory text
+        this.apples.text = this.player.inventory.Apples.ToString();
+        this.bread.text = this.player.inventory.Bread.ToString();
+        this.cheese.text = this.player.inventory.Cheese.ToString();
+        this.hPots.text = this.player.inventory.HealthPotions.ToString();
+        this.ePots.text = this.player.inventory.EnergyPotions.ToString();
+        this.campKits.text = this.player.inventory.CampKits.ToString();
     }
 
     /// <summary>

@@ -361,7 +361,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (this.Player.remainingEnergy < this.Player.totalHealth)
             {
-                this.Player.HealForAmount(EnergyPotionAmount);
+                this.Player.GiveEnergy(EnergyPotionAmount);
                 return true;
             }
         }

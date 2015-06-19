@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: f2288c55478bff348ba317065cf2ef7c
+timeCreated: 1434722839
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: paper_button1
+    21300002: paperButton3
+    21300004: Receipt
+    21300006: WantedPoster
+    21300008: paperButton2
+    21300010: Flat_long_scroll
+    21300012: Curled_long_scroll
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: paper_button1
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1742
+        width: 732
+        height: 706
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: paperButton3
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 1340
+        width: 686
+        height: 699
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Receipt
+      rect:
+        serializedVersion: 2
+        x: 2161
+        y: 1144
+        width: 761
+        height: 1263
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: WantedPoster
+      rect:
+        serializedVersion: 2
+        x: 3321
+        y: 1195
+        width: 912
+        height: 1095
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: paperButton2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 866
+        width: 691
+        height: 698
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Flat_long_scroll
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 60
+        width: 2108
+        height: 673
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Curled_long_scroll
+      rect:
+        serializedVersion: 2
+        x: 2509
+        y: 75
+        width: 1847
+        height: 665
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

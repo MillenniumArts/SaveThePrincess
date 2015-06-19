@@ -59,7 +59,7 @@ public class MenuController : MonoBehaviour {
 		// value per credit:
 		this.healthInc = 10;
 		this.damageInc = 5;
-		this.armorInc = 2;
+		this.armorInc = 5;
         this.energyInc = 10;
 
 		// base stats
@@ -162,6 +162,10 @@ public class MenuController : MonoBehaviour {
 				this.player.totalHealth = this.newHealth;
 				this.player.remainingHealth = this.newHealth;
 				this.player.physicalDamage = this.newDamage;
+                int _defaultDamageMod = Random.Range(0, 6); // Damage modifier for default weapon.
+                this.player.physicalDamage += _defaultDamageMod;
+                this.player.damageMod = _defaultDamageMod;
+                this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);
                 this.player.totalEnergy = this.newEnergy;
                 this.player.remainingEnergy = this.newEnergy;
 				this.player.armor = this.newArmor;

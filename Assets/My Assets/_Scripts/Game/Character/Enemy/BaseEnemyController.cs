@@ -19,7 +19,7 @@ public class BaseEnemyController : PawnController {
 
     private PlayerController player;
 
-    private int totalStats;
+    private int healthEnergy;
 
 	#endregion Variables
 	
@@ -61,20 +61,16 @@ public class BaseEnemyController : PawnController {
     /// </summary>
     private void CreateStats()
     {
-        int playerTotalStats = player.GetTotalStats();
-        totalStats = playerTotalStats + Mathf.FloorToInt((playerTotalStats * Random.Range(-0.2f, 0.1f)));
-        totalHealth = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
-        totalEnergy = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
+        int totalHealthEnergy = player.GetTotalHeatlhEnergyStats();
+        healthEnergy = totalHealthEnergy + Mathf.FloorToInt((totalHealthEnergy * Random.Range(-0.2f, 0.2f)));
+        totalHealth = Mathf.FloorToInt(healthEnergy * Random.Range(0.45f, 0.75f));
+        totalEnergy = healthEnergy - totalHealth;
+        physicalDamage = (int)(player.GetTotalArmor() + player.GetTotalArmor() * Random.Range(-0.2f, 0.1f));
+        armor = (int)(player.GetTotalDamage() + player.GetTotalDamage() * Random.Range(-0.2f, 0.1f));
 
-        int remainingStats = totalStats - totalHealth - totalEnergy;
-        physicalDamage = Mathf.FloorToInt(remainingStats * Random.Range(0.3f, 0.7f));
-        armor = remainingStats - physicalDamage;
-
-        Debug.Log("PlayerTotalStats: " + playerTotalStats + 
-            " EnemyTotalStats: " + totalStats + 
-            " EnemyTotalHealth: " + totalHealth + 
+        Debug.Log(" EnemyTotalHealth: " + totalHealth +
             " EnemyTotalEnergy: " + totalEnergy +
-            " EnemyPhysicalDamaga: " + physicalDamage + 
+            " EnemyPhysicalDamaga: " + physicalDamage +
             " EnemyArmor: " + armor);
     }
 
@@ -110,9 +106,7 @@ public class BaseEnemyController : PawnController {
     }
 
 	void Update(){
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
 	}
 	#endregion MonoBehaviour
-
-
 }

@@ -317,5 +317,17 @@ public class Item : MonoBehaviour {
 		return statsString;
 	}
 	#endregion Getters
-	
+
+    #region Setters
+    /// <summary>
+    /// Set the item's Damage modifier stat and Armor modifier stat.
+    /// </summary>
+    /// <param name="dmg">The new damage stat.</param>
+    /// <param name="arm">The new armor stat.</param>
+    public void SetDmgArm(int dmg, int arm)
+    {
+        atkMod = dmg;
+        defMod = arm;
+    }
+    #endregion Setters
 }

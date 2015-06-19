@@ -161,15 +161,31 @@ public class PawnController : MonoBehaviour
     public void TakeDamage()
     {
         int defecit;
-        if (physicalDamageToTake > 0)
+        if (this.physicalDamageToTake > 0)
         {
-            // armor reduction
-             defecit = (physicalDamageToTake - Mathf.FloorToInt(this.armor * DMG_REDUCTION_FACTOR));
+            if (this.physicalDamageToTake > this.armor) // if true damage will apply after armor
+            {
+            // only amount of damage over armor amount is true damage
+                int trueDamage = this.physicalDamageToTake - this.armor;
+                if (trueDamage < 0)
+                    trueDamage = 0;
+                int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
+            //amount of damage to take is the equivalent of:
+                // 50% of damage for each 'matched' point of armor
+                // 100% of damage for any left over points of armor
+            defecit = trueDamage + reducedDamage;
+            }
+            else
+            {
+                defecit = Mathf.FloorToInt(this.physicalDamage / 2);
+            }
 
+            
             // ensure min damage is always applied
             if (defecit < BASE_DMG)
                 defecit = BASE_DMG;
 
+            //handle animation for damage
             if (defecit > Mathf.FloorToInt(this.totalHealth * 0.1f))
             {		// if damage is more than 10% of player health
                 if (this.remainingHealth - defecit > 0)
@@ -455,7 +471,7 @@ public class PawnController : MonoBehaviour
     /// <returns></returns>
     public int GetTotalArmor()
     {
-        return this.armor + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
+        return this.armor;// + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
     }
     /// <summary>
     /// Gets the total damage.
@@ -463,12 +479,12 @@ public class PawnController : MonoBehaviour
     /// <returns>The total damage.</returns>
     public int GetTotalDamage()
     {
-        return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
+        return this.physicalDamage;// + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
-    public int GetTotalStats()
+    public int GetTotalHeatlhEnergyStats()
     {
-        int total = GetTotalArmor() + GetTotalDamage() + totalEnergy + totalHealth;
+        int total = totalEnergy + totalHealth;
         return total;
     }
 
@@ -512,6 +528,15 @@ public class PawnController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         // Renders the armor.
         this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+    }
+
+    /// <summary>
+    /// Sets the animation parameter that determines if the idle animation is "tired" or not.
+    /// </summary>
+    protected void UpdateHealth()
+    {
+        float healthPercent = (float)remainingHealth / (float)totalHealth;
+        playerAnimator.SetFloat("Health", healthPercent);
     }
 
     /// <summary>

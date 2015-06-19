@@ -320,7 +320,10 @@ public class PlayerInventory : MonoBehaviour
         {
             if (Apples > 0)
             {
+                Debug.Log(this.Player.name + " Has restored "+ ApplePercent + " health and energy!");
                 this.Player.HealForPercent(ApplePercent);
+                this.Player.GiveEnergyPercent(ApplePercent);
+                this.Player.TriggerAnimation("potion");
                 this.Apples--;
                 return true;
             }
@@ -328,13 +331,19 @@ public class PlayerInventory : MonoBehaviour
         }else if (food == "Bread"){
             if (Bread > 0)
             {
+                Debug.Log(this.Player.name + " Has restored " + BreadPercent + " health and energy!");
                 this.Player.HealForPercent(BreadPercent);
+                this.Player.GiveEnergyPercent(BreadPercent);
+                this.Player.TriggerAnimation("potion");
                 this.Bread--;
                 return true;
             }
         }else if (food == "Cheese"){
-            if (Cheese < 0) { 
+            if (Cheese < 0) {
+                Debug.Log(this.Player.name + " Has restored " + CheesePercent + " health and energy!");
                 this.Player.HealForPercent(CheesePercent);
+                this.Player.GiveEnergyPercent(CheesePercent);
+                this.Player.TriggerAnimation("potion");
                 this.Cheese--;
                 return true;
             }
@@ -363,7 +372,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (this.Player.remainingEnergy < this.Player.totalEnergy)
             {
-                this.Player.GiveEnergy(EnergyPotionAmount);
+                this.Player.GiveEnergyAmount(EnergyPotionAmount);
                 this.EnergyPotions--;
                 this.Player.TriggerAnimation("energypotion");
                 return true;

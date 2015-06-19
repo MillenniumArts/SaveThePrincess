@@ -226,7 +226,7 @@ public class Item : MonoBehaviour {
             {
                 if (p.remainingEnergy < p.totalEnergy)
                 {
-                    p.GiveEnergy(this.GetManaMod());
+                    p.GiveEnergyAmount(this.GetManaMod());
                     this.used = true;
                     return true;
                 }

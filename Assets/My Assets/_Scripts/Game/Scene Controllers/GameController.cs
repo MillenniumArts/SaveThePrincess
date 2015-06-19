@@ -142,13 +142,14 @@ public class GameController : MonoBehaviour
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
+        Debug.Log("Using Item number " + index);
         bool pass = false;
         switch (index){
             case 0:
                 pass = this.player.inventory.EatFood("Apple");
                 break;
             case 1:
-                this.player.inventory.EatFood("Bread");
+                pass = this.player.inventory.EatFood("Bread");
                 break;
             case 2:
                 pass = this.player.inventory.EatFood("Cheese");
@@ -171,7 +172,6 @@ public class GameController : MonoBehaviour
             invAnim.OpenClose();
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-
         }
     }
 
@@ -181,6 +181,10 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
+        // close inv if open
+        if (invAnim.open)
+            invAnim.OpenClose();
+
         // toggle movement on click
         if (!attackBarMoving)
         {
@@ -212,7 +216,7 @@ public class GameController : MonoBehaviour
         //  Debug.Log("OnWaitComplete. " + curTime);
         this.enemy.TakeDamage();
         //combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
-        this.enemy.GiveEnergy(ENERGY_REGEN_AMT);
+        this.enemy.GiveEnergyAmount(ENERGY_REGEN_AMT);
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
@@ -266,7 +270,7 @@ public class GameController : MonoBehaviour
                             {
                                 Debug.Log("Enemy Uses a mana potion");
                                 this.enemy.TriggerAnimation("HealPotion");
-                                this.enemy.GiveEnergy(10);
+                                this.enemy.GiveEnergyAmount(10);
                             }
                         }
                     }
@@ -322,7 +326,7 @@ public class GameController : MonoBehaviour
         combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
         this.enemy.UseEnergy(30);
         this.player.TakeDamage();
-        this.player.GiveEnergy(ENERGY_REGEN_AMT);
+        this.player.GiveEnergyAmount(ENERGY_REGEN_AMT);
         enemyHasAttacked = false;
         playerHasAttacked = false;
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class InventoryAnimation : MonoBehaviour {
     private Animator _animator;
-    private bool open = false;
+    public bool open = false;
     void Start()
     {
         _animator = this.gameObject.GetComponent<Animator>();

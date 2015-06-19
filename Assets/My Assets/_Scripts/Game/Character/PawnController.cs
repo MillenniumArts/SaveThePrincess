@@ -283,7 +283,6 @@ public class PawnController : MonoBehaviour
     /// <param name="percent">Percent (from 0.01f to 0.99f).</param>
     public virtual void HealForPercent(float percent)
     {
-        this.PerformHealMagicBehaviour();
         if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * percent) > this.totalHealth)
         {
             this.remainingHealth = this.totalHealth;
@@ -299,15 +298,13 @@ public class PawnController : MonoBehaviour
     /// </summary>
     /// <param name="percent"></param>
     public virtual void HealForPercent(int percent)
-    {
-        this.PerformHealMagicBehaviour();
-        
+    {        
         // set to float to use
-        float newPercent = percent/ 100;
-        
+        float newPercent = percent * 0.01f;
+        Debug.Log("Healing for " + newPercent + " percent");
         // can't be over 100% heal
         if (newPercent > 1)
-            newPercent = 1;
+            newPercent = 1.0f;
 
         if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * newPercent) > this.totalHealth)
         {
@@ -317,6 +314,61 @@ public class PawnController : MonoBehaviour
         {
             this.remainingHealth += Mathf.FloorToInt(this.totalHealth * newPercent);
         }
+    }
+
+    /// <summary>
+    /// Gives the specified amount of energy.
+    /// </summary>
+    /// <param name="amount">Amount.</param>
+    public virtual void GiveEnergyAmount(int amount)
+    {
+        if (this.remainingEnergy + amount >= this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += amount;
+        }
+        Debug.Log(this.name + " Receieved " + amount + " Energy.");
+    }
+    /// <summary>
+    /// Gives specified percentage to player as defined by float value (0.01f - 0.99f)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void GiveEnergyPercent(float percent)
+    {
+        if (this.remainingEnergy + Mathf.FloorToInt(this.totalEnergy * percent) > this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += Mathf.FloorToInt(this.totalEnergy * percent);
+        }
+    }
+    /// <summary>
+    /// Gives specified percentage to player as defined by Int value (1-99)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void GiveEnergyPercent(int percent)
+    {
+        // set to float to use
+        float newPercent = percent * 0.01f;
+
+        // can't be over 100% heal
+        if (newPercent > 1)
+            newPercent = 1;
+
+        if (this.remainingEnergy + Mathf.FloorToInt(this.totalEnergy * newPercent) > this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += Mathf.FloorToInt(this.totalEnergy * newPercent);
+        }
+
     }
 
     /// <summary>
@@ -373,23 +425,7 @@ public class PawnController : MonoBehaviour
         this.UseEnergy(ATTACK_ENERGY_COST);
     }
 
-    /// <summary>
-    /// Gives the specified amount of energy.
-    /// </summary>
-    /// <param name="amount">Amount.</param>
-    public void GiveEnergy(int amount)
-    {
-        if (this.remainingEnergy + amount >= this.totalEnergy)
-        {
-            this.remainingEnergy = this.totalEnergy;
-        }
-        else
-        {
-            this.remainingEnergy += amount;
-        }
-        Debug.Log(this.name + " Receieved " + amount + " Energy.");
-    }
-
+    
     /// <summary>
     /// Deals Damage to specified player.
     /// </summary>

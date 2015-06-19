@@ -43,7 +43,10 @@ public class MerchantController : MonoBehaviour {
                 quantityTwoText, 
                 quantityThreeText;
 
-    public int q_1, q_2, q_3;
+   // public int q_1, q_2, q_3;
+
+    // total number of items purchased 
+    public int numItemsPurchased;
 
     // purchase button
     public Button purchaseButton;
@@ -82,6 +85,10 @@ public class MerchantController : MonoBehaviour {
         this.playerBalance = this.player.dollarBalance;
         
         // get item balance
+        for (int i = 0; i < items.Length; i++)
+        {
+            this.purchaseBalance += prices[i];
+        }
 
         // calculate player's remaining balance
         this.remainingBalance = this.playerBalance - this.purchaseBalance;
@@ -89,16 +96,26 @@ public class MerchantController : MonoBehaviour {
 
     public void IncreaseAmount(int index)
     {
-        //if player can afford another and has enough room in inventory
-        items[index]++;
+        if (this.player.inventory.HasRoomInInventoryFor("food", numItemsPurchased))
+        {
+            items[index]+=1;
+            numItemsPurchased+=1;
+        }
+        CalculateShop();
     }
 
     public void DecreaseAmount(int index) {
 
-        if (items[index] - 1 <= 0)
+        if (items[index] - 1 <= 0){
             items[index] = 0;
+            numItemsPurchased = 0;
+        }
         else
-            items[index]--;
+        {
+            items[index]-=1;
+            numItemsPurchased--;
+        }
+        CalculateShop();
     }
 
     void UpdateText()
@@ -113,7 +130,6 @@ public class MerchantController : MonoBehaviour {
     }
 
 	void Update () {
-        CalculateShop();
         UpdateText();
 	}
 }

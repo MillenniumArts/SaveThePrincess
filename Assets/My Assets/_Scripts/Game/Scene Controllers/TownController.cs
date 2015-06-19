@@ -20,16 +20,18 @@ public class TownController : MonoBehaviour {
 	public void GoToStore(){
 		DontDestroyOnLoad (this.player);
 		Application.LoadLevel ("Store_LVP");
-
-
 	}
 
 	public void GoToInn(){
 		DontDestroyOnLoad (this.player);
 		Application.LoadLevel ("Tavern_LVP");
-
-
 	}
+
+    public void GoToMerchant()
+    {
+        DontDestroyOnLoad(this.player);
+        Application.LoadLevel("Merchant_LVP");
+    }
 
 	// Update is called once per frame
 	void Update () {

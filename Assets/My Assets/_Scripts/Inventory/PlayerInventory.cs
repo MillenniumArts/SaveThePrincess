@@ -238,14 +238,16 @@ public class PlayerInventory : MonoBehaviour
     /// <returns></returns>
     public bool HasRoomInInventoryFor(string itemType, int quantity)
     {
-        if (itemType == "Food"){
-            return TotalFood < MaxFood;
+        itemType = itemType.ToLower();
+        Debug.Log(itemType);
+        if (itemType == "food"){
+            return quantity < ( MaxFood - TotalFood );
         }
-        else if (itemType == "Potion")
+        else if (itemType == "potion")
         {
-            return TotalPotions < MaxPotions;
+            return quantity < ( MaxPotions - TotalPotions );
         }
-        else if (itemType == "campKit")
+        else if (itemType == "campkit")
         {
             return TotalCampKits < MaxCampKits;
         }
@@ -400,9 +402,9 @@ public class PlayerInventory : MonoBehaviour
         // inventory level 
         this.InventoryLevel = 1;
         // item counts
-        this.Apples = 1;
-        this.Bread = 1;
-        this.Cheese = 1;
+        this.Apples = 0;
+        this.Bread = 0;
+        this.Cheese = 0;
         this.HealthPotions = 1;
         this.EnergyPotions = 1;
         // totals

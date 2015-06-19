@@ -138,16 +138,6 @@ public class PawnController : MonoBehaviour
     public int magicalDamageToTake;
 
     /// <summary>
-    /// The Damage Reduction Factor for armor
-    /// </summary>
-    public float DMG_REDUCTION_FACTOR;
-
-    /// <summary>
-    /// The Base Damage if armor nullifies attack.
-    /// </summary>
-    public int BASE_DMG;
-
-    /// <summary>
     /// Base Energy Cost for any attack
     /// </summary>
     public int ATTACK_ENERGY_COST = 30;
@@ -170,59 +160,33 @@ public class PawnController : MonoBehaviour
                 if (trueDamage < 0)
                     trueDamage = 0;
                 int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
-            //amount of damage to take is the equivalent of:
-                // 50% of damage for each 'matched' point of armor
-                // 100% of damage for any left over points of armor
+
             defecit = trueDamage + reducedDamage;
+                Debug.Log("True Damage! ->" + defecit + "("+trueDamage+" true damage, "+ reducedDamage+" reduced damage)");
             }
             else
             {
                 defecit = Mathf.FloorToInt(this.physicalDamage / 2);
+                Debug.Log("Reduced Damage! ->" + defecit);
             }
 
-            
-            // ensure min damage is always applied
-            if (defecit < BASE_DMG)
-                defecit = BASE_DMG;
+            if (this.remainingHealth - defecit > 0)
+            {	// and it doesn't kill the player
+                this.remainingHealth -= defecit;		// take damage
+            }
+            else
+            {
+                this.remainingHealth = 0;				// die
+            }
 
             //handle animation for damage
             if (defecit > Mathf.FloorToInt(this.totalHealth * 0.1f))
             {		// if damage is more than 10% of player health
-                if (this.remainingHealth - defecit > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= defecit;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformDamageBehaviour();									// only reacts if damage applies over 10%
+                PerformDamageBehaviour();
             }
-            else if (defecit <= Mathf.FloorToInt(this.totalHealth * 0.1f) && defecit >= 0)
-            {	// if damage is less than 10% of player health
-                if (this.remainingHealth - defecit > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= defecit;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformBlockBehaviour();									// block animation under 10% damage
-                Debug.Log(this.name + " laughs at the lack of damage!");
-            } if (defecit <= 0)
+            else if (defecit <= Mathf.FloorToInt(this.totalHealth * 0.1f))
             {
-                Debug.Log("BASE DMG APPLIED");
-                // apply base damage since armor nullified
-                if (this.remainingHealth - BASE_DMG > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= BASE_DMG;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformBlockBehaviour();									// block animation under 10% damage
+                PerformBlockBehaviour();
                 Debug.Log(this.name + " laughs at the lack of damage!");
             }
         this.physicalDamageToTake = 0;
@@ -241,6 +205,18 @@ public class PawnController : MonoBehaviour
             {
                 this.remainingHealth = 0;
             }
+
+            //handle animation for damage
+            if (magicalDamageToTake > Mathf.FloorToInt(this.totalHealth * 0.1f))
+            {		// if damage is more than 10% of player health
+                PerformDamageBehaviour();
+            }
+            else if (magicalDamageToTake <= Mathf.FloorToInt(this.totalHealth * 0.1f))
+            {
+                PerformBlockBehaviour();
+                Debug.Log(this.name + " laughs at the lack of damage!");
+            }
+
             this.magicalDamageToTake = 0;
             PerformDamageBehaviour();
         }
@@ -453,7 +429,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Enough Mana For That!");
+            Debug.Log("Not Enough Energy For That!");
             return false;
         }
     }

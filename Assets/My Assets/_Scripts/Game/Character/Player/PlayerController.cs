@@ -204,9 +204,6 @@ public class PlayerController : PawnController
                 armorMod = 0;
                 this.playerWeapon.animParameter = "OneHandAttack";
             }
-            this.DMG_REDUCTION_FACTOR = 0.25f;
-            this.BASE_DMG = 10;
-
             firstTick = false;
         }
     }

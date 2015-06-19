@@ -70,6 +70,13 @@ public class MerchantController : MonoBehaviour {
             this.player.inventory.Apples = this.items[0];
             this.player.inventory.Bread = this.items[1];
             this.player.inventory.Cheese = this.items[2];
+
+            // clear prev. stats
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i] = 0;
+                numItemsPurchased = 0;
+            }
         }
     }
 

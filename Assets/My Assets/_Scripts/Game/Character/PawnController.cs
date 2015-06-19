@@ -446,24 +446,25 @@ public class PawnController : MonoBehaviour
     /// <param name="state">State.</param>
     public void TriggerAnimation(string state)
     {
+        state = state.ToLower();
         switch (state)
         {
             case "attack":
                 this.playerAnimator.SetTrigger("One_Hand_Attack");
                 break;
-            case "AttackMagic":
+            case "attackmagic":
                 this.playerAnimator.SetTrigger("Magic_Attack");
                 break;
-            case "EnergyPotion":
+            case "energypotion":
                 this.playerAnimator.SetTrigger("Magic_Heal");
                 break;
-            case "HealPotion":
+            case "healpotion":
                 this.playerAnimator.SetTrigger("Use_Item");
                 break;
             case "death":
                 this.playerAnimator.SetTrigger("Death");
                 break;
-            case "HealMagic":
+            case "healmagic":
                 this.playerAnimator.SetTrigger("Magic_Up");
                 break;
             case "damage":

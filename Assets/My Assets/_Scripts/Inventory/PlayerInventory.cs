@@ -355,7 +355,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 this.Player.HealForAmount(HealthPotionAmount);
                 this.HealthPotions--;
-                this.Player.TriggerAnimation("healPotion");
+                this.Player.TriggerAnimation("healpotion");
                 return true;
             }
         }
@@ -365,7 +365,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 this.Player.GiveEnergy(EnergyPotionAmount);
                 this.EnergyPotions--;
-                this.Player.TriggerAnimation("EnergyPotion");
+                this.Player.TriggerAnimation("energypotion");
                 return true;
             }
         }

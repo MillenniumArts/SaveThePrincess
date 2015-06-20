@@ -576,6 +576,8 @@ public class PawnController : MonoBehaviour
         playerAnimator.SetFloat("Health", healthPercent);
     }
 
+    #region perform behaviours
+
     /// <summary>
     /// Performs the potion behaviour.
     /// </summary>
@@ -625,6 +627,7 @@ public class PawnController : MonoBehaviour
     {
         TriggerAnimation("block");
     }
+    #endregion perform behaviours
     #endregion protected Functions
 
     #region skeletonTransform

@@ -31,6 +31,7 @@ public class MenuController : MonoBehaviour {
     public int MAX_CREDITS = 5;
 
 	public ItemFactory itemFactory;
+    Vector3 newPos;
 
 	// Use this for initialization
 	void Start () {
@@ -44,18 +45,9 @@ public class MenuController : MonoBehaviour {
 			Debug.Log("Cannot find MenuObject!");
 			return;
 		}
-		CreateCombination[] bodies = GameObject.FindObjectsOfType<CreateCombination> ();
-		// iterate through each, assigning left to left, right to right
-		foreach (CreateCombination bod in bodies) {
-			// get playerController 
-			this.player = bod.GetComponentInParent<PlayerController> ();
-		}
+	
+        this.player = FindObjectOfType<PlayerController>();
 
-		this.player.body.random = false;
-		//this.player.inventory.gameObject.SetActive (false);
-
-		// credits to upgrade character
-		//this.numCredits = null; // set in editor
 		// value per credit:
 		this.healthInc = 10;
 		this.damageInc = 5;

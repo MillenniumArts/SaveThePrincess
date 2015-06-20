@@ -190,11 +190,11 @@ public class PlayerController : PawnController
             }
             else
             {
-                this.damageMod = playerWeapon.GetAtkMod();
-                //this.physicalDamage = physicalDamage - damageMod;
+                this.damageMod = 0;//playerWeapon.GetAtkMod();
+                this.physicalDamage = physicalDamage - damageMod;
                 this.physicalDamage += damageMod;
                 this.armorMod = playerArmor.GetDefMod();
-                //this.armor = armor - armorMod;
+                this.armor = armor - armorMod;
                 this.armor += armorMod;
                 playerWeapon.ClearStats();
                 playerArmor.ClearStats();
@@ -230,11 +230,10 @@ public class PlayerController : PawnController
         PawnControllerStart();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.dollarBalance = 50;
-        this.armorMod = playerArmor.GetDefMod();
-        //this.armor = armor - armorMod;
-        this.armor += armorMod;
         playerArmor.ClearStats();
-        playerArmor.itemName = "None";
+        playerArmor.itemName = "";
+        playerWeapon.itemName = "";
+        damageMod = 0;
         armorMod = 0;
     }
 

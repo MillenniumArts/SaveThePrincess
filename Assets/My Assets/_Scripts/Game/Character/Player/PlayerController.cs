@@ -230,10 +230,11 @@ public class PlayerController : PawnController
         PawnControllerStart();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.dollarBalance = 50;
+        
         playerArmor.ClearStats();
         playerArmor.itemName = "";
         playerWeapon.itemName = "";
-        damageMod = 0;
+        //damageMod = 0;
         armorMod = 0;
     }
 

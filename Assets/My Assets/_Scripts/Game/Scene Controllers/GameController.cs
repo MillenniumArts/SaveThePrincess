@@ -18,7 +18,9 @@ public class GameController : MonoBehaviour
                 playerHasAttacked,
                 attackBarMoving,
                 someoneIsDead,
-                finalFrame;
+                finalFrame,
+                hasSelected,
+                confirmed;
 
     public int score,
                turn,
@@ -33,6 +35,7 @@ public class GameController : MonoBehaviour
                   playerMana,
                   enemyHealth,
                   enemyMana;
+
     public Slider attackMeter;
 
     public float attackAmount;
@@ -52,9 +55,11 @@ public class GameController : MonoBehaviour
     // Inventory Text
     public Text apples, bread, cheese, hPots, ePots, campKits;
 
-    public Button leftPhysAttack = null;
+    public Button leftPhysAttack = null, retreatButton = null, confirmButton = null, cancelButton = null;
 
     private Image background;
+
+    public GameObject confirmPanel = null;
 
     public float startTime, endTime, curTime;
 
@@ -68,6 +73,8 @@ public class GameController : MonoBehaviour
         // INITIALIZE BATTLE SCENE
         combatController.setState(CombatController.BattleStates.START);
 
+        this.confirmPanel.gameObject.SetActive(false);
+
         this.turn = 0;
         PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
@@ -79,6 +86,7 @@ public class GameController : MonoBehaviour
 
         someoneIsDead = false;
         finalFrame = false;
+        hasSelected = false;
 
         // enemy has not healed or attacked yet
         enemyHasHealed = false;
@@ -126,6 +134,7 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(false);
         this.attackMeter.gameObject.SetActive(false);
+        this.retreatButton.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -134,8 +143,26 @@ public class GameController : MonoBehaviour
     public void EnableButtons()
     {
         this.leftPhysAttack.gameObject.SetActive(true);
+        this.retreatButton.gameObject.SetActive(true);
     }
 
+    public void OnRetreat()
+    {
+        // open confirm panel
+        this.confirmPanel.gameObject.SetActive(true);
+    }
+
+    public void Confirm()
+    {
+        confirmed = true;
+        hasSelected = true;
+    }
+
+    public void Cancel() 
+    {
+        confirmed = false;
+        hasSelected = true;
+    }
     /// <summary>
     /// Player Uses the item in inventory specified at index, ends turn.
     /// </summary>
@@ -486,6 +513,20 @@ public class GameController : MonoBehaviour
         this.campKits.text = this.player.inventory.CampKits.ToString();
     }
 
+    private void UpdateConfirmPanel()
+    {
+        if (hasSelected && confirmed)
+        {
+            RetreatFromBattle();
+        }
+        else if (hasSelected && !confirmed)
+        {
+            // close panel
+            this.confirmPanel.gameObject.SetActive(false);
+            hasSelected = false;
+        }
+    }
+
     /// <summary>
     /// Ends the game.
     /// </summary>
@@ -538,11 +579,25 @@ public class GameController : MonoBehaviour
         }
     }
     /// <summary>
+    /// Player chooses to retreat, no rewards from battle. Reload Town
+    /// </summary>
+    private void RetreatFromBattle()
+    {
+        this.player.transform.localPosition = this.prevPos;
+        DontDestroyOnLoad(this.player);
+        if (!waiting)
+        {
+            // restore player mana after battle
+            this.player.remainingEnergy = this.player.totalEnergy;
+            Application.LoadLevel("Town_LVP");
+        }
+    }
+
+    /// <summary>
     /// Loads town scene
     /// </summary>
-    void GoToTown()
+    private void GoToTown()
     {
-        // VICTORY ANIMATION
         // reset position
         this.player.transform.localPosition = this.prevPos;
         // transfer money
@@ -582,6 +637,7 @@ public class GameController : MonoBehaviour
         UpdateScore();
         UpdateBars();
         UpdateAttackBar();
+        UpdateConfirmPanel();
     }
 
     void OnSomeoneDead()

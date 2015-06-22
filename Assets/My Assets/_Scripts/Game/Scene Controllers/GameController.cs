@@ -6,7 +6,6 @@ public class GameController : MonoBehaviour
 {
     public PlayerController player;
     public BaseEnemyController enemy;
-    public GameObject gameObj;
     public GameController gameController;
     public CombatController combatController;
     public InventoryAnimation invAnim;
@@ -24,12 +23,18 @@ public class GameController : MonoBehaviour
 
     public int score,
                turn,
-               ENERGY_REGEN_AMT = 10;
+               ENERGY_REGEN_AMT = 10,
+               currentBattle,
+               remainingBattles;
 
     public float MONEY_TRANSFER_PCT = 0.2f,
                  COOLDOWN_LENGTH = 0.0f,
                  ATTACK_LENGTH,
                  MAGIC_LENGTH;
+
+    public float attackAmount;
+
+    public float startTime, endTime, curTime;
 
     public Slider playerHealth,
                   playerMana,
@@ -37,8 +42,6 @@ public class GameController : MonoBehaviour
                   enemyMana;
 
     public Slider attackMeter;
-
-    public float attackAmount;
 
     private Vector3 prevPos;
 
@@ -55,13 +58,19 @@ public class GameController : MonoBehaviour
     // Inventory Text
     public Text apples, bread, cheese, hPots, ePots, campKits;
 
-    public Button leftPhysAttack = null, retreatButton = null, confirmButton = null, cancelButton = null;
+    // battle counter text
+    public Text battleText;
+
+    public Button leftPhysAttack = null,
+                  retreatButton = null,
+                  confirmButton = null,
+                  cancelButton = null,
+                  inventoryToggleButton = null;
 
     private Image background;
 
     public GameObject confirmPanel = null;
 
-    public float startTime, endTime, curTime;
 
     // Use this for initialization
     void Awake()
@@ -76,6 +85,8 @@ public class GameController : MonoBehaviour
         this.confirmPanel.gameObject.SetActive(false);
 
         this.turn = 0;
+        currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
+        remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
         PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
         this.score = PlayerPrefs.GetInt("score");
@@ -135,6 +146,7 @@ public class GameController : MonoBehaviour
         this.leftPhysAttack.gameObject.SetActive(false);
         this.attackMeter.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
+        this.inventoryToggleButton.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -144,21 +156,28 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
+        this.inventoryToggleButton.gameObject.SetActive(true);
     }
-
+    /// <summary>
+    /// when Retreat button is clicked
+    /// </summary>
     public void OnRetreat()
     {
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
-
+    /// <summary>
+    /// Called from ConfirmPanel
+    /// </summary>
     public void Confirm()
     {
         confirmed = true;
         hasSelected = true;
     }
-
-    public void Cancel() 
+    /// <summary>
+    /// Called from ConfirmPanel
+    /// </summary>
+    public void Cancel()
     {
         confirmed = false;
         hasSelected = true;
@@ -171,7 +190,8 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Using Item number " + index);
         bool pass = false;
-        switch (index){
+        switch (index)
+        {
             case 0:
                 pass = this.player.inventory.EatFood("Apple");
                 break;
@@ -323,7 +343,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                
+
             }
         }
     }
@@ -337,7 +357,7 @@ public class GameController : MonoBehaviour
     {
         if (combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
-           // waiting = true;
+            // waiting = true;
             enemyHasAttacked = true;
             StartCooldown(requiredCooldownLength);
             // animate enemy
@@ -382,9 +402,9 @@ public class GameController : MonoBehaviour
         {
             if (curTime >= endTime)
             {
-                //Debug.Log("WAITING DONE! endTime:" + endTime + "curTime: " + curTime);
                 this.endTime = curTime;
                 this.waiting = false;
+
                 if (!someoneIsDead)
                 {
                     if (combatController.currentState == CombatController.BattleStates.PLAYERANIMATE)
@@ -404,26 +424,38 @@ public class GameController : MonoBehaviour
                     if (!finalFrame)
                     {
                         finalFrame = true;
-
                         if (this.enemy.IsDead())
                         {
                             this.player.TriggerAnimation("victory");
                             this.enemy.TriggerAnimation("death");
+                            StartCooldown(COOLDOWN_LENGTH);
+                            //PlayerVictory();
                         }
 
                         if (this.player.IsDead())
                         {
                             this.enemy.TriggerAnimation("victory");
                             this.player.TriggerAnimation("death");
+                            StartCooldown(COOLDOWN_LENGTH);
+                            //EndGame();
                         }
-                        StartCooldown(COOLDOWN_LENGTH);
                     }
-                        OnSomeoneDead();
+                    else
+                    {
+                        if (this.player.IsDead())
+                        {
+                            EndGame();
+                        }
+                        else if (this.enemy.IsDead())
+                        {
+                            PlayerVictory();
+                        }
+                    }
                 }
             }
         }
     }
-    
+
     /// <summary>
     /// Updates the UI Health/mana bars.
     /// </summary>
@@ -482,8 +514,8 @@ public class GameController : MonoBehaviour
         if (this.enemy.IsDead() && !scoredThisRound)
         {
             this.score++;
-            scoredThisRound = true;
             PlayerPrefs.SetInt("score", score);
+            scoredThisRound = true;
         }
     }
     /// <summary>
@@ -504,6 +536,8 @@ public class GameController : MonoBehaviour
         // score stat
         this.numEnemiesKilledText.text = "SCORE: " + score;
 
+        // battles stat
+        this.battleText.text = currentBattle + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
         // inventory text
         this.apples.text = this.player.inventory.Apples.ToString();
         this.bread.text = this.player.inventory.Bread.ToString();
@@ -535,7 +569,7 @@ public class GameController : MonoBehaviour
         // player dead
         TransferGold();
         this.player.transform.localPosition = this.prevPos;
-        
+
         // check for high score
         if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore"))
         {
@@ -547,6 +581,8 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("turn", 0);
         // reset difficulty
         DifficultyLevel.GetInstance().ResetDifficulty();
+        BattleCounter.GetInstance().ResetCurrentBattleCount();
+        BattleCounter.GetInstance().ResetBattlesNeeded();
 
         if (!waiting)
         {
@@ -564,8 +600,6 @@ public class GameController : MonoBehaviour
         turn = 0;
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
-        // increase difficulty
-        DifficultyLevel.GetInstance().IncreaseDifficulty();
         // return to prev pos
         this.player.transform.localPosition = this.prevPos;
         // enemy dead, fight another and keep player on screen
@@ -585,6 +619,7 @@ public class GameController : MonoBehaviour
     {
         this.player.transform.localPosition = this.prevPos;
         DontDestroyOnLoad(this.player);
+        BattleCounter.GetInstance().ResetCurrentBattleCount();
         if (!waiting)
         {
             // restore player mana after battle
@@ -601,19 +636,19 @@ public class GameController : MonoBehaviour
         // reset position
         this.player.transform.localPosition = this.prevPos;
         // transfer money
-        this.enemy.DropMoney();
+        // this.enemy.DropMoney();
         this.player.dollarBalance += this.enemy.DropMoney();
-        DifficultyLevel.GetInstance().IncreaseDifficulty();
 
         DontDestroyOnLoad(this.player);
         if (!waiting)
         {
+            Debug.Log("Loading Town Scene");
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             Application.LoadLevel("Town_LVP");
         }
     }
-    
+
     /// <summary>
     /// Transfers a portion of player's gold to next game.
     /// </summary>
@@ -640,21 +675,38 @@ public class GameController : MonoBehaviour
         UpdateConfirmPanel();
     }
 
-    void OnSomeoneDead()
+    void PlayerVictory()
     {
-        if (this.player.IsDead())
+        Debug.Log("Winner");
+        // increase number of battles until level up
+        BattleCounter.GetInstance().IncreaseCurrentBattleCount();
+        // if no more battles
+        if (BattleCounter.GetInstance().GetRemainingBattles() <= 0 )
         {
-            // player dead
-            EndGame();
-        }
-        else if (this.enemy.IsDead())
-        {
-            // CHECK WHERE TO GO NEXT!
+            Debug.Log("Increasing Difficulty");
+            // increase difficulty
+            DifficultyLevel.GetInstance().IncreaseDifficulty();
+            // increase number of battles to difficulty level
+            BattleCounter.GetInstance().SetBattlesNeeded(DifficultyLevel.GetInstance().GetDifficultyMultiplier());
+            // start back from 0 battles
+            BattleCounter.GetInstance().ResetCurrentBattleCount();
             
-            // enemy dead
-            GoToTown();
+            //StartCooldown(COOLDOWN_LENGTH);
 
-        }        
+            // go to town, no more battles to be fought this round
+            GoToTown();
+        }
+        else
+        {
+            Debug.Log("On to the next battle!");
+            // check to see if player wants to use a camp kit (only if they have one!)
+            if (this.player.inventory.CampKits > 0)
+            {
+                // check if player wants to camp out before next battle
+                // load camp kit check scene?
+            }
+            LoadNextLevel();
+        }
     }
 
     void CheckDeath()
@@ -673,12 +725,12 @@ public class GameController : MonoBehaviour
         Cooldown();
         CheckDeath();
 
-        if (!waiting )
+        if (!waiting)
         {
             DoEnemyAction();
-            if (someoneIsDead)
+            if (someoneIsDead && !finalFrame)
             {
-                StartCooldown(COOLDOWN_LENGTH*1.5f);
+                StartCooldown(COOLDOWN_LENGTH * 1.5f);
             }
         }
     }

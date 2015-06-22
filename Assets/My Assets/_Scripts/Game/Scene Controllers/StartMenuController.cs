@@ -16,6 +16,13 @@ public class StartMenuController : MonoBehaviour {
 
     void Awake()
     {
+        // reset to level 1
+        DifficultyLevel.GetInstance().ResetDifficulty();
+        // make sure we start at 0
+        BattleCounter.GetInstance().ResetCurrentBattleCount();
+        BattleCounter.GetInstance().ResetBattlesNeeded();
+        // set number of battles
+        BattleCounter.GetInstance().SetBattlesNeeded(DifficultyLevel.GetInstance().GetDifficultyMultiplier());
     }
 
 	public void StartGame(){

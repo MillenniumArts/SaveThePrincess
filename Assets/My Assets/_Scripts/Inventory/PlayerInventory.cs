@@ -297,7 +297,6 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-
     public void AddCampKit(string type, int quantity)
     {
         CampKits += quantity;
@@ -404,8 +403,8 @@ public class PlayerInventory : MonoBehaviour
         this.Apples = 0;
         this.Bread = 0;
         this.Cheese = 0;
-        this.HealthPotions = 1;
-        this.EnergyPotions = 1;
+        this.HealthPotions = 0;
+        this.EnergyPotions = 0;
         //max counts
         this.MaxFood = 3;
         this.MaxPotions = 3;

@@ -36,17 +36,23 @@ public class MerchantController : MonoBehaviour {
                   increaseTwo, 
                   decreaseTwo, 
                   increaseThree, 
-                  decreaseThree;
+                  decreaseThree,
+                  increaseFour,
+                  decreaseFour,
+                  increaseFive,
+                  decreaseFive;
 
     // text to display amount of each item
     public Text quantityOneText, 
                 quantityTwoText, 
-                quantityThreeText;
+                quantityThreeText,
+                quantityFourText,
+                quantityFiveText;
 
    // public int q_1, q_2, q_3;
 
     // total number of items purchased 
-    public int numItemsPurchased;
+    public int numFoodItemsPurchased, numPotionsPurchased;
 
     // purchase button
     public Button purchaseButton;
@@ -60,8 +66,9 @@ public class MerchantController : MonoBehaviour {
         for (int i = 0; i < items.Length; i++)
         {
             items[i] = 0;
-            numItemsPurchased = 0;
         }
+        numFoodItemsPurchased = 0;
+        numPotionsPurchased = 0;
     }
 
     public void ConfirmPurchase()
@@ -70,13 +77,16 @@ public class MerchantController : MonoBehaviour {
             this.player.inventory.Apples = this.items[0];
             this.player.inventory.Bread = this.items[1];
             this.player.inventory.Cheese = this.items[2];
+            this.player.inventory.HealthPotions = this.items[3];
+            this.player.inventory.EnergyPotions = this.items[4];
 
             // clear prev. stats
             for (int i = 0; i < items.Length; i++)
             {
                 items[i] = 0;
-                numItemsPurchased = 0;
             }
+            numFoodItemsPurchased = 0;
+            numPotionsPurchased = 0;
         }
     }
 
@@ -88,23 +98,53 @@ public class MerchantController : MonoBehaviour {
 
     public void IncreaseAmount(int index)
     {
-        if (this.player.inventory.HasRoomInInventoryFor("food", numItemsPurchased))
+        if (index <= 2)
         {
-            items[index]+=1;
-            numItemsPurchased+=1;
+            if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
+            {
+                items[index]+=1;
+                numFoodItemsPurchased+=1;
+            }
+        }else if (index > 2 && index <= 4){
+            if (this.player.inventory.HasRoomInInventoryFor("potion", numPotionsPurchased))
+            {
+                items[index] += 1;
+                numPotionsPurchased += 1;
+            }
+        }
+        else
+        {
+
         }
     }
 
     public void DecreaseAmount(int index) {
 
-        if (items[index] - 1 <= 0){
-            items[index] = 0;
-            numItemsPurchased = 0;
-        }
-        else
+        if (index <= 2)
         {
-            items[index]-=1;
-            numItemsPurchased--;
+            if (items[index] - 1 <= 0)
+            {
+                items[index] = 0;
+                numFoodItemsPurchased = 0;
+            }
+            else
+            {
+                items[index] -= 1;
+                numFoodItemsPurchased--;
+            }
+        }
+        else if (index > 2 && index <= 4)
+        {
+            if (items[index] - 1 <= 0)
+            {
+                items[index] = 0;
+                numPotionsPurchased= 0;
+            }
+            else
+            {
+                items[index] -= 1;
+                numPotionsPurchased--;
+            }
         }
     }
 
@@ -117,7 +157,8 @@ public class MerchantController : MonoBehaviour {
         this.quantityOneText.text = this.items[0].ToString();
         this.quantityTwoText.text = this.items[1].ToString();
         this.quantityThreeText.text = this.items[2].ToString();
-
+        this.quantityFourText.text = this.items[3].ToString();
+        this.quantityFiveText.text = this.items[4].ToString();
 
     }
 
@@ -139,6 +180,17 @@ public class MerchantController : MonoBehaviour {
         // calculate player's remaining balance
         this.remainingBalance = this.playerBalance - this.purchaseBalance;
     }
+    void UpdateButtons()
+    {
+        if (this.purchaseBalance > this.player.dollarBalance)
+        {
+            this.purchaseButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.purchaseButton.gameObject.SetActive(true);
+        }
+    }
 
     void Start()
     {
@@ -149,13 +201,19 @@ public class MerchantController : MonoBehaviour {
         this.items = new int[numItemsForSale];
         this.prices = new int[numItemsForSale];
 
-        // add Item counts to list and set prices
-        for (int i = 0; i < items.Length; i++)
+        // food
+        for (int i = 0; i < 3; i++)
         {
             items[i] = 0;
             prices[i] = 2 * i + 1;
         }
-        // get palyer balance
+        // potions
+        for (int i = 3; i < items.Length; i++)
+        {
+            items[i] = 0;
+            prices[i] = 15;
+        }
+        // get player balance
         this.playerBalance = this.player.dollarBalance;
 
         // get item balance
@@ -169,6 +227,7 @@ public class MerchantController : MonoBehaviour {
     }
 	void Update () {
         UpdateText();
+        UpdateButtons();
         CalculateShop();
 	}
 }

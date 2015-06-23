@@ -65,7 +65,8 @@ public class GameController : MonoBehaviour
                   retreatButton = null,
                   confirmButton = null,
                   cancelButton = null,
-                  inventoryToggleButton = null;
+                  inventoryToggleButton = null,
+                  inventoryHandle = null;
 
     private Image background;
 
@@ -147,6 +148,7 @@ public class GameController : MonoBehaviour
         this.attackMeter.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
+        inventoryHandle.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -157,6 +159,7 @@ public class GameController : MonoBehaviour
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
+        inventoryHandle.gameObject.SetActive(true);
     }
     /// <summary>
     /// when Retreat button is clicked

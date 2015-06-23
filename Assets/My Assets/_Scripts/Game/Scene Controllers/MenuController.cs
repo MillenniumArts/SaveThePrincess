@@ -162,6 +162,8 @@ public class MenuController : MonoBehaviour {
                 this.player.remainingEnergy = this.newEnergy;
 				this.player.armor = this.newArmor;
 
+                EnemyStats.GetInstance().SetEnemyBaseStats(player.remainingHealth, player.remainingEnergy, player.physicalDamage, player.armor);
+
 				DontDestroyOnLoad(this.player);
 
 				Application.LoadLevel (firstSceneToLoad);

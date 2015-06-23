@@ -17,6 +17,7 @@ public class DeathController : MonoBehaviour {
 		this.restartButton.onClick.AddListener (()=>{
 			Destroy(this.player);
 			Application.LoadLevel("StartMenu_LVP");
+            EnemyStats.GetInstance().ResetEnemyBaseStats();
 		});
 	
 		this.healthText.text = "";

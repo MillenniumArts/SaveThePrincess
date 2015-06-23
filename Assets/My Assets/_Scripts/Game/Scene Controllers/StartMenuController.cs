@@ -11,7 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EscapeHandler.instance.GetButtons();
+
 	}
 
     void Awake()
@@ -26,21 +26,13 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
-<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
-=======
-        EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
 
     public void HowToPlay()
     {
-<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
-=======
-        EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
         Application.LoadLevel("HowToPlay_LVP");
     }
 

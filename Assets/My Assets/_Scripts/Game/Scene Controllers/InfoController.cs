@@ -7,7 +7,7 @@ public class InfoController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        EscapeHandler.instance.GetButtons();
+
     }
 
     // Update is called once per frame
@@ -18,11 +18,7 @@ public class InfoController : MonoBehaviour {
 
     public void GoBack()
     {
-<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
-=======
-        EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
         Application.LoadLevel("HowToPlay_LVP");
     }
 }

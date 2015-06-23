@@ -11,20 +11,15 @@ public class DeathController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EscapeHandler.instance.GetButtons();
+
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{
             AudioManager.Instance.PlaySFX("Select");
 			Destroy(this.player);
-<<<<<<< HEAD
             AudioManager.Instance.PlayNewSong("ForestOverworld");
 			Application.LoadLevel("StartMenu_LVP");
-=======
-            EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
             EnemyStats.GetInstance().ResetEnemyBaseStats();
-			Application.LoadLevel("StartMenu_LVP");
 		});
 	
 		this.healthText.text = "";

@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EscapeHandler.instance.GetButtons();
+
 		GameObject menuControllerObject = GameObject.FindWithTag ("MenuController");
 		
 		if (menuControllerObject != null) {
@@ -185,11 +185,7 @@ public class MenuController : MonoBehaviour {
 
     public void GoBack()
     {
-<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
-=======
-        EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
         Application.LoadLevel("StartMenu_LVP");
     }
 

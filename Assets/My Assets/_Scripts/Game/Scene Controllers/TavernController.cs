@@ -22,6 +22,7 @@ public class TavernController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 15;
         NUM_MEALS = 3;
         // get player
@@ -114,6 +115,7 @@ public class TavernController : MonoBehaviour
         AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 

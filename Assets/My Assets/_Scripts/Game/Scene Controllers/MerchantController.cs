@@ -74,11 +74,11 @@ public class MerchantController : MonoBehaviour {
     public void ConfirmPurchase()
     {
         if (this.player.PurchaseItem(purchaseBalance)){
-            this.player.inventory.Apples = this.items[0];
-            this.player.inventory.Bread = this.items[1];
-            this.player.inventory.Cheese = this.items[2];
-            this.player.inventory.HealthPotions = this.items[3];
-            this.player.inventory.EnergyPotions = this.items[4];
+            this.player.inventory.Apples += this.items[0];
+            this.player.inventory.Bread += this.items[1];
+            this.player.inventory.Cheese += this.items[2];
+            this.player.inventory.HealthPotions += this.items[3];
+            this.player.inventory.EnergyPotions += this.items[4];
 
             // clear prev. stats
             for (int i = 0; i < items.Length; i++)

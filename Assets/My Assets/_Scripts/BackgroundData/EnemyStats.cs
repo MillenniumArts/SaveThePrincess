@@ -20,7 +20,6 @@ public class EnemyStats {
     private int currentEnemyHP, currentEnemyEN, currentEnemyATK, currentEnemyDEF;
     private bool firstEnemy = true;
     private int firstCount = 0;
-    private bool bossEnemy = false;
     private int getCount = 0;
 
     /// <summary>

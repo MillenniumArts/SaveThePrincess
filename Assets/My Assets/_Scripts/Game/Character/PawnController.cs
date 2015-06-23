@@ -540,6 +540,28 @@ public class PawnController : MonoBehaviour
         this.weaponComboScript = playerWeapon.GetComponentInChildren<CreateWeaponCombination>();// Sets a reference to the weapon's script.
     }
 
+    // Variables for Swap WeaponHands
+    protected GameObject frontThumb;
+    protected GameObject backThumb;
+    protected GameObject backFingers;
+    protected void SetWeaponHands(CreateWeaponCombination _w)
+    {
+            if (_w.GetWeaponGrip() == true)
+            {
+                // Set hands to one handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.44f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.15f, -0.43f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                // Set hands to two handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.51f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.21f, -0.54f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 45);
+            }
+    }
+
     protected void SetArmor(string name)
     {
         GameObject body = playerBody.gameObject;	// Gets a reference for the body to see if there..
@@ -748,10 +770,11 @@ public class PawnController : MonoBehaviour
     }
 
     #endregion Constructors
-
+   
     //set up default parameters here for all characters in game
     void Start()
     {
+        
     }
 
     // Update is called once per frame

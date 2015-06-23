@@ -6,6 +6,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 	public bool swapNow = false;
 	private bool[] onOff;
 	public bool dagger, hammer, axe, sword, spear;
+    public bool oneHandGrip = true;
 	
 	void Start(){
 		onOff = new bool[11];
@@ -17,22 +18,27 @@ public class CreateWeaponCombination : MonoBehaviour {
 				IsDagger();
                 sprites[5].sortingLayerName = "Weapon1";
                 sprites[6].sortingLayerName = "Weapon1";
+                oneHandGrip = true;
 			}else if(hammer){
 				IsHammer();
-                sprites[5].sortingLayerName = "Weapon2";
+                sprites[5].sortingLayerName = "Weapon1";
                 sprites[6].sortingLayerName = "Weapon2";
+                oneHandGrip = false;
 			}else if(axe){
 				IsAxe();
-                sprites[5].sortingLayerName = "Weapon2";
+                sprites[5].sortingLayerName = "Weapon1";
                 sprites[6].sortingLayerName = "Weapon2";
+                oneHandGrip = false;
 			}else if(sword){
 				IsSword();
                 sprites[5].sortingLayerName = "Weapon1";
                 sprites[6].sortingLayerName = "Weapon1";
+                oneHandGrip = true;
 			}else if(spear){
 				IsSpear();
-                sprites[5].sortingLayerName = "Weapon2";
+                sprites[5].sortingLayerName = "Weapon1";
                 sprites[6].sortingLayerName = "Weapon2";
+                oneHandGrip = false;
 			}else{
 				IsOff();
 			}
@@ -83,6 +89,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[8] = true;
 		onOff[9] = false;
 		onOff[10] = false;
+        oneHandGrip = true;
 	}
 	
 	public void IsAxe(){
@@ -97,6 +104,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[8] = false;
 		onOff[9] = false;
 		onOff[10] = false;
+        oneHandGrip = false;
 	}
 	
 	public void IsHammer(){
@@ -111,6 +119,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[8] = false;
 		onOff[9] = false;
 		onOff[10] = false;
+        oneHandGrip = false;
 	}
 	
 	public void IsSword(){
@@ -125,6 +134,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[8] = true;
 		onOff[9] = false;
 		onOff[10] = false;
+        oneHandGrip = true;
 	}
 	
 	public void IsSpear(){
@@ -139,6 +149,7 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[8] = false;
 		onOff[9] = false;
 		onOff[10] = true;
+        oneHandGrip = false;
 	}
 	
 	public void IsOff(){
@@ -154,4 +165,13 @@ public class CreateWeaponCombination : MonoBehaviour {
 		onOff[9] = false;
 		onOff[10] = false;
 	}
+
+    /// <summary>
+    /// If the return is true then the weapon is onehanded, else it is two handed.
+    /// </summary>
+    /// <returns>If the weapon is onehanded, true or false.</returns>
+    public bool GetWeaponGrip()
+    {
+        return oneHandGrip;
+    }
 }

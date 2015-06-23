@@ -17,15 +17,21 @@ public class HowToPlayController : MonoBehaviour {
 
     public void GoBack()
     {
+<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
+=======
         EscapeHandler.instance.ClearButtons();
+>>>>>>> origin/Develop
         Application.LoadLevel("StartMenu_LVP");
     }
 
     public void StartGame()
     {
+<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
+=======
         EscapeHandler.instance.ClearButtons();
+>>>>>>> origin/Develop
         Application.LoadLevel("CharacterSelect_LVP");
     }
 }

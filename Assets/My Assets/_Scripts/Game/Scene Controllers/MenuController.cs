@@ -185,8 +185,11 @@ public class MenuController : MonoBehaviour {
 
     public void GoBack()
     {
+<<<<<<< HEAD
         AudioManager.Instance.PlaySFX("Select");
+=======
         EscapeHandler.instance.ClearButtons();
+>>>>>>> origin/Develop
         Application.LoadLevel("StartMenu_LVP");
     }
 

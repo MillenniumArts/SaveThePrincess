@@ -101,11 +101,53 @@ public class GameController : MonoBehaviour
         confirmed = false;
         hasSelected = true;
     }
+<<<<<<< HEAD
+    /// <summary>
+    /// Player Uses the item in inventory specified at index, ends turn.
+    /// </summary>
+    /// <param name="index">Index.</param>
+    public void UseItem(int index)
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        Debug.Log("Using Item number " + index);
+        bool pass = false;
+        switch (index)
+        {
+            case 0:
+                pass = this.player.inventory.EatFood("Apple");
+                break;
+            case 1:
+                pass = this.player.inventory.EatFood("Bread");
+                break;
+            case 2:
+                pass = this.player.inventory.EatFood("Cheese");
+                break;
+            case 3:
+                pass = this.player.inventory.UsePotion("Health");
+                break;
+            case 4:
+                pass = this.player.inventory.UsePotion("Energy");
+                break;
+            case 5:
+                //this.player.inventory.UseCampKit();
+                Debug.Log("Now is not the time to use that!");
+                break;
+            default:
+                break;
+        }
+        if (pass)
+        {
+            invAnim.OpenClose();
+            combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+            StartCooldown(COOLDOWN_LENGTH);
+        }
+    }
 
+=======
     #endregion retreat
     #region Battle
     #region Player Choice
-
+>>>>>>> origin/Develop
     /// <summary>
     /// When button is clicked
     /// </summary>
@@ -355,7 +397,6 @@ public class GameController : MonoBehaviour
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
-        AudioManager.Instance.PlaySFX("Select");
         Debug.Log("Using Item number " + index);
         bool pass = false;
         switch (index)

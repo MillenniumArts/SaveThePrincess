@@ -432,6 +432,7 @@ public class GameController : MonoBehaviour
                             this.player.TriggerAnimation("victory");
                             this.enemy.TriggerAnimation("death");
                             StartCooldown(COOLDOWN_LENGTH);
+                            DisableButtons();
                             //PlayerVictory();
                         }
 
@@ -439,6 +440,7 @@ public class GameController : MonoBehaviour
                         {
                             this.enemy.TriggerAnimation("victory");
                             this.player.TriggerAnimation("death");
+                            DisableButtons();
                             StartCooldown(COOLDOWN_LENGTH);
                             //EndGame();
                         }

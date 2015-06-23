@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
 public class EscapeHandler : MonoBehaviour {
 
-    bool paused = false;
+    public bool paused = false;
+    public GameObject pausePanel;
     public Button resume;
+    public Button exit;
 
     #region Singleton
     private static EscapeHandler _instance;
@@ -46,14 +48,32 @@ public class EscapeHandler : MonoBehaviour {
     /// </summary>
     void DoPauseBehaviour()
     {
-
+        if (paused)
+        {
+        }
+        else
+        {
+        }
     }
 
+    public void ResumeGame()
+    {
+        // close panel
+        this.pausePanel.gameObject.SetActive(false);
+        // resume timescale
+        Time.timeScale = 1.0f;
+        paused = false;
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game");
+    }
     #endregion Pause Behaviour
 
     // Use this for initialization
 	void Start () {
-	    
+        this.pausePanel.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -63,17 +83,18 @@ public class EscapeHandler : MonoBehaviour {
             if (!paused) {
                 if (Time.timeScale == 1.0f){
                     Time.timeScale = 0;
-                    Debug.Log("Pausing game");
-                    DoPauseBehaviour();
+                    paused = true;
+                    this.pausePanel.gameObject.SetActive(true);
                 }
-                else
-                {
-                    Time.timeScale = 1.0f;
-                    Debug.Log("Unpausing game");
-
-                }
-            
             }
+            else
+            {
+                Time.timeScale = 1.0f;
+                paused = false;
+                this.pausePanel.gameObject.SetActive(false);
+
+            }
+            DoPauseBehaviour();
         }
 	}
 }

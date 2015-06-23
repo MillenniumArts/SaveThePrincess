@@ -111,6 +111,7 @@ public class TavernController : MonoBehaviour
     {
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 

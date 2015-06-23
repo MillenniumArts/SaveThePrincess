@@ -76,6 +76,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();
         // inventory animator

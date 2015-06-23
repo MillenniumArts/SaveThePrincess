@@ -11,7 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        EscapeHandler.instance.GetButtons();
 	}
 
     void Awake()

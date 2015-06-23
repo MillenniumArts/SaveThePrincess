@@ -8,6 +8,7 @@ public class EscapeHandler : MonoBehaviour {
     public GameObject pausePanel;
     public Button resume;
     public Button exit;
+    Button[] buttons;
 
     #region Singleton
     private static EscapeHandler _instance;
@@ -46,7 +47,33 @@ public class EscapeHandler : MonoBehaviour {
     /// <summary>
     /// Do what's needed in the Pause state
     /// </summary>
+    public void OnPause()
+    {
+        // disable buttons
+        
 
+        foreach (Button b in buttons)
+        {
+            // if the button is not part of the pause panel
+            if (!b.Equals(this.resume) || !b.Equals(this.exit))
+            {
+                b.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void OnUnPause()
+    {
+        // re-enable buttons
+        foreach (Button b in buttons)
+        {
+            // if the button is not part of the pause panel
+            if (!b.Equals(this.resume) || !b.Equals(this.exit))
+            {
+                b.gameObject.SetActive(true);
+            }
+        }
+    }
 
     public void ResumeGame()
     {
@@ -55,6 +82,7 @@ public class EscapeHandler : MonoBehaviour {
         // resume timescale
         Time.timeScale = 1.0f;
         paused = false;
+        OnUnPause();
     }
 
     public void QuitGame()
@@ -65,9 +93,19 @@ public class EscapeHandler : MonoBehaviour {
     }
     #endregion Pause Behaviour
 
-    // Use this for initialization
+    public void ClearButtons()
+    {
+        buttons = null;
+    }
+
+    public void GetButtons()
+    {
+        buttons = FindObjectsOfType<Button>();
+    }
+
 	void Start () {
         this.pausePanel.gameObject.SetActive(paused);
+        GetButtons();
 	}
 	
 	// Update is called once per frame
@@ -79,6 +117,7 @@ public class EscapeHandler : MonoBehaviour {
                     Time.timeScale = 0;
                     paused = true;
                     this.pausePanel.gameObject.SetActive(true);
+                    OnPause();
                 }
             }
             else
@@ -86,6 +125,7 @@ public class EscapeHandler : MonoBehaviour {
                 Time.timeScale = 1.0f;
                 paused = false;
                 this.pausePanel.gameObject.SetActive(false);
+                OnUnPause();
             }
         }
 	}

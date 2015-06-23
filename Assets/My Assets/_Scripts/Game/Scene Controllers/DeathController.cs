@@ -11,7 +11,7 @@ public class DeathController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{

@@ -14,22 +14,26 @@ public class TownController : MonoBehaviour {
 
 	public void GoToBattle(){
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel ("Battle_LVP");
 	}
 
 	public void GoToStore(){
 		DontDestroyOnLoad (this.player);
+        EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel ("Store_LVP");
 	}
 
 	public void GoToInn(){
 		DontDestroyOnLoad (this.player);
+        EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel ("Tavern_LVP");
 	}
 
     public void GoToMerchant()
     {
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Merchant_LVP");
     }
 

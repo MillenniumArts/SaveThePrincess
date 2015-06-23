@@ -194,6 +194,8 @@ public class MerchantController : MonoBehaviour {
 
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
+
         // get player
         this.player = FindObjectOfType<PlayerController>();
 

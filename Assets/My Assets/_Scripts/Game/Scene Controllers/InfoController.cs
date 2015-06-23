@@ -7,7 +7,7 @@ public class InfoController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        EscapeHandler.instance.GetButtons();
     }
 
     // Update is called once per frame

@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        EscapeHandler.instance.GetButtons();
 		GameObject menuControllerObject = GameObject.FindWithTag ("MenuController");
 		
 		if (menuControllerObject != null) {

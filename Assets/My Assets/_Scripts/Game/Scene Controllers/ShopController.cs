@@ -27,10 +27,12 @@ public class ShopController : MonoBehaviour
 
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
+
         firstTick = false;
         //start = true;
         this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.gameObject.transform.localPosition;
+        this.prevPos = this.player.gameObject.transform.localPosition;\
 
         // relocate player
         Vector3 newSpot = new Vector3(-5.7f, -2f);

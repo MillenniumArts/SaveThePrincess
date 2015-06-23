@@ -533,13 +533,13 @@ public class GameController : MonoBehaviour
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
         this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
         this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
-        this.leftArmorText.text = "AMR: " + this.player.GetTotalArmor();
-        this.rightArmorText.text = "AMR: " + this.enemy.GetTotalArmor();
-        this.leftDamageText.text = "DMG: " + this.player.GetTotalDamage();
-        this.rightDamageText.text = "DMG: " + this.enemy.GetTotalDamage();
+        this.leftArmorText.text =  this.player.GetTotalArmor().ToString();
+        this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
+        this.leftDamageText.text = this.player.GetTotalDamage().ToString();
+        this.rightDamageText.text = this.enemy.GetTotalDamage().ToString();
 
         // score stat
-        this.numEnemiesKilledText.text = "SCORE: " + score;
+        this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
         this.battleText.text = currentBattle + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";

@@ -432,6 +432,7 @@ public class GameController : MonoBehaviour
                             this.player.TriggerAnimation("victory");
                             this.enemy.TriggerAnimation("death");
                             StartCooldown(COOLDOWN_LENGTH);
+                            DisableButtons();
                             //PlayerVictory();
                         }
 
@@ -439,6 +440,7 @@ public class GameController : MonoBehaviour
                         {
                             this.enemy.TriggerAnimation("victory");
                             this.player.TriggerAnimation("death");
+                            DisableButtons();
                             StartCooldown(COOLDOWN_LENGTH);
                             //EndGame();
                         }
@@ -531,13 +533,13 @@ public class GameController : MonoBehaviour
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
         this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
         this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
-        this.leftArmorText.text = "AMR: " + this.player.GetTotalArmor();
-        this.rightArmorText.text = "AMR: " + this.enemy.GetTotalArmor();
-        this.leftDamageText.text = "DMG: " + this.player.GetTotalDamage();
-        this.rightDamageText.text = "DMG: " + this.enemy.GetTotalDamage();
+        this.leftArmorText.text =  this.player.GetTotalArmor().ToString();
+        this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
+        this.leftDamageText.text = this.player.GetTotalDamage().ToString();
+        this.rightDamageText.text = this.enemy.GetTotalDamage().ToString();
 
         // score stat
-        this.numEnemiesKilledText.text = "SCORE: " + score;
+        this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
         this.battleText.text = currentBattle + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
@@ -603,10 +605,9 @@ public class GameController : MonoBehaviour
         turn = 0;
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
-        // return to prev pos
-        this.player.transform.localPosition = this.prevPos;
         // enemy dead, fight another and keep player on screen
         DontDestroyOnLoad(this.player);
+        this.player.dollarBalance += this.enemy.DropMoney();
         if (!waiting)
         {
             // restore player mana after battle

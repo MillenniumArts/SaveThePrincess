@@ -339,7 +339,7 @@ public class PlayerInventory : MonoBehaviour
                 return true;
             }
         }else if (food == "Cheese"){
-            if (Cheese < 0) {
+            if (Cheese > 0) {
                 Debug.Log(this.Player.name + " Has restored " + CheesePercent + " health and energy!");
                 this.Player.HealForPercent(CheesePercent);
                 this.Player.GiveEnergyPercent(CheesePercent);

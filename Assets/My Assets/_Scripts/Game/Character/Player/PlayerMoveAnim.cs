@@ -13,4 +13,11 @@ public class PlayerMoveAnim : MonoBehaviour {
 		if(parentAnimator != null)
 			parentAnimator.SetTrigger("MoveBack");
 	}
+    /// <summary>
+    /// Temporary should be in it's own class.
+    /// </summary>
+    public void PlaySound()
+    {
+        AudioManager.Instance.PlaySFX("Hit");
+    }
 }

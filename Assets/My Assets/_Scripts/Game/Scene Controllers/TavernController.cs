@@ -74,6 +74,7 @@ public class TavernController : MonoBehaviour
 
     public void PurchaseMeal(int index)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (totalHealthMissing > 0)
         {
             if (player.PurchaseItem(prices[index]))
@@ -90,6 +91,7 @@ public class TavernController : MonoBehaviour
 
     public void SleepForNight()
     {
+        AudioManager.Instance.PlaySFX("Select");
         // if player needs health OR mana
         if (totalHealthMissing > 0)
         {
@@ -109,6 +111,7 @@ public class TavernController : MonoBehaviour
 
     public void LeaveInn()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
         Application.LoadLevel("Town_LVP");

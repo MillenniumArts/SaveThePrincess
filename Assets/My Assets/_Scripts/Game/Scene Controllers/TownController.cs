@@ -16,11 +16,8 @@ public class TownController : MonoBehaviour {
 	public void GoToBattle(){
         AudioManager.Instance.PlaySFX("Select");
         DontDestroyOnLoad(this.player);
-<<<<<<< HEAD
         AudioManager.Instance.PlayNewSong("ForestBattle");
-=======
         EscapeHandler.instance.ClearButtons();
->>>>>>> origin/Develop
 		Application.LoadLevel ("Battle_LVP");
 	}
 

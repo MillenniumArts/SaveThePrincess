@@ -603,10 +603,9 @@ public class GameController : MonoBehaviour
         turn = 0;
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
-        // return to prev pos
-        this.player.transform.localPosition = this.prevPos;
         // enemy dead, fight another and keep player on screen
         DontDestroyOnLoad(this.player);
+        this.player.dollarBalance += this.enemy.DropMoney();
         if (!waiting)
         {
             // restore player mana after battle

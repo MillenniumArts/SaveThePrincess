@@ -46,15 +46,7 @@ public class EscapeHandler : MonoBehaviour {
     /// <summary>
     /// Do what's needed in the Pause state
     /// </summary>
-    void DoPauseBehaviour()
-    {
-        if (paused)
-        {
-        }
-        else
-        {
-        }
-    }
+
 
     public void ResumeGame()
     {
@@ -67,13 +59,15 @@ public class EscapeHandler : MonoBehaviour {
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game");
+        Debug.Log("Quitting Game. DOES NOT EXIT IN EDITOR");
+        // SAVE STATS NEEDED HERE!
+        Application.Quit();
     }
     #endregion Pause Behaviour
 
     // Use this for initialization
 	void Start () {
-        this.pausePanel.gameObject.SetActive(false);
+        this.pausePanel.gameObject.SetActive(paused);
 	}
 	
 	// Update is called once per frame
@@ -92,9 +86,7 @@ public class EscapeHandler : MonoBehaviour {
                 Time.timeScale = 1.0f;
                 paused = false;
                 this.pausePanel.gameObject.SetActive(false);
-
             }
-            DoPauseBehaviour();
         }
 	}
 }

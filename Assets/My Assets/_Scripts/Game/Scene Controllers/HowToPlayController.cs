@@ -17,13 +17,11 @@ public class HowToPlayController : MonoBehaviour {
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Application.LoadLevel("StartMenu_LVP");
     }
 
     public void StartGame()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Application.LoadLevel("CharacterSelect_LVP");
     }
 }

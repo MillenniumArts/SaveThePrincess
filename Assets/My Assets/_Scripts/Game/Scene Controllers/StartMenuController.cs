@@ -26,23 +26,19 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
-        AudioManager.Instance.PlaySFX("Select");
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
 
     public void HowToPlay()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Application.LoadLevel("HowToPlay_LVP");
     }
 
 	public void ResetHiScore(){
-        AudioManager.Instance.PlaySFX("Select");
 		PlayerPrefs.SetInt ("hiscore", 0);
 	}
 
 	public void ResetScore(){
-        AudioManager.Instance.PlaySFX("Select");
 		PlayerPrefs.SetInt ("score", 0);
 	}
 

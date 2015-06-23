@@ -166,7 +166,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnRetreat()
     {
-        AudioManager.Instance.PlaySFX("Select");
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
@@ -175,7 +174,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Select");
         confirmed = true;
         hasSelected = true;
     }
@@ -184,7 +182,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Cancel()
     {
-        AudioManager.Instance.PlaySFX("Select");
         confirmed = false;
         hasSelected = true;
     }
@@ -194,7 +191,6 @@ public class GameController : MonoBehaviour
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
-        AudioManager.Instance.PlaySFX("Select");
         Debug.Log("Using Item number " + index);
         bool pass = false;
         switch (index)
@@ -235,7 +231,6 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        AudioManager.Instance.PlaySFX("Select");
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();
@@ -633,7 +628,6 @@ public class GameController : MonoBehaviour
         {
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            AudioManager.Instance.PlayNewSong("ForestOverworld");
             Application.LoadLevel("Town_LVP");
         }
     }
@@ -655,7 +649,6 @@ public class GameController : MonoBehaviour
             Debug.Log("Loading Town Scene");
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            AudioManager.Instance.PlayNewSong("ForestOverworld");
             Application.LoadLevel("Town_LVP");
         }
     }

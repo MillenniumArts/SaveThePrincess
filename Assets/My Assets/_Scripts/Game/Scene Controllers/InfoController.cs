@@ -18,7 +18,6 @@ public class InfoController : MonoBehaviour {
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Application.LoadLevel("HowToPlay_LVP");
     }
 }

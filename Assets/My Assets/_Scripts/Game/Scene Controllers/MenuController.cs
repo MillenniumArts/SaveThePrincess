@@ -76,21 +76,18 @@ public class MenuController : MonoBehaviour {
 		// button handling - INCREASE
 		this.healthUp.onClick.AddListener (()=>{
 			if (this.numCredits > 0){
-                AudioManager.Instance.PlaySFX("Select");
 				numCredits--;
 				this.newHealth += this.healthInc;
 			}
 		});
 		this.damageUp.onClick.AddListener (()=>{
 			if (this.numCredits > 0){
-                AudioManager.Instance.PlaySFX("Select");
 				numCredits--;
 				this.newDamage += this.damageInc;
 			}
 		});
 		this.armorUp.onClick.AddListener (()=>{
 			if (this.numCredits > 0){
-                AudioManager.Instance.PlaySFX("Select");
 				numCredits--;
 				this.newArmor += this.armorInc;
 			}
@@ -99,7 +96,6 @@ public class MenuController : MonoBehaviour {
         {
             if (this.numCredits > 0)
             {
-                AudioManager.Instance.PlaySFX("Select");
                 numCredits--;
                 this.newEnergy += this.energyInc;
             }
@@ -109,7 +105,6 @@ public class MenuController : MonoBehaviour {
 		// DECREASE STATS
 		this.healthDown.onClick.AddListener (()=>{
 			if (this.numCredits < MAX_CREDITS){
-                AudioManager.Instance.PlaySFX("Select");
 				if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
 					this.newHealth = this.baseHealth;
 				else{
@@ -120,7 +115,6 @@ public class MenuController : MonoBehaviour {
 		});
 		this.damageDown.onClick.AddListener (()=>{
 			if (this.numCredits < 10){
-                AudioManager.Instance.PlaySFX("Select");
 				if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
 					this.newDamage = this.baseDamage;
 				else{
@@ -131,7 +125,6 @@ public class MenuController : MonoBehaviour {
 		});
 		this.armorDown.onClick.AddListener (()=>{
 			if (this.numCredits < 10){
-                AudioManager.Instance.PlaySFX("Select");
 				if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
 					this.newArmor = this.baseArmor;
 				else{
@@ -145,7 +138,6 @@ public class MenuController : MonoBehaviour {
         {
             if (this.numCredits < 10)
             {
-                AudioManager.Instance.PlaySFX("Select");
                 if (this.newEnergy - this.energyInc < this.baseEnergy)	// make sure they can't go below base stats
                     this.newEnergy = this.baseEnergy;
                 else
@@ -159,7 +151,6 @@ public class MenuController : MonoBehaviour {
 		// LOAD NEXT SCENE WITH THIS PLAYER
 		this.confirm.onClick.AddListener (()=>{
 			if (numCredits == 0){
-                AudioManager.Instance.PlaySFX("Select");
 				this.player.totalHealth = this.newHealth;
 				this.player.remainingHealth = this.newHealth;
 				this.player.physicalDamage = this.newDamage;
@@ -180,12 +171,11 @@ public class MenuController : MonoBehaviour {
 
 			}
 		});
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+
 	}
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Select");
         Application.LoadLevel("StartMenu_LVP");
     }
 

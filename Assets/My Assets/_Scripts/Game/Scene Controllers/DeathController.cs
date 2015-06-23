@@ -15,9 +15,7 @@ public class DeathController : MonoBehaviour {
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{
-            AudioManager.Instance.PlaySFX("Select");
 			Destroy(this.player);
-            AudioManager.Instance.PlayNewSong("ForestOverworld");
 			Application.LoadLevel("StartMenu_LVP");
             EnemyStats.GetInstance().ResetEnemyBaseStats();
 		});
@@ -30,7 +28,7 @@ public class DeathController : MonoBehaviour {
 		this.moneyText.text = "";
 
 		UpdateText ();
-        AudioManager.Instance.PlayNewSong("Death");
+
 	}
 
 	void UpdateText(){

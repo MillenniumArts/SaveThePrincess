@@ -9,6 +9,7 @@ public class TownController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
 	}
 

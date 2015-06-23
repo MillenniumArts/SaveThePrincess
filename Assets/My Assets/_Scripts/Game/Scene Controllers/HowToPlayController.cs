@@ -17,11 +17,13 @@ public class HowToPlayController : MonoBehaviour {
 
     public void GoBack()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
     }
 
     public void StartGame()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("CharacterSelect_LVP");
     }
 }

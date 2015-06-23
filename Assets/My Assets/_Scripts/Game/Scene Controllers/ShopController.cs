@@ -32,7 +32,7 @@ public class ShopController : MonoBehaviour
         firstTick = false;
         //start = true;
         this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.gameObject.transform.localPosition;\
+        this.prevPos = this.player.gameObject.transform.localPosition;
 
         // relocate player
         Vector3 newSpot = new Vector3(-5.7f, -2f);
@@ -56,6 +56,7 @@ public class ShopController : MonoBehaviour
     public void ExitStore()
     {
         this.player.gameObject.transform.localPosition = prevPos;
+        EscapeHandler.instance.ClearButtons();
         DontDestroyOnLoad(this.player);
         Application.LoadLevel("Town_LVP");
     }

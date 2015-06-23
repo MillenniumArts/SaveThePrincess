@@ -22,6 +22,7 @@ public class TavernController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 15;
         NUM_MEALS = 3;
         // get player

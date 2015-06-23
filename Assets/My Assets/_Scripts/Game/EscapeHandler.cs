@@ -8,7 +8,7 @@ public class EscapeHandler : MonoBehaviour {
     public GameObject pausePanel;
     public Button resume;
     public Button exit;
-    Button[] buttons;
+    public Button[] buttons;
 
     #region Singleton
     private static EscapeHandler _instance;
@@ -50,8 +50,6 @@ public class EscapeHandler : MonoBehaviour {
     public void OnPause()
     {
         // disable buttons
-        
-
         foreach (Button b in buttons)
         {
             // if the button is not part of the pause panel
@@ -87,7 +85,7 @@ public class EscapeHandler : MonoBehaviour {
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game. DOES NOT EXIT IN EDITOR");
+        Debug.Log("Quitting Game. DOES NOT EXIT IN EDITOR!!!");
         // SAVE STATS NEEDED HERE!
         Application.Quit();
     }

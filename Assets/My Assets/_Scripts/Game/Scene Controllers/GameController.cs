@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
                 finalFrame,
                 hasSelected,
                 confirmed;
+    bool increasing = true;
 
     public int score,
                turn,
@@ -72,96 +73,7 @@ public class GameController : MonoBehaviour
 
     public GameObject confirmPanel = null;
 
-
-    // Use this for initialization
-    void Awake()
-    {
-        EscapeHandler.instance.GetButtons();
-        // Combat AI Controller reference
-        this.combatController = FindObjectOfType<CombatController>();
-        // inventory animator
-        this.invAnim = FindObjectOfType<InventoryAnimation>();
-        // INITIALIZE BATTLE SCENE
-        combatController.setState(CombatController.BattleStates.START);
-
-        this.confirmPanel.gameObject.SetActive(false);
-
-        this.turn = 0;
-        currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
-        remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
-        PlayerPrefs.SetInt("turn", turn);
-        this.scoredThisRound = false;
-        this.score = PlayerPrefs.GetInt("score");
-
-        COOLDOWN_LENGTH = 2.0f;
-        ATTACK_LENGTH = 1.85f;
-        MAGIC_LENGTH = 1.5f;
-
-        someoneIsDead = false;
-        finalFrame = false;
-        hasSelected = false;
-
-        // enemy has not healed or attacked yet
-        enemyHasHealed = false;
-        enemyHasAttacked = false;
-
-        // get game Controller Object
-        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-        if (gameControllerObject != null)
-        {
-            gameController = gameControllerObject.GetComponent<GameController>();
-        }
-        if (gameControllerObject == null)
-        {
-            Debug.Log("Cannot find GameObject!");
-            return;
-        }
-
-        // get playerController 
-        this.player = FindObjectOfType<PlayerController>();
-
-        // carry over previous balance
-        this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
-        PlayerPrefs.SetInt("carryover", 0);
-        // reposition player
-        this.prevPos = this.player.transform.localPosition;
-        Vector3 newSpot = new Vector3(-4.5f, -2.5f);
-        this.player.gameObject.transform.localPosition = newSpot;
-
-        // get enemy reference
-        this.enemy = FindObjectOfType<BaseEnemyController>();
-
-        // Set Attack Meter Amount
-        this.attackMeter.maxValue = 100;
-        this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
-        this.attackMeter.gameObject.SetActive(false);
-
-        // combat starts after initialization is finished
-        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
-    }
-
-    /// <summary>
-    /// Disables the buttons.
-    /// </summary>
-    public void DisableButtons()
-    {
-        this.leftPhysAttack.gameObject.SetActive(false);
-        this.attackMeter.gameObject.SetActive(false);
-        this.retreatButton.gameObject.SetActive(false);
-        this.inventoryToggleButton.gameObject.SetActive(false);
-        inventoryHandle.gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Enables the buttons.
-    /// </summary>
-    public void EnableButtons()
-    {
-        this.leftPhysAttack.gameObject.SetActive(true);
-        this.retreatButton.gameObject.SetActive(true);
-        this.inventoryToggleButton.gameObject.SetActive(true);
-        inventoryHandle.gameObject.SetActive(true);
-    }
+    #region Retreat
     /// <summary>
     /// when Retreat button is clicked
     /// </summary>
@@ -186,46 +98,9 @@ public class GameController : MonoBehaviour
         confirmed = false;
         hasSelected = true;
     }
-    /// <summary>
-    /// Player Uses the item in inventory specified at index, ends turn.
-    /// </summary>
-    /// <param name="index">Index.</param>
-    public void UseItem(int index)
-    {
-        Debug.Log("Using Item number " + index);
-        bool pass = false;
-        switch (index)
-        {
-            case 0:
-                pass = this.player.inventory.EatFood("Apple");
-                break;
-            case 1:
-                pass = this.player.inventory.EatFood("Bread");
-                break;
-            case 2:
-                pass = this.player.inventory.EatFood("Cheese");
-                break;
-            case 3:
-                pass = this.player.inventory.UsePotion("Health");
-                break;
-            case 4:
-                pass = this.player.inventory.UsePotion("Energy");
-                break;
-            case 5:
-                //this.player.inventory.UseCampKit();
-                Debug.Log("Now is not the time to use that!");
-                break;
-            default:
-                break;
-        }
-        if (pass)
-        {
-            invAnim.OpenClose();
-            combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-            StartCooldown(COOLDOWN_LENGTH);
-        }
-    }
-
+    #endregion retreat
+    #region Battle
+    #region Player Choice
     /// <summary>
     /// When button is clicked
     /// </summary>
@@ -271,7 +146,8 @@ public class GameController : MonoBehaviour
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
-
+    #endregion Player Choice
+    #region Enemy Choice
     /// <summary>
     /// Does the enemy AI Behaviour.
     /// </summary>
@@ -385,6 +261,8 @@ public class GameController : MonoBehaviour
             waiting = false;
     }
 
+    #endregion Enemy Choice
+    #region Cooldown logic
     /// <summary>
     /// Starts the cooldown for specified boolean.
     /// </summary>
@@ -461,6 +339,74 @@ public class GameController : MonoBehaviour
             }
         }
     }
+    #endregion Cooldown Logic
+    #endregion Battle
+    #region Item Use
+
+    /// <summary>
+    /// Player Uses the item in inventory specified at index, ends turn.
+    /// </summary>
+    /// <param name="index">Index.</param>
+    public void UseItem(int index)
+    {
+        Debug.Log("Using Item number " + index);
+        bool pass = false;
+        switch (index)
+        {
+            case 0:
+                pass = this.player.inventory.EatFood("Apple");
+                break;
+            case 1:
+                pass = this.player.inventory.EatFood("Bread");
+                break;
+            case 2:
+                pass = this.player.inventory.EatFood("Cheese");
+                break;
+            case 3:
+                pass = this.player.inventory.UsePotion("Health");
+                break;
+            case 4:
+                pass = this.player.inventory.UsePotion("Energy");
+                break;
+            case 5:
+                //this.player.inventory.UseCampKit();
+                Debug.Log("Now is not the time to use that!");
+                break;
+            default:
+                break;
+        }
+        if (pass)
+        {
+            invAnim.OpenClose();
+            combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
+            StartCooldown(COOLDOWN_LENGTH);
+        }
+    }
+
+    #endregion Item Use
+    #region UI
+    /// <summary>
+    /// Disables the buttons.
+    /// </summary>
+    public void DisableButtons()
+    {
+        this.leftPhysAttack.gameObject.SetActive(false);
+        this.attackMeter.gameObject.SetActive(false);
+        this.retreatButton.gameObject.SetActive(false);
+        this.inventoryToggleButton.gameObject.SetActive(false);
+        inventoryHandle.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Enables the buttons.
+    /// </summary>
+    public void EnableButtons()
+    {
+        this.leftPhysAttack.gameObject.SetActive(true);
+        this.retreatButton.gameObject.SetActive(true);
+        this.inventoryToggleButton.gameObject.SetActive(true);
+        inventoryHandle.gameObject.SetActive(true);
+    }
 
     /// <summary>
     /// Updates the UI Health/mana bars.
@@ -477,7 +423,6 @@ public class GameController : MonoBehaviour
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
 
-    bool increasing = true;
     public void UpdateAttackBar()
     {
         int counter = 0;
@@ -552,7 +497,9 @@ public class GameController : MonoBehaviour
         this.ePots.text = this.player.inventory.EnergyPotions.ToString();
         this.campKits.text = this.player.inventory.CampKits.ToString();
     }
-
+    /// <summary>
+    /// Handles Retreat UI ("confirm Panel")
+    /// </summary>
     private void UpdateConfirmPanel()
     {
         if (hasSelected && confirmed)
@@ -567,6 +514,20 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates UI
+    /// </summary>
+    void UpdateDisplay()
+    {
+        UpdateText();
+        UpdateScore();
+        UpdateBars();
+        UpdateAttackBar();
+        UpdateConfirmPanel();
+    }
+
+    #endregion UI
+    #region level loading
     /// <summary>
     /// Ends the game.
     /// </summary>
@@ -653,7 +614,8 @@ public class GameController : MonoBehaviour
             Application.LoadLevel("Town_LVP");
         }
     }
-
+    #endregion level loading
+    #region Misc. Game functionality methods
     /// <summary>
     /// Transfers a portion of player's gold to next game.
     /// </summary>
@@ -666,18 +628,6 @@ public class GameController : MonoBehaviour
             goldAmount = 100;
         }
         PlayerPrefs.SetInt("carryover", goldAmount);
-    }
-
-    /// <summary>
-    /// Updates display for user
-    /// </summary>
-    void UpdateDisplay()
-    {
-        UpdateText();
-        UpdateScore();
-        UpdateBars();
-        UpdateAttackBar();
-        UpdateConfirmPanel();
     }
 
     void PlayerVictory()
@@ -722,6 +672,75 @@ public class GameController : MonoBehaviour
             someoneIsDead = false;
     }
 
+    #endregion Misc. Game functionality methods
+    #region monobehaviour
+    // Use this for initialization
+    void Start()
+    {
+        EscapeHandler.instance.GetButtons();
+        // Combat AI Controller reference
+        this.combatController = FindObjectOfType<CombatController>();
+        // inventory animator
+        this.invAnim = FindObjectOfType<InventoryAnimation>();
+        // INITIALIZE BATTLE SCENE
+        combatController.setState(CombatController.BattleStates.START);
+
+        this.confirmPanel.gameObject.SetActive(false);
+
+        this.turn = 0;
+        currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
+        remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
+        PlayerPrefs.SetInt("turn", turn);
+        this.scoredThisRound = false;
+        this.score = PlayerPrefs.GetInt("score");
+
+        COOLDOWN_LENGTH = 2.0f;
+        ATTACK_LENGTH = 1.85f;
+        MAGIC_LENGTH = 1.5f;
+
+        someoneIsDead = false;
+        finalFrame = false;
+        hasSelected = false;
+
+        // enemy has not healed or attacked yet
+        enemyHasHealed = false;
+        enemyHasAttacked = false;
+
+        // get game Controller Object
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
+        if (gameControllerObject == null)
+        {
+            Debug.Log("Cannot find GameObject!");
+            return;
+        }
+
+        // get playerController 
+        this.player = FindObjectOfType<PlayerController>();
+
+        // carry over previous balance
+        this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
+        PlayerPrefs.SetInt("carryover", 0);
+        // reposition player
+        this.prevPos = this.player.transform.localPosition;
+        Vector3 newSpot = new Vector3(-4.5f, -2.5f);
+        this.player.gameObject.transform.localPosition = newSpot;
+
+        // get enemy reference
+        this.enemy = FindObjectOfType<BaseEnemyController>();
+
+        // Set Attack Meter Amount
+        this.attackMeter.maxValue = 100;
+        this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
+        this.attackMeter.gameObject.SetActive(false);
+
+        // combat starts after initialization is finished
+        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -740,3 +759,4 @@ public class GameController : MonoBehaviour
         }
     }
 }
+    #endregion monoBehaviour

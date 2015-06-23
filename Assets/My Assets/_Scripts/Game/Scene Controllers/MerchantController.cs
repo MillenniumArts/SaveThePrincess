@@ -93,6 +93,7 @@ public class MerchantController : MonoBehaviour {
     public void LeaveMerchant()
     {
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 

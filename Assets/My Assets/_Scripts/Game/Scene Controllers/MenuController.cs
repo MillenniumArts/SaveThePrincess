@@ -176,6 +176,7 @@ public class MenuController : MonoBehaviour {
 
     public void GoBack()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
     }
 

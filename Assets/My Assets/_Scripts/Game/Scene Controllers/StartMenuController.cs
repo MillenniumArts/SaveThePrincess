@@ -26,11 +26,13 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
+        EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
 
     public void HowToPlay()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("HowToPlay_LVP");
     }
 

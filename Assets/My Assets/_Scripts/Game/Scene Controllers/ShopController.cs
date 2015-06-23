@@ -27,8 +27,6 @@ public class ShopController : MonoBehaviour
 
     void Start()
     {
-        EscapeHandler.instance.GetButtons();
-
         firstTick = false;
         //start = true;
         this.player = FindObjectOfType<PlayerController>();
@@ -57,7 +55,6 @@ public class ShopController : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
-        EscapeHandler.instance.ClearButtons();
         DontDestroyOnLoad(this.player);
         Application.LoadLevel("Town_LVP");
     }

@@ -96,7 +96,6 @@ public class MerchantController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Select");
         DontDestroyOnLoad(this.player);
-        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 
@@ -199,8 +198,6 @@ public class MerchantController : MonoBehaviour {
 
     void Start()
     {
-        EscapeHandler.instance.GetButtons();
-
         // get player
         this.player = FindObjectOfType<PlayerController>();
 

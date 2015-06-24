@@ -49,6 +49,14 @@ public class NotificationHandler : MonoBehaviour {
         // set up content/title
         this.title.text = nTitle;
         this.content.text = nContent;
+        GetButtons();
+        foreach (Button b in buttons)
+        {
+            if (!b.Equals(this.confirm))
+            {
+                b.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Notify()
@@ -58,16 +66,35 @@ public class NotificationHandler : MonoBehaviour {
 
     public void Confirm()
     {
+        foreach (Button b in buttons)
+        {
+            if (!b.Equals(this.confirm))
+            {
+                b.gameObject.SetActive(true);
+            }
+        }
         // clear content
         this.title.text = null;
         this.content.text = null;
         // disable panel
         this.gameObject.SetActive(false);
+
+        ClearButtons();
+    }
+    public void ClearButtons()
+    {
+        buttons = null;
+    }
+
+    public void GetButtons()
+    {
+        buttons = FindObjectsOfType<Button>();
     }
 
 	// Use this for initialization
 	void Start () {
         this.gameObject.SetActive(false);
+        GetButtons();
 	}
 	
 	// Update is called once per frame

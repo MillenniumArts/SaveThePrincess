@@ -19,6 +19,6 @@ public class InfoController : MonoBehaviour {
     public void GoBack()
     {
         EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("HowToPlay_LVP");
+        Application.LoadLevel("StartMenu_LVP");
     }
 }

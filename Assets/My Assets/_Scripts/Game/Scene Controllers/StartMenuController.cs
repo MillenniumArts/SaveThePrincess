@@ -36,6 +36,12 @@ public class StartMenuController : MonoBehaviour {
         Application.LoadLevel("HowToPlay_LVP");
     }
 
+    public void Info()
+    {
+        EscapeHandler.instance.ClearButtons();
+        Application.LoadLevel("InfoScene_LVP");
+    }
+
 	public void ResetHiScore(){
 		PlayerPrefs.SetInt ("hiscore", 0);
 	}
@@ -43,7 +49,7 @@ public class StartMenuController : MonoBehaviour {
 	public void ResetScore(){
 		PlayerPrefs.SetInt ("score", 0);
 	}
-
+    
 	private void GetScore(){
 		this.hiScoreText.text = "High Score: " + PlayerPrefs.GetInt("hiscore").ToString ();
 		this.resetScoreText.text = "Reset Score: " + PlayerPrefs.GetInt ("score").ToString ();

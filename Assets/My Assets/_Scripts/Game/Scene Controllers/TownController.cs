@@ -40,6 +40,6 @@ public class TownController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
+        this.playerBalance.text = this.player.dollarBalance.ToString() ;
 	}
 }

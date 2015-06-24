@@ -44,11 +44,16 @@ public class NotificationHandler : MonoBehaviour {
 
     public void MakeNotification(string nTitle, string nContent)
     {
+        // enable panel
+        this.gameObject.SetActive(true);
         // set up content/title
         this.title.text = nTitle;
         this.content.text = nContent;
-        // enable panel
-        this.gameObject.SetActive(true);
+    }
+
+    public void Notify()
+    {
+        MakeNotification("Title", "CONTENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public void Confirm()

@@ -93,6 +93,7 @@ public class MerchantController : MonoBehaviour {
     public void LeaveMerchant()
     {
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 
@@ -194,6 +195,9 @@ public class MerchantController : MonoBehaviour {
 
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
+        NotificationHandler.instance.MakeNotification("Merchant", "Welcome to the merchant! Feel free to buy yourself some food or potions to help sustain through battles!");
+
         // get player
         this.player = FindObjectOfType<PlayerController>();
 

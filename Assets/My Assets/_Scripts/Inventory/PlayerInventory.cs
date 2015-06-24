@@ -358,24 +358,30 @@ public class PlayerInventory : MonoBehaviour
 
     public bool UsePotion(string potion)
     {
-        if (potion == "Health")
+        if (this.HealthPotions > 0)
         {
-            if (this.Player.remainingHealth < this.Player.totalHealth)
+            if (potion == "Health")
             {
-                this.Player.HealForAmount(HealthPotionAmount);
-                this.HealthPotions--;
-                this.Player.TriggerAnimation("healpotion");
-                return true;
+                if (this.Player.remainingHealth < this.Player.totalHealth)
+                {
+                    this.Player.HealForAmount(HealthPotionAmount);
+                    this.HealthPotions--;
+                    this.Player.TriggerAnimation("healpotion");
+                    return true;
+                }
             }
         }
         else if (potion == "Energy")
         {
-            if (this.Player.remainingEnergy < this.Player.totalEnergy)
+            if (this.EnergyPotions > 0)
             {
-                this.Player.GiveEnergyAmount(EnergyPotionAmount);
-                this.EnergyPotions--;
-                this.Player.TriggerAnimation("energypotion");
-                return true;
+                if (this.Player.remainingEnergy < this.Player.totalEnergy)
+                {
+                    this.Player.GiveEnergyAmount(EnergyPotionAmount);
+                    this.EnergyPotions--;
+                    this.Player.TriggerAnimation("energypotion");
+                    return true;
+                }
             }
         }
         else

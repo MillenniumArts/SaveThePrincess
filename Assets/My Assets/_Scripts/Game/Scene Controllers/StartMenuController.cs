@@ -11,7 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        EscapeHandler.instance.GetButtons();
 	}
 
     void Awake()
@@ -26,12 +26,20 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
+        EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
 
     public void HowToPlay()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("HowToPlay_LVP");
+    }
+
+    public void Info()
+    {
+        EscapeHandler.instance.ClearButtons();
+        Application.LoadLevel("InfoScene_LVP");
     }
 
 	public void ResetHiScore(){
@@ -41,7 +49,7 @@ public class StartMenuController : MonoBehaviour {
 	public void ResetScore(){
 		PlayerPrefs.SetInt ("score", 0);
 	}
-
+    
 	private void GetScore(){
 		this.hiScoreText.text = "High Score: " + PlayerPrefs.GetInt("hiscore").ToString ();
 		this.resetScoreText.text = "Reset Score: " + PlayerPrefs.GetInt ("score").ToString ();

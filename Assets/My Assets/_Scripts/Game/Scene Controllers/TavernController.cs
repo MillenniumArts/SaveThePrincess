@@ -22,6 +22,7 @@ public class TavernController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 15;
         NUM_MEALS = 3;
         // get player
@@ -53,8 +54,8 @@ public class TavernController : MonoBehaviour
     private void UpdateText()
     {
         this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-        this.healthText.text = "Health: " + this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
+        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
+        this.playerBalance.text = "$" + this.player.dollarBalance;
 
         if (totalHealthMissing > 0)
         {
@@ -111,6 +112,7 @@ public class TavernController : MonoBehaviour
     {
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 

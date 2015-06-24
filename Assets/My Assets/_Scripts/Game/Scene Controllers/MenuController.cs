@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        EscapeHandler.instance.GetButtons();
 		GameObject menuControllerObject = GameObject.FindWithTag ("MenuController");
 		
 		if (menuControllerObject != null) {
@@ -176,6 +176,7 @@ public class MenuController : MonoBehaviour {
 
     public void GoBack()
     {
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
     }
 

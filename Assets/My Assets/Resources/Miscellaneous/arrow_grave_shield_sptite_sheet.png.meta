@@ -1,16 +1,16 @@
 fileFormatVersion: 2
 guid: 8a32ada2daad7ff4a81400f50c22fcfb
-timeCreated: 1435162667
+timeCreated: 1435162916
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: arrow_grave_shield_sptite_sheet_0
-    21300002: arrow_grave_shield_sptite_sheet_1
-    21300004: arrow_grave_shield_sptite_sheet_2
-    21300006: arrow_grave_shield_sptite_sheet_3
-    21300008: arrow_grave_shield_sptite_sheet_4
-    21300010: arrow_grave_shield_sptite_sheet_5
-    21300012: arrow_grave_shield_sptite_sheet_6
+    21300000: Tombstone
+    21300002: ArrowUp
+    21300004: ArrowDown
+    21300006: Plus
+    21300008: Minus
+    21300010: defenseSymbol
+    21300012: GoBack
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,7 +56,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: arrow_grave_shield_sptite_sheet_0
+    - name: Tombstone
       rect:
         serializedVersion: 2
         x: 491
@@ -64,9 +64,9 @@ TextureImporter:
         width: 699
         height: 1025
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_1
+    - name: ArrowUp
       rect:
         serializedVersion: 2
         x: 3066
@@ -74,9 +74,9 @@ TextureImporter:
         width: 435
         height: 670
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_2
+    - name: ArrowDown
       rect:
         serializedVersion: 2
         x: 3774
@@ -84,9 +84,9 @@ TextureImporter:
         width: 435
         height: 670
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_3
+    - name: Plus
       rect:
         serializedVersion: 2
         x: 1744
@@ -94,9 +94,9 @@ TextureImporter:
         width: 281
         height: 224
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_4
+    - name: Minus
       rect:
         serializedVersion: 2
         x: 2393
@@ -104,9 +104,9 @@ TextureImporter:
         width: 218
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_5
+    - name: defenseSymbol
       rect:
         serializedVersion: 2
         x: 533
@@ -114,9 +114,9 @@ TextureImporter:
         width: 579
         height: 546
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: arrow_grave_shield_sptite_sheet_6
+    - name: GoBack
       rect:
         serializedVersion: 2
         x: 3197
@@ -124,7 +124,7 @@ TextureImporter:
         width: 814
         height: 495
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

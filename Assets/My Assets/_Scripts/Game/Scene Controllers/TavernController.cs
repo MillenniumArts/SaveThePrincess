@@ -54,8 +54,8 @@ public class TavernController : MonoBehaviour
     private void UpdateText()
     {
         this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-        this.healthText.text = "Health: " + this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.playerBalance.text = "Balance: $" + this.player.dollarBalance;
+        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
+        this.playerBalance.text = "$" + this.player.dollarBalance;
 
         if (totalHealthMissing > 0)
         {

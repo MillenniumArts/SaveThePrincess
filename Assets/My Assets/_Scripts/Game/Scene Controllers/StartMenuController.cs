@@ -11,6 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
 	}
 
@@ -26,27 +27,32 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
+        AudioManager.Instance.PlaySFX("Select");
         EscapeHandler.instance.ClearButtons();
 		Application.LoadLevel("CharacterSelect_LVP");
 	}
 
     public void HowToPlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("HowToPlay_LVP");
     }
 
     public void Info()
     {
+        AudioManager.Instance.PlaySFX("Select");
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("InfoScene_LVP");
     }
 
 	public void ResetHiScore(){
+        AudioManager.Instance.PlaySFX("Select");
 		PlayerPrefs.SetInt ("hiscore", 0);
 	}
 
 	public void ResetScore(){
+        AudioManager.Instance.PlaySFX("Select");
 		PlayerPrefs.SetInt ("score", 0);
 	}
     

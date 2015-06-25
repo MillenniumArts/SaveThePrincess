@@ -22,6 +22,7 @@ public class TavernController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 15;
         NUM_MEALS = 3;
@@ -75,6 +76,7 @@ public class TavernController : MonoBehaviour
 
     public void PurchaseMeal(int index)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (totalHealthMissing > 0)
         {
             if (player.PurchaseItem(prices[index]))
@@ -91,6 +93,7 @@ public class TavernController : MonoBehaviour
 
     public void SleepForNight()
     {
+        AudioManager.Instance.PlaySFX("Select");
         // if player needs health OR mana
         if (totalHealthMissing > 0)
         {
@@ -110,6 +113,7 @@ public class TavernController : MonoBehaviour
 
     public void LeaveInn()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();

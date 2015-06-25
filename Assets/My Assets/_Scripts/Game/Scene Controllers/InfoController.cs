@@ -7,6 +7,7 @@ public class InfoController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
     }
 
@@ -18,6 +19,7 @@ public class InfoController : MonoBehaviour {
 
     public void GoBack()
     {
+        AudioManager.Instance.PlaySFX("Select");
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
     }

@@ -63,6 +63,7 @@ public class MerchantController : MonoBehaviour {
 
     public void CancelPurchase()
     {
+        AudioManager.Instance.PlaySFX("Select");
         for (int i = 0; i < items.Length; i++)
         {
             items[i] = 0;
@@ -73,6 +74,7 @@ public class MerchantController : MonoBehaviour {
 
     public void ConfirmPurchase()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (this.player.PurchaseItem(purchaseBalance)){
             this.player.inventory.Apples += this.items[0];
             this.player.inventory.Bread += this.items[1];
@@ -92,6 +94,7 @@ public class MerchantController : MonoBehaviour {
 
     public void LeaveMerchant()
     {
+        AudioManager.Instance.PlaySFX("Select");
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
@@ -99,6 +102,7 @@ public class MerchantController : MonoBehaviour {
 
     public void IncreaseAmount(int index)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (index <= 2)
         {
             if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
@@ -120,7 +124,7 @@ public class MerchantController : MonoBehaviour {
     }
 
     public void DecreaseAmount(int index) {
-
+        AudioManager.Instance.PlaySFX("Select");
         if (index <= 2)
         {
             if (items[index] - 1 <= 0)
@@ -195,6 +199,7 @@ public class MerchantController : MonoBehaviour {
 
     void Start()
     {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
         NotificationHandler.instance.MakeNotification("Merchant", "Welcome to the merchant! Feel free to buy yourself some food or potions to help sustain through battles!");
 

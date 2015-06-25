@@ -27,6 +27,7 @@ public class ShopController : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
 
         firstTick = false;
@@ -55,6 +56,7 @@ public class ShopController : MonoBehaviour
 
     public void ExitStore()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
         EscapeHandler.instance.ClearButtons();
         DontDestroyOnLoad(this.player);
@@ -63,6 +65,7 @@ public class ShopController : MonoBehaviour
 
     public void SelectItem(int buttonNum)
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
@@ -83,6 +86,7 @@ public class ShopController : MonoBehaviour
 
     public void BuyItem()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")

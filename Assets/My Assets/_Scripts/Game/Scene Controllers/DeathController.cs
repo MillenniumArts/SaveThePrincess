@@ -11,10 +11,12 @@ public class DeathController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        AudioManager.Instance.PlayNewSong("Death");
         EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{
+            AudioManager.Instance.PlaySFX("Select");
 			Destroy(this.player);
             EscapeHandler.instance.ClearButtons();
             EnemyStats.GetInstance().ResetEnemyBaseStats();

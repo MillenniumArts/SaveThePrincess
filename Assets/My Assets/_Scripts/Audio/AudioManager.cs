@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
     #region Game Object Singleton
     /// <summary>
@@ -30,8 +31,10 @@ public class AudioManager : MonoBehaviour {
     }
     #endregion Game Object Singleton
 
-    [SerializeField] private GameObject[] sfx;
-    [SerializeField] private GameObject[] songs;
+    [SerializeField]
+    private GameObject[] sfx;
+    [SerializeField]
+    private GameObject[] songs;
     private AudioSource oldSong;
     private bool isSongPlaying = false;
 

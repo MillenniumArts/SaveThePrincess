@@ -30,7 +30,7 @@ public class MenuController : MonoBehaviour {
     public int MAX_CREDITS = 5;
 
 	public ItemFactory itemFactory;
-    Vector3 newPos;
+    Vector3 newPos, prevPos;
 
 	// Use this for initialization
 	void Start () {
@@ -41,11 +41,11 @@ public class MenuController : MonoBehaviour {
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;
         }
-        else
-        {
-            this.player = FindObjectOfType<PlayerController>();
-        }
-
+        
+        this.player = FindObjectOfType<PlayerController>();
+        this.prevPos = this.player.transform.localPosition;
+        Vector3 newSpot = new Vector3(-7.5f, -2.5f);
+        this.player.gameObject.transform.localPosition = newSpot;
 
 		// value per credit:
 		this.healthInc = 10;

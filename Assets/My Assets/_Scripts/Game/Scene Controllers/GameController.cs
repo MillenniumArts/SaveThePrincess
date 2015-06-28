@@ -181,23 +181,24 @@ public class GameController : MonoBehaviour
                         this.enemy.Attack(this.player, attackAmount);
                     }
                 }
-            }
-            else
-            {
-                // chance to heal if enemy has potion
-                if (!enemyHasHealed)
-                {
-                    Debug.Log(this.enemy.name + " healed for 25 hp");
-                    this.enemy.TriggerAnimation("HealPotion");
-                    this.enemy.HealForAmount(25);
-                    this.enemyHasHealed = true;
-                }
                 else
                 {
-                    // no potions to heal, LAST RESORT ATTACK!
-                    Debug.Log(this.enemy.name + " attacks!");
-                    this.enemy.Attack(this.player, attackAmount);
+                    // chance to heal if enemy has potion
+                    if (!enemyHasHealed)
+                    {
+                        Debug.Log(this.enemy.name + " healed for 25 hp");
+                        this.enemy.TriggerAnimation("HealPotion");
+                        this.enemy.HealForAmount(25);
+                        this.enemyHasHealed = true;
+                    }
+                    else
+                    {
+                        // no potions to heal, LAST RESORT ATTACK!
+                        Debug.Log(this.enemy.name + " attacks!");
+                        this.enemy.Attack(this.player, attackAmount);
+                    }
                 }
+
             }
             OnEnemyActionUsed(this.player, cdReq);
         }
@@ -553,7 +554,7 @@ public class GameController : MonoBehaviour
             Application.LoadLevel("Battle_LVP");
         }
     }
-    
+
     /// <summary>
     /// Player chooses to retreat, no rewards from battle. Reload Town
     /// </summary>
@@ -596,12 +597,17 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.player);
         if (!waiting)
         {
-            Debug.Log("Loading Town Scene");
+            Debug.Log("Loading Stat Scene");
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            Application.LoadLevel("CharacterSelect_LVP");
-            PlayerPrefs.SetInt("midgame",1);
+            //Give player extra 10 health
+            this.player.totalHealth += 10;
+            this.player.remainingHealth += 10;
+            this.player.dollarBalance += this.enemy.DropMoney();
+            this.player.transform.localPosition = this.prevPos;
 
+            Application.LoadLevel("MidGameStatSelect_LVP");
+            PlayerPrefs.SetInt("midgame", 1);
         }
     }
 
@@ -638,7 +644,7 @@ public class GameController : MonoBehaviour
             //GoToTown();
             LoadStatSelect();
             // Stat Select?
-            
+
 
         }
         else

@@ -126,5 +126,6 @@ public class EscapeHandler : MonoBehaviour {
                 OnUnPause();
             }
         }
+        
 	}
 }

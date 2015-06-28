@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour {
                    energyUp= null,
                    energyDown = null, 
 				   confirm = null,
-                   backButton ;
+                   backButton = null ;
 
 	private int baseHealth, baseArmor, baseDamage, baseEnergy, 
 				healthInc, armorInc, damageInc, energyInc,

@@ -159,9 +159,9 @@ public class PawnController : MonoBehaviour
                 int trueDamage = this.physicalDamageToTake - this.armor;
                 if (trueDamage < 0)
                     trueDamage = 0;
-                int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
+                int reducedDamage = Mathf.RoundToInt(((this.physicalDamageToTake - trueDamage) / 2));
 
-            defecit = trueDamage + reducedDamage;
+                defecit = trueDamage + reducedDamage;
                 Debug.Log("True Damage! ->" + defecit + "("+trueDamage+" true damage, "+ reducedDamage+" reduced damage)");
             }
             else

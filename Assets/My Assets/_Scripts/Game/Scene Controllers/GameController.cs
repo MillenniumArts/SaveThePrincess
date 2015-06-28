@@ -168,12 +168,11 @@ public class GameController : MonoBehaviour
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
             {
-                int r = Random.Range(0, 10);
                 //enemy health < 25% 
                 if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth))
                 {
                     //50% chance of physical vs magic
-                    r = Random.Range(0, 10);
+                    int r = Random.Range(0, 10);
                     if (r > 5)
                     {
                         // physical
@@ -181,54 +180,26 @@ public class GameController : MonoBehaviour
                         cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, attackAmount);
                     }
-                    else if (r <= 5)
-                    {
-                        //Magical	
-                        Debug.Log(this.enemy.name + " uses a Magic Attack!");
-                        bool pass = this.enemy.MagicAttack(this.player, attackAmount);
-                        // if there is not enough mana to cast a magic attack
-                        if (!pass)
-                        {
-                            //50% chance of mana potion or physical attack instead
-                            r = Random.Range(0, 10);
-                            if (r > 5)
-                            {
-                                Debug.Log("Instead of casting Magic, " + this.enemy.name + " attacks!");
-                                cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                                this.enemy.Attack(this.player, attackAmount);
-                            }
-                            else
-                            {
-                                Debug.Log("Enemy Uses a mana potion");
-                                this.enemy.TriggerAnimation("HealPotion");
-                                this.enemy.GiveEnergyAmount(10);
-                            }
-                        }
-                    }
                 }
-                else
-                {
-                    // chance to heal if enemy has potion
-                    if (!enemyHasHealed)
-                    {
-                        Debug.Log(this.enemy.name + " healed for 25 hp");
-                        this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.HealForAmount(25);
-                        this.enemyHasHealed = true;
-                    }
-                    else
-                    {
-                        // no potions to heal, LAST RESORT ATTACK!
-                        Debug.Log(this.enemy.name + " attacks!");
-                        this.enemy.Attack(this.player, attackAmount);
-                    }
-                }
-                OnEnemyActionUsed(this.player, cdReq);
             }
             else
             {
-
+                // chance to heal if enemy has potion
+                if (!enemyHasHealed)
+                {
+                    Debug.Log(this.enemy.name + " healed for 25 hp");
+                    this.enemy.TriggerAnimation("HealPotion");
+                    this.enemy.HealForAmount(25);
+                    this.enemyHasHealed = true;
+                }
+                else
+                {
+                    // no potions to heal, LAST RESORT ATTACK!
+                    Debug.Log(this.enemy.name + " attacks!");
+                    this.enemy.Attack(this.player, attackAmount);
+                }
             }
+            OnEnemyActionUsed(this.player, cdReq);
         }
     }
 
@@ -483,7 +454,7 @@ public class GameController : MonoBehaviour
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
         this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
         this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
-        this.leftArmorText.text =  this.player.GetTotalArmor().ToString();
+        this.leftArmorText.text = this.player.GetTotalArmor().ToString();
         this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
         this.leftDamageText.text = this.player.GetTotalDamage().ToString();
         this.rightDamageText.text = this.enemy.GetTotalDamage().ToString();
@@ -582,6 +553,7 @@ public class GameController : MonoBehaviour
             Application.LoadLevel("Battle_LVP");
         }
     }
+    
     /// <summary>
     /// Player chooses to retreat, no rewards from battle. Reload Town
     /// </summary>
@@ -618,11 +590,21 @@ public class GameController : MonoBehaviour
             Application.LoadLevel("Town_LVP");
         }
     }
-    #endregion level loading
-    #region Misc. Game functionality methods
-    /// <summary>
-    /// Transfers a portion of player's gold to next game.
-    /// </summary>
+
+    private void LoadStatSelect()
+    {
+        DontDestroyOnLoad(this.player);
+        if (!waiting)
+        {
+            Debug.Log("Loading Town Scene");
+            // restore player mana after battle
+            this.player.remainingEnergy = this.player.totalEnergy;
+            Application.LoadLevel("CharacterSelect_LVP");
+            PlayerPrefs.SetInt("midgame",1);
+
+        }
+    }
+
     private void TransferGold()
     {
         int goldAmount = Mathf.FloorToInt((this.player.dollarBalance * MONEY_TRANSFER_PCT));
@@ -640,7 +622,7 @@ public class GameController : MonoBehaviour
         // increase number of battles until level up
         BattleCounter.GetInstance().IncreaseCurrentBattleCount();
         // if no more battles
-        if (BattleCounter.GetInstance().GetRemainingBattles() <= 0 )
+        if (BattleCounter.GetInstance().GetRemainingBattles() <= 0)
         {
             Debug.Log("Increasing Difficulty");
             // increase difficulty
@@ -649,11 +631,15 @@ public class GameController : MonoBehaviour
             BattleCounter.GetInstance().SetBattlesNeeded(DifficultyLevel.GetInstance().GetDifficultyMultiplier());
             // start back from 0 battles
             BattleCounter.GetInstance().ResetCurrentBattleCount();
-            
+
             //StartCooldown(COOLDOWN_LENGTH);
 
             // go to town, no more battles to be fought this round
-            GoToTown();
+            //GoToTown();
+            LoadStatSelect();
+            // Stat Select?
+            
+
         }
         else
         {

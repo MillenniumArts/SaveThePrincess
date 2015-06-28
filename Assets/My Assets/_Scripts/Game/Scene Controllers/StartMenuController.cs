@@ -17,6 +17,7 @@ public class StartMenuController : MonoBehaviour {
 
     void Awake()
     {
+        PlayerPrefs.SetInt("midgame", 0);
         // reset to level 1
         DifficultyLevel.GetInstance().ResetDifficulty();
         // make sure we start at 0

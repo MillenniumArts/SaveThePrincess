@@ -7,7 +7,6 @@ public class MenuController : MonoBehaviour {
 	public string firstSceneToLoad;
 
 	public PlayerController player;
-	public MenuController menuController;
 
 	[SerializeField]
 	private Button healthUp = null, 
@@ -37,16 +36,12 @@ public class MenuController : MonoBehaviour {
 	void Start () {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
-		GameObject menuControllerObject = GameObject.FindWithTag ("MenuController");
-		
-		if (menuControllerObject != null) {
-			menuController = menuControllerObject.GetComponent<MenuController> ();
-		} 
-		if (menuController == null) {
-			Debug.Log("Cannot find MenuObject!");
-			return;
-		}
-	
+
+	    if (PlayerPrefs.GetInt("midgame") == 1){
+            this.backButton.gameObject.SetActive(false);
+            this.numCredits = 1;
+        }
+
         this.player = FindObjectOfType<PlayerController>();
 
 		// value per credit:

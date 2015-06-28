@@ -41,8 +41,11 @@ public class MenuController : MonoBehaviour {
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;
         }
+        else
+        {
+            this.player = FindObjectOfType<PlayerController>();
+        }
 
-        this.player = FindObjectOfType<PlayerController>();
 
 		// value per credit:
 		this.healthInc = 10;

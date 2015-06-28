@@ -149,6 +149,10 @@ public class ShopController : MonoBehaviour
 
             // IF WEAPON STATS ARE NOT INITIATED HERE WE GET THE FIRESALE
 
+            // NEW ALGORITHM
+            // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
+
+
             this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
 
             int score = PlayerPrefs.GetInt("score");

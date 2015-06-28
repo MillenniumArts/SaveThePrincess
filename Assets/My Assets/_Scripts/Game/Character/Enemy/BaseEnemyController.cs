@@ -17,9 +17,9 @@ public class BaseEnemyController : PawnController {
 
     public bool isAnimating;
 
-    private PlayerController player;
+    //private PlayerController player;
 
-    private int totalStats;
+    private int healthEnergy;
 
 	#endregion Variables
 	
@@ -61,25 +61,24 @@ public class BaseEnemyController : PawnController {
     /// </summary>
     private void CreateStats()
     {
-        int playerTotalStats = player.GetTotalStats();
-        totalStats = playerTotalStats + Mathf.FloorToInt((playerTotalStats * Random.Range(-0.2f, 0.1f)));
-        totalHealth = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
-        totalEnergy = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
-
-        int remainingStats = totalStats - totalHealth - totalEnergy;
-        physicalDamage = Mathf.FloorToInt(remainingStats * Random.Range(0.3f, 0.7f));
-        armor = remainingStats - physicalDamage;
-
-        Debug.Log("PlayerTotalStats: " + playerTotalStats + 
-            " EnemyTotalStats: " + totalStats + 
-            " EnemyTotalHealth: " + totalHealth + 
+        /*int totalHealthEnergy = player.GetTotalHeatlhEnergyStats();
+        healthEnergy = totalHealthEnergy + Mathf.FloorToInt((totalHealthEnergy * Random.Range(-0.2f, 0.2f)));
+        totalHealth = Mathf.FloorToInt(healthEnergy * Random.Range(0.45f, 0.75f));
+        totalEnergy = healthEnergy - totalHealth;
+        physicalDamage = (int)(player.GetTotalArmor() + player.GetTotalArmor() * Random.Range(-0.2f, 0.1f));
+        armor = (int)(player.GetTotalDamage() + player.GetTotalDamage() * Random.Range(-0.2f, 0.1f));*/
+        totalHealth = EnemyStats.GetInstance().GetNewEnemyHP();
+        totalEnergy = EnemyStats.GetInstance().GetNewEnemyEN();
+        physicalDamage = EnemyStats.GetInstance().GetNewEnemyATK();
+        armor = EnemyStats.GetInstance().GetNewEnemyDEF();
+        Debug.Log(" EnemyTotalHealth: " + totalHealth +
             " EnemyTotalEnergy: " + totalEnergy +
-            " EnemyPhysicalDamaga: " + physicalDamage + 
+            " EnemyPhysicalDamaga: " + physicalDamage +
             " EnemyArmor: " + armor);
     }
 
 	private void EnemyStart(){
-		this.dollarBalance = 25;
+		this.dollarBalance = 35;
         CreateStats();
         remainingEnergy = totalEnergy;
         remainingHealth = totalHealth;
@@ -89,7 +88,7 @@ public class BaseEnemyController : PawnController {
 	/// Drops a random amount of money after enemy dies.
 	/// </summary>
 	public int DropMoney(){
-		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) , this.dollarBalance);
+		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) + 1 , this.dollarBalance);
 	}
 
 	#endregion Private functions
@@ -105,14 +104,12 @@ public class BaseEnemyController : PawnController {
 
     void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
+        //player = FindObjectOfType<PlayerController>();
         isAnimating = false;
     }
 
 	void Update(){
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
 	}
 	#endregion MonoBehaviour
-
-
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -7,23 +7,27 @@ public class DeathController : MonoBehaviour {
 	public Button restartButton = null; 	// assign in editor
 	public PlayerController player;
 
-	public Text healthText, magicText, armorText, damageText, moneyText, hiScoreText;
+	public Text healthText, energyText, armorText, damageText, moneyText, scoreText;
 
 	// Use this for initialization
 	void Start () {
-
+        AudioManager.Instance.PlayNewSong("Death");
+        EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{
+            AudioManager.Instance.PlaySFX("Select");
 			Destroy(this.player);
+            EscapeHandler.instance.ClearButtons();
+            EnemyStats.GetInstance().ResetEnemyBaseStats();
 			Application.LoadLevel("StartMenu_LVP");
 		});
 	
 		this.healthText.text = "";
 		this.armorText.text = "";
-		this.magicText.text = "";
+		this.energyText.text = "";
 		this.damageText.text = "";
-		this.hiScoreText.text = "";
+		this.scoreText.text = "";
 		this.moneyText.text = "";
 
 		UpdateText ();
@@ -31,17 +35,17 @@ public class DeathController : MonoBehaviour {
 	}
 
 	void UpdateText(){
-		this.healthText.text = "HEALTH: " + this.player.totalHealth;
-		
-		this.magicText.text = "MAGIC: " + this.player.magicalDamage;
-		
-		this.armorText.text = "ARMOR: " + this.player.armor;
-		
-		this.damageText.text = "DAMAGE: " + this.player.physicalDamage;
+        this.healthText.text = this.player.totalHealth.ToString();
 
-		this.moneyText.text = "MONEY: " + this.player.dollarBalance;
+        this.energyText.text = this.player.totalEnergy.ToString();
+
+        this.armorText.text = this.player.armor.ToString();
+
+        this.damageText.text = this.player.physicalDamage.ToString();
+
+        this.moneyText.text = this.player.dollarBalance.ToString();
 		
-		this.hiScoreText.text = "HI SCORE: " + PlayerPrefs.GetInt("hiscore");
+		this.scoreText.text = PlayerPrefs.GetInt("score").ToString();
 	}
 
 	// Update is called once per frame

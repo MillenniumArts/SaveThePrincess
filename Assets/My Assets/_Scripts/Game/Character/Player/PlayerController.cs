@@ -16,6 +16,10 @@ public class PlayerController : PawnController
     /// </summary>
     public int numUsableItems;
 
+    /// <summary>
+    /// The player's Inventory
+    /// </summary>
+    public PlayerInventory inventory;
     #endregion Variables
 
     #region Public functions
@@ -72,7 +76,7 @@ public class PlayerController : PawnController
     }
 
     /// <summary>
-    /// Purchases the item.
+    /// Purchases the item and returns true if player has enough money, returns false if not.
     /// </summary>
     /// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
     /// <param name="itemCost">Item cost.</param>
@@ -96,13 +100,22 @@ public class PlayerController : PawnController
     /// <param name="w">The weapon to be transfered.</param>
     public void TransferPurchasedWeapon(Item w)
     {
-        this.physicalDamage = physicalDamage - damageMod;
+        this.physicalDamage -= damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
         this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
         this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
+        if (playerWeapon.GetItemSubClass() == "Spear")
+        {
+            playerAnimator.SetBool("IsSpearAttack", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsSpearAttack", false);
+        }
         this.damageMod = w.GetAtkMod();
-        this.physicalDamage = physicalDamage + damageMod;
+        this.physicalDamage += damageMod;
+        SetWeaponHands(w.gameObject.GetComponentInChildren<CreateWeaponCombination>());
     }
 
     /// <summary>
@@ -178,11 +191,11 @@ public class PlayerController : PawnController
             }
             else
             {
-                this.damageMod = playerWeapon.GetAtkMod();
-                //this.physicalDamage = physicalDamage - damageMod;
+                this.damageMod = 0;//playerWeapon.GetAtkMod();
+                this.physicalDamage = physicalDamage - damageMod;
                 this.physicalDamage += damageMod;
                 this.armorMod = playerArmor.GetDefMod();
-                //this.armor = armor - armorMod;
+                this.armor = armor - armorMod;
                 this.armor += armorMod;
                 playerWeapon.ClearStats();
                 playerArmor.ClearStats();
@@ -192,9 +205,6 @@ public class PlayerController : PawnController
                 armorMod = 0;
                 this.playerWeapon.animParameter = "OneHandAttack";
             }
-            this.DMG_REDUCTION_FACTOR = 0.25f;
-            this.BASE_DMG = 10;
-
             firstTick = false;
         }
     }
@@ -218,14 +228,17 @@ public class PlayerController : PawnController
     /// </summary>
     void Start()
     {
+        frontThumb = GameObject.Find("thumb_front_player");
+        backThumb = GameObject.Find("thumb_back_player");
+        backFingers = GameObject.Find("fingers_back_player");
         PawnControllerStart();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.dollarBalance = 50;
-        this.armorMod = playerArmor.GetDefMod();
-        //this.armor = armor - armorMod;
-        this.armor += armorMod;
+        
         playerArmor.ClearStats();
-        playerArmor.itemName = "None";
+        playerArmor.itemName = "";
+        playerWeapon.itemName = "";
+        //damageMod = 0;
         armorMod = 0;
     }
 
@@ -236,7 +249,7 @@ public class PlayerController : PawnController
         {
             DoOnLastTick();
         }
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
     }
     #endregion MonoBehaviour
 }

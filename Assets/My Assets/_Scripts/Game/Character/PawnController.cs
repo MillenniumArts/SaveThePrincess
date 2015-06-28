@@ -138,16 +138,6 @@ public class PawnController : MonoBehaviour
     public int magicalDamageToTake;
 
     /// <summary>
-    /// The Damage Reduction Factor for armor
-    /// </summary>
-    public float DMG_REDUCTION_FACTOR;
-
-    /// <summary>
-    /// The Base Damage if armor nullifies attack.
-    /// </summary>
-    public int BASE_DMG;
-
-    /// <summary>
     /// Base Energy Cost for any attack
     /// </summary>
     public int ATTACK_ENERGY_COST = 30;
@@ -161,52 +151,42 @@ public class PawnController : MonoBehaviour
     public void TakeDamage()
     {
         int defecit;
-        if (physicalDamageToTake > 0)
+        if (this.physicalDamageToTake > 0)
         {
-            // armor reduction
-             defecit = (physicalDamageToTake - Mathf.FloorToInt(this.armor * DMG_REDUCTION_FACTOR));
+            if (this.physicalDamageToTake > this.armor) // if true damage will apply after armor
+            {
+            // only amount of damage over armor amount is true damage
+                int trueDamage = this.physicalDamageToTake - this.armor;
+                if (trueDamage < 0)
+                    trueDamage = 0;
+                int reducedDamage = Mathf.FloorToInt((this.physicalDamageToTake - trueDamage) / 2);
 
-            // ensure min damage is always applied
-            if (defecit < BASE_DMG)
-                defecit = BASE_DMG;
+            defecit = trueDamage + reducedDamage;
+                Debug.Log("True Damage! ->" + defecit + "("+trueDamage+" true damage, "+ reducedDamage+" reduced damage)");
+            }
+            else
+            {
+                defecit = Mathf.FloorToInt(this.physicalDamage / 2);
+                Debug.Log("Reduced Damage! ->" + defecit);
+            }
 
+            if (this.remainingHealth - defecit > 0)
+            {	// and it doesn't kill the player
+                this.remainingHealth -= defecit;		// take damage
+            }
+            else
+            {
+                this.remainingHealth = 0;				// die
+            }
+
+            //handle animation for damage
             if (defecit > Mathf.FloorToInt(this.totalHealth * 0.1f))
             {		// if damage is more than 10% of player health
-                if (this.remainingHealth - defecit > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= defecit;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformDamageBehaviour();									// only reacts if damage applies over 10%
+                PerformDamageBehaviour();
             }
-            else if (defecit <= Mathf.FloorToInt(this.totalHealth * 0.1f) && defecit >= 0)
-            {	// if damage is less than 10% of player health
-                if (this.remainingHealth - defecit > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= defecit;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformBlockBehaviour();									// block animation under 10% damage
-                Debug.Log(this.name + " laughs at the lack of damage!");
-            } if (defecit <= 0)
+            else if (defecit <= Mathf.FloorToInt(this.totalHealth * 0.1f))
             {
-                Debug.Log("BASE DMG APPLIED");
-                // apply base damage since armor nullified
-                if (this.remainingHealth - BASE_DMG > 0)
-                {	// and it doesn't kill the player
-                    this.remainingHealth -= BASE_DMG;		// take damage
-                }
-                else
-                {
-                    this.remainingHealth = 0;									// die
-                }
-                PerformBlockBehaviour();									// block animation under 10% damage
+                PerformBlockBehaviour();
                 Debug.Log(this.name + " laughs at the lack of damage!");
             }
         this.physicalDamageToTake = 0;
@@ -225,6 +205,18 @@ public class PawnController : MonoBehaviour
             {
                 this.remainingHealth = 0;
             }
+
+            //handle animation for damage
+            if (magicalDamageToTake > Mathf.FloorToInt(this.totalHealth * 0.1f))
+            {		// if damage is more than 10% of player health
+                PerformDamageBehaviour();
+            }
+            else if (magicalDamageToTake <= Mathf.FloorToInt(this.totalHealth * 0.1f))
+            {
+                PerformBlockBehaviour();
+                Debug.Log(this.name + " laughs at the lack of damage!");
+            }
+
             this.magicalDamageToTake = 0;
             PerformDamageBehaviour();
         }
@@ -262,12 +254,11 @@ public class PawnController : MonoBehaviour
         }
     }
     /// <summary>
-    /// Heals for percent.
+    /// Heals for percent specified by a float (0.01f - 0.99f)
     /// </summary>
-    /// <param name="percent">Percent (from 0.01f to 0.99).</param>
+    /// <param name="percent">Percent (from 0.01f to 0.99f).</param>
     public virtual void HealForPercent(float percent)
     {
-        this.PerformHealMagicBehaviour();
         if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * percent) > this.totalHealth)
         {
             this.remainingHealth = this.totalHealth;
@@ -278,6 +269,83 @@ public class PawnController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Heals for percent specified by Integer value (must be less than 100)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void HealForPercent(int percent)
+    {        
+        // set to float to use
+        float newPercent = percent * 0.01f;
+        Debug.Log("Healing for " + newPercent + " percent");
+        // can't be over 100% heal
+        if (newPercent > 1)
+            newPercent = 1.0f;
+
+        if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * newPercent) > this.totalHealth)
+        {
+            this.remainingHealth = this.totalHealth;
+        }
+        else
+        {
+            this.remainingHealth += Mathf.FloorToInt(this.totalHealth * newPercent);
+        }
+    }
+
+    /// <summary>
+    /// Gives the specified amount of energy.
+    /// </summary>
+    /// <param name="amount">Amount.</param>
+    public virtual void GiveEnergyAmount(int amount)
+    {
+        if (this.remainingEnergy + amount >= this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += amount;
+        }
+        Debug.Log(this.name + " Receieved " + amount + " Energy.");
+    }
+    /// <summary>
+    /// Gives specified percentage to player as defined by float value (0.01f - 0.99f)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void GiveEnergyPercent(float percent)
+    {
+        if (this.remainingEnergy + Mathf.FloorToInt(this.totalEnergy * percent) > this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += Mathf.FloorToInt(this.totalEnergy * percent);
+        }
+    }
+    /// <summary>
+    /// Gives specified percentage to player as defined by Int value (1-99)
+    /// </summary>
+    /// <param name="percent"></param>
+    public virtual void GiveEnergyPercent(int percent)
+    {
+        // set to float to use
+        float newPercent = percent * 0.01f;
+
+        // can't be over 100% heal
+        if (newPercent > 1)
+            newPercent = 1;
+
+        if (this.remainingEnergy + Mathf.FloorToInt(this.totalEnergy * newPercent) > this.totalEnergy)
+        {
+            this.remainingEnergy = this.totalEnergy;
+        }
+        else
+        {
+            this.remainingEnergy += Mathf.FloorToInt(this.totalEnergy * newPercent);
+        }
+
+    }
 
     /// <summary>
     /// Determines whether this instance is dead.
@@ -333,23 +401,7 @@ public class PawnController : MonoBehaviour
         this.UseEnergy(ATTACK_ENERGY_COST);
     }
 
-    /// <summary>
-    /// Gives the specified amount of energy.
-    /// </summary>
-    /// <param name="amount">Amount.</param>
-    public void GiveEnergy(int amount)
-    {
-        if (this.remainingEnergy + amount >= this.totalEnergy)
-        {
-            this.remainingEnergy = this.totalEnergy;
-        }
-        else
-        {
-            this.remainingEnergy += amount;
-        }
-        Debug.Log(this.name + " Receieved " + amount + " Energy.");
-    }
-
+    
     /// <summary>
     /// Deals Damage to specified player.
     /// </summary>
@@ -377,7 +429,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Enough Mana For That!");
+            Debug.Log("Not Enough Energy For That!");
             return false;
         }
     }
@@ -406,24 +458,25 @@ public class PawnController : MonoBehaviour
     /// <param name="state">State.</param>
     public void TriggerAnimation(string state)
     {
+        state = state.ToLower();
         switch (state)
         {
             case "attack":
                 this.playerAnimator.SetTrigger("One_Hand_Attack");
                 break;
-            case "AttackMagic":
+            case "attackmagic":
                 this.playerAnimator.SetTrigger("Magic_Attack");
                 break;
-            case "ManaPotion":
+            case "energypotion":
                 this.playerAnimator.SetTrigger("Magic_Heal");
                 break;
-            case "HealPotion":
+            case "healpotion":
                 this.playerAnimator.SetTrigger("Use_Item");
                 break;
             case "death":
                 this.playerAnimator.SetTrigger("Death");
                 break;
-            case "HealMagic":
+            case "healmagic":
                 this.playerAnimator.SetTrigger("Magic_Up");
                 break;
             case "damage":
@@ -455,7 +508,7 @@ public class PawnController : MonoBehaviour
     /// <returns></returns>
     public int GetTotalArmor()
     {
-        return this.armor + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
+        return this.armor;// + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
     }
     /// <summary>
     /// Gets the total damage.
@@ -463,12 +516,12 @@ public class PawnController : MonoBehaviour
     /// <returns>The total damage.</returns>
     public int GetTotalDamage()
     {
-        return this.physicalDamage + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
+        return this.physicalDamage;// + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
 
-    public int GetTotalStats()
+    public int GetTotalHeatlhEnergyStats()
     {
-        int total = GetTotalArmor() + GetTotalDamage() + totalEnergy + totalHealth;
+        int total = totalEnergy + totalHealth;
         return total;
     }
 
@@ -485,6 +538,28 @@ public class PawnController : MonoBehaviour
         this.playerWeapon.transform.parent = playerHand;										// Make it the child of the hand.
         this.playerWeapon.transform.localScale = new Vector3(1, 1, 1);							// Fix the scale.
         this.weaponComboScript = playerWeapon.GetComponentInChildren<CreateWeaponCombination>();// Sets a reference to the weapon's script.
+    }
+
+    // Variables for Swap WeaponHands
+    protected GameObject frontThumb;
+    protected GameObject backThumb;
+    protected GameObject backFingers;
+    protected void SetWeaponHands(CreateWeaponCombination _w)
+    {
+            if (_w.GetWeaponGrip() == true)
+            {
+                // Set hands to one handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.44f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.15f, -0.43f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                // Set hands to two handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.51f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.21f, -0.54f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 45);
+            }
     }
 
     protected void SetArmor(string name)
@@ -513,6 +588,17 @@ public class PawnController : MonoBehaviour
         // Renders the armor.
         this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
     }
+
+    /// <summary>
+    /// Sets the animation parameter that determines if the idle animation is "tired" or not.
+    /// </summary>
+    protected void UpdateHealth()
+    {
+        float healthPercent = (float)remainingHealth / (float)totalHealth;
+        playerAnimator.SetFloat("Health", healthPercent);
+    }
+
+    #region perform behaviours
 
     /// <summary>
     /// Performs the potion behaviour.
@@ -563,6 +649,7 @@ public class PawnController : MonoBehaviour
     {
         TriggerAnimation("block");
     }
+    #endregion perform behaviours
     #endregion protected Functions
 
     #region skeletonTransform
@@ -683,10 +770,11 @@ public class PawnController : MonoBehaviour
     }
 
     #endregion Constructors
-
+   
     //set up default parameters here for all characters in game
     void Start()
     {
+        
     }
 
     // Update is called once per frame

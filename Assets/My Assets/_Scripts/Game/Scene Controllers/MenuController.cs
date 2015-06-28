@@ -37,23 +37,18 @@ public class MenuController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
 
-	    if (PlayerPrefs.GetInt("midgame") == 1){
-            this.backButton.gameObject.SetActive(false);
-            this.numCredits = 1;
-        }
-        
+        // initialize references
         this.player = FindObjectOfType<PlayerController>();
         this.prevPos = this.player.transform.localPosition;
         Vector3 newSpot = new Vector3(-7.5f, -2.5f);
         this.player.gameObject.transform.localPosition = newSpot;
 
-		// value per credit:
-		this.healthInc = 10;
-		this.damageInc = 5;
-		this.armorInc = 5;
-        this.energyInc = 10;
-
-		// base stats
+	    if (PlayerPrefs.GetInt("midgame") == 1){
+            this.backButton.gameObject.SetActive(false);
+            this.numCredits = 1;
+        }
+        
+		// get stats from player
 		this.baseHealth = this.player.totalHealth;
 		this.baseDamage = this.player.physicalDamage;
 		this.baseArmor = this.player.armor;
@@ -71,29 +66,45 @@ public class MenuController : MonoBehaviour {
 		this.damageAmt.text = this.newDamage.ToString ();
 		this.creditText.text = "CREDITS: " + numCredits;
 
+		// value per credit:
+		this.healthInc = 10;
+		this.damageInc = 5;
+		this.armorInc = 5;
+        this.energyInc = 10;
 
 		// button handling - INCREASE
-		this.healthUp.onClick.AddListener (()=>{
-			if (this.numCredits > 0){
+        ButtonInit();
+	}
+
+    void ButtonInit()
+    {
+        this.healthUp.onClick.AddListener(() =>
+        {
+            if (this.numCredits > 0)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				numCredits--;
-				this.newHealth += this.healthInc;
-			}
-		});
-		this.damageUp.onClick.AddListener (()=>{
-			if (this.numCredits > 0){
+                numCredits--;
+                this.newHealth += this.healthInc;
+            }
+        });
+        this.damageUp.onClick.AddListener(() =>
+        {
+            if (this.numCredits > 0)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				numCredits--;
-				this.newDamage += this.damageInc;
-			}
-		});
-		this.armorUp.onClick.AddListener (()=>{
-			if (this.numCredits > 0){
+                numCredits--;
+                this.newDamage += this.damageInc;
+            }
+        });
+        this.armorUp.onClick.AddListener(() =>
+        {
+            if (this.numCredits > 0)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				numCredits--;
-				this.newArmor += this.armorInc;
-			}
-		});
+                numCredits--;
+                this.newArmor += this.armorInc;
+            }
+        });
         this.energyUp.onClick.AddListener(() =>
         {
             if (this.numCredits > 0)
@@ -105,40 +116,49 @@ public class MenuController : MonoBehaviour {
         });
 
 
-		// DECREASE STATS
-		this.healthDown.onClick.AddListener (()=>{
-			if (this.numCredits < MAX_CREDITS){
+        // DECREASE STATS
+        this.healthDown.onClick.AddListener(() =>
+        {
+            if (this.numCredits < MAX_CREDITS)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
-					this.newHealth = this.baseHealth;
-				else{
-					this.newHealth -= this.healthInc;
-					numCredits++;
-				}
-			}
-		});
-		this.damageDown.onClick.AddListener (()=>{
-			if (this.numCredits < 10){
+                if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
+                    this.newHealth = this.baseHealth;
+                else
+                {
+                    this.newHealth -= this.healthInc;
+                    numCredits++;
+                }
+            }
+        });
+        this.damageDown.onClick.AddListener(() =>
+        {
+            if (this.numCredits < 10)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
-					this.newDamage = this.baseDamage;
-				else{
-					this.newDamage -= this.damageInc;
-					numCredits++;
-				}
-			}
-		});
-		this.armorDown.onClick.AddListener (()=>{
-			if (this.numCredits < 10){
+                if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
+                    this.newDamage = this.baseDamage;
+                else
+                {
+                    this.newDamage -= this.damageInc;
+                    numCredits++;
+                }
+            }
+        });
+        this.armorDown.onClick.AddListener(() =>
+        {
+            if (this.numCredits < 10)
+            {
                 AudioManager.Instance.PlaySFX("Select");
-				if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
-					this.newArmor = this.baseArmor;
-				else{
-					this.newArmor -= this.armorInc;
-					numCredits++;
-				}
-			}
-		});
+                if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
+                    this.newArmor = this.baseArmor;
+                else
+                {
+                    this.newArmor -= this.armorInc;
+                    numCredits++;
+                }
+            }
+        });
 
         this.energyDown.onClick.AddListener(() =>
         {
@@ -154,34 +174,44 @@ public class MenuController : MonoBehaviour {
                 }
             }
         });
-        
-		// LOAD NEXT SCENE WITH THIS PLAYER
-		this.confirm.onClick.AddListener (()=>{
-			if (numCredits == 0){
-                AudioManager.Instance.PlaySFX("Select");
-				this.player.totalHealth = this.newHealth;
-				this.player.remainingHealth = this.newHealth;
-				this.player.physicalDamage = this.newDamage;
-                int _defaultDamageMod = Random.Range(0, 6); // Damage modifier for default weapon.
-                this.player.physicalDamage += _defaultDamageMod;
-                this.player.damageMod = _defaultDamageMod;
-                this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);
-                this.player.totalEnergy = this.newEnergy;
-                this.player.remainingEnergy = this.newEnergy;
-				this.player.armor = this.newArmor;
 
-                EnemyStats.GetInstance().SetEnemyBaseStats(player.remainingHealth, player.remainingEnergy, player.physicalDamage, player.armor);
+        // LOAD NEXT SCENE WITH THIS PLAYER
+        this.confirm.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlaySFX("Select");
+            Confirm();
+        });
+    }
 
-				DontDestroyOnLoad(this.player);
+    public void Confirm()
+    {
+        if (numCredits == 0)
+        {
+            this.player.totalHealth = this.newHealth;
+            //only set health to full if 1st time
+            if(PlayerPrefs.GetInt("midgame") == 0)
+                this.player.remainingHealth = this.newHealth;
+            this.player.physicalDamage = this.newDamage;
 
-				Application.LoadLevel (firstSceneToLoad);
-			}else{
+            int _defaultDamageMod = Random.Range(0, 6); // Damage modifier for default weapon.
+            this.player.physicalDamage += _defaultDamageMod;
+            this.player.damageMod = _defaultDamageMod;
+            this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);
+            this.player.totalEnergy = this.newEnergy;
+            this.player.remainingEnergy = this.newEnergy;
+            this.player.armor = this.newArmor;
 
-			}
-		});
+            EnemyStats.GetInstance().SetEnemyBaseStats(player.remainingHealth, player.remainingEnergy, player.physicalDamage, player.armor);
 
-	}
+            DontDestroyOnLoad(this.player);
 
+            Application.LoadLevel(firstSceneToLoad);
+        }
+        else
+        {
+
+        }
+    }
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Select");

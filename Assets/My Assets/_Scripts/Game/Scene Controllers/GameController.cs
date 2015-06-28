@@ -159,6 +159,7 @@ public class GameController : MonoBehaviour
     private void DoEnemyAction()
     {
         float cdReq = COOLDOWN_LENGTH * MAGIC_LENGTH;
+
         if (!waiting && !enemyHasAttacked
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
@@ -170,7 +171,7 @@ public class GameController : MonoBehaviour
             {
                 //50% chance of physical vs magic
                 int r = Random.Range(0, 10);
-                if (r > 2)
+                if (r > 1)
                 {
                     // physical
                     Debug.Log(this.enemy.name + " attacks!");
@@ -179,22 +180,20 @@ public class GameController : MonoBehaviour
                 }
                 else
                 { //enemy health < 25% 
-                    if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth))
+                    // chance to heal if enemy has potion
+                    if (!enemyHasHealed)
                     {
-                        // chance to heal if enemy has potion
-                        if (!enemyHasHealed)
-                        {
-                            Debug.Log(this.enemy.name + " healed for 25 hp");
-                            this.enemy.TriggerAnimation("HealPotion");
-                            this.enemy.HealForAmount(25);
-                            this.enemyHasHealed = true;
-                        }
-                        else
-                        {
-                            // no potions to heal, LAST RESORT ATTACK!
-                            Debug.Log(this.enemy.name + " attacks!");
-                            this.enemy.Attack(this.player, attackAmount);
-                        }
+                        Debug.Log(this.enemy.name + " healed for 25 hp");
+                        this.enemy.TriggerAnimation("HealPotion");
+                        this.enemy.HealForAmount(25);
+                        this.enemyHasHealed = true;
+                    }
+                    else
+                    {
+                        // no potions to heal, LAST RESORT ATTACK!
+                        Debug.Log(this.enemy.name + " attacks!");
+                        cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
+                        this.enemy.Attack(this.player, attackAmount);
                     }
                 }
                 OnEnemyActionUsed(this.player, cdReq);
@@ -584,7 +583,7 @@ public class GameController : MonoBehaviour
         if (!waiting)
         {
             Debug.Log("Loading Town Scene");
-            // restore player mana after battle
+            // restore player energy after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             Application.LoadLevel("Town_LVP");
         }
@@ -603,9 +602,8 @@ public class GameController : MonoBehaviour
             this.player.remainingHealth += 10;
             this.player.dollarBalance += this.enemy.DropMoney();
             this.player.transform.localPosition = this.prevPos;
-
-            Application.LoadLevel("MidGameStatSelect_LVP");
             PlayerPrefs.SetInt("midgame", 1);
+            Application.LoadLevel("MidGameStatSelect_LVP");
         }
     }
 

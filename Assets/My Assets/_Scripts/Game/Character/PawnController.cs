@@ -166,7 +166,7 @@ public class PawnController : MonoBehaviour
             }
             else
             {
-                defecit = Mathf.FloorToInt(this.physicalDamage / 2);
+                defecit = Mathf.RoundToInt(this.physicalDamage / 2);
                 Debug.Log("Reduced Damage! ->" + defecit);
             }
 
@@ -732,7 +732,6 @@ public class PawnController : MonoBehaviour
 
 
     #endregion SpriteCustomization
-
 
     #region Constructors
 

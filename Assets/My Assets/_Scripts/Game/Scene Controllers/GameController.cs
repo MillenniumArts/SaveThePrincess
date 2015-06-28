@@ -168,39 +168,37 @@ public class GameController : MonoBehaviour
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
             {
-                //enemy health < 25% 
-                if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth))
+                //50% chance of physical vs magic
+                int r = Random.Range(0, 10);
+                if (r > 2)
                 {
-                    //50% chance of physical vs magic
-                    int r = Random.Range(0, 10);
-                    if (r > 5)
-                    {
-                        // physical
-                        Debug.Log(this.enemy.name + " attacks!");
-                        cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                        this.enemy.Attack(this.player, attackAmount);
-                    }
+                    // physical
+                    Debug.Log(this.enemy.name + " attacks!");
+                    cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
+                    this.enemy.Attack(this.player, attackAmount);
                 }
                 else
-                {
-                    // chance to heal if enemy has potion
-                    if (!enemyHasHealed)
+                { //enemy health < 25% 
+                    if (this.enemy.remainingHealth >= (0.25 * this.enemy.totalHealth))
                     {
-                        Debug.Log(this.enemy.name + " healed for 25 hp");
-                        this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.HealForAmount(25);
-                        this.enemyHasHealed = true;
-                    }
-                    else
-                    {
-                        // no potions to heal, LAST RESORT ATTACK!
-                        Debug.Log(this.enemy.name + " attacks!");
-                        this.enemy.Attack(this.player, attackAmount);
+                        // chance to heal if enemy has potion
+                        if (!enemyHasHealed)
+                        {
+                            Debug.Log(this.enemy.name + " healed for 25 hp");
+                            this.enemy.TriggerAnimation("HealPotion");
+                            this.enemy.HealForAmount(25);
+                            this.enemyHasHealed = true;
+                        }
+                        else
+                        {
+                            // no potions to heal, LAST RESORT ATTACK!
+                            Debug.Log(this.enemy.name + " attacks!");
+                            this.enemy.Attack(this.player, attackAmount);
+                        }
                     }
                 }
-
-            }
-            OnEnemyActionUsed(this.player, cdReq);
+                OnEnemyActionUsed(this.player, cdReq);
+            }// end if someone is dead            
         }
     }
 

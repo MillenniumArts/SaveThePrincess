@@ -169,15 +169,17 @@ public class GameController : MonoBehaviour
         if (!waiting && !enemyHasAttacked
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
-            // get enemy %
+            // get enemy % (int)
             float attackAmount = (Random.Range(25, 75) + (Random.Range(25, 75)) / 2);
             // reciprocal for energy regen
-            ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(100 - attackAmount);
+            float regenAmt = 100 - attackAmount;
             //attack %
             attackAmount /= 100;
             //Energy Amount regen
-            ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt((ENEMY_ENERGY_REGEN_AMT/100) * this.enemy.ATTACK_ENERGY_COST);
+            regenAmt = (regenAmt / 100) * this.enemy.ATTACK_ENERGY_COST;
+            ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(regenAmt);
 
+            Debug.Log("regen enemy: " + regenAmt);
             // multiply damage by reduction factor
             int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.physicalDamage);
             Debug.Log("Enemy bar at " + attackAmount + " Damage to apply: " + damageToApply);
@@ -229,7 +231,7 @@ public class GameController : MonoBehaviour
             // waiting = true;
             enemyHasAttacked = true;
             StartCooldown(requiredCooldownLength);
-            this.enemy.UseEnergy(30);
+            //this.enemy.UseEnergy(30);
             // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }

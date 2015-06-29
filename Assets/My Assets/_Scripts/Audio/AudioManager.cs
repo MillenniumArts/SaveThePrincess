@@ -64,13 +64,13 @@ public class AudioManager : MonoBehaviour {
     private void PlaySound(AudioSource clip)
     {
         // Play the clip.
-        //clip.Play();
+        clip.Play();
     }
 
     private void StopSound(AudioSource clip)
     {
         // Play the clip.
-        //clip.Stop();
+        clip.Stop();
     }
 
     private AudioSource SearchAudioSources(GameObject[] a, string n)

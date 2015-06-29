@@ -172,11 +172,11 @@ public class GameController : MonoBehaviour
             // get enemy % (int)
             float attackAmount = (Random.Range(25, 75) + (Random.Range(25, 75)) / 2);
             // reciprocal for energy regen
-            float regenAmt = 100 - attackAmount;
+            float regenAmt = 100f - attackAmount;
             //attack %
-            attackAmount /= 100;
+            attackAmount /= 100f;
             //Energy Amount regen
-            regenAmt = (regenAmt / 100) * this.enemy.ATTACK_ENERGY_COST;
+            regenAmt = (regenAmt / 100f) * this.enemy.ATTACK_ENERGY_COST;
             ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(regenAmt);
 
             Debug.Log("regen enemy: " + regenAmt);

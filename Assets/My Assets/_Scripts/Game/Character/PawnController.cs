@@ -383,16 +383,16 @@ public class PawnController : MonoBehaviour
     /// Attacks provided pawncontroller, passing in the amount from the attack bar in the Battle
     /// </summary>
     /// <param name="attackedPlayer">Player Being attacked</param>
-    /// <param name="attackAmount">the amount from the attack bar in the Battle</param>
-    public void Attack(PawnController attackedPlayer, float attackAmount)
+    /// <param name="appliedDamage">the amount from the attack bar in the Battle</param>
+    public void Attack(PawnController attackedPlayer, float appliedDamage)
     {
         // Check Weapon type for behavior
         if (this.playerWeapon.GetItemClass() == "Weapon"){
-            PhysicalAttack(attackedPlayer, attackAmount);
+            PhysicalAttack(attackedPlayer, appliedDamage);
         }
         else if (this.playerWeapon.GetItemClass() == "Magic")
         {
-            MagicAttack(attackedPlayer, attackAmount);
+            MagicAttack(attackedPlayer, appliedDamage);
 
         }else{
             // other attack types?

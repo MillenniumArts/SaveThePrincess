@@ -131,10 +131,14 @@ public class GameController : MonoBehaviour
         // After second click
         if (!attackBarMoving && playerHasAttacked)
         {
+            // apply damage amount from attack meter
+            attackAmount = Mathf.RoundToInt((attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
+
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
             this.player.Attack(attacked, attackAmount);
+            attackMeter.value = Random.Range(0, attackMeter.maxValue);
         }
     }
 
@@ -143,9 +147,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnWaitComplete()
     {
-        //  Debug.Log("OnWaitComplete. " + curTime);
         this.enemy.TakeDamage();
-        //combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         this.enemy.GiveEnergyAmount(ENERGY_REGEN_AMT);
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
@@ -727,7 +729,7 @@ public class GameController : MonoBehaviour
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
-        this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
+        //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
 
         // combat starts after initialization is finished

@@ -24,7 +24,8 @@ public class GameController : MonoBehaviour
 
     public int score,
                turn,
-               ENERGY_REGEN_AMT = 10,
+               PLAYER_ENERGY_REGEN_AMT,
+               ENEMY_ENERGY_REGEN_AMT,
                currentBattle,
                remainingBattles;
 
@@ -132,13 +133,16 @@ public class GameController : MonoBehaviour
         if (!attackBarMoving && playerHasAttacked)
         {
             // apply damage amount from attack meter
-            attackAmount = Mathf.RoundToInt((attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
-
+            attackAmount = attackMeter.value;
+            // apply the percent damage from the bar (value/max)
+            int damageToApply = Mathf.RoundToInt((attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
+            // regenerate the reciprocal ((max - value) / max) of the energy used on attack
+            PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt( ((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-            this.player.Attack(attacked, attackAmount);
-            attackMeter.value = Random.Range(0, attackMeter.maxValue);
+            this.player.Attack(attacked, damageToApply);
+            //attackMeter.value = Random.Range(0, attackMeter.maxValue);
         }
     }
 
@@ -148,7 +152,7 @@ public class GameController : MonoBehaviour
     public void OnWaitComplete()
     {
         this.enemy.TakeDamage();
-        this.enemy.GiveEnergyAmount(ENERGY_REGEN_AMT);
+        this.enemy.GiveEnergyAmount(ENEMY_ENERGY_REGEN_AMT);
         // ENEMY TURN
         combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
@@ -165,8 +169,18 @@ public class GameController : MonoBehaviour
         if (!waiting && !enemyHasAttacked
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
-            // determine crit chance for enemy
+            // get enemy %
             float attackAmount = (Random.Range(25, 75) + (Random.Range(25, 75)) / 2);
+            // reciprocal for energy regen
+            ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(100 - attackAmount);
+            //attack %
+            attackAmount /= 100;
+            //Energy Amount regen
+            ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt((ENEMY_ENERGY_REGEN_AMT/100) * this.enemy.ATTACK_ENERGY_COST);
+
+            // multiply damage by reduction factor
+            int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.physicalDamage);
+            Debug.Log("Enemy bar at " + attackAmount + " Damage to apply: " + damageToApply);
 
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
@@ -178,7 +192,7 @@ public class GameController : MonoBehaviour
                     // physical
                     Debug.Log(this.enemy.name + " attacks!");
                     cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                    this.enemy.Attack(this.player, attackAmount);
+                    this.enemy.Attack(this.player, damageToApply);
                 }
                 else
                 { //enemy health < 25% 
@@ -195,7 +209,7 @@ public class GameController : MonoBehaviour
                         // no potions to heal, LAST RESORT ATTACK!
                         Debug.Log(this.enemy.name + " attacks!");
                         cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                        this.enemy.Attack(this.player, attackAmount);
+                        this.enemy.Attack(this.player, damageToApply);
                     }
                 }
                 OnEnemyActionUsed(this.player, cdReq);
@@ -215,6 +229,7 @@ public class GameController : MonoBehaviour
             // waiting = true;
             enemyHasAttacked = true;
             StartCooldown(requiredCooldownLength);
+            this.enemy.UseEnergy(30);
             // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
@@ -226,9 +241,8 @@ public class GameController : MonoBehaviour
     public void OnEnemyWaitComplete()
     {
         combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-        this.enemy.UseEnergy(30);
         this.player.TakeDamage();
-        this.player.GiveEnergyAmount(ENERGY_REGEN_AMT);
+        this.player.GiveEnergyAmount(PLAYER_ENERGY_REGEN_AMT);
         enemyHasAttacked = false;
         playerHasAttacked = false;
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);

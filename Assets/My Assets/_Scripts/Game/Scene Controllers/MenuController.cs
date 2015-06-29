@@ -27,7 +27,7 @@ public class MenuController : MonoBehaviour {
 	public Text healthAmt, damageAmt, armorAmt, energyAmt, creditText;
 
 	public int numCredits;
-    public int MAX_CREDITS = 5;
+    public int MAX_CREDITS = 3;
 
 	public ItemFactory itemFactory;
     Vector3 newPos, prevPos;
@@ -133,7 +133,7 @@ public class MenuController : MonoBehaviour {
         });
         this.damageDown.onClick.AddListener(() =>
         {
-            if (this.numCredits < 10)
+            if (this.numCredits < MAX_CREDITS)
             {
                 AudioManager.Instance.PlaySFX("Select");
                 if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
@@ -147,7 +147,7 @@ public class MenuController : MonoBehaviour {
         });
         this.armorDown.onClick.AddListener(() =>
         {
-            if (this.numCredits < 10)
+            if (this.numCredits < MAX_CREDITS)
             {
                 AudioManager.Instance.PlaySFX("Select");
                 if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
@@ -162,7 +162,7 @@ public class MenuController : MonoBehaviour {
 
         this.energyDown.onClick.AddListener(() =>
         {
-            if (this.numCredits < 10)
+            if (this.numCredits < MAX_CREDITS)
             {
                 AudioManager.Instance.PlaySFX("Select");
                 if (this.newEnergy - this.energyInc < this.baseEnergy)	// make sure they can't go below base stats

@@ -56,6 +56,11 @@ public class EnemyStats {
         firstCount = 0;
     }
 
+    public bool GetFirstEnemyBool()
+    {
+        return firstEnemy;
+    }
+
     /// <summary>
     /// Get New Enemy HP.
     /// </summary>

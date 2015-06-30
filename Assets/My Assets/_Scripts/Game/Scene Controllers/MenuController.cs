@@ -40,8 +40,8 @@ public class MenuController : MonoBehaviour {
         // initialize references
         this.player = FindObjectOfType<PlayerController>();
         this.prevPos = this.player.transform.localPosition;
-        Vector3 newSpot = new Vector3(-7.5f, -2.5f);
-        this.player.gameObject.transform.localPosition = newSpot;
+        newPos = new Vector3(-7.5f, -2.5f);
+        this.player.gameObject.transform.localPosition = newPos;
 
 	    if (PlayerPrefs.GetInt("midgame") == 1){
             this.backButton.gameObject.SetActive(false);

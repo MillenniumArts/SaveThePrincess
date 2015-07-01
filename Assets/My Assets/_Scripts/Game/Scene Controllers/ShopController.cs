@@ -25,26 +25,6 @@ public class ShopController : MonoBehaviour
 
     //private bool start;
 
-    void Start()
-    {
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
-        EscapeHandler.instance.GetButtons();
-
-        firstTick = false;
-        //start = true;
-        this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.gameObject.transform.localPosition;
-
-        // relocate player
-        Vector3 newSpot = new Vector3(-5.7f, -2f);
-        this.player.gameObject.transform.localPosition = newSpot;
-
-        this.playerBalance.text = this.player.dollarBalance.ToString();
-
-        factory = FindObjectOfType<ItemFactory>();
-
-        PopulateShop();
-    }
 
     private void ItemNameUpdate()
     {
@@ -186,7 +166,29 @@ public class ShopController : MonoBehaviour
     private void DoOnFirstTick()
     {
         firstTick = true;
-        RandomizeCost();
+        Invoke("RandomizeCost", 0.01f);
+    }
+
+    #region monobehaviour
+
+    void Start()
+    {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        EscapeHandler.instance.GetButtons();
+
+        firstTick = false;
+        this.player = FindObjectOfType<PlayerController>();
+        this.prevPos = this.player.gameObject.transform.localPosition;
+
+        // relocate player
+        Vector3 newSpot = new Vector3(-5.7f, -2f);
+        this.player.gameObject.transform.localPosition = newSpot;
+
+        this.playerBalance.text = this.player.dollarBalance.ToString();
+
+        factory = FindObjectOfType<ItemFactory>();
+
+        PopulateShop();
     }
 
     public void Update()
@@ -201,3 +203,4 @@ public class ShopController : MonoBehaviour
         }
     }
 }
+#endregion monobehaviour

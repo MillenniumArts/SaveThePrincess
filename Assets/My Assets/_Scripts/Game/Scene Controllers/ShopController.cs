@@ -155,12 +155,6 @@ public class ShopController : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             int totalStats = shopItems[i].GetDefMod() + shopItems[i].GetAtkMod();
-            /*+ shopItems[i].GetHpMod() + shopItems[i].GetManaMod() + shopItems[i].GetSpdMod();  // UNCOMMENT AFTER LVP!*/
-
-            // IF WEAPON STATS ARE NOT INITIATED HERE WE GET THE FIRESALE
-
-           
-
 
             this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
 

@@ -132,8 +132,6 @@ public class GameController : MonoBehaviour
         // After second click
         if (!attackBarMoving && playerHasAttacked)
         {
-            // apply damage amount from attack meter
-            attackAmount = attackMeter.value;
             // apply the percent damage from the bar (value/max)
             int damageToApply = Mathf.RoundToInt((attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack

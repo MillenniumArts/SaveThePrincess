@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public CombatController combatController;
     public InventoryAnimation invAnim;
 
-    public bool enemyHasHealed,
+    private bool enemyHasHealed,
                 waiting,
                 scoredThisRound,
                 enemyHasAttacked,
@@ -20,23 +20,23 @@ public class GameController : MonoBehaviour
                 finalFrame,
                 hasSelected,
                 confirmed;
-    bool increasing = true;
+    private bool increasing = true;
 
     public int score,
-               turn,
-               PLAYER_ENERGY_REGEN_AMT,
+               turn;
+    private int PLAYER_ENERGY_REGEN_AMT,
                ENEMY_ENERGY_REGEN_AMT,
                currentBattle,
                remainingBattles;
 
-    public float MONEY_TRANSFER_PCT = 0.2f,
+    private float MONEY_TRANSFER_PCT = 0.2f,
                  COOLDOWN_LENGTH = 0.0f,
                  ATTACK_LENGTH,
                  MAGIC_LENGTH;
 
-    public float attackAmount;
+    private float attackAmount;
 
-    public float startTime, endTime, curTime;
+    private float startTime, endTime, curTime;
 
     public Slider playerHealth,
                   playerMana,
@@ -340,7 +340,6 @@ public class GameController : MonoBehaviour
     /// <param name="index">Index.</param>
     public void UseItem(int index)
     {
-        Debug.Log("Using Item number " + index);
         bool pass = false;
         switch (index)
         {
@@ -385,7 +384,8 @@ public class GameController : MonoBehaviour
         this.attackMeter.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
-        inventoryHandle.gameObject.SetActive(false);
+        this.inventoryHandle.gameObject.SetActive(false);
+        this.inventoryToggleButton.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -396,7 +396,8 @@ public class GameController : MonoBehaviour
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
-        inventoryHandle.gameObject.SetActive(true);
+        this.inventoryHandle.gameObject.SetActive(true);
+        this.inventoryToggleButton.gameObject.SetActive(true);
     }
 
     /// <summary>

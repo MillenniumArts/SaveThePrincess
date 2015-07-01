@@ -19,7 +19,7 @@ public class EnemyStats {
     private int previousEnemyHP, previousEnemyEN, previousEnemyATK, previousEnemyDEF;
     private int currentEnemyHP, currentEnemyNRG, currentEnemyATK, currentEnemyDEF;
     private bool firstEnemy = true;
-    private int firstCount = 0;
+//    private int firstCount = 0;
     private int getCount = 0;
 
     /// <summary>
@@ -53,7 +53,7 @@ public class EnemyStats {
         previousEnemyATK = 0;
         previousEnemyATK = 0;
         firstEnemy = true; // When the game is reset the firstEnemy bool is reset to true.
-        firstCount = 0;
+//        firstCount = 0;
     }
 
     public bool GetFirstEnemyBool()

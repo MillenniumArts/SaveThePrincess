@@ -14,7 +14,10 @@ public class ShopController : MonoBehaviour
     public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
     public int HI_DOLLAR_VALUE;
     public int LO_DOLLAR_VALUE;
+    
     private bool firstTick;
+    //private string[] itemsToSpawn = { "Sword", "Hammer", "Spear" /*,"Axe","Bow","Dagger"*/ };
+
 
     public Text currentStatDisplay;
     public Text selectedItemStats;
@@ -43,6 +46,7 @@ public class ShopController : MonoBehaviour
         Application.LoadLevel("Town_LVP");
     }
 
+    #region purchasing items
     public void SelectItem(int buttonNum)
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -70,23 +74,19 @@ public class ShopController : MonoBehaviour
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")
-            {				// Armor
+            {	// Armor
                 player.TransferPurchasedArmor(shopItems[selectedItem]);
             }
             else if (shopItems[selectedItem].GetItemClass() == "Weapon")
-            {		// Weapon
+            {	// Weapon
                 player.TransferPurchasedWeapon(shopItems[selectedItem]);
             }
-            else if (shopItems[selectedItem].GetItemClass() == "Potion")
-            {		// Potion
-
-            }
             else if (shopItems[selectedItem].GetItemClass() == "Magic")
-            {		// Magic
+            {	// Magic
 
             }
             else
-            {															// Other
+            {	// Other
                 Debug.Log(shopItems[selectedItem].GetItemClass() + " is not a recognized Item Class!");
             }
             DestroyItem(selectedItem);
@@ -100,21 +100,51 @@ public class ShopController : MonoBehaviour
         Destroy(buttons[n].gameObject);
         Destroy(shopItems[n].gameObject);
     }
-
+    #endregion purchasing items
     private void PopulateShop()
     {
+        // NEW ALGORITHM
+        // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
+        
+        GetRandomArmor();
         shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
         shopItems[0].transform.parent = spawn1.transform;
+        shopItems[0].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
         shopItems[1].transform.parent = spawn2.transform;
+        shopItems[1].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
         shopItems[2].transform.parent = spawn3.transform;
+        shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
         shopItems[3].transform.parent = spawn4.transform;
+        shopItems[3].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[4] = factory.CreateArmor(spawn5, "MediumArmor");
         shopItems[4].transform.parent = spawn5.transform;
+        shopItems[4].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[5] = factory.CreateArmor(spawn6, "HeavyArmor");
         shopItems[5].transform.parent = spawn6.transform;
+        shopItems[5].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
+    }
+
+    private int GetRandomDamage()
+    {
+        return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
+            * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
+            * EnemyStats.GetInstance().GetNewEnemyATK());
+    }
+
+    private int GetRandomArmor()
+    {
+        return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
+            * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
+            * EnemyStats.GetInstance().GetNewEnemyDEF());
     }
 
     /// <summary>
@@ -129,8 +159,7 @@ public class ShopController : MonoBehaviour
 
             // IF WEAPON STATS ARE NOT INITIATED HERE WE GET THE FIRESALE
 
-            // NEW ALGORITHM
-            // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
+           
 
 
             this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();

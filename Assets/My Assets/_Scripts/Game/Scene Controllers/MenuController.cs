@@ -47,6 +47,10 @@ public class MenuController : MonoBehaviour {
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;
         }
+        if (PlayerPrefs.GetInt("score") > 0 || BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
+        {
+            EnemyStats.GetInstance().SetFirstEnemy(true);
+        }
         
 		// get stats from player
 		this.baseHealth = this.player.totalHealth;
@@ -72,7 +76,7 @@ public class MenuController : MonoBehaviour {
 		this.armorInc = 5;
         this.energyInc = 10;
 
-		// button handling - INCREASE
+		// button handling
         ButtonInit();
 	}
 
@@ -200,17 +204,15 @@ public class MenuController : MonoBehaviour {
             this.player.totalEnergy = this.newEnergy;
             this.player.remainingEnergy = this.newEnergy;
             this.player.armor = this.newArmor;
-            
-            if(EnemyStats.GetInstance().GetFirstEnemyBool() == true)
+
+            if (EnemyStats.GetInstance().GetFirstEnemyBool())
+            {
                 EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
+            }
 
             DontDestroyOnLoad(this.player);
 
             Application.LoadLevel(firstSceneToLoad);
-        }
-        else
-        {
-
         }
     }
     public void GoBack()

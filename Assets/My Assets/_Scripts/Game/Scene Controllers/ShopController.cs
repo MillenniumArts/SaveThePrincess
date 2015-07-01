@@ -137,14 +137,14 @@ public class ShopController : MonoBehaviour
     {
         return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
             * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
-            * EnemyStats.GetInstance().GetNewEnemyATK());
+            * EnemyStats.GetInstance().GetCurrentEnemyATK());
     }
 
     private int GetRandomArmor()
     {
         return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
             * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
-            * EnemyStats.GetInstance().GetNewEnemyDEF());
+            * EnemyStats.GetInstance().GetCurrentEnemyDEF());
     }
 
     /// <summary>

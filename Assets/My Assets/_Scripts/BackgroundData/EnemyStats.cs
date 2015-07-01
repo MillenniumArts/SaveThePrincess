@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnemyStats {
@@ -17,7 +17,7 @@ public class EnemyStats {
     private EnemyStats() { }
 
     private int previousEnemyHP, previousEnemyEN, previousEnemyATK, previousEnemyDEF;
-    private int currentEnemyHP, currentEnemyEN, currentEnemyATK, currentEnemyDEF;
+    private int currentEnemyHP, currentEnemyNRG, currentEnemyATK, currentEnemyDEF;
     private bool firstEnemy = true;
     private int firstCount = 0;
     private int getCount = 0;
@@ -38,7 +38,7 @@ public class EnemyStats {
         previousEnemyDEF = DEF;
         // Increase the base stats for the first enemy.
         currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, 0f, 0.1f);
-        currentEnemyEN = previousEnemyEN + RandomIncrease(previousEnemyEN, 0f, 0.1f);
+        currentEnemyNRG = previousEnemyEN + RandomIncrease(previousEnemyEN, 0f, 0.1f);
         currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, 0f, 0.1f);
         currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, 0f, 0.1f);
         StatFlip();
@@ -60,7 +60,7 @@ public class EnemyStats {
     {
         return firstEnemy;
     }
-
+    #region getters
     /// <summary>
     /// Get New Enemy HP.
     /// </summary>
@@ -74,10 +74,10 @@ public class EnemyStats {
                 currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, 0.1f, 0.15f);  // If the enemy is a "boss" enemy.
             }
         }else{
-            firstCount++;
+           /* firstCount++;
             if (firstCount == 4){
                 firstEnemy = false;
-            }
+            }*/
         }
         getCount++;
         if (getCount == 4){
@@ -96,20 +96,21 @@ public class EnemyStats {
         {
             if (!CheckForBoss())
             {
-                currentEnemyEN = previousEnemyEN + RandomIncrease(previousEnemyEN, 0f, 0.05f);   // If the enemy is a regular enemy.
+                currentEnemyNRG = previousEnemyEN + RandomIncrease(previousEnemyEN, 0f, 0.05f);   // If the enemy is a regular enemy.
             }
             else
             {
-                currentEnemyEN = previousEnemyEN + RandomIncrease(previousEnemyEN, 0.1f, 0.15f);  // If the enemy is a "boss" enemy.
+                currentEnemyNRG = previousEnemyEN + RandomIncrease(previousEnemyEN, 0.1f, 0.15f);  // If the enemy is a "boss" enemy.
             }
         }
         else
         {
-            firstCount++;
+            // Carlo, I'm confused as to what's going on in here... ?
+           /* firstCount++;
             if (firstCount == 4)
             {
                 firstEnemy = false;
-            }
+            }*/
         }
         getCount++;
         if (getCount == 4)
@@ -117,7 +118,7 @@ public class EnemyStats {
             StatFlip();
             getCount = 0;
         }
-        return currentEnemyEN;
+        return currentEnemyNRG;
     }
     /// <summary>
     /// Gets new enemy Attack stat.
@@ -137,12 +138,12 @@ public class EnemyStats {
             }
         }
         else
-        {
+        {/*
             firstCount++;
             if (firstCount == 4)
             {
                 firstEnemy = false;
-            }
+            }*/
         }
         getCount++;
         if (getCount == 4)
@@ -170,12 +171,12 @@ public class EnemyStats {
             }
         }
         else
-        {
+        {/*
             firstCount++;
             if (firstCount == 4)
             {
                 firstEnemy = false;
-            }
+            }*/
         }
         getCount++;
         if (getCount == 4)
@@ -186,15 +187,41 @@ public class EnemyStats {
         return currentEnemyDEF;
     }
 
+    public int GetCurrentEnemyATK()
+    {
+        return this.currentEnemyATK;
+    }
+
+    public int GetCurrentEnemyDEF()
+    {
+        return this.currentEnemyDEF;
+    }
+
+    public int GetCurrentEnemyNRG()
+    {
+        return this.currentEnemyNRG;
+    }
+
+    public int GetCurrentEnemyHP()
+    {
+        return this.currentEnemyHP;
+    }
+    #endregion getters
     /// <summary>
     /// Sets the current enemy stats to the previous enemy stats.
     /// </summary>
     private void StatFlip()
     {
         previousEnemyHP = currentEnemyHP;
-        previousEnemyEN = currentEnemyEN;
+        previousEnemyEN = currentEnemyNRG;
         previousEnemyATK = currentEnemyATK;
         previousEnemyDEF = currentEnemyDEF;
+    }
+
+    public
+        void SetFirstEnemy(bool tog)
+    {
+        this.firstEnemy = tog;
     }
 
     /// <summary>

@@ -6,7 +6,6 @@ public class GameController : MonoBehaviour
 {
     public PlayerController player;
     public BaseEnemyController enemy;
-    public GameController gameController;
     public CombatController combatController;
     public InventoryAnimation invAnim;
 
@@ -717,18 +716,6 @@ public class GameController : MonoBehaviour
         // enemy has not healed or attacked yet
         enemyHasHealed = false;
         enemyHasAttacked = false;
-
-        // get game Controller Object
-        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-        if (gameControllerObject != null)
-        {
-            gameController = gameControllerObject.GetComponent<GameController>();
-        }
-        if (gameControllerObject == null)
-        {
-            Debug.Log("Cannot find GameObject!");
-            return;
-        }
 
         // get playerController 
         this.player = FindObjectOfType<PlayerController>();

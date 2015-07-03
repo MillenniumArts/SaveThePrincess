@@ -18,21 +18,21 @@ public class TownController : MonoBehaviour {
         AudioManager.Instance.PlaySFX("Select");
         DontDestroyOnLoad(this.player);
         //EscapeHandler.instance.ClearButtons();
-		Application.LoadLevel ("Battle_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Battle_LVP");
 	}
 
 	public void GoToStore(){
         AudioManager.Instance.PlaySFX("Select");
 		//DontDestroyOnLoad (this.player);
         //EscapeHandler.instance.ClearButtons();
-		Application.LoadLevel ("Store_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Store_LVP");
 	}
 
 	public void GoToInn(){
         AudioManager.Instance.PlaySFX("Select");
 		//DontDestroyOnLoad (this.player);
         //EscapeHandler.instance.ClearButtons();
-		Application.LoadLevel ("Tavern_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Tavern_LVP");
 	}
 
     public void GoToMerchant()
@@ -40,7 +40,7 @@ public class TownController : MonoBehaviour {
         AudioManager.Instance.PlaySFX("Select");
         //DontDestroyOnLoad(this.player);
         //EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("Merchant_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Merchant_LVP");
     }
 
 	// Update is called once per frame

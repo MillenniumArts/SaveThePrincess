@@ -41,9 +41,9 @@ public class ShopController : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         this.player.gameObject.transform.localPosition = prevPos;
-        EscapeHandler.instance.ClearButtons();
-        DontDestroyOnLoad(this.player);
-        Application.LoadLevel("Town_LVP");
+        //EscapeHandler.instance.ClearButtons();
+        //DontDestroyOnLoad(this.player);
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP");
     }
 
     #region purchasing items

@@ -36,6 +36,8 @@ public class AudioManager : MonoBehaviour {
     private bool isSongPlaying = false;
     public bool audioMuted = false;
 
+    public float volume = 1.0f;
+
     public void ToggleAudioMute()
     {
         if (this.audioMuted)
@@ -46,6 +48,12 @@ public class AudioManager : MonoBehaviour {
         {
             this.audioMuted = true;
         }
+    }
+
+    public void SetAudioVolume(float vol)
+    {
+        Mathf.Clamp(vol,0,1);
+        this.volume = vol;
     }
 
     public void PlaySFX(string n)
@@ -83,6 +91,8 @@ public class AudioManager : MonoBehaviour {
     {
         if (!audioMuted)
         {
+            //set volume
+            clip.volume = this.volume;
             // Play the clip.
             clip.Play();
         }

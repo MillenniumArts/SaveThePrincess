@@ -9,11 +9,11 @@ public class OptionsHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        audioLevel.maxValue = 1.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        AudioManager.Instance.volumeFactor = audioLevel.value;
 	}
 }

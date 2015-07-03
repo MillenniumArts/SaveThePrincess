@@ -33,69 +33,49 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private GameObject[] sfx;
     [SerializeField] private GameObject[] songs;
     private AudioSource oldSong;
+    public AudioSource currentlyPlaying;
     private bool isSongPlaying = false;
-    public bool audioMuted = false;
 
-    public float volume = 1.0f;
-
-    public void ToggleAudioMute()
-    {
-        if (this.audioMuted)
-        {
-            this.audioMuted = false;
-        }
-        else
-        {
-            this.audioMuted = true;
-        }
-    }
+    public float volumeFactor = 1.0f;
 
     public void SetAudioVolume(float vol)
     {
         Mathf.Clamp(vol,0,1);
-        this.volume = vol;
+        this.volumeFactor = vol;
     }
 
     public void PlaySFX(string n)
     {
-        if (!audioMuted)
-        {
-            PlaySound(SearchAudioSources(sfx, n));
-        }
+           PlaySound(SearchAudioSources(sfx, n));
     }
 
     public void PlayNewSong(string n)
     {
-        if (!audioMuted) { 
-            if (isSongPlaying)
+        if (isSongPlaying)
+        {
+            if (n != oldSong.gameObject.name)
             {
-                if (n != oldSong.gameObject.name)
-                {
-                    StopSound(oldSong);
-                    AudioSource newSource = SearchAudioSources(songs, n);
-                    PlaySound(newSource);
-                    oldSong = newSource;
-                }
-            }
-            else
-            {
+                StopSound(oldSong);
                 AudioSource newSource = SearchAudioSources(songs, n);
+                this.currentlyPlaying = newSource;
                 PlaySound(newSource);
                 oldSong = newSource;
-                isSongPlaying = true;
             }
+        }
+        else
+        {
+            AudioSource newSource = SearchAudioSources(songs, n);
+            this.currentlyPlaying = newSource;
+            PlaySound(newSource);
+            oldSong = newSource;
+            isSongPlaying = true;
         }
     }
 
     private void PlaySound(AudioSource clip)
     {
-        if (!audioMuted)
-        {
-            //set volume
-            clip.volume = this.volume;
             // Play the clip.
-            clip.Play();
-        }
+            currentlyPlaying.Play();
     }
 
     private void StopSound(AudioSource clip)
@@ -117,5 +97,17 @@ public class AudioManager : MonoBehaviour {
         }
         Debug.Log("No GameObject called " + n + " with an Audio Source in the Audio Manager's array.");
         return source;
+    }
+
+    void GoBack()
+    {
+        Application.LoadLevel("StartMenu_LVP");
+    }
+
+    void Update()
+    {
+        // set volume of clips as needed
+        currentlyPlaying.volume = this.volumeFactor;
+        EscapeHandler.instance.GetButtons();
     }
 }

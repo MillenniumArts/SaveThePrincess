@@ -44,7 +44,7 @@ public class StartMenuController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Select");
         EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("InfoScene_LVP");
+        Application.LoadLevel("Options_LVP");
     }
 
 	public void ResetHiScore(){

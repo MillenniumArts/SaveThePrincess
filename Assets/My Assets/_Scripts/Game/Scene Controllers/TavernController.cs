@@ -19,6 +19,106 @@ public class TavernController : MonoBehaviour
     int BASE_MEAL_COST, NUM_MEALS;
     int totalHealthMissing;
 
+    public void PurchaseMeal(int index)
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        if (totalHealthMissing > 0)
+        {
+            if (player.PurchaseItem(prices[index]))
+            {
+                this.player.HealForAmount(stats[index]);
+                NotifyStatIncrease(false);
+            }
+        }
+        else
+        {
+            Debug.Log("You already have full stats! Go fight something!");
+            NotifyFullStats();
+        }
+    }
+
+    public void SleepForNight()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        // if player needs health OR mana
+        if (totalHealthMissing > 0)
+        {
+            // if can afford, purchase
+            if (player.PurchaseItem(totalHealthMissing))
+            {
+                Debug.Log(this.player.name + " is refreshed after a night of sleep!");
+                NotifyStatIncrease(true);
+            }
+        }
+        else
+        {
+            Debug.Log("You already have full stats! Go fight something!");
+            NotifyFullStats();
+        }
+    }
+
+    void NotifyStatIncrease(bool sleptForNight)
+    {
+        string notTitle = "";
+        string notString = "";
+        if (sleptForNight){
+            notTitle = "Slept for Night!";
+            notString = "Your remaining balance: " + this.player.dollarBalance +" \nHealth is fully restored.";
+        }
+        else
+        {
+            notTitle = "A Hearty Meal!";
+            notString = "Your remaining balance: " + this.player.dollarBalance + " \nHealth is partially restored.";
+        }
+    }
+
+    void NotifyFullStats()
+    {
+        string notTitle = "Full Stats!";
+        string notString = "You already have full stats! \nGo fight someone!";
+        NotificationHandler.instance.MakeNotification(notTitle, notString);
+    }
+
+    public void LeaveInn()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        this.player.gameObject.transform.localPosition = prevPos;
+        DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
+        Application.LoadLevel("Town_LVP");
+    }
+
+    #region on updates
+    /// <summary>
+    /// Updates text on buttons, disables buttons if player is full health
+    /// </summary>
+    private void UpdateText()
+    {
+        this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
+        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
+        this.playerBalance.text = "$" + this.player.dollarBalance;
+
+        // disable buttons if no health needed
+        if (totalHealthMissing > 0)
+        {
+            this.sleepText.text = "Sleep: $" + totalHealthMissing;
+        }
+        else
+        {
+            for (int i = 0; i < buttonText.Length; i++)
+            {
+                foodButtons[i].gameObject.SetActive(false);
+            }
+            this.sleepText.text = "";
+            this.sleepForNight.gameObject.SetActive(false);
+
+        }
+    }
+
+
+    #endregion on updates
+
+    #region monobehaviour
     // Use this for initialization
     void Start()
     {
@@ -42,7 +142,9 @@ public class TavernController : MonoBehaviour
 
         //get total health missing on entry
         totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-
+        if (totalHealthMissing == 0){
+            NotifyFullStats();
+        }
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)
         {
@@ -52,77 +154,11 @@ public class TavernController : MonoBehaviour
 
     }
 
-    private void UpdateText()
-    {
-        this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.playerBalance.text = "$" + this.player.dollarBalance;
-
-        if (totalHealthMissing > 0)
-        {
-            this.sleepText.text = "Sleep: $" + totalHealthMissing;
-        }
-        else
-        {
-            for (int i = 0; i < buttonText.Length; i++)
-            {
-                foodButtons[i].gameObject.SetActive(false);
-            }
-            this.sleepText.text = "";
-            this.sleepForNight.gameObject.SetActive(false);
-
-        }
-    }
-
-    public void PurchaseMeal(int index)
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        if (totalHealthMissing > 0)
-        {
-            if (player.PurchaseItem(prices[index]))
-            {
-                this.player.HealForAmount(stats[index]);
-            }
-        }
-        else
-        {
-            Handheld.Vibrate();
-            Debug.Log("You already have full stats! Go fight something!");
-        }
-    }
-
-    public void SleepForNight()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        // if player needs health OR mana
-        if (totalHealthMissing > 0)
-        {
-            // if can afford, purchase
-            if (player.PurchaseItem(totalHealthMissing))
-            {
-                Debug.Log(this.player.name + " is refreshed after a night of sleep!");
-            }
-        }
-        else
-        {
-            Handheld.Vibrate();
-            Debug.Log("You already have full stats! Go fight something!");
-        }
-    }
-
-
-    public void LeaveInn()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        this.player.gameObject.transform.localPosition = prevPos;
-        DontDestroyOnLoad(this.player);
-        EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("Town_LVP");
-    }
 
     // Update is called once per frame
     void Update()
     {
         UpdateText();
     }
+    #endregion monobehaviour
 }

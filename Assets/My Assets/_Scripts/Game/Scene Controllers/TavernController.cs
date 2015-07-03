@@ -19,6 +19,22 @@ public class TavernController : MonoBehaviour
     int BASE_MEAL_COST, NUM_MEALS;
     int totalHealthMissing;
 
+    #region button clicks
+    /// <summary>
+    /// called on exit tavern click
+    /// </summary>
+    public void LeaveInn()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        this.player.gameObject.transform.localPosition = prevPos;
+        DontDestroyOnLoad(this.player);
+        EscapeHandler.instance.ClearButtons();
+        Application.LoadLevel("Town_LVP");
+    }
+    /// <summary>
+    /// called on meal purchase button click
+    /// </summary>
+    /// <param name="index"></param>
     public void PurchaseMeal(int index)
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -26,8 +42,8 @@ public class TavernController : MonoBehaviour
         {
             if (player.PurchaseItem(prices[index]))
             {
+                NotifyStatIncrease(false,index);
                 this.player.HealForAmount(stats[index]);
-                NotifyStatIncrease(false);
             }
         }
         else
@@ -37,6 +53,9 @@ public class TavernController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called on sleep for night button click
+    /// </summary>
     public void SleepForNight()
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -56,8 +75,16 @@ public class TavernController : MonoBehaviour
             NotifyFullStats();
         }
     }
+   
+#endregion button clicks
+
     #region Notifications
-    void NotifyStatIncrease(bool sleptForNight)
+    /// <summary>
+    /// called when stats are increased, boolean indicates if the player slept over night or bought a meal
+    /// </summary>
+    /// <param name="sleptForNight">true if player restored all stats by sleeping the night</param>
+    /// <param name="index">only used if player purchased a meal</param>
+    void NotifyStatIncrease(bool sleptForNight, int index = -1)
     {
         string notTitle = "";
         string notString = "";
@@ -68,32 +95,30 @@ public class TavernController : MonoBehaviour
         else
         {
             notTitle = "A Hearty Meal!";
-            notString = "Your remaining balance: " + this.player.dollarBalance + " \nHealth is partially restored.";
+            notString = "Your remaining balance: " + this.player.dollarBalance + " \nHealth is restored by " + this.stats[index] + "%!" ;
         }
+        NotificationHandler.instance.MakeNotification(notTitle, notString);
     }
-
+    /// <summary>
+    /// called if player tries to increase stats when already full
+    /// </summary>
     void NotifyFullStats()
     {
         string notTitle = "Full Stats!";
         string notString = "You already have full stats! \nGo fight someone!";
         NotificationHandler.instance.MakeNotification(notTitle, notString);
     }
-
+    /// <summary>
+    /// called to show welcome message to player if health is not full
+    /// </summary>
     void NotifyWelcomeToTavern()
     {
         string notTitle = "Welcome to the Tavern!";
         string notString = "Click on the pictures to purchase a meal, or the stairs to sleep for the night!";
         NotificationHandler.instance.MakeNotification(notTitle, notString);
     }
+   
     #endregion Notifications
-    public void LeaveInn()
-    {
-        AudioManager.Instance.PlaySFX("Select");
-        this.player.gameObject.transform.localPosition = prevPos;
-        DontDestroyOnLoad(this.player);
-        EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("Town_LVP");
-    }
 
     #region on updates
     /// <summary>
@@ -109,6 +134,11 @@ public class TavernController : MonoBehaviour
         if (totalHealthMissing > 0)
         {
             this.sleepText.text = "Sleep: $" + totalHealthMissing;
+            for (int i = 0; i < buttonText.Length; i++)
+            {
+                foodButtons[i].gameObject.SetActive(true);
+            }
+            this.sleepForNight.gameObject.SetActive(true);
         }
         else
         {
@@ -116,12 +146,9 @@ public class TavernController : MonoBehaviour
             {
                 foodButtons[i].gameObject.SetActive(false);
             }
-            this.sleepText.text = "";
             this.sleepForNight.gameObject.SetActive(false);
-
         }
     }
-
 
     #endregion on updates
 
@@ -156,6 +183,7 @@ public class TavernController : MonoBehaviour
         {
             NotifyWelcomeToTavern();
         }
+
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)
         {

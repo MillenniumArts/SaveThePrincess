@@ -33,7 +33,8 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private GameObject[] sfx;
     [SerializeField] private GameObject[] songs;
     private AudioSource oldSong;
-    public AudioSource currentlyPlaying;
+    public AudioSource currentlyPlayingSong;
+    public AudioSource currentlyPlayingSound = null;
     private bool isSongPlaying = false;
 
     public float volumeFactor = 1.0f;
@@ -46,7 +47,8 @@ public class AudioManager : MonoBehaviour {
 
     public void PlaySFX(string n)
     {
-           PlaySound(SearchAudioSources(sfx, n));
+        this.currentlyPlayingSound = SearchAudioSources(sfx, n);
+        PlaySound(currentlyPlayingSound);
     }
 
     public void PlayNewSong(string n)
@@ -57,7 +59,7 @@ public class AudioManager : MonoBehaviour {
             {
                 StopSound(oldSong);
                 AudioSource newSource = SearchAudioSources(songs, n);
-                this.currentlyPlaying = newSource;
+                this.currentlyPlayingSong = newSource;
                 PlaySound(newSource);
                 oldSong = newSource;
             }
@@ -65,7 +67,7 @@ public class AudioManager : MonoBehaviour {
         else
         {
             AudioSource newSource = SearchAudioSources(songs, n);
-            this.currentlyPlaying = newSource;
+            this.currentlyPlayingSong = newSource;
             PlaySound(newSource);
             oldSong = newSource;
             isSongPlaying = true;
@@ -75,11 +77,12 @@ public class AudioManager : MonoBehaviour {
     private void PlaySound(AudioSource clip)
     {
             // Play the clip.
-            currentlyPlaying.Play();
+            clip.Play();
     }
 
     private void StopSound(AudioSource clip)
     {
+        this.currentlyPlayingSound = null;
         // Play the clip.
         clip.Stop();
     }
@@ -101,9 +104,16 @@ public class AudioManager : MonoBehaviour {
 
 
 
+    void Start()
+    {
+        this.currentlyPlayingSound = null;
+    }
     void Update()
     {
         // set volume of clips as needed
-        currentlyPlaying.volume = this.volumeFactor;
+        if (this.currentlyPlayingSong != null)
+            currentlyPlayingSong.volume = this.volumeFactor;
+        if (this.currentlyPlayingSound != null)
+            currentlyPlayingSound.volume = this.volumeFactor;
     }
 }

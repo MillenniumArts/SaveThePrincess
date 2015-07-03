@@ -166,13 +166,14 @@ public class PlayerController : PawnController
                     if (playerWeapon != null)
                     {
                         damageMod = playerWeapon.GetAtkMod();
+                        playerWeapon.itemName = "Wooden Sword";
                         physicalDamage += damageMod;
                     }
                 }
                 else
                 {
                     playerWeapon.ClearStats();
-                    playerWeapon.itemName = "None";
+                    playerWeapon.itemName = "Fist";
                 }
 
                 if (spawnWithArmor)
@@ -180,27 +181,28 @@ public class PlayerController : PawnController
                     if (playerArmor != null)
                     {
                         armorMod = playerArmor.GetDefMod();
+                        playerArmor.itemName = "Cloth";
                         armor += armorMod;
                     }
                 }
                 else
                 {
                     playerArmor.ClearStats();
-                    playerArmor.itemName = "None";
+                    playerArmor.itemName = "Naked Skin";
                 }
             }
             else
             {
-                this.damageMod = 0;//playerWeapon.GetAtkMod();
-                this.physicalDamage = physicalDamage - damageMod;
+                this.damageMod = playerWeapon.GetAtkMod();
+                //this.physicalDamage = physicalDamage - damageMod;
                 this.physicalDamage += damageMod;
                 this.armorMod = playerArmor.GetDefMod();
-                this.armor = armor - armorMod;
+                //this.armor = armor - armorMod;
                 this.armor += armorMod;
                 playerWeapon.ClearStats();
                 playerArmor.ClearStats();
-                playerWeapon.itemName = "None";
-                playerArmor.itemName = "None";
+                playerWeapon.itemName = "Fist";
+                playerArmor.itemName = "Bare Skin";
                 damageMod = 0;
                 armorMod = 0;
                 this.playerWeapon.animParameter = "OneHandAttack";

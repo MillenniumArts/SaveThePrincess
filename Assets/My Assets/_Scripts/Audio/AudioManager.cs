@@ -99,10 +99,7 @@ public class AudioManager : MonoBehaviour {
         return source;
     }
 
-    void GoBack()
-    {
-        Application.LoadLevel("StartMenu_LVP");
-    }
+
 
     void Update()
     {

@@ -7,14 +7,14 @@ public class LevelLoadHandler : MonoBehaviour
     /// This class will handle level loading throughout the game
     /// </summary>
 
+    /// <summary>
+    /// Player Reference
+    /// </summary>
     public PlayerController player;
-
 
     /// <summary>
     /// Loads the specified level
     /// </summary>
-
-
     public void LoadLevel(string level)
     {
         DontDestroyOnLoad(this.player);
@@ -26,13 +26,14 @@ public class LevelLoadHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        this.player = GameObject.FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.player = GameObject.FindObjectOfType<PlayerController>();
+        if (this.player == null)
+            this.player = GameObject.FindObjectOfType<PlayerController>();
     }
     #region Singleton
     private static LevelLoadHandler _instance;

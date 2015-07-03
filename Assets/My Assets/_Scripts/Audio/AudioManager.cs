@@ -34,37 +34,58 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private GameObject[] songs;
     private AudioSource oldSong;
     private bool isSongPlaying = false;
+    public bool audioMuted = false;
+
+    public void ToggleAudioMute()
+    {
+        if (this.audioMuted)
+        {
+            this.audioMuted = false;
+        }
+        else
+        {
+            this.audioMuted = true;
+        }
+    }
 
     public void PlaySFX(string n)
     {
-        PlaySound(SearchAudioSources(sfx, n));
+        if (!audioMuted)
+        {
+            PlaySound(SearchAudioSources(sfx, n));
+        }
     }
 
     public void PlayNewSong(string n)
     {
-        if (isSongPlaying)
-        {
-            if (n != oldSong.gameObject.name)
+        if (!audioMuted) { 
+            if (isSongPlaying)
             {
-                StopSound(oldSong);
+                if (n != oldSong.gameObject.name)
+                {
+                    StopSound(oldSong);
+                    AudioSource newSource = SearchAudioSources(songs, n);
+                    PlaySound(newSource);
+                    oldSong = newSource;
+                }
+            }
+            else
+            {
                 AudioSource newSource = SearchAudioSources(songs, n);
                 PlaySound(newSource);
                 oldSong = newSource;
+                isSongPlaying = true;
             }
-        }
-        else
-        {
-            AudioSource newSource = SearchAudioSources(songs, n);
-            PlaySound(newSource);
-            oldSong = newSource;
-            isSongPlaying = true;
         }
     }
 
     private void PlaySound(AudioSource clip)
     {
-        // Play the clip.
-        clip.Play();
+        if (!audioMuted)
+        {
+            // Play the clip.
+            clip.Play();
+        }
     }
 
     private void StopSound(AudioSource clip)

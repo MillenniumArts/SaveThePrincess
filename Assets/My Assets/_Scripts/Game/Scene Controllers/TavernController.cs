@@ -56,7 +56,7 @@ public class TavernController : MonoBehaviour
             NotifyFullStats();
         }
     }
-
+    #region Notifications
     void NotifyStatIncrease(bool sleptForNight)
     {
         string notTitle = "";
@@ -79,6 +79,13 @@ public class TavernController : MonoBehaviour
         NotificationHandler.instance.MakeNotification(notTitle, notString);
     }
 
+    void NotifyWelcomeToTavern()
+    {
+        string notTitle = "Welcome to the Tavern!";
+        string notString = "Click on the pictures to purchase a meal, or the stairs to sleep for the night!";
+        NotificationHandler.instance.MakeNotification(notTitle, notString);
+    }
+    #endregion Notifications
     public void LeaveInn()
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -144,6 +151,10 @@ public class TavernController : MonoBehaviour
         totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
         if (totalHealthMissing == 0){
             NotifyFullStats();
+        }
+        else
+        {
+            NotifyWelcomeToTavern();
         }
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)

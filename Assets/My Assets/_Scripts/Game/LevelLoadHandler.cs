@@ -8,10 +8,8 @@ public class LevelLoadHandler : MonoBehaviour
     /// </summary>
 
     /// <summary>
-    /// 
+    /// Loads the specified level
     /// </summary>
-    public string sceneToLoad;
-
     public void LoadLevel(string level)
     {
         Application.LoadLevel(level);
@@ -28,4 +26,36 @@ public class LevelLoadHandler : MonoBehaviour
     {
 
     }
+    #region Singleton
+    private static LevelLoadHandler _instance;
+
+    public static LevelLoadHandler Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<LevelLoadHandler>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            if (this != _instance)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+    #endregion Singleton
 }

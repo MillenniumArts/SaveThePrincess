@@ -17,7 +17,7 @@ public class LevelLoadHandler : MonoBehaviour
 
     public void LoadLevel(string level)
     {
-        DontDestroyOnLoad(player);
+        DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel(level);
         EscapeHandler.instance.GetButtons();
@@ -26,13 +26,13 @@ public class LevelLoadHandler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.player = GameObject.FindObjectOfType<PlayerController>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        this.player = GameObject.FindObjectOfType<PlayerController>();
     }
     #region Singleton
     private static LevelLoadHandler _instance;

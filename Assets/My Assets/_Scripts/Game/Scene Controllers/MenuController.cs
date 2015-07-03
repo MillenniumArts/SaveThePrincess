@@ -163,9 +163,8 @@ public class MenuController : MonoBehaviour {
                 EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
             }
 
-            DontDestroyOnLoad(this.player);
-
-            Application.LoadLevel(firstSceneToLoad);
+            //DontDestroyOnLoad(this.player);
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
     public void GoBack()

@@ -554,7 +554,7 @@ public class GameController : MonoBehaviour
         if (!waiting)
         {
             // load death scene
-            Application.LoadLevel("DeathScene_LVP");
+            LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP");
         }
     }
 
@@ -575,7 +575,7 @@ public class GameController : MonoBehaviour
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             // reload battle scene
-            Application.LoadLevel("Battle_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Battle_LVP");
         }
     }
 
@@ -591,7 +591,7 @@ public class GameController : MonoBehaviour
         {
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            Application.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
 
@@ -612,7 +612,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Loading Town Scene");
             // restore player energy after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            Application.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
 
@@ -630,7 +630,7 @@ public class GameController : MonoBehaviour
             this.player.dollarBalance += this.enemy.DropMoney();
             this.player.transform.localPosition = this.prevPos;
             PlayerPrefs.SetInt("midgame", 1);
-            Application.LoadLevel("MidGameStatSelect_LVP");
+            LevelLoadHandler.Instance.LoadLevel("MidGameStatSelect_LVP");
         }
     }
 
@@ -661,14 +661,8 @@ public class GameController : MonoBehaviour
             // start back from 0 battles
             BattleCounter.GetInstance().ResetCurrentBattleCount();
 
-            //StartCooldown(COOLDOWN_LENGTH);
-
             // go to town, no more battles to be fought this round
-            //GoToTown();
             LoadStatSelect();
-            // Stat Select?
-
-
         }
         else
         {

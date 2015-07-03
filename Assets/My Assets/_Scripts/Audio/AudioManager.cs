@@ -105,6 +105,5 @@ public class AudioManager : MonoBehaviour {
     {
         // set volume of clips as needed
         currentlyPlaying.volume = this.volumeFactor;
-        EscapeHandler.instance.GetButtons();
     }
 }

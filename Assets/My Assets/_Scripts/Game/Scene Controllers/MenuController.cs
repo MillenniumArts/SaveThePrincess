@@ -32,53 +32,6 @@ public class MenuController : MonoBehaviour {
 	public ItemFactory itemFactory;
     Vector3 newPos, prevPos;
 
-	// Use this for initialization
-	void Start () {
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
-        EscapeHandler.instance.GetButtons();
-
-        // initialize references
-        this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.transform.localPosition;
-        newPos = new Vector3(-7.5f, -2.5f);
-        this.player.gameObject.transform.localPosition = newPos;
-
-	    if (PlayerPrefs.GetInt("midgame") == 1){
-            this.backButton.gameObject.SetActive(false);
-            this.numCredits = 1;
-        }
-        if (PlayerPrefs.GetInt("score") > 0 || BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
-        {
-            EnemyStats.GetInstance().SetFirstEnemy(true);
-        }
-        
-		// get stats from player
-		this.baseHealth = this.player.totalHealth;
-		this.baseDamage = this.player.physicalDamage;
-		this.baseArmor = this.player.armor;
-        this.baseEnergy = this.player.totalEnergy;
-
-		// variables to be changed
-		this.newHealth = this.baseHealth;
-		this.newDamage = this.baseDamage;
-		this.newArmor = this.baseArmor;
-        this.newEnergy = this.baseEnergy;
-
-		this.healthAmt.text = this.newHealth.ToString();
-		this.armorAmt.text = this.newArmor.ToString();
-        this.energyAmt.text = this.newEnergy.ToString();
-		this.damageAmt.text = this.newDamage.ToString ();
-		this.creditText.text = "CREDITS: " + numCredits;
-
-		// value per credit:
-		this.healthInc = 10;
-		this.damageInc = 5;
-		this.armorInc = 5;
-        this.energyInc = 10;
-
-		// button handling
-        ButtonInit();
-	}
 
     void ButtonInit()
     {
@@ -218,10 +171,13 @@ public class MenuController : MonoBehaviour {
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Select");
-        EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("StartMenu_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP");
+        //EscapeHandler.instance.ClearButtons();
+        //Application.LoadLevel();
     }
 
+
+    #region monobehaviour
 	void UpdateText(){
 		this.healthAmt.text = this.newHealth.ToString();
 		this.armorAmt.text =  this.newArmor.ToString();
@@ -229,9 +185,59 @@ public class MenuController : MonoBehaviour {
         this.energyAmt.text = this.newEnergy.ToString();
 		this.creditText.text = "CREDITS: " + numCredits;
 	}
+    // Use this for initialization
+    void Start()
+    {
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        //EscapeHandler.instance.GetButtons();
+
+        // initialize references
+        this.player = FindObjectOfType<PlayerController>();
+        this.prevPos = this.player.transform.localPosition;
+        newPos = new Vector3(-7.5f, -2.5f);
+        this.player.gameObject.transform.localPosition = newPos;
+
+        if (PlayerPrefs.GetInt("midgame") == 1)
+        {
+            this.backButton.gameObject.SetActive(false);
+            this.numCredits = 1;
+        }
+        if (PlayerPrefs.GetInt("score") > 0 || BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
+        {
+            EnemyStats.GetInstance().SetFirstEnemy(true);
+        }
+
+        // get stats from player
+        this.baseHealth = this.player.totalHealth;
+        this.baseDamage = this.player.physicalDamage;
+        this.baseArmor = this.player.armor;
+        this.baseEnergy = this.player.totalEnergy;
+
+        // variables to be changed
+        this.newHealth = this.baseHealth;
+        this.newDamage = this.baseDamage;
+        this.newArmor = this.baseArmor;
+        this.newEnergy = this.baseEnergy;
+
+        this.healthAmt.text = this.newHealth.ToString();
+        this.armorAmt.text = this.newArmor.ToString();
+        this.energyAmt.text = this.newEnergy.ToString();
+        this.damageAmt.text = this.newDamage.ToString();
+        this.creditText.text = "CREDITS: " + numCredits;
+
+        // value per credit:
+        this.healthInc = 10;
+        this.damageInc = 5;
+        this.armorInc = 5;
+        this.energyInc = 10;
+
+        // button handling
+        ButtonInit();
+    }
 
 	// Update is called once per frame
 	void Update () {
 		UpdateText ();
 	}
+    #endregion monobehaviour
 }

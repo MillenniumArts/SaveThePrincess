@@ -7,18 +7,26 @@ public class LevelLoadHandler : MonoBehaviour
     /// This class will handle level loading throughout the game
     /// </summary>
 
+    public PlayerController player;
+
+
     /// <summary>
     /// Loads the specified level
     /// </summary>
+
+
     public void LoadLevel(string level)
     {
+        DontDestroyOnLoad(player);
+        EscapeHandler.instance.ClearButtons();
         Application.LoadLevel(level);
+        EscapeHandler.instance.GetButtons();
     }
 
     // Use this for initialization
     void Start()
     {
-
+        this.player = GameObject.FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame

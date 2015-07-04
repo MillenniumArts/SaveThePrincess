@@ -20,7 +20,7 @@ public class LevelLoadHandler : MonoBehaviour
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel(level);
-        EscapeHandler.instance.GetButtons();
+        Invoke("GetButtons", 0.02f);
     }
 
     /// <summary>
@@ -30,6 +30,12 @@ public class LevelLoadHandler : MonoBehaviour
     {
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
+        Invoke("GetButtons", 0.02f);
+    }
+
+    public void GetButtons()
+    {
+        Debug.Log("Getting buttons");
         EscapeHandler.instance.GetButtons();
     }
 

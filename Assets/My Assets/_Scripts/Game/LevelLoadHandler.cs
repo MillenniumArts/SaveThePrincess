@@ -23,6 +23,16 @@ public class LevelLoadHandler : MonoBehaviour
         EscapeHandler.instance.GetButtons();
     }
 
+    /// <summary>
+    ///  called to return to start menu. will destroy player
+    /// </summary>
+    public void LoadStartGame()
+    {
+        EscapeHandler.instance.ClearButtons();
+        Application.LoadLevel("StartMenu_LVP");
+        EscapeHandler.instance.GetButtons();
+    }
+
     // Use this for initialization
     void Start()
     {

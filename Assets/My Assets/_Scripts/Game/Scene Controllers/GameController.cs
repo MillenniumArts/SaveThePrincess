@@ -135,19 +135,22 @@ public class GameController : MonoBehaviour
             attackAmount = attackMeter.value;
             //(remainingNRG/totalNRG) is the factor of damage to be applied 
             //when there is less than the required amount
-            int NRGFactor = Mathf.RoundToInt(this.player.remainingEnergy / this.player.ATTACK_ENERGY_COST);
+            float NRGFactor = this.player.remainingEnergy / this.player.ATTACK_ENERGY_COST;
             // make sure you can only do 100% damage
-            NRGFactor = Mathf.Clamp(NRGFactor,0,1);
+            NRGFactor = Mathf.Clamp(NRGFactor,0.0f,1.0f);
 
             // apply the percent damage from the bar (value/max) * NRGFactor
-            int damageToApply = NRGFactor * Mathf.RoundToInt((attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
+            int damageToApply = Mathf.RoundToInt(NRGFactor * (attackMeter.value / attackMeter.maxValue) * this.player.physicalDamage);
             
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
-            PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt( ((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
+            PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
             
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
+
+            Debug.Log(damageToApply + "Damage to apply");
+
             this.player.Attack(attacked, damageToApply);
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);

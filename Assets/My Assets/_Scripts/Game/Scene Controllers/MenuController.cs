@@ -170,7 +170,7 @@ public class MenuController : MonoBehaviour {
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Select");
-        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP");
+        LevelLoadHandler.Instance.LoadStartGame();
         //EscapeHandler.instance.ClearButtons();
         //Application.LoadLevel();
     }

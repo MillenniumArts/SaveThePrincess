@@ -151,7 +151,7 @@ public class PawnController : MonoBehaviour
     public void TakeDamage()
     {
         int defecit=0;
-        if (this.physicalDamageToTake > 0)
+        if (this.physicalDamageToTake >= 0)
         {
             if (this.physicalDamageToTake > this.armor) // if true damage will apply after armor
             {

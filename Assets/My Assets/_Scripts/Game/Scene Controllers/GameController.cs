@@ -187,10 +187,8 @@ public class GameController : MonoBehaviour
             regenAmt = (regenAmt / 100f) * this.enemy.ATTACK_ENERGY_COST;
             ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(regenAmt);
 
-            Debug.Log("regen enemy: " + regenAmt);
             // multiply damage by reduction factor
             int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.physicalDamage);
-            Debug.Log("Enemy bar at " + attackAmount + " Damage to apply: " + damageToApply);
 
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
@@ -200,7 +198,7 @@ public class GameController : MonoBehaviour
                 if (r > 1)
                 {
                     // physical
-                    Debug.Log(this.enemy.name + " attacks!");
+                    //Debug.Log(this.enemy.name + " attacks!");
                     cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                     this.enemy.Attack(this.player, damageToApply);
                 }
@@ -209,7 +207,7 @@ public class GameController : MonoBehaviour
                     // chance to heal if enemy has potion
                     if (!enemyHasHealed)
                     {
-                        Debug.Log(this.enemy.name + " healed for 25 hp");
+                        //Debug.Log(this.enemy.name + " healed for 25 hp");
                         this.enemy.TriggerAnimation("HealPotion");
                         this.enemy.HealForAmount(25);
                         this.enemyHasHealed = true;
@@ -217,7 +215,7 @@ public class GameController : MonoBehaviour
                     else
                     {
                         // no potions to heal, LAST RESORT ATTACK!
-                        Debug.Log(this.enemy.name + " attacks!");
+                       // Debug.Log(this.enemy.name + " attacks!");
                         cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, damageToApply);
                     }

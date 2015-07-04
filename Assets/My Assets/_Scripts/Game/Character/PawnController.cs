@@ -188,6 +188,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
+            Debug.Log("No Damage");
             PerformVictoryBehaviour();
         }
         // MAGICAL DAMAGE
@@ -488,8 +489,8 @@ public class PawnController : MonoBehaviour
                 {
                     this.playerAnimator.SetTrigger("human_winHigh");
                 }
-                else if (this.remainingHealth / this.totalHealth < 0.75
-                      && this.remainingHealth / this.totalHealth > 0.5)
+                else if (this.remainingHealth / this.totalHealth <= 0.75
+                      && this.remainingHealth / this.totalHealth >= 0.25)
                 {
                     this.playerAnimator.SetTrigger("human_winMid");
                 }

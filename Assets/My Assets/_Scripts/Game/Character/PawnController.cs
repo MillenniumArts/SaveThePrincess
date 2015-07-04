@@ -151,7 +151,7 @@ public class PawnController : MonoBehaviour
     public void TakeDamage()
     {
         int defecit=0;
-        if (this.physicalDamageToTake >= 0)
+        if (this.physicalDamageToTake > 0)
         {
             if (this.physicalDamageToTake > this.armor) // if true damage will apply after armor
             {
@@ -183,8 +183,14 @@ public class PawnController : MonoBehaviour
             {
                 PerformBlockBehaviour();
             }
-        this.physicalDamageToTake = 0;
+            
+            this.physicalDamageToTake = 0;
         }
+        else
+        {
+            PerformVictoryBehaviour();
+        }
+        // MAGICAL DAMAGE
         if (this.magicalDamageToTake > 0)
         {
             if (this.remainingHealth - this.magicalDamageToTake >= 0)
@@ -207,6 +213,10 @@ public class PawnController : MonoBehaviour
             }
             this.magicalDamageToTake = 0;
             PerformDamageBehaviour();
+        }
+        else
+        {
+            PerformVictoryBehaviour();
         }
     }
 
@@ -479,7 +489,7 @@ public class PawnController : MonoBehaviour
                     this.playerAnimator.SetTrigger("human_winHigh");
                 }
                 else if (this.remainingHealth / this.totalHealth < 0.75
-                      && this.remainingHealth / this.totalHealth < 0.75)
+                      && this.remainingHealth / this.totalHealth > 0.5)
                 {
                     this.playerAnimator.SetTrigger("human_winMid");
                 }
@@ -636,6 +646,11 @@ public class PawnController : MonoBehaviour
     protected virtual void PerformBlockBehaviour()
     {
         TriggerAnimation("block");
+    }
+
+    protected virtual void PerformVictoryBehaviour()
+    {
+        TriggerAnimation("victory");
     }
     #endregion perform behaviours
     #endregion protected Functions

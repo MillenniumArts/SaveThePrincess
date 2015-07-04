@@ -148,9 +148,6 @@ public class GameController : MonoBehaviour
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-
-            Debug.Log(damageToApply + "Damage to apply");
-
             this.player.Attack(attacked, damageToApply);
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);

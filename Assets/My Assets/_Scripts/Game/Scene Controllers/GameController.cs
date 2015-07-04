@@ -203,11 +203,9 @@ public class GameController : MonoBehaviour
                     this.enemy.Attack(this.player, damageToApply);
                 }
                 else
-                { //enemy health < 25% 
-                    // chance to heal if enemy has potion
+                {
                     if (!enemyHasHealed)
                     {
-                        //Debug.Log(this.enemy.name + " healed for 25 hp");
                         this.enemy.TriggerAnimation("HealPotion");
                         this.enemy.HealForAmount(25);
                         this.enemyHasHealed = true;
@@ -215,7 +213,6 @@ public class GameController : MonoBehaviour
                     else
                     {
                         // no potions to heal, LAST RESORT ATTACK!
-                       // Debug.Log(this.enemy.name + " attacks!");
                         cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, damageToApply);
                     }

@@ -48,6 +48,14 @@ public class EnemyStats {
     /// </summary>
     private float MAX_inc_boss = 0.15f;
     /// <summary>
+    /// Minimum stat increase % for filling the stat gap between the player and the enemy.
+    /// </summary>
+    private float MIN_gapFill = 0.50f;
+    /// <summary>
+    /// Maximum stat increase % for filling the stat gap between the player and the enemy.
+    /// </summary>
+    private float MAX_gapFill = 0.65f;
+    /// <summary>
     /// Are we on the very first enemy?
     /// </summary>
     private bool firstEnemy = true;
@@ -63,7 +71,7 @@ public class EnemyStats {
     /// Sets the stats of an enemy that is passed through.
     /// </summary>
     /// <param name="enemy">BaseEnemyController class.</param>
-    public void GetEnemyBaseStats(BaseEnemyController enemy)
+    public void GetEnemyBaseStats(BaseEnemyController enemy, PlayerController player)
     {
         //Debug.Log("Start of Run bool = " + startOfRun);
         if (startOfRun == true)
@@ -76,24 +84,32 @@ public class EnemyStats {
         float max;
         if (!firstEnemy)
         {
-            //Debug.Log("Not first enemy.");
-            if (!CheckForBoss())
+            if (CheckStatGap(player) == false)
             {
-                //Debug.Log("Not boss.");
-                min = MIN_inc;
-                max = MAX_inc;
+                //Debug.Log("Not first enemy.");
+                if (!CheckForBoss())
+                {
+                    //Debug.Log("Not boss.");
+                    min = MIN_inc;
+                    max = MAX_inc;
+                }
+                else
+                {
+                    //Debug.Log("Enemy is boss.");
+                    min = MIN_inc_boss;
+                    max = MAX_inc_boss;
+                }
             }
             else
             {
-                //Debug.Log("Enemy is boss.");
-                min = MIN_inc_boss;
-                max = MAX_inc_boss;
+                min = MIN_gapFill;
+                max = MAX_gapFill;
             }
-            //Debug.Log("Increasing stats");
-            currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, min, max);
-            currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
-            currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
-            currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
+                //Debug.Log("Increasing stats");
+                currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, min, max);
+                currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
+                currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
+                currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
         }
         /*else
         {
@@ -226,7 +242,7 @@ public class EnemyStats {
         int increase = (int)(stat * (Random.Range(min, max)));
         if (increase < 1)
         {
-            increase = Random.Range(1, 4);
+            increase = Random.Range(1, 6);
         }
         return increase;
     }
@@ -249,6 +265,57 @@ public class EnemyStats {
         lastCeckpointNRG = currentEnemyNRG;
         lastCeckpointATK = currentEnemyATK;
         lastCeckpointDEF = currentEnemyDEF;
+    }
+
+    private bool CheckStatGap(PlayerController _player)
+    {
+        float tempHP = (float)previousEnemyHP / (float)_player.totalHealth;
+        //Debug.Log(previousEnemyHP + " / " + _player.totalHealth + " HP Gap is " + tempHP + "%");
+        float tempNRG = (float)previousEnemyNRG / (float)_player.totalEnergy;
+        //Debug.Log(previousEnemyNRG + " / " + _player.totalEnergy + " NRG Gap is " + tempNRG + "%");
+        float tempATK = (float)previousEnemyATK / (float)_player.physicalDamage;
+        //Debug.Log(previousEnemyATK + " / " + _player.physicalDamage + " ATK Gap is " + tempATK + "%");
+        float tempDEF = (float)previousEnemyDEF / (float)_player.armor;
+        //Debug.Log(previousEnemyDEF + " / " + _player.armor + " DEF Gap is " + tempDEF + "%");
+
+        float tempStatAvg = (tempHP + tempNRG + tempATK + tempDEF) / 4;
+
+        Debug.Log("Stat Gap is " + tempStatAvg * 100f + "%");
+
+        if (tempStatAvg <= 0.15f)
+        {
+            MIN_gapFill = 2.5f;
+            MAX_gapFill = 3f;
+            return true;
+        }
+        else if (tempStatAvg <= 0.25f)
+        {
+            MIN_gapFill = 1f;
+            MAX_gapFill = 1.05f;
+            return true;
+        }
+        else if (tempStatAvg <= 0.4f)
+        {
+            MIN_gapFill = 0.75f;
+            MAX_gapFill = 0.85f;
+            return true;
+        }
+        else if (tempStatAvg <= 0.55f)
+        {
+            MIN_gapFill = 0.45f;
+            MAX_gapFill = 0.55f;
+            return true;
+        }
+        if (tempStatAvg <= 0.7f)
+        {
+            MIN_gapFill = 0.25f;
+            MAX_gapFill = 0.35f;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 #endregion Private Functions
 }

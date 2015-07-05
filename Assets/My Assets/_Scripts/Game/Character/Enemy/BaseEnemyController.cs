@@ -17,7 +17,7 @@ public class BaseEnemyController : PawnController {
 
     public bool isAnimating;
 
-    //private PlayerController player;
+    private PlayerController player;
 
     private int healthEnergy;
 
@@ -73,7 +73,7 @@ public class BaseEnemyController : PawnController {
     /// </summary>
     private void CreateStats()
     {
-        EnemyStats.GetInstance().GetEnemyBaseStats(this);
+        EnemyStats.GetInstance().GetEnemyBaseStats(this, player);
     }
 
 	private void EnemyStart(){
@@ -103,7 +103,7 @@ public class BaseEnemyController : PawnController {
 
     void Awake()
     {
-        //player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerController>();
         isAnimating = false;
     }
 

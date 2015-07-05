@@ -201,9 +201,17 @@ public class MenuController : MonoBehaviour {
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;
         }
-        if (PlayerPrefs.GetInt("score") > 0 || BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
+        if (PlayerPrefs.GetInt("score") == 0)
         {
-            EnemyStats.GetInstance().SetFirstEnemy(true);
+            EnemyStats.GetInstance().SetVeryFirstEnemy(true);
+        }
+        else
+        {
+            EnemyStats.GetInstance().SetVeryFirstEnemy(false);
+        }
+        if (BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
+        {
+            EnemyStats.GetInstance().SetStartOfRun(true);
         }
 
         // get stats from player

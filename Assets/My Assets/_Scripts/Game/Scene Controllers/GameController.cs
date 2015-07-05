@@ -582,6 +582,7 @@ public class GameController : MonoBehaviour
         this.player.transform.localPosition = this.prevPos;
         DontDestroyOnLoad(this.player);
         BattleCounter.GetInstance().ResetCurrentBattleCount();
+        EnemyStats.GetInstance().ResetCheckpoint();
         if (!waiting)
         {
             // restore player mana after battle

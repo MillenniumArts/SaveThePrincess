@@ -159,6 +159,13 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void CancelAttack()
+    {
+        attackBarMoving = false;
+        this.attackMeter.gameObject.SetActive(true);
+        attackMeter.value = Random.Range(0, attackMeter.maxValue);
+    }
+
     /// <summary>
     /// called when player animation is finished
     /// </summary>

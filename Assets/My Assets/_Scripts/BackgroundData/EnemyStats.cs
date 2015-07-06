@@ -63,10 +63,6 @@ public class EnemyStats {
     /// Are we at the beginning of a run of enemies.
     /// </summary>
     private bool startOfRun = true;
-    /// <summary>
-    /// Are we at the end of a run of enemies.
-    /// </summary>
-    //private bool endOfRun = false;
 #endregion Variables
 
 #region Public Functions
@@ -212,6 +208,18 @@ public class EnemyStats {
     }
 
     /// <summary>
+    /// Sets the checkpoint of the enemy stat creation base stats to the current enemy's stats.
+    /// </summary>
+    public void SetCheckpoint()
+    {
+        //Debug.Log("SetCheckpoint");
+        lastCheckpointHP = currentEnemyHP;
+        lastCheckpointNRG = currentEnemyNRG;
+        lastCheckpointATK = currentEnemyATK;
+        lastCheckpointDEF = currentEnemyDEF;
+    }
+
+    /// <summary>
     /// Restores the enemy stats creation base stats to the previous checkpoints stats.
     /// </summary>
     public void ResetCheckpoint()
@@ -260,20 +268,6 @@ public class EnemyStats {
     private bool CheckForBoss()
     {
         return BattleCounter.GetInstance().battlesNeeded == 1;
-    }
-
-    /// <summary>
-    /// Sets the checkpoint of the enemy stat creation base stats to the current enemy's stats.
-    /// </summary>
-    public void SetCheckpoint()
-    {
-        //Debug.Log("SetCheckpoint");
-        //if(endOfRun)
-        //    endOfRun = false;
-        lastCheckpointHP = currentEnemyHP;
-        lastCheckpointNRG = currentEnemyNRG;
-        lastCheckpointATK = currentEnemyATK;
-        lastCheckpointDEF = currentEnemyDEF;
     }
 
     private bool CheckStatGap(PlayerController _player)

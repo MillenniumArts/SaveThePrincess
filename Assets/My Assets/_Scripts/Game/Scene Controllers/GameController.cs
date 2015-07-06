@@ -656,6 +656,7 @@ public class GameController : MonoBehaviour
             BattleCounter.GetInstance().SetBattlesNeeded(DifficultyLevel.GetInstance().GetDifficultyMultiplier());
             // start back from 0 battles
             BattleCounter.GetInstance().ResetCurrentBattleCount();
+            // set a checkpoint for enemy stat creation
             EnemyStats.GetInstance().SetCheckpoint();
             // go to town, no more battles to be fought this round
             LoadStatSelect();

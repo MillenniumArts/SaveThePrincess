@@ -30,6 +30,8 @@ public class MerchantController : MonoBehaviour {
     // text to show remaining balance after purchase
     public Text remainingBalanceText;
 
+    public Text[] labelText;
+
     // buttons for increase/decrease quantity
     public Button increaseOne, 
                   decreaseOne, 
@@ -49,8 +51,6 @@ public class MerchantController : MonoBehaviour {
                 quantityFourText,
                 quantityFiveText;
 
-   // public int q_1, q_2, q_3;
-
     // total number of items purchased 
     public int numFoodItemsPurchased, numPotionsPurchased;
 
@@ -61,6 +61,9 @@ public class MerchantController : MonoBehaviour {
     // exit button
     public Button exitButton;
 
+    /// <summary>
+    /// on Cancel Button Click
+    /// </summary>
     public void CancelPurchase()
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -72,6 +75,9 @@ public class MerchantController : MonoBehaviour {
         numPotionsPurchased = 0;
     }
 
+    /// <summary>
+    /// on Confirm Button Click
+    /// </summary>
     public void ConfirmPurchase()
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -92,6 +98,9 @@ public class MerchantController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    ///  on exit button click
+    /// </summary>
     public void LeaveMerchant()
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -100,6 +109,10 @@ public class MerchantController : MonoBehaviour {
         Application.LoadLevel("Town_LVP");
     }
 
+    /// <summary>
+    ///  on '+' button click
+    /// </summary>
+    /// <param name="index"></param>
     public void IncreaseAmount(int index)
     {
         AudioManager.Instance.PlaySFX("Select");
@@ -123,6 +136,10 @@ public class MerchantController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// on '-' button click
+    /// </summary>
+    /// <param name="index"></param>
     public void DecreaseAmount(int index) {
         AudioManager.Instance.PlaySFX("Select");
         if (index <= 2)
@@ -165,6 +182,11 @@ public class MerchantController : MonoBehaviour {
         this.quantityFourText.text = this.items[3].ToString();
         this.quantityFiveText.text = this.items[4].ToString();
 
+        for (int i = 0; i < this.labelText.Length; i++ )
+        {
+            this.labelText[i].text = "$" + this.prices[i].ToString() + " each";
+        }
+
     }
 
     /// <summary>
@@ -185,6 +207,10 @@ public class MerchantController : MonoBehaviour {
         // calculate player's remaining balance
         this.remainingBalance = this.playerBalance - this.purchaseBalance;
     }
+   
+    /// <summary>
+   /// sets active of buttons to false when not enough money
+   /// </summary>
     void UpdateButtons()
     {
         if (this.purchaseBalance > this.player.dollarBalance)

@@ -188,7 +188,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Damage");
+            //Debug.Log("No Damage");
             PerformVictoryBehaviour();
         }
         // MAGICAL DAMAGE
@@ -356,13 +356,19 @@ public class PawnController : MonoBehaviour
     }
 
     /// <summary>
-    /// Uses amount of energy if possible
+    /// Uses amount of energy if possible, bottoms out otherwise (sets to 0). 
+    /// DAMAGE REDUCTION ON 'BOTTOMING OUT' IS HANDLED IN THE GAME CONTROLLER IN CASE MAGIC AND PHYS HAVE DIFFERENT BEHAVIOURS
     /// </summary>
     /// <param name="amount"></param>
     public void UseEnergy(int amount)
     {
         if (CanUseEnergy(amount)){
             this.remainingEnergy -= amount;
+        }
+        else
+        {
+            Debug.Log(this.name + " uses what energy they have left!");
+            this.remainingEnergy = 0;
         }
     }
     /// <summary>

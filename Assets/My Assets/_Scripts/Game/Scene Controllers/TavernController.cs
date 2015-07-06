@@ -9,8 +9,9 @@ public class TavernController : MonoBehaviour
     Vector3 prevPos;
     // UI
     public Button sleepForNight;
-    public Text sleepText;
+    public Button leaveInn;
     public Button[] foodButtons;
+    public Text sleepText;
     public Text[] buttonText;
     public Text[] labelText;
     // stats
@@ -180,6 +181,7 @@ public class TavernController : MonoBehaviour
 
         prices = new int[NUM_MEALS];
         stats = new int[NUM_MEALS];
+        this.leaveInn.gameObject.SetActive(true);
 
         //get total health missing on entry
         totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);

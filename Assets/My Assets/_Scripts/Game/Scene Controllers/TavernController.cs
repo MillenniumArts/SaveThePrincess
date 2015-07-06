@@ -12,6 +12,7 @@ public class TavernController : MonoBehaviour
     public Text sleepText;
     public Button[] foodButtons;
     public Text[] buttonText;
+    public Text[] labelText;
     // stats
     public int[] prices, stats;
     public Text healthText, playerBalance;
@@ -131,24 +132,29 @@ public class TavernController : MonoBehaviour
         this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
         this.playerBalance.text = "$" + this.player.dollarBalance;
 
-        // disable buttons if no health needed
-        if (totalHealthMissing > 0)
+        for (int i = 0; i < this.labelText.Length; i++)
         {
-            this.sleepText.text = "Sleep: $" + totalHealthMissing;
-            for (int i = 0; i < buttonText.Length; i++)
-            {
-                foodButtons[i].gameObject.SetActive(true);
-            }
-            this.sleepForNight.gameObject.SetActive(true);
+            this.labelText[i].text = "$" + this.prices[i].ToString()+ " => " + this.stats[i].ToString()+"%";
         }
-        else
-        {
-            for (int i = 0; i < buttonText.Length; i++)
+
+            // disable buttons if no health needed
+            if (totalHealthMissing > 0)
             {
-                foodButtons[i].gameObject.SetActive(false);
+                this.sleepText.text = "Sleep: $" + totalHealthMissing;
+                for (int i = 0; i < buttonText.Length; i++)
+                {
+                    foodButtons[i].gameObject.SetActive(true);
+                }
+                this.sleepForNight.gameObject.SetActive(true);
             }
-            this.sleepForNight.gameObject.SetActive(false);
-        }
+            else
+            {
+                for (int i = 0; i < buttonText.Length; i++)
+                {
+                    foodButtons[i].gameObject.SetActive(false);
+                }
+                this.sleepForNight.gameObject.SetActive(false);
+            }
     }
 
     #endregion on updates

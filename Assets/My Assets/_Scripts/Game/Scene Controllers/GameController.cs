@@ -26,7 +26,8 @@ public class GameController : MonoBehaviour
     private int PLAYER_ENERGY_REGEN_AMT,
                ENEMY_ENERGY_REGEN_AMT,
                currentBattle,
-               remainingBattles;
+               remainingBattles,
+               BAR_SPEED = 30;
 
     private float MONEY_TRANSFER_PCT = 0.2f,
                  COOLDOWN_LENGTH = 0.0f,
@@ -423,17 +424,17 @@ public class GameController : MonoBehaviour
         int counter = 0;
         if (attackBarMoving)
         {
-            if (increasing && counter % 60 == 0)
+            if (increasing && counter % BAR_SPEED == 0)
             {
                 this.attackMeter.value++;
             }
-            else if (!increasing && counter % 60 == 0)
+            else if (!increasing && counter % BAR_SPEED == 0)
             {
                 this.attackMeter.value--;
             }
             else
             {
-                if (counter >= 60)
+                if (counter >= BAR_SPEED)
                     counter = 0;
             }
             counter++;

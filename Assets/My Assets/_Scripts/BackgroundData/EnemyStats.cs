@@ -30,7 +30,7 @@ public class EnemyStats {
     /// <summary>
     /// Enemy Stat Checkpoint.
     /// </summary>
-    private int lastCeckpointHP, lastCeckpointNRG, lastCeckpointATK, lastCeckpointDEF;
+    private int lastCheckpointHP, lastCheckpointNRG, lastCheckpointATK, lastCheckpointDEF;
     /// <summary>
     /// Minimum stat increase %.
     /// </summary>
@@ -63,6 +63,10 @@ public class EnemyStats {
     /// Are we at the beginning of a run of enemies.
     /// </summary>
     private bool startOfRun = true;
+    /// <summary>
+    /// Are we at the end of a run of enemies.
+    /// </summary>
+    //private bool endOfRun = false;
 #endregion Variables
 
 #region Public Functions
@@ -73,10 +77,12 @@ public class EnemyStats {
     /// <param name="enemy">BaseEnemyController class.</param>
     public void GetEnemyBaseStats(BaseEnemyController enemy, PlayerController player)
     {
+        Debug.Log("Checkpoint is: " + lastCheckpointHP + " HP, " + lastCheckpointNRG + " NRG, " + lastCheckpointATK + " ATK, " + lastCheckpointDEF + " DEF.");
+        Debug.Log("Previous is: " + previousEnemyHP + " HP, " + previousEnemyNRG + " NRG, " + previousEnemyATK + " ATK, " + previousEnemyDEF + " DEF.");
         //Debug.Log("Start of Run bool = " + startOfRun);
         if (startOfRun == true)
         {
-            SetCheckpoint();
+            //SetCheckpoint();
             startOfRun = false;
         }
         //Debug.Log("Getting Enemy Stats");
@@ -169,6 +175,7 @@ public class EnemyStats {
         currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, 0f, 0.1f);
         currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, 0f, 0.1f);
         currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, 0f, 0.1f);
+        SetCheckpoint();
         StatFlip();
     }
 
@@ -210,10 +217,10 @@ public class EnemyStats {
     public void ResetCheckpoint()
     {
         startOfRun = true;
-        previousEnemyHP = lastCeckpointHP;
-        previousEnemyNRG = lastCeckpointNRG;
-        previousEnemyATK = lastCeckpointATK;
-        previousEnemyDEF = lastCeckpointDEF;
+        previousEnemyHP = lastCheckpointHP;
+        previousEnemyNRG = lastCheckpointNRG;
+        previousEnemyATK = lastCheckpointATK;
+        previousEnemyDEF = lastCheckpointDEF;
     }
     #endregion Resetters
 #endregion Public Functions
@@ -258,13 +265,15 @@ public class EnemyStats {
     /// <summary>
     /// Sets the checkpoint of the enemy stat creation base stats to the current enemy's stats.
     /// </summary>
-    private void SetCheckpoint()
+    public void SetCheckpoint()
     {
         //Debug.Log("SetCheckpoint");
-        lastCeckpointHP = currentEnemyHP;
-        lastCeckpointNRG = currentEnemyNRG;
-        lastCeckpointATK = currentEnemyATK;
-        lastCeckpointDEF = currentEnemyDEF;
+        //if(endOfRun)
+        //    endOfRun = false;
+        lastCheckpointHP = currentEnemyHP;
+        lastCheckpointNRG = currentEnemyNRG;
+        lastCheckpointATK = currentEnemyATK;
+        lastCheckpointDEF = currentEnemyDEF;
     }
 
     private bool CheckStatGap(PlayerController _player)

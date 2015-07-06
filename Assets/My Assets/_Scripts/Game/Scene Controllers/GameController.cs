@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
                   enemyMana;
 
     public Slider attackMeter;
+    public Button cancelAttack;
 
     private Vector3 prevPos;
 
@@ -147,6 +148,7 @@ public class GameController : MonoBehaviour
 
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
+            // energy cost is the remainder of the total cost - regen
             PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);

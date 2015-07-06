@@ -139,12 +139,12 @@ public class GameController : MonoBehaviour
             
             // (remainingNRG/totalNRG) is the factor of damage reduction to be applied 
             // when there is less than the required amount of energy
-            float NRGFactor = (float)this.player.remainingEnergy / (float)this.player.ATTACK_ENERGY_COST;
+            float NRGReductionFactor = (float)this.player.remainingEnergy / (float)this.player.ATTACK_ENERGY_COST;
 
-            NRGFactor = Mathf.Clamp(NRGFactor,0.0f,1.0f);
+            NRGReductionFactor = Mathf.Clamp(NRGReductionFactor,0.0f,1.0f);
             // apply the percent damage from the bar (value/max) * NRGFactor
-            float damageToApply = NRGFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.physicalDamage;
-            
+            float damageToApply = NRGReductionFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.physicalDamage;
+
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
             PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;

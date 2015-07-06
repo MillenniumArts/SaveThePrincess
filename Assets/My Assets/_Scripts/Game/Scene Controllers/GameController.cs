@@ -400,6 +400,7 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(false);
         this.attackMeter.gameObject.SetActive(false);
+        this.cancelAttack.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
         this.inventoryHandle.gameObject.SetActive(false);

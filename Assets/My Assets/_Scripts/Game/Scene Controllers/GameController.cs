@@ -208,12 +208,10 @@ public class GameController : MonoBehaviour
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())
             {
-                //50% chance of physical vs magic
                 int r = Random.Range(0, 10);
                 if (r > 1)
                 {
                     // physical
-                    //Debug.Log(this.enemy.name + " attacks!");
                     cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                     this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                 }

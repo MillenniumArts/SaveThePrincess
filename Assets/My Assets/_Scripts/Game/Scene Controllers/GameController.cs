@@ -219,10 +219,10 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    if (!enemyHasHealed)
+                    if (!enemyHasHealed && this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))
                     {
                         this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.HealForAmount(25);
+                        this.enemy.HealForAmount(50);
                         this.enemyHasHealed = true;
                     }
                     else

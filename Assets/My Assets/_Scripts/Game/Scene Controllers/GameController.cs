@@ -164,9 +164,9 @@ public class GameController : MonoBehaviour
     public void CancelAttack()
     {
         attackBarMoving = false;
+        attackMeter.value = Random.Range(0, attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         this.cancelAttack.gameObject.SetActive(false);
-        attackMeter.value = Random.Range(0, attackMeter.maxValue);
 
     }
 
@@ -752,6 +752,8 @@ public class GameController : MonoBehaviour
         this.attackMeter.maxValue = 100;
         //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
+        // set cancel button to invis
+        this.cancelAttack.gameObject.SetActive(false);
 
         // combat starts after initialization is finished
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);

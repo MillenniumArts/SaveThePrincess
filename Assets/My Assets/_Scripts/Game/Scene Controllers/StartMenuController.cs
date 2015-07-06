@@ -13,6 +13,7 @@ public class StartMenuController : MonoBehaviour {
 	void Start () {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
+        PlayerPrefs.SetInt("score", 0);
 	}
 
     void Awake()

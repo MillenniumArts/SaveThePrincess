@@ -539,7 +539,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("hiscore", PlayerPrefs.GetInt("score"));
         }
         // reset score/turn
-        PlayerPrefs.SetInt("score", 0);
+        //PlayerPrefs.SetInt("score", 0);  // COMMENTED THIS OUT AND MOVED IT TO THE DEATH CONTROLLER.
         PlayerPrefs.SetInt("turn", 0);
         // reset difficulty
         DifficultyLevel.GetInstance().ResetDifficulty();

@@ -427,7 +427,7 @@ public class PlayerInventory : MonoBehaviour
         this.BreadPercent = 15;
         this.CheesePercent = 20;
         // amount per potion
-        this.HealthPotionAmount = 30;
+        this.HealthPotionAmount = 50;
         this.EnergyPotionAmount = 30;
 	}
 	

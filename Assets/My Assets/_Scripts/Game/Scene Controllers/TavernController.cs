@@ -67,6 +67,7 @@ public class TavernController : MonoBehaviour
             {
                 Debug.Log(this.player.name + " is refreshed after a night of sleep!");
                 NotifyStatIncrease(true);
+                this.player.HealForAmount(totalHealthMissing);
             }
         }
         else

@@ -383,7 +383,7 @@ public class PawnController : MonoBehaviour
     /// </summary>
     /// <param name="attackedPlayer">Player Being attacked</param>
     /// <param name="appliedDamage">the actual percent of damage applied from the attack bar in the Battle</param>
-    public void Attack(PawnController attackedPlayer, int appliedDamage)
+    public void Attack(PawnController attackedPlayer, int appliedDamage, int energyUsed)
     {
         // Check Weapon type for behavior
         if (this.playerWeapon.GetItemClass() == "Weapon"){
@@ -397,7 +397,7 @@ public class PawnController : MonoBehaviour
             // other attack types?
         }
         // all attacks always use energy
-        this.UseEnergy(ATTACK_ENERGY_COST);
+        this.UseEnergy(energyUsed);
     }
 
     

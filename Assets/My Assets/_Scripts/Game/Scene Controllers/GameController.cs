@@ -24,10 +24,12 @@ public class GameController : MonoBehaviour
     public int score,
                turn;
     private int PLAYER_ENERGY_REGEN_AMT,
-               ENEMY_ENERGY_REGEN_AMT,
-               currentBattle,
-               remainingBattles,
-               BAR_SPEED = 30;
+                PLAYER_ENERGY_COST_AMT,
+                ENEMY_ENERGY_REGEN_AMT,
+                ENEMY_ENERGY_COST_AMT,
+                currentBattle,
+                remainingBattles,
+                BAR_SPEED = 30;
 
     private float MONEY_TRANSFER_PCT = 0.2f,
                  COOLDOWN_LENGTH = 0.0f,
@@ -145,11 +147,11 @@ public class GameController : MonoBehaviour
             
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
-            
+            PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-            this.player.Attack(attacked, Mathf.RoundToInt(damageToApply));
+            this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);
         }
@@ -187,7 +189,7 @@ public class GameController : MonoBehaviour
             //Energy Amount regen
             regenAmt = (regenAmt / 100f) * this.enemy.ATTACK_ENERGY_COST;
             ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(regenAmt);
-
+            ENEMY_ENERGY_COST_AMT = this.enemy.ATTACK_ENERGY_COST - ENEMY_ENERGY_REGEN_AMT;
             // multiply damage by reduction factor
             int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.physicalDamage);
 
@@ -201,7 +203,7 @@ public class GameController : MonoBehaviour
                     // physical
                     //Debug.Log(this.enemy.name + " attacks!");
                     cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                    this.enemy.Attack(this.player, damageToApply);
+                    this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                 }
                 else
                 {
@@ -215,7 +217,7 @@ public class GameController : MonoBehaviour
                     {
                         // no potions to heal, LAST RESORT ATTACK!
                         cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
-                        this.enemy.Attack(this.player, damageToApply);
+                        this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                     }
                 }
                 OnEnemyActionUsed(this.player, cdReq);
@@ -235,7 +237,6 @@ public class GameController : MonoBehaviour
             // waiting = true;
             enemyHasAttacked = true;
             StartCooldown(requiredCooldownLength);
-            //this.enemy.UseEnergy(30);
             // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
@@ -418,7 +419,9 @@ public class GameController : MonoBehaviour
         this.enemyMana.maxValue = this.enemy.totalEnergy;
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
-
+    /// <summary>
+    /// Handles logic for attack Bar.
+    /// </summary>
     public void UpdateAttackBar()
     {
         int counter = 0;

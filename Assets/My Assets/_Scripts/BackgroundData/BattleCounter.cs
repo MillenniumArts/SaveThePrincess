@@ -23,7 +23,6 @@ public class BattleCounter {
 
     public int GetCurrentBattleCount()
     {
-        Debug.Log("Current battle count" + currentBattleCount);
         return currentBattleCount;
     }
 

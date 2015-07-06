@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LevelLoadHandler : MonoBehaviour
@@ -35,7 +35,6 @@ public class LevelLoadHandler : MonoBehaviour
 
     public void GetButtons()
     {
-        Debug.Log("Getting buttons");
         EscapeHandler.instance.GetButtons();
     }
 

@@ -125,6 +125,7 @@ public class GameController : MonoBehaviour
             // starts attackBar movement in updateAttackBar
             attackBarMoving = true;
             this.attackMeter.gameObject.SetActive(true);
+            this.cancelAttack.gameObject.SetActive(true);
         }
         else
         {
@@ -150,6 +151,7 @@ public class GameController : MonoBehaviour
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST );
             // energy cost is the remainder of the total cost - regen
             PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;
+
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
@@ -162,8 +164,10 @@ public class GameController : MonoBehaviour
     public void CancelAttack()
     {
         attackBarMoving = false;
-        this.attackMeter.gameObject.SetActive(true);
+        this.attackMeter.gameObject.SetActive(false);
+        this.cancelAttack.gameObject.SetActive(false);
         attackMeter.value = Random.Range(0, attackMeter.maxValue);
+
     }
 
     /// <summary>

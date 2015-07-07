@@ -37,7 +37,7 @@ public class AudioDictionary : MonoBehaviour{
     public string GetMusic(string s)
     {
         string music;
-        if (SoundFiles.TryGetValue(s, out music))
+        if (MusicFiles.TryGetValue(s, out music))
         {
             return music;
         }

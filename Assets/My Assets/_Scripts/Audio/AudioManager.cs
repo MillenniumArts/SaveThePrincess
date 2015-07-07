@@ -99,7 +99,7 @@ public class AudioManager : MonoBehaviour {
     {
         if (isSongPlaying)
         {
-            if (n != musicAudioSource.clip.name)  // If the current song is different from the song that is being called.
+            if (_dictionary.GetMusic(n) != musicAudioSource.clip.name)  // If the current song is different from the song that is being called.
             {
                 StopSound(musicAudioSource);      // Stop the previous song.
                 LoadPlaySongClip(n);        // And load and play the new song.

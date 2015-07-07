@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour {
 
     [SerializeField] private GameObject[] sfx;
     [SerializeField] private GameObject[] songs;
-    private AudioSource oldSong;
+    private AudioSource songSource;
     public AudioSource currentlyPlayingSong;
     public AudioSource currentlyPlayingSound = null;
     private bool isSongPlaying = false;
@@ -51,11 +51,11 @@ public class AudioManager : MonoBehaviour {
         PlaySound(currentlyPlayingSound);
     }
 
-    public void PlayNewSong(string n)
+    /*public void PlayNewSong(string n)
     {
         if (isSongPlaying)
         {
-            if (n != oldSong.gameObject.name)
+            if (n != oldSong.clip.name)
             {
                 StopSound(oldSong);
                 AudioSource newSource = SearchAudioSources(songs, n);
@@ -72,18 +72,47 @@ public class AudioManager : MonoBehaviour {
             oldSong = newSource;
             isSongPlaying = true;
         }
+    }*/
+
+    public void PlayNewSong(string n)
+    {
+        if (isSongPlaying)
+        {
+            if (n != songSource.clip.name)  // If the current song is different from the song that is being called.
+            {
+                StopSound(songSource);      // Stop the previous song.
+                LoadPlaySongClip(n);        // And load and play the new song.
+            }
+            else
+            {
+                // Old song keeps playing.
+            }
+        }
+        else
+        {
+            // Load and play the first song.
+            LoadPlaySongClip(n);
+            isSongPlaying = true; // A song is now playing.
+        }
+    }
+
+    private void LoadPlaySongClip(string name)
+    {
+        AudioClip newClip = Resources.Load("_Audio/Music/" + name) as AudioClip;
+        songSource.clip = newClip;
+        PlaySound(songSource);
     }
 
     private void PlaySound(AudioSource clip)
     {
-            // Play the clip.
-            clip.Play();
+        // Play the clip.
+        clip.Play();
     }
 
     private void StopSound(AudioSource clip)
     {
         this.currentlyPlayingSound = null;
-        // Play the clip.
+        // Stop the clip.
         clip.Stop();
     }
 
@@ -107,6 +136,7 @@ public class AudioManager : MonoBehaviour {
     void Start()
     {
         this.currentlyPlayingSound = null;
+        songSource = GameObject.Find("Audio_Music").GetComponent<AudioSource>();
     }
     void Update()
     {

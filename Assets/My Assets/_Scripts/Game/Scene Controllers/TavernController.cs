@@ -27,7 +27,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     public void LeaveInn()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         this.player.gameObject.transform.localPosition = prevPos;
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
@@ -39,7 +39,7 @@ public class TavernController : MonoBehaviour
     /// <param name="index"></param>
     public void PurchaseMeal(int index)
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         if (totalHealthMissing > 0)
         {
             if (player.PurchaseItem(prices[index]))
@@ -60,7 +60,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     public void SleepForNight()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         // if player needs health OR mana
         if (totalHealthMissing > 0)
         {

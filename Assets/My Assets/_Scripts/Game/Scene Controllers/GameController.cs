@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnRetreat()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         confirmed = true;
         hasSelected = true;
     }
@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Cancel()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         confirmed = false;
         hasSelected = true;
     }
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();
@@ -702,7 +702,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        AudioManager.Instance.PlayNewSong("ForestBattleMusic");
+        AudioManager.Instance.PlayNewSong("ForestBattle");
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();

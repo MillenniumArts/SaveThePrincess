@@ -16,7 +16,7 @@ public class DeathController : MonoBehaviour {
 		this.player = FindObjectOfType<PlayerController> ();
 
 		this.restartButton.onClick.AddListener (()=>{
-            AudioManager.Instance.PlaySFX("Select");
+            AudioManager.Instance.PlaySFX("Button1");
             EnemyStats.GetInstance().ResetEnemyBaseStats();
             PlayerPrefs.SetInt("score", 0); // Reset the score to 0 for the next game.
             //EscapeHandler.instance.ClearButtons();

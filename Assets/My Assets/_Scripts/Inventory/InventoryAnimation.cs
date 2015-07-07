@@ -10,7 +10,7 @@ public class InventoryAnimation : MonoBehaviour {
     }
     public void OpenClose()
     {
-        AudioManager.Instance.PlaySFX("OpenBag");
+        AudioManager.Instance.PlaySFX("Button2");
         if (!open)
         {
             _animator.SetTrigger("Open");

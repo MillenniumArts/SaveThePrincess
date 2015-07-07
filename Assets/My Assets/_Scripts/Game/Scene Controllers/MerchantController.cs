@@ -66,7 +66,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void CancelPurchase()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         for (int i = 0; i < items.Length; i++)
         {
             items[i] = 0;
@@ -80,7 +80,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void ConfirmPurchase()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         if (this.player.PurchaseItem(purchaseBalance)){
             this.player.inventory.Apples += this.items[0];
             this.player.inventory.Bread += this.items[1];
@@ -103,7 +103,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void LeaveMerchant()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
@@ -115,7 +115,7 @@ public class MerchantController : MonoBehaviour {
     /// <param name="index"></param>
     public void IncreaseAmount(int index)
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         if (index <= 2)
         {
             if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
@@ -141,7 +141,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     /// <param name="index"></param>
     public void DecreaseAmount(int index) {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         if (index <= 2)
         {
             if (items[index] - 1 <= 0)

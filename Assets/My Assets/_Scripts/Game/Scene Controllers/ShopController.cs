@@ -39,7 +39,7 @@ public class ShopController : MonoBehaviour
 
     public void ExitStore()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
@@ -49,7 +49,7 @@ public class ShopController : MonoBehaviour
     #region purchasing items
     public void SelectItem(int buttonNum)
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
@@ -70,7 +70,7 @@ public class ShopController : MonoBehaviour
 
     public void BuyItem()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Button1");
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")

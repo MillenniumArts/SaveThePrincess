@@ -115,7 +115,7 @@ public class PlayerInventory : MonoBehaviour
 
     private int _healthPotionAmount;
 
-    public int HealthPotionAmount
+    public int HealthPotionPercent
     {
         get { return _healthPotionAmount; }
         set { _healthPotionAmount = value; }
@@ -137,7 +137,7 @@ public class PlayerInventory : MonoBehaviour
     }
     private int _energyPotionAmount;
 
-    public int EnergyPotionAmount
+    public int EnergyPotionPercent
     {
         get { return _energyPotionAmount; }
         set { _energyPotionAmount = value; }
@@ -364,7 +364,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (this.Player.remainingHealth < this.Player.totalHealth)
                 {
-                    this.Player.HealForAmount(HealthPotionAmount);
+                    this.Player.HealForPercent(HealthPotionPercent);
                     this.HealthPotions--;
                     this.Player.TriggerAnimation("healpotion");
                     return true;
@@ -377,7 +377,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (this.Player.remainingEnergy < this.Player.totalEnergy)
                 {
-                    this.Player.GiveEnergyAmount(EnergyPotionAmount);
+                    this.Player.GiveEnergyPercent(EnergyPotionPercent);
                     this.EnergyPotions--;
                     this.Player.TriggerAnimation("energypotion");
                     return true;
@@ -427,8 +427,8 @@ public class PlayerInventory : MonoBehaviour
         this.BreadPercent = 15;
         this.CheesePercent = 20;
         // amount per potion
-        this.HealthPotionAmount = 50;
-        this.EnergyPotionAmount = 30;
+        this.HealthPotionPercent = 50;
+        this.EnergyPotionPercent = 30;
 	}
 	
 	// Update is called once per frame

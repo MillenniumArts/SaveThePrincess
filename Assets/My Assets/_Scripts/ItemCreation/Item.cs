@@ -215,7 +215,7 @@ public class Item : MonoBehaviour {
             {
                 if (p.remainingHealth < p.totalHealth)
                 {
-                    p.HealForAmount(this.GetHealEffect());
+                    p.GiveHealthAmount(this.GetHealEffect());
                     this.used = true;
                     return true;
                 }
@@ -241,7 +241,7 @@ public class Item : MonoBehaviour {
             {
                 if (this.GetItemSubClass() == "HealMagic")
                 {
-                    p.HealForPercent((this.GetHealEffect() / 100f));
+                    p.GiveHealthPercent((this.GetHealEffect() / 100f));
                 }
                 else if (this.GetItemSubClass() == "AttackMagic")
                 {

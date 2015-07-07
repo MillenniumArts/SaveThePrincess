@@ -19,7 +19,8 @@ public class GameController : MonoBehaviour
                 finalFrame,
                 hasSelected,
                 confirmed;
-    private bool increasing = true;
+    private bool increasing = true,
+                 playerHasEatenFoodThisTurn = false;
 
     public int score,
                turn;
@@ -36,9 +37,11 @@ public class GameController : MonoBehaviour
                  ATTACK_LENGTH,
                  MAGIC_LENGTH;
 
-    private float attackAmount;
-
-    private float startTime, endTime, curTime;
+    private float attackAmount,
+                  startTime,
+                  endTime,
+                  curTime,
+                  timeVal = 1.5f;
 
     public Slider playerHealth,
                   playerMana,
@@ -175,10 +178,32 @@ public class GameController : MonoBehaviour
     public void OnWaitComplete()
     {
         this.enemy.TakeDamage();
-        this.enemy.GiveEnergyAmount(ENEMY_ENERGY_REGEN_AMT);
+        Invoke("EnemyRegen", timeVal);
         // ENEMY TURN
-        combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
+    /// <summary>
+    /// Invokable call to delay stat regen
+    /// </summary>
+    public void PlayerRegen()
+    {
+        // energy regen
+        this.player.GiveEnergyAmount(PLAYER_ENERGY_REGEN_AMT);
+        // heal for food
+        if (this.player.numTurnsLeftToHeal > 0)
+        {
+            this.player.GiveEnergyPercent(this.player.inventory.PercentToRegenPerTurn);
+            this.player.GiveHealthPercent(this.player.inventory.PercentToRegenPerTurn);
+            if (this.player.numTurnsLeftToHeal <= 1)
+            {
+                this.player.numTurnsLeftToHeal = 0;
+            }
+            else
+            {
+                this.player.numTurnsLeftToHeal--;
+            }
+        }
+    }
+
     #endregion Player Choice
     #region Enemy Choice
     /// <summary>
@@ -220,7 +245,7 @@ public class GameController : MonoBehaviour
                     if (!enemyHasHealed && this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))
                     {
                         this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.HealForAmount(50);
+                        this.enemy.GiveHealthAmount(50);
                         this.enemyHasHealed = true;
                     }
                     else
@@ -244,10 +269,8 @@ public class GameController : MonoBehaviour
     {
         if (combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
-            // waiting = true;
             enemyHasAttacked = true;
             StartCooldown(requiredCooldownLength);
-            // animate enemy
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
     }
@@ -259,12 +282,21 @@ public class GameController : MonoBehaviour
     {
         combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
         this.player.TakeDamage();
-        this.player.GiveEnergyAmount(PLAYER_ENERGY_REGEN_AMT);
-        enemyHasAttacked = false;
-        playerHasAttacked = false;
-        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+        Invoke("PlayerRegen", timeVal * 0.5f);
+        this.playerHasEatenFoodThisTurn = false;
+        this.enemyHasAttacked = false;
+        this.playerHasAttacked = false;
+        this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
         if (!this.enemy.IsDead())
             waiting = false;
+    }
+    /// <summary>
+    /// Invokable call to delay Enemy Regen
+    /// </summary>
+    public void EnemyRegen()
+    {
+        this.enemy.GiveEnergyAmount(ENEMY_ENERGY_REGEN_AMT);
+        combatController.setState(CombatController.BattleStates.ENEMYCHOICE);
     }
 
     #endregion Enemy Choice
@@ -359,13 +391,25 @@ public class GameController : MonoBehaviour
         switch (index)
         {
             case 0:
-                pass = this.player.inventory.EatFood("Apple");
+                if (!this.playerHasEatenFoodThisTurn)
+                {
+                    pass = this.player.inventory.EatFood("Apple");
+                    this.playerHasEatenFoodThisTurn = true;
+                }
                 break;
             case 1:
-                pass = this.player.inventory.EatFood("Bread");
+                if (!this.playerHasEatenFoodThisTurn)
+                {
+                    pass = this.player.inventory.EatFood("Bread");
+                    this.playerHasEatenFoodThisTurn = true;
+                }
                 break;
             case 2:
-                pass = this.player.inventory.EatFood("Cheese");
+                if (!this.playerHasEatenFoodThisTurn)
+                {
+                    pass = this.player.inventory.EatFood("Cheese");
+                    this.playerHasEatenFoodThisTurn = true;
+                }
                 break;
             case 3:
                 pass = this.player.inventory.UsePotion("Health");
@@ -380,9 +424,12 @@ public class GameController : MonoBehaviour
             default:
                 break;
         }
-        if (pass)
+
+        // toggle inventoryAnim after each use
+        invAnim.OpenClose();
+
+        if (pass && index >= 3) // only potions will consume a turn
         {
-            invAnim.OpenClose();
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
         }

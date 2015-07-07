@@ -45,7 +45,7 @@ public class TavernController : MonoBehaviour
             if (player.PurchaseItem(prices[index]))
             {
                 NotifyStatIncrease(false,index);
-                this.player.HealForAmount(stats[index]);
+                this.player.GiveHealthAmount(stats[index]);
             }
         }
         else
@@ -69,7 +69,7 @@ public class TavernController : MonoBehaviour
             {
                 Debug.Log(this.player.name + " is refreshed after a night of sleep!");
                 NotifyStatIncrease(true);
-                this.player.HealForAmount(totalHealthMissing);
+                this.player.GiveHealthAmount(totalHealthMissing);
             }
         }
         else

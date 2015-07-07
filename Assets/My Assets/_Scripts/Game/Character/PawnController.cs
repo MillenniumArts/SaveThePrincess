@@ -205,7 +205,6 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            //Debug.Log("No Damage");
             PerformVictoryBehaviour();
         }
         // MAGICAL DAMAGE
@@ -254,7 +253,7 @@ public class PawnController : MonoBehaviour
     /// Heals the player for specified amount.
     /// </summary>
     /// <param name="amount">Amount.</param>
-    public virtual void HealForAmount(int amount)
+    public virtual void GiveHealthAmount(int amount)
     {
         if (this.remainingHealth < this.totalHealth)
         {
@@ -269,11 +268,12 @@ public class PawnController : MonoBehaviour
             }
         }
     }
+    
     /// <summary>
     /// Heals for percent specified by a float (0.01f - 0.99f)
     /// </summary>
     /// <param name="percent">Percent (from 0.01f to 0.99f).</param>
-    public virtual void HealForPercent(float percent)
+    public virtual void GiveHealthPercent(float percent)
     {
         if (this.remainingHealth + Mathf.FloorToInt(this.totalHealth * percent) > this.totalHealth)
         {
@@ -289,11 +289,10 @@ public class PawnController : MonoBehaviour
     /// Heals for percent specified by Integer value (must be less than 100)
     /// </summary>
     /// <param name="percent"></param>
-    public virtual void HealForPercent(int percent)
+    public virtual void GiveHealthPercent(int percent)
     {        
         // set to float to use
         float newPercent = percent * 0.01f;
-        Debug.Log("Healing for " + newPercent + " percent");
         // can't be over 100% heal
         if (newPercent > 1)
             newPercent = 1.0f;
@@ -322,7 +321,6 @@ public class PawnController : MonoBehaviour
         {
             this.remainingEnergy += amount;
         }
-        //Debug.Log(this.name + " Receieved " + amount + " Energy.");
     }
     /// <summary>
     /// Gives specified percentage to player as defined by float value (0.01f - 0.99f)
@@ -384,7 +382,6 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            Debug.Log(this.name + " uses what energy they have left!");
             this.remainingEnergy = 0;
         }
     }
@@ -451,7 +448,6 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Enough Energy For That!");
             return false;
         }
     }

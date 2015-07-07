@@ -53,10 +53,10 @@ public class BaseEnemyController : PawnController {
         this.totalEnergy = NRG;
         this.physicalDamage = ATK;
         this.armor = DEF;
-        Debug.Log(" EnemyTotalHealth: " + totalHealth +
+       /* Debug.Log(" EnemyTotalHealth: " + totalHealth +
             " EnemyTotalEnergy: " + totalEnergy +
             " EnemyPhysicalDamaga: " + physicalDamage +
-            " EnemyArmor: " + armor);
+            " EnemyArmor: " + armor);*/
     }
 
 	#endregion Public functions

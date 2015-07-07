@@ -228,7 +228,7 @@ public class PlayerInventory : MonoBehaviour
     #region percentToHealPerTurn
     private int _percentToHealPerTurn;
 
-    public int PercentToHealPerTurn
+    public int PercentToRegenPerTurn
     {
         get { return _percentToHealPerTurn; }
         set { _percentToHealPerTurn = value; }
@@ -381,7 +381,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (this.Player.remainingHealth < this.Player.totalHealth)
                 {
-                    this.Player.HealForPercent(HealthPotionPercent);
+                    this.Player.GiveHealthPercent(HealthPotionPercent);
                     this.HealthPotions--;
                     this.Player.TriggerAnimation("healpotion");
                     return true;
@@ -444,7 +444,7 @@ public class PlayerInventory : MonoBehaviour
         this.BreadTurns = 3;
         this.CheeseTurns = 4;
         // percent to heal per turn
-        this.PercentToHealPerTurn = 10;
+        this.PercentToRegenPerTurn = 10;
         // amount per potion
         this.HealthPotionPercent = 50;
         this.EnergyPotionPercent = 30;

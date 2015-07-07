@@ -73,9 +73,9 @@ public class EnemyStats {
     /// <param name="enemy">BaseEnemyController class.</param>
     public void GetEnemyBaseStats(BaseEnemyController enemy, PlayerController player)
     {
-        Debug.Log("Checkpoint is: " + lastCheckpointHP + " HP, " + lastCheckpointNRG + " NRG, " + lastCheckpointATK + " ATK, " + lastCheckpointDEF + " DEF.");
-        Debug.Log("Previous is: " + previousEnemyHP + " HP, " + previousEnemyNRG + " NRG, " + previousEnemyATK + " ATK, " + previousEnemyDEF + " DEF.");
-        //Debug.Log("Start of Run bool = " + startOfRun);
+       // Debug.Log("Checkpoint is: " + lastCheckpointHP + " HP, " + lastCheckpointNRG + " NRG, " + lastCheckpointATK + " ATK, " + lastCheckpointDEF + " DEF.");
+       // Debug.Log("Previous is: " + previousEnemyHP + " HP, " + previousEnemyNRG + " NRG, " + previousEnemyATK + " ATK, " + previousEnemyDEF + " DEF.");
+       // Debug.Log("Start of Run bool = " + startOfRun);
         if (startOfRun == true)
         {
             //SetCheckpoint();

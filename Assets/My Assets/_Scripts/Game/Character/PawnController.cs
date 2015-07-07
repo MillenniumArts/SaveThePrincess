@@ -56,11 +56,6 @@ public class PawnController : MonoBehaviour
     public bool spawnWithArmor;
     #endregion Rendering
 
-    #region Inventory
-    
-
-    #endregion Inventory
-
     #region STATS
     /// <summary>
     /// The Maximum Mana for this player
@@ -142,9 +137,31 @@ public class PawnController : MonoBehaviour
     /// </summary>
     public int ATTACK_ENERGY_COST = 30;
 
+    /// <summary>
+    /// Food heals per turn, specifies how many turns are left before heal stops
+    /// </summary>
+    public int numTurnsLeftToHeal;
+
     #endregion STATS
 
     #region Public Functions
+
+    /// <summary>
+    /// Sets the number of turns to heal, adds to number if more than 0.
+    /// </summary>
+    /// <param name="numTurns"></param>
+    public void SetNumTurnsToHeal(int numTurns)
+    {
+        if (this.numTurnsLeftToHeal == 0)
+        {
+            this.numTurnsLeftToHeal = numTurns;
+        }
+        else
+        {
+            this.numTurnsLeftToHeal += numTurns;
+        }
+    }
+
     /// <summary>
     /// Used to apply damage to player stored in damageToTake;
     /// </summary>

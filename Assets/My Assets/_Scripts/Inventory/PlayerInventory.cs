@@ -43,12 +43,12 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Percent of Player's health healed by Apple
     /// </summary>
-    private int _applePercent;
+    private int _appleTurns;
 
-    public int ApplePercent
+    public int AppleTurns
     {
-        get { return _applePercent; }
-        set { _applePercent = value; }
+        get { return _appleTurns; }
+        set { _appleTurns = value; }
     }
     #endregion Apple
 
@@ -67,12 +67,12 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Percent of health healed by bread
     /// </summary>
-    private int _breadPercent;
+    private int _breadTurns;
 
-    public int BreadPercent
+    public int BreadTurns
     {
-        get { return _breadPercent; }
-        set { _breadPercent = value; }
+        get { return _breadTurns; }
+        set { _breadTurns = value; }
     }
     #endregion Bread
 
@@ -91,12 +91,12 @@ public class PlayerInventory : MonoBehaviour
     /// <summary>
     /// Percent of health restored from Cheese
     /// </summary>
-    private int _cheesePercent;
+    private int _cheeseTurns;
 
-    public int CheesePercent
+    public int CheeseTurns
     {
-        get { return _cheesePercent; }
-        set { _cheesePercent = value; }
+        get { return _cheeseTurns; }
+        set { _cheeseTurns = value; }
     }
     #endregion Cheese
 
@@ -225,6 +225,17 @@ public class PlayerInventory : MonoBehaviour
     }
     #endregion item counters
 
+    #region percentToHealPerTurn
+    private int _percentToHealPerTurn;
+
+    public int PercentToHealPerTurn
+    {
+        get { return _percentToHealPerTurn; }
+        set { _percentToHealPerTurn = value; }
+    }
+
+    #endregion percentToHealPerTurn
+
     #endregion variables
 
     #region buying items
@@ -313,16 +324,19 @@ public class PlayerInventory : MonoBehaviour
     #endregion buying items
 
     #region using items
-
+    /// <summary>
+    /// behaviour called on food use
+    /// </summary>
+    /// <param name="food">type of food</param>
+    /// <returns>if food was eaten successfully</returns>
     public bool EatFood(string food)
     {
         if (food == "Apple")
         {
             if (Apples > 0)
             {
-                Debug.Log(this.Player.name + " Has restored "+ ApplePercent + " health and energy!");
-                this.Player.HealForPercent(ApplePercent);
-                this.Player.GiveEnergyPercent(ApplePercent);
+                //Debug.Log(this.Player.name + " Has restored "+ AppleTurns + " health and energy!");
+                this.Player.SetNumTurnsToHeal(AppleTurns);
                 this.Player.TriggerAnimation("potion");
                 this.Apples--;
                 return true;
@@ -331,18 +345,16 @@ public class PlayerInventory : MonoBehaviour
         }else if (food == "Bread"){
             if (Bread > 0)
             {
-                Debug.Log(this.Player.name + " Has restored " + BreadPercent + " health and energy!");
-                this.Player.HealForPercent(BreadPercent);
-                this.Player.GiveEnergyPercent(BreadPercent);
+                //Debug.Log(this.Player.name + " Has restored " + BreadTurns + " health and energy!");
+                this.Player.SetNumTurnsToHeal(BreadTurns);
                 this.Player.TriggerAnimation("potion");
                 this.Bread--;
                 return true;
             }
         }else if (food == "Cheese"){
             if (Cheese > 0) {
-                Debug.Log(this.Player.name + " Has restored " + CheesePercent + " health and energy!");
-                this.Player.HealForPercent(CheesePercent);
-                this.Player.GiveEnergyPercent(CheesePercent);
+                //Debug.Log(this.Player.name + " Has restored " + CheeseTurns + " health and energy!");
+                this.Player.SetNumTurnsToHeal(CheeseTurns);
                 this.Player.TriggerAnimation("potion");
                 this.Cheese--;
                 return true;
@@ -356,6 +368,11 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// behaviour called on potion use
+    /// </summary>
+    /// <param name="potion">potion type</param>
+    /// <returns></returns>
     public bool UsePotion(string potion)
     {
         if (this.HealthPotions > 0)
@@ -422,10 +439,12 @@ public class PlayerInventory : MonoBehaviour
         // max counts
         this.MaxFood = 3;
         this.MaxPotions = 3;
-        // percent per food item
-        this.ApplePercent = 10;
-        this.BreadPercent = 15;
-        this.CheesePercent = 20;
+        // number of turns to heal for a percent per food item
+        this.AppleTurns = 2;
+        this.BreadTurns = 3;
+        this.CheeseTurns = 4;
+        // percent to heal per turn
+        this.PercentToHealPerTurn = 10;
         // amount per potion
         this.HealthPotionPercent = 50;
         this.EnergyPotionPercent = 30;

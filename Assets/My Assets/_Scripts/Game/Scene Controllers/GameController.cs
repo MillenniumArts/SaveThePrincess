@@ -239,13 +239,33 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    if (!enemyHasHealed && this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))
+                    r = Random.Range(0, 2);
+                    if (r == 0 && !enemyHasHealed && this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))
                     {
+                        // Heal (r=0)
                         this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.GiveHealthAmount(50);
+                        this.enemy.GiveHealthPercent(50);
                         this.enemyHasHealed = true;
                     }
-                    else
+                    else if (r == 1 && !enemyHasHealed && this.enemy.remainingEnergy < Mathf.RoundToInt((0.3f * this.enemy.totalEnergy)))
+                    {
+                        // Energy Regen(r=1)
+                        this.enemy.TriggerAnimation("HealPotion");
+                        this.enemy.GiveEnergyPercent(50);
+                        this.enemyHasHealed = true;
+                    }
+                    else if (r == 2 && !enemyHasHealed && (
+                        this.enemy.remainingEnergy < Mathf.RoundToInt((0.3f * this.enemy.totalEnergy)) 
+                        || this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth))
+                        ))
+                    {
+                        // Heal and energy regen (r=2)
+                        this.enemy.TriggerAnimation("HealPotion");
+                        this.enemy.GiveHealthPercent(25);
+                        this.enemy.GiveEnergyPercent(25);
+                        this.enemyHasHealed = true;
+                    }
+                    else if (enemyHasHealed)
                     {
                         // no potions to heal, LAST RESORT ATTACK!
                         // cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
@@ -435,7 +455,7 @@ public class GameController : MonoBehaviour
     }
 
     #endregion Item Use
-    #region UI
+    #region buttons 
     /// <summary>
     /// Disables the buttons.
     /// </summary>
@@ -461,7 +481,8 @@ public class GameController : MonoBehaviour
         this.inventoryHandle.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
     }
-
+    #endregion buttons
+    #region CalledOnTheTick
     /// <summary>
     /// Updates the UI Health/mana bars.
     /// </summary>
@@ -582,7 +603,21 @@ public class GameController : MonoBehaviour
         UpdateConfirmPanel();
     }
 
-    #endregion UI
+    /// <summary>
+    /// runs a test for a dead player/enemy
+    /// </summary>
+    void CheckDeath()
+    {
+        if (this.player.IsDead() || this.enemy.IsDead())
+        {
+            someoneIsDead = true;
+            if (this.player.IsDead())
+                this.player.numTurnsLeftToHeal = 0;
+        }
+        else
+            someoneIsDead = false;
+    }
+    #endregion CalledOnTheTick
     #region level loading
     /// <summary>
     /// Ends the game.
@@ -590,7 +625,7 @@ public class GameController : MonoBehaviour
     private void EndGame()
     {
         // player dead
-        TransferGold();
+        TransferGoldOnDeath();
         this.player.transform.localPosition = this.prevPos;
 
         // check for high score
@@ -673,12 +708,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads Stat Select Scene
+    /// </summary>
     private void LoadStatSelect()
     {
         DontDestroyOnLoad(this.player);
         if (!waiting)
         {
-            Debug.Log("Loading Stat Scene");
+            //Debug.Log("Loading Stat Scene");
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             //Give player extra 10 health
@@ -691,7 +729,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void TransferGold()
+    /// <summary>
+    /// transfers player gold after death
+    /// </summary>
+    private void TransferGoldOnDeath()
     {
         int goldAmount = Mathf.FloorToInt((this.player.dollarBalance * MONEY_TRANSFER_PCT));
 
@@ -702,15 +743,18 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("carryover", goldAmount);
     }
 
+    /// <summary>
+    /// Called on player victory to decide what comes next
+    /// </summary>
     void PlayerVictory()
     {
-        Debug.Log("Winner");
+        //Debug.Log("Winner");
         // increase number of battles until level up
         BattleCounter.GetInstance().IncreaseCurrentBattleCount();
         // if no more battles
         if (BattleCounter.GetInstance().GetRemainingBattles() <= 0)
         {
-            Debug.Log("Increasing Difficulty");
+            //Debug.Log("Increasing Difficulty");
             // increase difficulty
             DifficultyLevel.GetInstance().IncreaseDifficulty();
             // increase number of battles to difficulty level
@@ -724,7 +768,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Debug.Log("On to the next battle!");
+            //Debug.Log("On to the next battle!");
             // check to see if player wants to use a camp kit (only if they have one!)
             if (this.player.inventory.CampKits > 0)
             {
@@ -735,18 +779,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void CheckDeath()
-    {
-        if (this.player.IsDead() || this.enemy.IsDead()){
-            someoneIsDead = true;
-            if (this.player.IsDead())
-                this.player.numTurnsLeftToHeal = 0;
-        }
-        else
-            someoneIsDead = false;
-    }
-
-    #endregion Misc. Game functionality methods
+    #endregion LevelLoading
     #region monobehaviour
     // Use this for initialization
     void Start()

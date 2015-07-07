@@ -33,9 +33,7 @@ public class GameController : MonoBehaviour
                 BAR_SPEED = 30;
 
     private float MONEY_TRANSFER_PCT = 0.2f,
-                 COOLDOWN_LENGTH = 0.0f,
-                 ATTACK_LENGTH,
-                 MAGIC_LENGTH;
+                 COOLDOWN_LENGTH = 0.0f;
 
     private float attackAmount,
                   startTime,
@@ -188,7 +186,8 @@ public class GameController : MonoBehaviour
     {
         // energy regen
         this.player.GiveEnergyAmount(PLAYER_ENERGY_REGEN_AMT);
-        // heal for food
+
+        // turn-based heal for food
         if (this.player.numTurnsLeftToHeal > 0)
         {
             this.player.GiveEnergyPercent(this.player.inventory.PercentToRegenPerTurn);
@@ -212,8 +211,6 @@ public class GameController : MonoBehaviour
     /// <returns>The enemy action.</returns>
     private void DoEnemyAction()
     {
-        float cdReq = COOLDOWN_LENGTH * MAGIC_LENGTH;
-
         if (!waiting && !enemyHasAttacked
             && combatController.currentState == CombatController.BattleStates.ENEMYCHOICE)
         {
@@ -237,7 +234,7 @@ public class GameController : MonoBehaviour
                 if (r > 1)
                 {
                     // physical
-                    cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
+                    //cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                     this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                 }
                 else
@@ -251,11 +248,11 @@ public class GameController : MonoBehaviour
                     else
                     {
                         // no potions to heal, LAST RESORT ATTACK!
-                        cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
+                        // cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                     }
                 }
-                OnEnemyActionUsed(this.player, cdReq);
+                OnEnemyActionUsed(this.player, COOLDOWN_LENGTH);
             }// end if someone is dead            
         }
     }
@@ -273,6 +270,7 @@ public class GameController : MonoBehaviour
             StartCooldown(requiredCooldownLength);
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
+        Debug.Log("Enemy Action Used");
     }
 
     /// <summary>
@@ -280,15 +278,16 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnEnemyWaitComplete()
     {
-        combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
         this.player.TakeDamage();
-        Invoke("PlayerRegen", timeVal * 0.5f);
+        combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
         this.playerHasEatenFoodThisTurn = false;
         this.enemyHasAttacked = false;
         this.playerHasAttacked = false;
+        Invoke("PlayerRegen", (timeVal));
         this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
         if (!this.enemy.IsDead())
             waiting = false;
+        Debug.Log("Enemy Action Complete");
     }
     /// <summary>
     /// Invokable call to delay Enemy Regen
@@ -768,8 +767,6 @@ public class GameController : MonoBehaviour
         this.score = PlayerPrefs.GetInt("score");
 
         COOLDOWN_LENGTH = 2.0f;
-        ATTACK_LENGTH = 1.85f;
-        MAGIC_LENGTH = 1.5f;
 
         someoneIsDead = false;
         finalFrame = false;

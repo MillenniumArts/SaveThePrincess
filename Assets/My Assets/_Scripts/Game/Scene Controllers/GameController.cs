@@ -737,8 +737,11 @@ public class GameController : MonoBehaviour
 
     void CheckDeath()
     {
-        if (this.player.IsDead() || this.enemy.IsDead())
+        if (this.player.IsDead() || this.enemy.IsDead()){
             someoneIsDead = true;
+            if (this.player.IsDead())
+                this.player.numTurnsLeftToHeal = 0;
+        }
         else
             someoneIsDead = false;
     }

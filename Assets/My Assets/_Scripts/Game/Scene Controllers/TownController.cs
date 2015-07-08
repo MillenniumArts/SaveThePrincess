@@ -5,7 +5,7 @@ using System.Collections;
 public class TownController : MonoBehaviour {
 	public PlayerController player;
 
-	public Text playerBalance;
+	public Text playerBalance, playerHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +45,7 @@ public class TownController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        this.playerBalance.text = this.player.dollarBalance.ToString() ;
+        this.playerBalance.text = this.player.dollarBalance.ToString();
+        this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
 	}
 }

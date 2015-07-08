@@ -48,13 +48,21 @@ public class EnemyStats {
     /// </summary>
     private float MAX_inc_boss = 0.15f;
     /// <summary>
-    /// Minimum stat increase % for filling the stat gap between the player and the enemy.
+    /// Minimum stat increase % for filling the stat gap between the player's and the enemy's HP and NRG.
     /// </summary>
-    private float MIN_gapFill = 0.50f;
+    private float MIN_gapFill_HP_NRG = 0.50f;
     /// <summary>
-    /// Maximum stat increase % for filling the stat gap between the player and the enemy.
+    /// Maximum stat increase % for filling the stat gap between the player's and the enemy's HP and NRG.
     /// </summary>
-    private float MAX_gapFill = 0.65f;
+    private float MAX_gapFill_HP_NRG = 0.65f;
+    /// <summary>
+    /// Minimum stat increase % for filling the stat gap between the player's and the enemy's ATK and DEF.
+    /// </summary>
+    private float MIN_gapFill_ATK_DEF = 0.50f;
+    /// <summary>
+    /// Maximum stat increase % for filling the stat gap between the player's and the enemy's ATK and DEF.
+    /// </summary>
+    private float MAX_gapFill_ATK_DEF = 0.65f;
     /// <summary>
     /// Are we on the very first enemy?
     /// </summary>
@@ -86,37 +94,61 @@ public class EnemyStats {
         float max;
         if (!firstEnemy)
         {
-            if (CheckStatGap(player) == false)
+            // Check the HP and NRG.
+            if (CheckStatGap(previousEnemyHP, previousEnemyNRG, player.totalHealth, player.totalEnergy, MIN_gapFill_HP_NRG, MAX_gapFill_HP_NRG) == false)
             {
-                //Debug.Log("Not first enemy.");
+                Debug.Log("Not first enemy.");
                 if (!CheckForBoss())
                 {
-                    //Debug.Log("Not boss.");
+                    Debug.Log("Not boss.");
                     min = MIN_inc;
                     max = MAX_inc;
                 }
                 else
                 {
-                    //Debug.Log("Enemy is boss.");
+                    Debug.Log("Enemy is boss.");
                     min = MIN_inc_boss;
                     max = MAX_inc_boss;
                 }
             }
             else
             {
-                min = MIN_gapFill;
-                max = MAX_gapFill;
+                Debug.Log("Stat gap fill HP and NRG");
+                min = MIN_gapFill_HP_NRG;
+                max = MAX_gapFill_HP_NRG;
             }
-                //Debug.Log("Increasing stats");
-                currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, min, max);
-                currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
-                currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
-                currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
+            Debug.Log("Increasing HP and NRG stats");
+            currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, min, max);
+            currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
+
+            // Check the ATK and DEF.
+            if (CheckStatGap(previousEnemyATK, previousEnemyDEF, player.physicalDamage, player.armor, MIN_gapFill_ATK_DEF, MAX_gapFill_ATK_DEF) == false)
+            {
+                Debug.Log("Not first enemy.");
+                if (!CheckForBoss())
+                {
+                    Debug.Log("Not boss.");
+                    min = MIN_inc;
+                    max = MAX_inc;
+                }
+                else
+                {
+                    Debug.Log("Enemy is boss.");
+                    min = MIN_inc_boss;
+                    max = MAX_inc_boss;
+                }
+            }
+            else
+            {
+                Debug.Log("Stat gap fill ATK and DEF");
+                min = MIN_gapFill_ATK_DEF;
+                max = MAX_gapFill_ATK_DEF;
+            }
+            Debug.Log("Increasing ATK and DEF stats");
+            currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
+            currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
         }
-        /*else
-        {
-            Debug.Log("Is first enemy.");
-        }*/
+
         enemy.SetStats(currentEnemyHP, currentEnemyNRG, currentEnemyATK, currentEnemyDEF);
         StatFlip();
     }
@@ -193,6 +225,7 @@ public class EnemyStats {
         this.firstEnemy = tog;
     }
     #endregion Setters
+
     #region Resetters
     /// <summary>
     /// Reset the enemy base stats to 0.
@@ -270,7 +303,7 @@ public class EnemyStats {
         return BattleCounter.GetInstance().battlesNeeded == 1;
     }
 
-    private bool CheckStatGap(PlayerController _player)
+    /*private bool CheckStatGap(PlayerController _player)
     {
         float tempHP = (float)previousEnemyHP / (float)_player.totalHealth;
         //Debug.Log(previousEnemyHP + " / " + _player.totalHealth + " HP Gap is " + tempHP + "%");
@@ -281,38 +314,93 @@ public class EnemyStats {
         float tempDEF = (float)previousEnemyDEF / (float)_player.armor;
         //Debug.Log(previousEnemyDEF + " / " + _player.armor + " DEF Gap is " + tempDEF + "%");
 
-        float tempStatAvg = (tempHP + tempNRG + tempATK + tempDEF) / 4;
+        float tempStatAvg_HP_NRG = (tempHP + tempNRG) / 2;
+        float tempStatAvg_ATK_DEF = (tempATK + tempDEF) / 2;
 
-        Debug.Log("Stat Gap is " + tempStatAvg * 100f + "%");
+        Debug.Log("HP and Energy stat Gap is " + tempStatAvg_HP_NRG * 100f + "%");
+        Debug.Log("ATK and DEF stat Gap is " + tempStatAvg_ATK_DEF * 100f + "%");
+
+        if (tempStatAvg_HP_NRG <= 0.15f)
+        {
+            MIN_gapFill_HP_NRG = 2.5f;
+            MAX_gapFill_HP_NRG = 3f;
+            return true;
+        }
+        else if (tempStatAvg_HP_NRG <= 0.25f)
+        {
+            MIN_gapFill_HP_NRG = 1f;
+            MAX_gapFill_HP_NRG = 1.05f;
+            return true;
+        }
+        else if (tempStatAvg_HP_NRG <= 0.4f)
+        {
+            MIN_gapFill_HP_NRG = 0.75f;
+            MAX_gapFill_HP_NRG = 0.85f;
+            return true;
+        }
+        else if (tempStatAvg_HP_NRG <= 0.55f)
+        {
+            MIN_gapFill_HP_NRG = 0.45f;
+            MAX_gapFill_HP_NRG = 0.55f;
+            return true;
+        }
+        if (tempStatAvg_HP_NRG <= 0.7f)
+        {
+            MIN_gapFill_HP_NRG = 0.25f;
+            MAX_gapFill_HP_NRG = 0.35f;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }*/
+    
+    /// <summary>
+    /// Checks the stat gap (enemy/player) of the stats passeed in.
+    /// </summary>
+    /// <param name="eStat1">First enemy's stat. (HP or ATK)</param>
+    /// <param name="eStat2">Second enemy's stat. (NRG or DEF)</param>
+    /// <param name="pStat1">First player's stat. (HP or ATK)</param>
+    /// <param name="pStat2">Second player's stat. (HP or ATK)</param>
+    /// <param name="min">The MIN variable to pass the new minimum to.</param>
+    /// <param name="max">The MAX variable to pass the new maximum to.</param>
+    /// <returns></returns>
+    private bool CheckStatGap(int eStat1, int eStat2, int pStat1, int pStat2, float min, float max)
+    {
+        float tempStatAvg = (float)(eStat1 + eStat2) / (float)(pStat1+pStat2);
+        //Debug.Log(eStat1 +  " + " + eStat2 + " / " + pStat1 + " + " + pStat2 + " = " + tempStatAvg);
+
+        Debug.Log("The stat Gap is " + tempStatAvg);
 
         if (tempStatAvg <= 0.15f)
         {
-            MIN_gapFill = 2.5f;
-            MAX_gapFill = 3f;
+            min = 2.5f;
+            max = 3f;
             return true;
         }
         else if (tempStatAvg <= 0.25f)
         {
-            MIN_gapFill = 1f;
-            MAX_gapFill = 1.05f;
+            min = 1f;
+            max = 1.05f;
             return true;
         }
         else if (tempStatAvg <= 0.4f)
         {
-            MIN_gapFill = 0.75f;
-            MAX_gapFill = 0.85f;
+            min = 0.75f;
+            max = 0.85f;
             return true;
         }
         else if (tempStatAvg <= 0.55f)
         {
-            MIN_gapFill = 0.45f;
-            MAX_gapFill = 0.55f;
+            min = 0.45f;
+            max = 0.55f;
             return true;
         }
         if (tempStatAvg <= 0.7f)
         {
-            MIN_gapFill = 0.25f;
-            MAX_gapFill = 0.35f;
+            min = 0.25f;
+            max = 0.35f;
             return true;
         }
         else
@@ -320,5 +408,6 @@ public class EnemyStats {
             return false;
         }
     }
+
 #endregion Private Functions
 }

@@ -60,7 +60,8 @@ public class GameController : MonoBehaviour
                 rightArmorText,
                 leftDamageText,
                 rightDamageText,
-                numEnemiesKilledText;
+                numEnemiesKilledText,
+                healTurnsRemainText;
     // Inventory Text
     public Text apples, bread, cheese, hPots, ePots, campKits;
 
@@ -560,6 +561,7 @@ public class GameController : MonoBehaviour
         this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
         this.leftDamageText.text = this.player.GetTotalDamage().ToString();
         this.rightDamageText.text = this.enemy.GetTotalDamage().ToString();
+        this.healTurnsRemainText.text = this.player.numTurnsLeftToHeal.ToString();
 
         // score stat
         this.numEnemiesKilledText.text = score.ToString();

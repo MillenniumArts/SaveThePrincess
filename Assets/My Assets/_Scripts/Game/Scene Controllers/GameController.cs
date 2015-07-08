@@ -232,49 +232,49 @@ public class GameController : MonoBehaviour
             if (!this.player.IsDead() && !this.enemy.IsDead())
             {
                 int r = Random.Range(0, 10);
-                if (r > 1)
+                if (r > 1)  // 90%chance to attack
                 {
                     // physical
                     //cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                     this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                 }
                 else
-                {
-                    r = Random.Range(0, 2);
-                    if (r == 0 && !enemyHasHealed && this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))
+                {   // 10%chance to heal, only if nrg/hp <30%
+                    if ((this.enemy.remainingEnergy < Mathf.RoundToInt((0.3f * this.enemy.totalEnergy))      // <30%nrg
+                     || this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth)))      // <30%hp
+                        && !enemyHasHealed)                                                                 // hasn't healed yet this round
                     {
-                        // Heal (r=0)
-                        this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.GiveHealthPercent(50);
-                        this.enemyHasHealed = true;
+                        r = Random.Range(0, 2);
+                        if (r == 0)
+                        {
+                            // Healthregen (r=0)
+                            this.enemy.TriggerAnimation("HealPotion");
+                            this.enemy.GiveHealthPercent(50);
+                            this.enemyHasHealed = true;
+                        }
+                        else if (r == 1)
+                        {
+                            // Energy Regen (r=1)
+                            this.enemy.TriggerAnimation("HealPotion");
+                            this.enemy.GiveEnergyPercent(50);
+                            this.enemyHasHealed = true;
+                        }
+                        else if (r == 2)
+                        {
+                            // Health and energy regen (r=2)
+                            this.enemy.TriggerAnimation("HealPotion");
+                            this.enemy.GiveHealthPercent(25);
+                            this.enemy.GiveEnergyPercent(25);
+                            this.enemyHasHealed = true;
+                        }
                     }
-                    else if (r == 1 && !enemyHasHealed && this.enemy.remainingEnergy < Mathf.RoundToInt((0.3f * this.enemy.totalEnergy)))
+                    else
                     {
-                        // Energy Regen(r=1)
-                        this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.GiveEnergyPercent(50);
-                        this.enemyHasHealed = true;
-                    }
-                    else if (r == 2 && !enemyHasHealed && (
-                        this.enemy.remainingEnergy < Mathf.RoundToInt((0.3f * this.enemy.totalEnergy)) 
-                        || this.enemy.remainingHealth < Mathf.RoundToInt((0.3f * this.enemy.totalHealth))
-                        ))
-                    {
-                        // Heal and energy regen (r=2)
-                        this.enemy.TriggerAnimation("HealPotion");
-                        this.enemy.GiveHealthPercent(25);
-                        this.enemy.GiveEnergyPercent(25);
-                        this.enemyHasHealed = true;
-                    }
-                    else if (enemyHasHealed)
-                    {
-                        // no potions to heal, LAST RESORT ATTACK!
-                        // cdReq = COOLDOWN_LENGTH * ATTACK_LENGTH;
                         this.enemy.Attack(this.player, damageToApply, ENEMY_ENERGY_COST_AMT);
                     }
                 }
                 OnEnemyActionUsed(this.player, COOLDOWN_LENGTH);
-            }// end if someone is dead            
+            }
         }
     }
 
@@ -291,7 +291,6 @@ public class GameController : MonoBehaviour
             StartCooldown(requiredCooldownLength);
             combatController.setState(CombatController.BattleStates.ENEMYANIMATE);
         }
-        Debug.Log("Enemy Action Used");
     }
 
     /// <summary>
@@ -308,7 +307,6 @@ public class GameController : MonoBehaviour
         this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
         if (!this.enemy.IsDead())
             waiting = false;
-        Debug.Log("Enemy Action Complete");
     }
     /// <summary>
     /// Invokable call to delay Enemy Regen

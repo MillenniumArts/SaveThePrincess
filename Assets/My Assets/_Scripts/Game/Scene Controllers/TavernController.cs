@@ -166,7 +166,7 @@ public class TavernController : MonoBehaviour
     {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
-        BASE_MEAL_COST = 15;
+        BASE_MEAL_COST = 5;
         NUM_MEALS = 3;
         // get player
         this.player = FindObjectOfType<PlayerController>();
@@ -196,8 +196,9 @@ public class TavernController : MonoBehaviour
         // RANDOMIZE MEAL PRICING HERE
         for (int i = 0; i < buttonText.Length; i++)
         {
-            prices[i] = BASE_MEAL_COST + (i * 5);
-            stats[i] = BASE_MEAL_COST + (i * 5);
+            float tempNum = BASE_MEAL_COST + (i * 7.5f);
+            prices[i] = Mathf.FloorToInt(tempNum);
+            stats[i] = (int)(tempNum * 2);
         }
 
     }

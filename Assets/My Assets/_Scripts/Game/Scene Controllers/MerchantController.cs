@@ -240,7 +240,7 @@ public class MerchantController : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             items[i] = 0;
-            prices[i] = 2 * i + 1;
+            prices[i] = 5 * i + 10;
         }
         // potions
         for (int i = 3; i < items.Length; i++)

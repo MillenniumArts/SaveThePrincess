@@ -247,6 +247,7 @@ public class GameController : MonoBehaviour
                         r = Random.Range(0, 2);
                         if (r == 0)
                         {
+                            Debug.Log("Enemy uses a Health Potion. Heals 50 Health");
                             // Healthregen (r=0)
                             this.enemy.TriggerAnimation("HealPotion");
                             this.enemy.GiveHealthPercent(50);
@@ -254,6 +255,7 @@ public class GameController : MonoBehaviour
                         }
                         else if (r == 1)
                         {
+                            Debug.Log("Enemy uses a Energy Potion. Heals 50 Energy.");
                             // Energy Regen (r=1)
                             this.enemy.TriggerAnimation("HealPotion");
                             this.enemy.GiveEnergyPercent(50);
@@ -261,6 +263,7 @@ public class GameController : MonoBehaviour
                         }
                         else if (r == 2)
                         {
+                            Debug.Log("Enemy uses a Health Potion. Heals 25 Health");
                             // Health and energy regen (r=2)
                             this.enemy.TriggerAnimation("HealPotion");
                             this.enemy.GiveHealthPercent(25);

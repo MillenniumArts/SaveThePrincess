@@ -118,7 +118,7 @@ public class EnemyStats {
                 max = MAX_gapFill_HP_NRG;
             }
             Debug.Log("Increasing HP and NRG stats");
-            currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, min, max);
+            currentEnemyHP = previousEnemyHP + RandomIncrease(previousEnemyHP, (min + 0.05f), (max + 0.1f));
             currentEnemyNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
 
             // Check the ATK and DEF.
@@ -375,32 +375,32 @@ public class EnemyStats {
 
         if (tempStatAvg <= 0.15f)
         {
-            min = 2.5f;
-            max = 3f;
+            min = 3.1f;
+            max = 3.5f;
             return true;
         }
         else if (tempStatAvg <= 0.25f)
         {
-            min = 1f;
-            max = 1.05f;
+            min = 1.90f;
+            max = 2.05f;
             return true;
         }
         else if (tempStatAvg <= 0.4f)
         {
-            min = 0.75f;
-            max = 0.85f;
+            min = 1.25f;
+            max = 1.35f;
             return true;
         }
         else if (tempStatAvg <= 0.55f)
         {
-            min = 0.45f;
-            max = 0.55f;
+            min = 0.76f;
+            max = 0.82f;
             return true;
         }
         if (tempStatAvg <= 0.7f)
         {
-            min = 0.25f;
-            max = 0.35f;
+            min = 0.4f;
+            max = 0.45f;
             return true;
         }
         else

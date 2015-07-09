@@ -65,7 +65,7 @@ public class TavernController : MonoBehaviour
         if (totalHealthMissing > 0)
         {
             // if can afford, purchase
-            if (player.PurchaseItem(totalHealthMissing))
+            if (player.PurchaseItem((totalHealthMissing/2)))
             {
                 Debug.Log(this.player.name + " is refreshed after a night of sleep!");
                 NotifyStatIncrease(true);
@@ -141,7 +141,7 @@ public class TavernController : MonoBehaviour
             // disable buttons if no health needed
             if (totalHealthMissing > 0)
             {
-                this.sleepText.text = "Sleep: $" + totalHealthMissing;
+                this.sleepText.text = "Sleep: $" + (totalHealthMissing/2);
                 for (int i = 0; i < buttonText.Length; i++)
                 {
                     foodButtons[i].gameObject.SetActive(true);

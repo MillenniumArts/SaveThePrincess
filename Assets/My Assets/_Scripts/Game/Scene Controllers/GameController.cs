@@ -565,7 +565,7 @@ public class GameController : MonoBehaviour
         this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
-        this.battleText.text = currentBattle + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
+        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
         // inventory text
         this.apples.text = this.player.inventory.Apples.ToString();
         this.bread.text = this.player.inventory.Bread.ToString();

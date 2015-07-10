@@ -644,6 +644,8 @@ public class GameController : MonoBehaviour
         DifficultyLevel.GetInstance().ResetDifficulty();
         BattleCounter.GetInstance().ResetCurrentBattleCount();
         BattleCounter.GetInstance().ResetBattlesNeeded();
+        // Set the idle animation to town idle
+        player.playerAnimator.SetBool("InBattle", false);
 
         if (!waiting)
         {
@@ -682,6 +684,8 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(this.player);
         BattleCounter.GetInstance().ResetCurrentBattleCount();
         EnemyStats.GetInstance().ResetCheckpoint();
+        // Set the idle animation to town idle
+        player.InBattle(false);
         if (!waiting)
         {
             // restore player mana after battle
@@ -823,7 +827,8 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("carryover", 0);
         // reposition player
         this.prevPos = this.player.transform.localPosition;
-        Vector3 newSpot = new Vector3(-4.5f, -2.5f);
+        //Vector3 newSpot = new Vector3(-4.5f, -2.5f);
+        Vector3 newSpot = new Vector3(-2.5f, -2f); // New Position
         this.player.gameObject.transform.localPosition = newSpot;
 
         // get enemy reference
@@ -838,6 +843,24 @@ public class GameController : MonoBehaviour
 
         // combat starts after initialization is finished
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+        // Set the idle animation to battle idle and trigger the entry animations.
+        player.InBattle(true);
+        if(currentBattle == 0)
+            player.TriggerAnimation("enterbattle");
+        enemy.InBattle(true);
+        StartCoroutine("smalldelay");
+    }
+    /// <summary>
+    /// Temporary fix to make the animations fit a bit better.  Better fix would be to change the animations.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator smalldelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        enemy.TriggerAnimation("enterbattle");
+        Vector3 newSpot = new Vector3(5.5f, -2.2f); // New Position
+        yield return new WaitForSeconds(0.6f);
+        this.enemy.gameObject.transform.localPosition = newSpot;
     }
 
     // Update is called once per frame

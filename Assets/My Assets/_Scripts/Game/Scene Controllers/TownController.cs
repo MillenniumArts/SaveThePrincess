@@ -12,6 +12,9 @@ public class TownController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         //EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
+
+        Vector3 newPos = new Vector3(-7.5f, -2.5f);
+        this.player.gameObject.transform.localPosition = newPos;
 	}
 
 	public void GoToBattle(){

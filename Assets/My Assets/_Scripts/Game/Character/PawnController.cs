@@ -479,6 +479,9 @@ public class PawnController : MonoBehaviour
         state = state.ToLower();
         switch (state)
         {
+            case "enterbattle":
+                this.playerAnimator.SetTrigger("Enter");
+                break;
             case "attack":
                 this.playerAnimator.SetTrigger("One_Hand_Attack");
                 break;
@@ -498,7 +501,18 @@ public class PawnController : MonoBehaviour
                 this.playerAnimator.SetTrigger("Magic_Up");
                 break;
             case "damage":
-                this.playerAnimator.SetTrigger("Take_Damage");
+                if (this.physicalDamageToTake / this.totalHealth > 0.65)
+                {
+                    this.playerAnimator.SetTrigger("Take_Damage_2");
+                }else if(this.physicalDamageToTake / this.totalHealth <= 0.65
+                    && this.physicalDamageToTake / this.totalHealth >= 0.25)
+                {
+                    this.playerAnimator.SetTrigger("Take_Damage_1");
+                }
+                else if (this.physicalDamageToTake / this.totalHealth < 0.25)
+                {
+                    this.playerAnimator.SetTrigger("Take_Damage_0");
+                }
                 break;
             case "block":
                 this.playerAnimator.SetTrigger("Block");
@@ -520,6 +534,17 @@ public class PawnController : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// Is the pawn in battle? True or False.  Sets the Idle animation.
+    /// </summary>
+    /// <param name="b">Boolean</param>
+    public void InBattle(bool b)
+    {
+        this.playerAnimator.SetBool("InBattle", b);
+    }
+
+
     /// <summary>
     /// Get the total armor
     /// </summary>

@@ -122,8 +122,11 @@ public class AudioManager : MonoBehaviour {
     private void LoadPlaySongClip(string name)
     {
         AudioClip newClip = Resources.Load("_Audio/Music/" + _dictionary.GetMusic(name)) as AudioClip;
-        musicAudioSource.clip = newClip;
-        PlaySound(musicAudioSource);
+        if (newClip != null)
+        {
+            musicAudioSource.clip = newClip;
+            PlaySound(musicAudioSource);
+        }
     }
 
     /// <summary>

@@ -501,15 +501,16 @@ public class PawnController : MonoBehaviour
                 this.playerAnimator.SetTrigger("Magic_Up");
                 break;
             case "damage":
-                if (this.physicalDamageToTake / this.totalHealth > 0.65)
+                if ((float)this.physicalDamageToTake / (float)this.totalHealth > 0.65f)
                 {
                     this.playerAnimator.SetTrigger("Take_Damage_2");
-                }else if(this.physicalDamageToTake / this.totalHealth <= 0.65
-                    && this.physicalDamageToTake / this.totalHealth >= 0.25)
+                }
+                else if ((float)this.physicalDamageToTake / (float)this.totalHealth <= 0.65f
+                    && (float)this.physicalDamageToTake / (float)this.totalHealth >= 0.25f)
                 {
                     this.playerAnimator.SetTrigger("Take_Damage_1");
                 }
-                else if (this.physicalDamageToTake / this.totalHealth < 0.25)
+                else if ((float)this.physicalDamageToTake / (float)this.totalHealth < 0.25)
                 {
                     this.playerAnimator.SetTrigger("Take_Damage_0");
                 }
@@ -518,16 +519,16 @@ public class PawnController : MonoBehaviour
                 this.playerAnimator.SetTrigger("Block");
                 break;
             case "victory":
-                if (this.remainingHealth / this.totalHealth > 0.75)
+                if ((float)this.remainingHealth / (float)this.totalHealth > 0.75)
                 {
                     this.playerAnimator.SetTrigger("human_winHigh");
                 }
-                else if (this.remainingHealth / this.totalHealth <= 0.75
-                      && this.remainingHealth / this.totalHealth >= 0.25)
+                else if ((float)this.remainingHealth / (float)this.totalHealth <= 0.75f
+                      && (float)this.remainingHealth / (float)this.totalHealth >= 0.25f)
                 {
                     this.playerAnimator.SetTrigger("human_winMid");
                 }
-                else if (this.remainingHealth / this.totalHealth < 0.25)
+                else if ((float)this.remainingHealth / (float)this.totalHealth < 0.25f)
                 {
                     this.playerAnimator.SetTrigger("human_winLow");
                 }

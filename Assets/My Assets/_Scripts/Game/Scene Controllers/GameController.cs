@@ -75,9 +75,9 @@ public class GameController : MonoBehaviour
                   inventoryToggleButton = null,
                   inventoryHandle = null;
 
-    private Image background;
-
     public GameObject confirmPanel = null;
+
+    private BackgroundManager _backgroundManager;
 
     #region Retreat
     /// <summary>
@@ -772,6 +772,7 @@ public class GameController : MonoBehaviour
             EnemyStats.GetInstance().SetCheckpoint();
             // go to town, no more battles to be fought this round
             LoadStatSelect();
+            _backgroundManager.BackgroundChange();
         }
         else
         {
@@ -785,7 +786,6 @@ public class GameController : MonoBehaviour
             LoadNextLevel();
         }
     }
-
     #endregion LevelLoading
     #region monobehaviour
     // Use this for initialization
@@ -849,6 +849,9 @@ public class GameController : MonoBehaviour
             player.TriggerAnimation("enterbattle");
         enemy.InBattle(true);
         StartCoroutine("smalldelay");
+
+        _backgroundManager = FindObjectOfType<BackgroundManager>();
+        _backgroundManager.SetBackground();
     }
     /// <summary>
     /// Temporary fix to make the animations fit a bit better.  Better fix would be to change the animations.

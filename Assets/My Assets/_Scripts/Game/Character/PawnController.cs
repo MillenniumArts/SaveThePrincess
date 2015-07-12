@@ -480,7 +480,7 @@ public class PawnController : MonoBehaviour
         switch (state)
         {
             case "enterbattle":
-                this.playerAnimator.SetTrigger("Enter");
+                //this.playerAnimator.SetTrigger("Enter");
                 break;
             case "attack":
                 this.playerAnimator.SetTrigger("One_Hand_Attack");

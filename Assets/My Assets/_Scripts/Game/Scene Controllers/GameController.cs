@@ -848,7 +848,7 @@ public class GameController : MonoBehaviour
         if(currentBattle == 0)
             player.TriggerAnimation("enterbattle");
         enemy.InBattle(true);
-        StartCoroutine("smalldelay");
+        //StartCoroutine("smalldelay");
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();
@@ -857,14 +857,14 @@ public class GameController : MonoBehaviour
     /// Temporary fix to make the animations fit a bit better.  Better fix would be to change the animations.
     /// </summary>
     /// <returns></returns>
-    IEnumerator smalldelay()
+    /*IEnumerator smalldelay()
     {
         yield return new WaitForSeconds(0.5f);
         enemy.TriggerAnimation("enterbattle");
         Vector3 newSpot = new Vector3(5.5f, -2.2f); // New Position
         yield return new WaitForSeconds(0.6f);
         this.enemy.gameObject.transform.localPosition = newSpot;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()

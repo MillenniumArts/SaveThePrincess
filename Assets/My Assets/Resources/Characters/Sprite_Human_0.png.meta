@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4f9044c68363660428f401554385d4b0
-timeCreated: 1436730893
+timeCreated: 1436736182
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -113,9 +113,9 @@ TextureImporter:
     - name: Hand_Back
       rect:
         serializedVersion: 2
-        x: 18
+        x: 1
         y: 661
-        width: 178
+        width: 195
         height: 321
       alignment: 9
       pivot: {x: .530314922, y: .931459963}
@@ -123,19 +123,19 @@ TextureImporter:
     - name: Fingers
       rect:
         serializedVersion: 2
-        x: 234
+        x: 218
         y: 652
-        width: 128
-        height: 76
+        width: 144
+        height: 89
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Hand_Front
       rect:
         serializedVersion: 2
-        x: 1384
+        x: 1356
         y: 641
-        width: 247
+        width: 275
         height: 331
       alignment: 9
       pivot: {x: .383486599, y: .964614749}
@@ -163,10 +163,10 @@ TextureImporter:
     - name: Thumb
       rect:
         serializedVersion: 2
-        x: 254
-        y: 734
-        width: 61
-        height: 58
+        x: 234
+        y: 743
+        width: 81
+        height: 65
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

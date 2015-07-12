@@ -2,34 +2,47 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuController : MonoBehaviour {
-	// used to handle menu options
-	public string firstSceneToLoad;
+public class MenuController : MonoBehaviour
+{
+    // used to handle menu options
+    public string firstSceneToLoad;
 
-	public PlayerController player;
+    public PlayerController player;
 
-	[SerializeField]
-	private Button healthUp = null, 
-				   healthDown = null,
-				   damageUp = null,
-				   damageDown = null,
-				   armorUp = null, 
-				   armorDown= null,
-                   energyUp= null,
-                   energyDown = null, 
-				   confirm = null,
-                   backButton = null ;
+    [SerializeField]
+    private Button healthUp = null,
+                   healthDown = null,
+                   damageUp = null,
+                   damageDown = null,
+                   armorUp = null,
+                   armorDown = null,
+                   energyUp = null,
+                   energyDown = null,
+                   confirm = null,
+                   backButton = null;
 
-	private int baseHealth, baseArmor, baseDamage, baseEnergy, 
-				healthInc, armorInc, damageInc, energyInc,
-				newHealth, newArmor, newDamage, newEnergy;
+    public Text healthAmt,
+                damageAmt,
+                armorAmt,
+                energyAmt,
+                creditText,
+                numHpCredits,
+                numNrgCredits,
+                numDmgCredits,
+                numArmCredits,
+                prevHP,
+                prevNRG,
+                prevDmg,
+                prevArm;
 
-	public Text healthAmt, damageAmt, armorAmt, energyAmt, creditText;
+    private int baseHealth, baseArmor, baseDamage, baseEnergy,
+                healthInc, armorInc, damageInc, energyInc,
+                newHealth, newArmor, newDamage, newEnergy;
 
-	public int numCredits;
+    public int numCredits, numDMG, numARM, numNRG, numHP;
     public int MAX_CREDITS = 3;
 
-	public ItemFactory itemFactory;
+    public ItemFactory itemFactory;
     Vector3 newPos, prevPos;
 
 
@@ -41,6 +54,7 @@ public class MenuController : MonoBehaviour {
             {
                 AudioManager.Instance.PlaySFX("Button1");
                 numCredits--;
+                this.numHP++;
                 this.newHealth += this.healthInc;
             }
         });
@@ -50,6 +64,7 @@ public class MenuController : MonoBehaviour {
             {
                 AudioManager.Instance.PlaySFX("Button1");
                 numCredits--;
+                this.numDMG++;
                 this.newDamage += this.damageInc;
             }
         });
@@ -59,6 +74,7 @@ public class MenuController : MonoBehaviour {
             {
                 AudioManager.Instance.PlaySFX("Button1");
                 numCredits--;
+                this.numARM++;
                 this.newArmor += this.armorInc;
             }
         });
@@ -68,6 +84,7 @@ public class MenuController : MonoBehaviour {
             {
                 AudioManager.Instance.PlaySFX("Button1");
                 numCredits--;
+                this.numNRG++;
                 this.newEnergy += this.energyInc;
             }
         });
@@ -85,6 +102,7 @@ public class MenuController : MonoBehaviour {
                 {
                     this.newHealth -= this.healthInc;
                     numCredits++;
+                    this.numHP--;
                 }
             }
         });
@@ -99,6 +117,7 @@ public class MenuController : MonoBehaviour {
                 {
                     this.newDamage -= this.damageInc;
                     numCredits++;
+                    this.numDMG--;
                 }
             }
         });
@@ -113,6 +132,7 @@ public class MenuController : MonoBehaviour {
                 {
                     this.newArmor -= this.armorInc;
                     numCredits++;
+                    this.numARM--;
                 }
             }
         });
@@ -128,6 +148,7 @@ public class MenuController : MonoBehaviour {
                 {
                     this.newEnergy -= this.energyInc;
                     numCredits++;
+                    this.numNRG--;
                 }
             }
         });
@@ -146,7 +167,7 @@ public class MenuController : MonoBehaviour {
         {
             this.player.totalHealth = this.newHealth;
             //only set health to full if 1st time
-            if(PlayerPrefs.GetInt("midgame") == 0)
+            if (PlayerPrefs.GetInt("midgame") == 0)
                 this.player.remainingHealth = this.newHealth;
             this.player.physicalDamage = this.newDamage;
             this.player.totalEnergy = this.newEnergy;
@@ -174,15 +195,25 @@ public class MenuController : MonoBehaviour {
         //Application.LoadLevel();
     }
 
-
     #region monobehaviour
-	void UpdateText(){
-		this.healthAmt.text = this.newHealth.ToString();
-		this.armorAmt.text =  this.newArmor.ToString();
-		this.damageAmt.text = this.newDamage.ToString ();
+    void UpdateText()
+    {
+        this.healthAmt.text = this.newHealth.ToString();
+        this.armorAmt.text = this.newArmor.ToString();
+        this.damageAmt.text = this.newDamage.ToString();
         this.energyAmt.text = this.newEnergy.ToString();
-		this.creditText.text = "CREDITS: " + numCredits;
-	}
+
+        this.prevArm.text = this.baseArmor.ToString();
+        this.prevDmg.text = this.baseDamage.ToString();
+        this.prevNRG.text = this.baseEnergy.ToString();
+        this.prevHP.text = this.baseHealth.ToString();
+
+        this.creditText.text = "CREDITS: " + numCredits;
+        this.numArmCredits.text = this.numARM.ToString();
+        this.numDmgCredits.text = this.numDMG.ToString();
+        this.numHpCredits.text = this.numHP.ToString();
+        this.numNrgCredits.text = this.numNRG.ToString();
+    }
     // Use this for initialization
     void Start()
     {
@@ -242,9 +273,10 @@ public class MenuController : MonoBehaviour {
         ButtonInit();
     }
 
-	// Update is called once per frame
-	void Update () {
-		UpdateText ();
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateText();
+    }
     #endregion monobehaviour
 }

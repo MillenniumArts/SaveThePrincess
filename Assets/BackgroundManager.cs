@@ -12,10 +12,8 @@ public class BackgroundManager : MonoBehaviour {
     public void SetBackground()
     {
         int newNum = PlayerPrefs.GetInt("BackgroundImageNum");
-        if (newNum != null)
-        {
+        if(newNum < backgroundImages.Length)
             backgroundNum = newNum;
-        }
         background.sprite = backgroundImages[backgroundNum];
     }
 

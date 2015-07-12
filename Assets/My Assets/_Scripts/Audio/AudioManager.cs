@@ -86,9 +86,12 @@ public class AudioManager : MonoBehaviour {
     public void PlaySFX(string n)
     {
         AudioClip newClip = Resources.Load("_Audio/Sounds/" + _dictionary.GetSound(n)) as AudioClip;
-        AudioSource newSource = GetAvailableSource();
-        newSource.clip = newClip;
-        PlaySound(newSource);
+        if (newClip != null)
+        {
+            AudioSource newSource = GetAvailableSource();
+            newSource.clip = newClip;
+            PlaySound(newSource);
+        }
     }
 
     /// <summary>

@@ -33,13 +33,13 @@ public class GameController : MonoBehaviour
                 BAR_SPEED = 30;
 
     private float MONEY_TRANSFER_PCT = 0.2f,
-                 COOLDOWN_LENGTH = 2.0f;
+                  COOLDOWN_LENGTH = 2.0f;
 
     private float attackAmount,
                   startTime,
                   endTime,
                   curTime,
-                  timeVal = 1.5f;
+                  timeVal = 2.0f;
 
     public Slider playerHealth,
                   playerMana,
@@ -303,14 +303,22 @@ public class GameController : MonoBehaviour
     {
         this.player.TakeDamage();
         combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
-        this.playerHasEatenFoodThisTurn = false;
-        this.enemyHasAttacked = false;
-        this.playerHasAttacked = false;
-        Invoke("PlayerRegen", (timeVal));
-        this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
-        if (!this.enemy.IsDead())
-            waiting = false;
+
+        if (this.player.remainingHealth > 0){
+            Invoke("PlayerRegen", (timeVal));
+            this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+            this.playerHasEatenFoodThisTurn = false;
+            this.enemyHasAttacked = false;
+            this.playerHasAttacked = false;
+        }
+        else
+        {
+            this.combatController.setState(CombatController.BattleStates.LOSE);
+            if (!this.enemy.IsDead())
+                waiting = false;
+        }
     }
+
     /// <summary>
     /// Invokable call to delay Enemy Regen
     /// </summary>
@@ -469,7 +477,6 @@ public class GameController : MonoBehaviour
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
         this.inventoryHandle.gameObject.SetActive(false);
-        this.inventoryToggleButton.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -479,7 +486,6 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
-        this.inventoryToggleButton.gameObject.SetActive(true);
         this.inventoryHandle.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
     }
@@ -615,7 +621,11 @@ public class GameController : MonoBehaviour
         {
             someoneIsDead = true;
             if (this.player.IsDead())
+            {
+                Debug.Log("Player Dead!!");
                 this.player.numTurnsLeftToHeal = 0;
+                DisableButtons();
+            }
         }
         else
             someoneIsDead = false;

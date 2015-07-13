@@ -213,10 +213,10 @@ public class MerchantController : MonoBehaviour {
         for (int i = 0; i < items.Length; i++)
         {
             this.purchaseBalance += items[i] * prices[i];
-            if (!this.player.PurchaseItem(prices[i]))
-            {
-                // if can't afford item
-            }
+            //if (!this.player.PurchaseItem(prices[i]))
+            //{
+            //    // if can't afford item
+            //}
         }
 
         // calculate player's remaining balance

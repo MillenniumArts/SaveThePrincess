@@ -28,7 +28,12 @@ public class MerchantController : MonoBehaviour {
     public Text purchaseBalanceText;
 
     // text to show remaining balance after purchase
-    public Text remainingBalanceText;
+    public Text remainingBalanceText,
+                playerApples,
+                playerBread,
+                playerCheese,
+                playerHP,
+                playerNRG;
 
     public Text[] labelText;
 
@@ -181,6 +186,13 @@ public class MerchantController : MonoBehaviour {
         this.quantityThreeText.text = this.items[2].ToString();
         this.quantityFourText.text = this.items[3].ToString();
         this.quantityFiveText.text = this.items[4].ToString();
+
+        // update stock
+        this.playerApples.text = this.player.inventory.Apples.ToString();
+        this.playerBread.text = this.player.inventory.Bread.ToString();
+        this.playerCheese.text = this.player.inventory.Cheese.ToString();
+        this.playerHP.text = this.player.inventory.HealthPotions.ToString();
+        this.playerNRG.text = this.player.inventory.EnergyPotions.ToString();
 
         for (int i = 0; i < this.labelText.Length; i++ )
         {

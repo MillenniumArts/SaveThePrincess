@@ -5,7 +5,8 @@ using System.Collections;
 public class TownController : MonoBehaviour {
 	public PlayerController player;
 
-	public Text playerBalance, playerHealth;
+	public Text playerBalance, 
+                playerHealth;
 
 	// Use this for initialization
 	void Start () {

@@ -89,7 +89,7 @@ public class PlayerController : PawnController
         }
         else
         {
-            Debug.Log("Not enough money for that!");
+            //Debug.Log("Not enough money for that!");
             return false;
         }
     }

@@ -565,7 +565,7 @@ public class GameController : MonoBehaviour
         this.healTurnsRemainText.text = this.player.numTurnsLeftToHeal.ToString();
 
         // score stat
-        this.numEnemiesKilledText.text = score.ToString();
+        //this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
         this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
@@ -575,7 +575,7 @@ public class GameController : MonoBehaviour
         this.cheese.text = this.player.inventory.Cheese.ToString();
         this.hPots.text = this.player.inventory.HealthPotions.ToString();
         this.ePots.text = this.player.inventory.EnergyPotions.ToString();
-        this.campKits.text = this.player.inventory.CampKits.ToString();
+        //this.campKits.text = this.player.inventory.CampKits.ToString();
     }
     /// <summary>
     /// Handles Retreat UI ("confirm Panel")

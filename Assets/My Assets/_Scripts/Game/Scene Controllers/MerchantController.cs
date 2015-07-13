@@ -109,8 +109,8 @@ public class MerchantController : MonoBehaviour {
     public void LeaveMerchant()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        DontDestroyOnLoad(this.player);
-        EscapeHandler.instance.ClearButtons();
+        //DontDestroyOnLoad(this.player);
+        //EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("Town_LVP");
     }
 
@@ -198,7 +198,6 @@ public class MerchantController : MonoBehaviour {
         {
             this.labelText[i].text = "$" + this.prices[i].ToString() + " each";
         }
-
     }
 
     /// <summary>
@@ -214,6 +213,10 @@ public class MerchantController : MonoBehaviour {
         for (int i = 0; i < items.Length; i++)
         {
             this.purchaseBalance += items[i] * prices[i];
+            if (!this.player.PurchaseItem(prices[i]))
+            {
+                // if can't afford item
+            }
         }
 
         // calculate player's remaining balance

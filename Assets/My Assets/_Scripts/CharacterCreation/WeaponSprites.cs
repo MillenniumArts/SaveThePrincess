@@ -14,11 +14,11 @@ public class WeaponSprites : MonoBehaviour {
     {
         _wSprites = GameObject.FindObjectOfType<SwapWeaponSprites>();
         currWeaponSprites = new Sprite[10];
-        //RandomWeaponSprites();
-        //DisplaySprites();
+        RandomWeaponSprites();
+        DisplaySprites();
     }
-    public bool go = false;
-    void Update()
+    /*public bool go = true;
+    void LateUpdate()
     {
         if (go)
         {
@@ -26,10 +26,11 @@ public class WeaponSprites : MonoBehaviour {
             DisplaySprites();
             go = false;
         }
-    }
+    }*/
 
     public void RandomWeaponSprites()
     {
+        currWeaponSprites = new Sprite[10];
         for (int i = 0; i < currWeaponSprites.Length; i++)
         {
             currWeaponSprites[i] = _wSprites.GetSprite(weaponParts[i]);

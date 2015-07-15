@@ -102,8 +102,10 @@ public class PlayerController : PawnController
     {
         this.physicalDamage -= damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
-        this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
-        this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
+        //this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
+        //this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
+        this.playerWeapon.SwapWeaponType(w.GetItemSubClass());
+        this.playerWeapon.GetComponentInChildren<WeaponSprites>().SwapWeaponSprites(w.GetComponentInChildren<WeaponSprites>());
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
         if (playerWeapon.GetItemSubClass() == "Spear")
         {
@@ -115,7 +117,7 @@ public class PlayerController : PawnController
         }
         this.damageMod = w.GetAtkMod();
         this.physicalDamage += damageMod;
-        SetWeaponHands(w.gameObject.GetComponentInChildren<CreateWeaponCombination>());
+        SetWeaponHands(w.gameObject.GetComponentInChildren<WeaponCombination>());
     }
 
     /// <summary>

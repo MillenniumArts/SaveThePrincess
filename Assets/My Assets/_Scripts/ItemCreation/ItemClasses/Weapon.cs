@@ -47,4 +47,17 @@ public class Weapon : Item {
 			Debug.Log("No Create Weapon Combination attached");
 		}
 	}
+
+    public void SwapWeaponType(string weaponType)
+    {
+        WeaponCombination wc = GetComponentInChildren<WeaponCombination>();
+        if (wc)
+        {
+            wc.SwapWeapon(weaponType);
+        }
+        else
+        {
+            Debug.Log("No WeaponCombination attached");
+        }
+    }
 }

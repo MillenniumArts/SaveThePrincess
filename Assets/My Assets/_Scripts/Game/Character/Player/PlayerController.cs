@@ -100,7 +100,7 @@ public class PlayerController : PawnController
     /// <param name="w">The weapon to be transfered.</param>
     public void TransferPurchasedWeapon(Item w)
     {
-        this.physicalDamage -= damageMod;
+        //this.physicalDamage -= damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
         this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
         this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
@@ -113,8 +113,8 @@ public class PlayerController : PawnController
         {
             playerAnimator.SetBool("IsSpearAttack", false);
         }
-        this.damageMod = w.GetAtkMod();
-        this.physicalDamage += damageMod;
+        //this.damageMod = w.GetAtkMod();
+        //this.physicalDamage += damageMod;
         SetWeaponHands(w.gameObject.GetComponentInChildren<CreateWeaponCombination>());
     }
 
@@ -124,11 +124,11 @@ public class PlayerController : PawnController
     /// <param name="a">The armour to be transfered.</param>
     public void TransferPurchasedArmor(Item a)
     {
-        this.armor -= armorMod;				// Remove the current defence stat modifier.
+        //this.armor -= armorMod;				// Remove the current defence stat modifier.
         Armor _a = (Armor)a;				// Casts the Item to Armor.  Used to access CopyTypeIndex().
         this.playerArmor.SwapTo(_a);		// Swaps all the stats from the new armor to the player's armor.
-        this.armorMod = _a.GetDefMod();		// Gets the defence stat modifier.
-        this.armor += armorMod;				// Add the defence stat modifier.
+        //this.armorMod = _a.GetDefMod();		// Gets the defence stat modifier.
+       // this.armor += armorMod;				// Add the defence stat modifier.
         if (this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false)
         {
             this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
@@ -161,9 +161,9 @@ public class PlayerController : PawnController
                 {
                     if (playerWeapon != null)
                     {
-                        damageMod = playerWeapon.GetAtkMod();
+                        //damageMod = playerWeapon.GetAtkMod();
                         playerWeapon.itemName = "Wooden Sword";
-                        physicalDamage += damageMod;
+                        //physicalDamage += damageMod;
                     }
                 }
                 else
@@ -176,9 +176,9 @@ public class PlayerController : PawnController
                 {
                     if (playerArmor != null)
                     {
-                        armorMod = playerArmor.GetDefMod();
+                        //armorMod = playerArmor.GetDefMod();
                         playerArmor.itemName = "Cloth";
-                        armor += armorMod;
+                        //armor += armorMod;
                     }
                 }
                 else
@@ -189,18 +189,18 @@ public class PlayerController : PawnController
             }
             else
             {
-                this.damageMod = playerWeapon.GetAtkMod();
+                //this.damageMod = playerWeapon.GetAtkMod();
                 //this.physicalDamage = physicalDamage - damageMod;
-                this.physicalDamage += damageMod;
-                this.armorMod = playerArmor.GetDefMod();
+                //this.physicalDamage += damageMod;
+               // this.armorMod = playerArmor.GetDefMod();
                 //this.armor = armor - armorMod;
-                this.armor += armorMod;
+               // this.armor += armorMod;
                 playerWeapon.ClearStats();
                 playerArmor.ClearStats();
                 playerWeapon.itemName = "Fist";
                 playerArmor.itemName = "Bare Skin";
-                damageMod = 0;
-                armorMod = 0;
+                //damageMod = 0;
+                //armorMod = 0;
                 this.playerWeapon.animParameter = "OneHandAttack";
             }
             firstTick = false;
@@ -237,7 +237,7 @@ public class PlayerController : PawnController
         playerArmor.itemName = "";
         playerWeapon.itemName = "";
         //damageMod = 0;
-        armorMod = 0;
+        //armorMod = 0;
     }
 
     void Update()

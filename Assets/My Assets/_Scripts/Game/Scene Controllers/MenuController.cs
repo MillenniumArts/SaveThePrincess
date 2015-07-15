@@ -174,14 +174,7 @@ public class MenuController : MonoBehaviour
             this.player.remainingEnergy = this.newEnergy;
             this.player.armor = this.newArmor;
 
-            if (EnemyStats.GetInstance().GetFirstEnemyBool())
-            {
-                EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
-                int _defaultDamageMod = Random.Range(0, 6);                 // Damage modifier for default weapon.
-                this.player.physicalDamage += _defaultDamageMod;            //
-                this.player.damageMod = _defaultDamageMod;                  //
-                this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);   //
-            }
+            
 
             //DontDestroyOnLoad(this.player);
             LevelLoadHandler.Instance.LoadLevel("Town_LVP");
@@ -194,6 +187,19 @@ public class MenuController : MonoBehaviour
         //EscapeHandler.instance.ClearButtons();
         //Application.LoadLevel();
     }
+
+    public void FirstEnemy()
+    {
+        if (EnemyStats.GetInstance().GetFirstEnemyBool())
+        {
+            EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
+            int _defaultDamageMod = Random.Range(0, 6);                 // Damage modifier for default weapon.
+            this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);   //
+            this.player.physicalDamage += _defaultDamageMod;            //
+            //this.player.damageMod = _defaultDamageMod;                  //
+        }
+    }
+
 
     #region monobehaviour
     void UpdateText()
@@ -232,6 +238,7 @@ public class MenuController : MonoBehaviour
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;
         }
+
         if (PlayerPrefs.GetInt("score") == 0)
         {
             EnemyStats.GetInstance().SetVeryFirstEnemy(true);
@@ -240,6 +247,7 @@ public class MenuController : MonoBehaviour
         {
             EnemyStats.GetInstance().SetVeryFirstEnemy(false);
         }
+
         if (BattleCounter.GetInstance().GetCurrentBattleCount() == 0)
         {
             EnemyStats.GetInstance().SetStartOfRun(true);
@@ -271,6 +279,8 @@ public class MenuController : MonoBehaviour
 
         // button handling
         ButtonInit();
+        //first Enemy handling
+        Invoke("FirstEnemy", 0.01f);
     }
 
     // Update is called once per frame

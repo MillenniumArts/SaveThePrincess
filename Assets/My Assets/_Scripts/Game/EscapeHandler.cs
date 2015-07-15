@@ -89,6 +89,8 @@ public class EscapeHandler : MonoBehaviour {
     {
         Debug.Log("Quitting Game. DOES NOT EXIT IN EDITOR!!!");
         // SAVE STATS NEEDED HERE!
+        SaveSystemHandler.instance.SaveGame();
+
         Application.Quit();
     }
     #endregion Pause Behaviour
@@ -102,8 +104,10 @@ public class EscapeHandler : MonoBehaviour {
     {
         buttons = FindObjectsOfType<Button>();
     }
-
-	void Start () {
+    
+    
+    #region monobehaviour
+    void Start () {
         this.pausePanel.gameObject.SetActive(paused);
         GetButtons();
 	}
@@ -131,3 +135,4 @@ public class EscapeHandler : MonoBehaviour {
         
 	}
 }
+    #endregion monobehaviour

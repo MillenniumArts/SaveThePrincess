@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SaveSystemHandler : MonoBehaviour
 {
-    private PlayerController player;
+    public PlayerController player;
 
     #region Singleton
     private static SaveSystemHandler _instance;
@@ -64,29 +64,29 @@ public class SaveSystemHandler : MonoBehaviour
     #region Saving
     public void SaveGame()
     {
-        string statString = "";
-        // generate a CSV string for stats
-        // FORMAT: STAT:###;
-        // strip on semi colons first, then colons
-        // get player stats
-        statString += this.player.GetStatString();
+        if (this.player != null)
+        {
+            string statString = "";
+            // generate a CSV string for stats
+            // FORMAT: STAT:###;
+            // strip on semi colons first, then colons
+            // get player stats
+            statString += this.player.GetStatString();
+    
+            // gameStats
 
-        // gameStats
+            // place in level (10/15 battles)
+            statString += "PLVL" + BattleCounter.GetInstance().GetCurrentBattleCount() + ";";
+            // Level
+            statString += "LVL:" + BattleCounter.GetInstance().GetBattlesNeeded() + ";";
+            // Number Enemies Killed
+            statString += "NEK:" + PlayerPrefs.GetInt("score") + ";";
 
-        // place in level (10/15 battles)
-        statString += "PLVL" + BattleCounter.GetInstance().GetCurrentBattleCount() + ";";
-        // Level
-        statString += "LVL:" + BattleCounter.GetInstance().GetBattlesNeeded() + ";";
-        // Number Enemies Killed
-        statString += "NEK:" + PlayerPrefs.GetInt("score") + ";";
-
-
-        // Game level
-
-        // get sprite info
-
-        // set flag for game to load next time
-        PlayerPrefs.SetInt("GameToLoad", 1);
+            // get sprite info
+            Debug.Log(statString);
+            // set flag for game to load next time
+            PlayerPrefs.SetInt("GameToLoad", 1);
+        }
 
     }
 
@@ -100,6 +100,9 @@ public class SaveSystemHandler : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (this.player == null)
+        {
+            this.player = FindObjectOfType<PlayerController>();
+        }
 	}
 }

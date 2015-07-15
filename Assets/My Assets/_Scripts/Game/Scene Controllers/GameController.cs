@@ -148,7 +148,7 @@ public class GameController : MonoBehaviour
 
             NRGReductionFactor = Mathf.Clamp(NRGReductionFactor, 0.0f, 1.0f);
             // apply the percent damage from the bar (value/max) * NRGFactor
-            float damageToApply = NRGReductionFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.physicalDamage;
+            float damageToApply = NRGReductionFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.GetTotalDamage();
 
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST);
@@ -227,7 +227,7 @@ public class GameController : MonoBehaviour
             ENEMY_ENERGY_REGEN_AMT = Mathf.RoundToInt(regenAmt);
             ENEMY_ENERGY_COST_AMT = this.enemy.ATTACK_ENERGY_COST - ENEMY_ENERGY_REGEN_AMT;
             // multiply damage by reduction factor
-            int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.physicalDamage);
+            int damageToApply = Mathf.RoundToInt(attackAmount * this.enemy.GetTotalDamage());
 
             // player/enemy alive and enemy turn
             if (!this.player.IsDead() && !this.enemy.IsDead())

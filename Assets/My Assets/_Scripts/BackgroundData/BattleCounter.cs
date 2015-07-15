@@ -15,7 +15,7 @@ public class BattleCounter {
 		}
 		return instance;
 	}
-
+    #region getters
     public int GetRemainingBattles()
     {
         return battlesNeeded - currentBattleCount;
@@ -25,6 +25,12 @@ public class BattleCounter {
     {
         return currentBattleCount;
     }
+
+    public int GetBattlesNeeded()
+    {
+        return this.battlesNeeded;
+    }
+    #endregion getters
 
     public void IncreaseCurrentBattleCount()
     {
@@ -40,11 +46,13 @@ public class BattleCounter {
     {
         this.battlesNeeded = 0;
     }
-
+    #region setters
     public void SetBattlesNeeded(int amount)
     {
         this.battlesNeeded = amount;
     }
+
+    #endregion setters
 
     private BattleCounter() { }
 

@@ -10,6 +10,8 @@ public class EscapeHandler : MonoBehaviour {
     public Button exit;
     public Button[] buttons;
 
+    private SaveSystemHandler ssh;
+
     #region Singleton
     private static EscapeHandler _instance;
 

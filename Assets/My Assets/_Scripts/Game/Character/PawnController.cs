@@ -562,11 +562,36 @@ public class PawnController : MonoBehaviour
     {
         return this.physicalDamage;// + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
     }
-
+    /// <summary>
+    /// returns a sum of player's health and energy
+    /// </summary>
+    /// <returns>sum of player's health and energy</returns>
     public int GetTotalHeatlhEnergyStats()
     {
         int total = totalEnergy + totalHealth;
         return total;
+    }
+
+    /// <summary>
+    /// returns a string in format STAT:###;STAT:###;... for Load/Save
+    /// </summary>
+    /// <returns>string in format STAT:###;STAT:###</returns>
+    public string GetStatString()
+    {
+        string ret = "";
+        // HP
+        ret += "rHP:" + this.remainingHealth + ";";
+        ret += "tHP:" + this.totalHealth + ";";
+        // NRG
+        ret += "rNRG:" + this.remainingEnergy + ";";
+        ret += "tNRG:" + this.totalEnergy + ";";
+        // DMG
+        ret += "DMG:" + this.physicalDamage + ";";
+        // ARM
+        ret += "ARM:" + this.armor + ";";
+        //Magic
+        //ret += "MAG:" + this.player.magicalDamage = ";";  
+        return ret;
     }
 
     #endregion Public Functions

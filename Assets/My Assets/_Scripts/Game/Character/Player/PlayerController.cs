@@ -143,11 +143,7 @@ public class PlayerController : PawnController
             this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
         }
     }
-    /// <summary>
-    /// Gets the total armor.
-    /// </summary>
-    /// <returns>The total armor.</returns>
-    
+
     #endregion Public functions
 
     #region Private functions

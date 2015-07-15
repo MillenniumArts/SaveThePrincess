@@ -11,7 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Main_Menu");
         EscapeHandler.instance.GetButtons();
         PlayerPrefs.SetInt("score", 0);
 	}

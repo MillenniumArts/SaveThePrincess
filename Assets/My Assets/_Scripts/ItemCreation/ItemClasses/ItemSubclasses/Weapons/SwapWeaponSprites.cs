@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class required in the scene to create new weapons.  Stat Slect Scene, Store Scene, Battle Scene.
+/// </summary>
 public class SwapWeaponSprites : MonoBehaviour {
     /// <summary>
     /// These arrays are populated in the inspector.

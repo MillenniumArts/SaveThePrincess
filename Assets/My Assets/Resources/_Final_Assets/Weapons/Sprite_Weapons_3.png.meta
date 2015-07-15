@@ -1,27 +1,27 @@
 fileFormatVersion: 2
 guid: 127546b95c97a824e98a5fdbf64c9926
-timeCreated: 1436964862
+timeCreated: 1436967326
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sprite_Weapons_3_0
-    21300002: Sprite_Weapons_3_1
-    21300004: Sprite_Weapons_3_2
-    21300006: Sprite_Weapons_3_3
-    21300008: Sprite_Weapons_3_4
-    21300010: Sprite_Weapons_3_5
-    21300012: Sprite_Weapons_3_6
-    21300014: Sprite_Weapons_3_7
-    21300016: Sprite_Weapons_3_8
+    21300000: Blade_9
+    21300002: Blade_10
+    21300004: Blade_28
+    21300006: Blade_30
+    21300008: Guard_29
+    21300010: Guard_10
+    21300012: Guard_27
+    21300014: Guard_9
+    21300016: Blade_29
     21300018: Sprite_Weapons_3_9
-    21300020: Sprite_Weapons_3_10
+    21300020: Blade_15
     21300022: Sprite_Weapons_3_11
-    21300024: Sprite_Weapons_3_12
-    21300026: Sprite_Weapons_3_13
-    21300028: Sprite_Weapons_3_14
-    21300030: Sprite_Weapons_3_15
-    21300032: Sprite_Weapons_3_16
-    21300034: Sprite_Weapons_3_17
+    21300024: Blade_31
+    21300026: Blade_32
+    21300028: Guard_28
+    21300030: Guard_30
+    21300032: Guard_32
+    21300034: Guard_31
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -67,47 +67,47 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Sprite_Weapons_3_0
+    - name: Blade_9
       rect:
         serializedVersion: 2
         x: 71
         y: 2558
         width: 877
         height: 1102
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .60713619, y: .0162703563}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_1
+    - name: Blade_10
       rect:
         serializedVersion: 2
         x: 1178
         y: 2700
         width: 719
         height: 856
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .366653889, y: .018380139}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_2
+    - name: Blade_28
       rect:
         serializedVersion: 2
         x: 2209
         y: 2701
         width: 648
         height: 816
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .496403068, y: .0544014722}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_3
+    - name: Blade_30
       rect:
         serializedVersion: 2
         x: 3360
         y: 2830
         width: 322
         height: 755
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .284255505, y: .0236981325}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_4
+    - name: Guard_29
       rect:
         serializedVersion: 2
         x: 3313
@@ -115,9 +115,9 @@ TextureImporter:
         width: 275
         height: 105
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_5
+    - name: Guard_10
       rect:
         serializedVersion: 2
         x: 1317
@@ -125,9 +125,9 @@ TextureImporter:
         width: 269
         height: 181
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_6
+    - name: Guard_27
       rect:
         serializedVersion: 2
         x: 2402
@@ -135,9 +135,9 @@ TextureImporter:
         width: 254
         height: 109
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_7
+    - name: Guard_9
       rect:
         serializedVersion: 2
         x: 344
@@ -145,79 +145,59 @@ TextureImporter:
         width: 500
         height: 90
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_8
+    - name: Blade_29
       rect:
         serializedVersion: 2
         x: 2516
         y: 1438
         width: 121
         height: 802
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .491317868, y: .0191686917}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_9
-      rect:
-        serializedVersion: 2
-        x: 2066
-        y: 2133
-        width: 21
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_10
+    - name: Blade_15
       rect:
         serializedVersion: 2
         x: 233
         y: 950
         width: 333
         height: 940
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .191653967, y: .0187406503}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_11
-      rect:
-        serializedVersion: 2
-        x: 2066
-        y: 1700
-        width: 10
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_12
+    - name: Blade_31
       rect:
         serializedVersion: 2
         x: 3277
         y: 1387
         width: 397
         height: 731
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .325192243, y: .0234557018}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_13
+    - name: Blade_32
       rect:
         serializedVersion: 2
         x: 1078
         y: 741
         width: 932
         height: 836
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .234677553, y: .0289270859}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_14
+    - name: Guard_28
       rect:
         serializedVersion: 2
         x: 2458
         y: 958
         width: 294
         height: 305
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .385632575, y: .12793009}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_15
+    - name: Guard_30
       rect:
         serializedVersion: 2
         x: 3245
@@ -225,27 +205,27 @@ TextureImporter:
         width: 328
         height: 107
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_16
+    - name: Guard_32
       rect:
         serializedVersion: 2
         x: 242
         y: 65
         width: 356
         height: 697
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .152244478, y: .672592819}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Sprite_Weapons_3_17
+    - name: Guard_31
       rect:
         serializedVersion: 2
         x: 1166
         y: 393
         width: 256
         height: 211
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .803837955}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

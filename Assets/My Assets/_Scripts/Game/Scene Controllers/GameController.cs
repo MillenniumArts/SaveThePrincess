@@ -127,6 +127,7 @@ public class GameController : MonoBehaviour
             // starts attackBar movement in updateAttackBar
             attackBarMoving = true;
             this.attackMeter.gameObject.SetActive(true);
+            this.attackMeter.interactable = false;
             this.cancelAttack.gameObject.SetActive(true);
         }
         else

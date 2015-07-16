@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 6efe7712209478647936f01d4aa83ff9
+timeCreated: 1436967398
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Blade_1
+    21300002: Blade_2
+    21300004: Blade_3
+    21300006: Blade_4
+    21300008: Blade_5
+    21300010: Blade_6
+    21300012: Guard_1
+    21300014: Guard_2
+    21300016: Guard_3
+    21300018: Guard_4
+    21300020: Guard_5
+    21300022: Blade_7
+    21300024: Guard_6
+    21300026: Blade_8
+    21300028: Blade_14
+    21300030: Shuriken_1
+    21300032: Guard_25
+    21300034: Guard_7
+    21300036: Guard_8
+    21300038: Blade_23
+    21300040: Shuriken_4
+    21300042: Shuriken_3
+    21300044: Shuriken_2
+    21300046: Guard_26
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 150
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Blade_1
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 3180
+        width: 483
+        height: 743
+      alignment: 9
+      pivot: {x: .495716423, y: .0939195529}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_2
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 3071
+        width: 521
+        height: 883
+      alignment: 9
+      pivot: {x: .357029408, y: .0219740383}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_3
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 3152
+        width: 248
+        height: 794
+      alignment: 9
+      pivot: {x: .496950716, y: .0152403405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_4
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 3180
+        width: 750
+        height: 743
+      alignment: 9
+      pivot: {x: .498517573, y: .0223459322}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_5
+      rect:
+        serializedVersion: 2
+        x: 2863
+        y: 3070
+        width: 192
+        height: 864
+      alignment: 9
+      pivot: {x: .494162232, y: .0601840541}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_6
+      rect:
+        serializedVersion: 2
+        x: 3340
+        y: 3053
+        width: 103
+        height: 871
+      alignment: 9
+      pivot: {x: .488755316, y: .0266900919}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_1
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 2889
+        width: 433
+        height: 145
+      alignment: 9
+      pivot: {x: .495670944, y: .300223947}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_2
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 2891
+        width: 261
+        height: 91
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_3
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 2830
+        width: 432
+        height: 144
+      alignment: 9
+      pivot: {x: .496825606, y: .690461874}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_4
+      rect:
+        serializedVersion: 2
+        x: 2154
+        y: 2927
+        width: 442
+        height: 142
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_5
+      rect:
+        serializedVersion: 2
+        x: 2762
+        y: 2703
+        width: 386
+        height: 324
+      alignment: 9
+      pivot: {x: .504888535, y: .325281978}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_7
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 1650
+        width: 324
+        height: 1063
+      alignment: 9
+      pivot: {x: .240688846, y: .0178715307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_6
+      rect:
+        serializedVersion: 2
+        x: 3261
+        y: 2681
+        width: 308
+        height: 242
+      alignment: 9
+      pivot: {x: .396519244, y: .851206362}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_8
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 1579
+        width: 248
+        height: 1029
+      alignment: 9
+      pivot: {x: .495222509, y: .102777153}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_14
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 1852
+        width: 705
+        height: 621
+      alignment: 9
+      pivot: {x: .497529864, y: .0428854041}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shuriken_1
+      rect:
+        serializedVersion: 2
+        x: 2649
+        y: 1577
+        width: 750
+        height: 752
+      alignment: 9
+      pivot: {x: .499694973, y: .485971987}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_25
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 1662
+        width: 364
+        height: 166
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_7
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1410
+        width: 406
+        height: 188
+      alignment: 9
+      pivot: {x: .504188597, y: .572364986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_8
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 1207
+        width: 628
+        height: 330
+      alignment: 9
+      pivot: {x: .498543322, y: .294851959}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blade_23
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 409
+        width: 647
+        height: 680
+      alignment: 9
+      pivot: {x: .499865562, y: .0246737767}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shuriken_4
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 252
+        width: 692
+        height: 683
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shuriken_3
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 341
+        width: 692
+        height: 695
+      alignment: 9
+      pivot: {x: .51857549, y: .499500483}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shuriken_2
+      rect:
+        serializedVersion: 2
+        x: 2726
+        y: 379
+        width: 756
+        height: 877
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_26
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 94
+        width: 233
+        height: 243
+      alignment: 9
+      pivot: {x: .49353236, y: .803870678}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

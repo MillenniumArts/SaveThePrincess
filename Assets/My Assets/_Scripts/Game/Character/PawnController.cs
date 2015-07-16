@@ -12,7 +12,7 @@ public class PawnController : MonoBehaviour
     /// <summary>
     /// The weapon combo script.
     /// </summary>
-    public CreateWeaponCombination weaponComboScript;
+    public WeaponCombination weaponComboScript;
 
     /// <summary>
     /// The player's body.
@@ -613,14 +613,14 @@ public class PawnController : MonoBehaviour
         this.playerWeapon = ItemFactory.instance.CreateWeapon(playerHand, name);// Spawn specified weapon.
         this.playerWeapon.transform.parent = playerHand;										// Make it the child of the hand.
         this.playerWeapon.transform.localScale = new Vector3(1, 1, 1);							// Fix the scale.
-        this.weaponComboScript = playerWeapon.GetComponentInChildren<CreateWeaponCombination>();// Sets a reference to the weapon's script.
+        this.weaponComboScript = playerWeapon.GetComponentInChildren<WeaponCombination>();// Sets a reference to the weapon's script.
     }
 
     // Variables for Swap WeaponHands
     protected GameObject frontThumb;
     protected GameObject backThumb;
     protected GameObject backFingers;
-    protected void SetWeaponHands(CreateWeaponCombination _w)
+    protected void SetWeaponHands(WeaponCombination _w)
     {
             if (_w.GetWeaponGrip() == true)
             {

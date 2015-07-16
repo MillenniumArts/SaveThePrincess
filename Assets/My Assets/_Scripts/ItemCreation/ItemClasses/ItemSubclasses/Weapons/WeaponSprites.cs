@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class WeaponSprites : MonoBehaviour {
-    public string[] weaponParts;
+    public string[] weaponParts; // Set in the inspector.
 
     public Sprite[] currWeaponSprites;
 
@@ -16,6 +16,7 @@ public class WeaponSprites : MonoBehaviour {
         currWeaponSprites = new Sprite[10];
         RandomWeaponSprites();
         DisplaySprites();
+        LoadSprites(SaveSprites());
     }
     
     public void RandomWeaponSprites()
@@ -59,6 +60,43 @@ public class WeaponSprites : MonoBehaviour {
         for (int i = 0; i < currWeaponSprites.Length; i++)
         {
             currWeaponSprites[i] = tempSprites[i];
+        }
+        DisplaySprites();
+    }
+
+    public string SaveSprites()
+    {
+        string s = null;
+        for (int i = 0; i < currWeaponSprites.Length; i++)
+        {
+            string temp = currWeaponSprites[i].name;
+            s += temp;
+            s += "+";
+        }
+        Debug.Log(s);
+        //saved = s;
+        return s;
+    }
+
+    //For testing
+
+    /*public bool go = false;
+    private string saved;
+    void Update()
+    {
+        if (go)
+        {
+            LoadSprites(saved);
+        }
+    }*/
+
+    public void LoadSprites(string savedSprites)
+    {
+        string[] spriteNames = savedSprites.Split('+');
+        for (int i = 0; i < (spriteNames.Length - 1); i++)
+        {
+            Debug.Log(spriteNames[i]);
+            currWeaponSprites[i] = _wSprites.SearchForSprites(weaponParts[i], spriteNames[i]);
         }
         DisplaySprites();
     }

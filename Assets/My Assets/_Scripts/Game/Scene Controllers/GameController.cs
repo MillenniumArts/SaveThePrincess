@@ -668,7 +668,7 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Loads the next level.
     /// </summary>
-    private void LoadNextLevel()
+    private void LoadNextBattle()
     {
         // VICTORY ANIMATION
         turn = 0;
@@ -701,12 +701,13 @@ public class GameController : MonoBehaviour
         {
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
+            this.player.inBattle = false;
             LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
 
     /// <summary>
-    /// Loads town scene
+    /// Loads town scene on victory
     /// </summary>
     private void GoToTown()
     {
@@ -722,6 +723,7 @@ public class GameController : MonoBehaviour
             Debug.Log("Loading Town Scene");
             // restore player energy after battle
             this.player.remainingEnergy = this.player.totalEnergy;
+            this.player.inBattle = false;
             LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
@@ -742,6 +744,7 @@ public class GameController : MonoBehaviour
             this.player.remainingHealth += 10;
             this.player.dollarBalance += this.enemy.DropMoney();
             this.player.transform.localPosition = this.prevPos;
+            this.player.inBattle = false;
             PlayerPrefs.SetInt("midgame", 1);
             LevelLoadHandler.Instance.LoadLevel("MidGameStatSelect_LVP");
         }
@@ -794,7 +797,7 @@ public class GameController : MonoBehaviour
                 // check if player wants to camp out before next battle
                 // load camp kit check scene?
             }
-            LoadNextLevel();
+            LoadNextBattle();
         }
     }
     #endregion LevelLoading
@@ -832,6 +835,7 @@ public class GameController : MonoBehaviour
 
         // get playerController 
         this.player = FindObjectOfType<PlayerController>();
+        this.player.inBattle = true;
 
         // carry over previous balance
         this.player.dollarBalance += PlayerPrefs.GetInt("carryover");

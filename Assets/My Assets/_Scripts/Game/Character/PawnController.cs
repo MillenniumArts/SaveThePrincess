@@ -142,6 +142,8 @@ public class PawnController : MonoBehaviour
     /// </summary>
     public int numTurnsLeftToHeal;
 
+    public bool inBattle;
+
     #endregion STATS
 
     #region Public Functions
@@ -578,6 +580,20 @@ public class PawnController : MonoBehaviour
     /// <returns>string in format STAT:###;STAT:###</returns>
     public string GetStatString()
     {
+        /* ORDER:
+         * remHP
+         * totHP
+         * remNRG
+         * totNRG
+            * [Magic]
+         * DMG
+         * ARM
+         * wDMG
+         * wARM
+         * aDMG
+         * aARM
+         */
+
         string ret = "";
         // HP
         ret += "rHP:" + this.remainingHealth + ";";
@@ -587,17 +603,17 @@ public class PawnController : MonoBehaviour
         ret += "tNRG:" + this.totalEnergy + ";";
         //Magic
         //ret += "MAG:" + this.player.magicalDamage = ";";  
-
-        // weapon/armor stats
-        ret += "WPA:" + this.playerWeapon.GetAtkMod() + ";";
-        ret += "WPD:" + this.playerWeapon.GetDefMod() + ";";
-
-        ret += "ARA:" + this.playerArmor.GetAtkMod() + ";";
-        ret += "ARD:" + this.playerArmor.GetDefMod() + ";";
         // DMG
-        ret += "DMG:" + this.playerWeapon.GetAtkMod() + ";";
+        ret += "DMG:" + this.physicalDamage + ";";
         // ARM
-        ret += "ARM:" + this.playerArmor.GetDefMod() + ";";
+        ret += "ARM:" + this.armor + ";";
+
+        // weapon stats
+        ret += "wDMG:" + this.playerWeapon.GetAtkMod() + ";";
+        ret += "wARM:" + this.playerWeapon.GetDefMod() + ";";
+        // armor stats
+        ret += "aDMG:" + this.playerArmor.GetAtkMod() + ";";
+        ret += "aARM:" + this.playerArmor.GetDefMod() + ";";
         return ret;
     }
 
@@ -820,7 +836,7 @@ public class PawnController : MonoBehaviour
     {
         this.body = GameObject.FindWithTag(this.tag).GetComponentInChildren<CreateCombination>();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
-
+        this.inBattle = false;
         // initialize weapon if player is supposed to have one
         CallSetWeapon("Sword");
         if (!spawnWithWeapon)

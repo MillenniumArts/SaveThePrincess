@@ -195,8 +195,6 @@ public class MenuController : MonoBehaviour
             EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
             int _defaultDamageMod = Random.Range(0, 6);                 // Damage modifier for default weapon.
             this.player.playerWeapon.SetDmgArm(_defaultDamageMod, 0);   //
-            this.player.physicalDamage += _defaultDamageMod;            //
-            //this.player.damageMod = _defaultDamageMod;                  //
         }
     }
 

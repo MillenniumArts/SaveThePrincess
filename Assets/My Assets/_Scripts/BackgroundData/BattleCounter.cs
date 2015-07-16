@@ -52,6 +52,11 @@ public class BattleCounter {
         this.battlesNeeded = amount;
     }
 
+    public void SetCurrentBattleCount(int c)
+    {
+        this.currentBattleCount = c;
+    }
+
     #endregion setters
 
     private BattleCounter() { }

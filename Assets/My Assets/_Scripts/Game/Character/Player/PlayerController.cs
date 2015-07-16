@@ -115,8 +115,6 @@ public class PlayerController : PawnController
         {
             playerAnimator.SetBool("IsSpearAttack", false);
         }
-        //this.damageMod = w.GetAtkMod();
-        //this.physicalDamage += damageMod;
         SetWeaponHands(w.gameObject.GetComponentInChildren<WeaponCombination>());
     }
 

@@ -224,6 +224,19 @@ public class EnemyStats {
     {
         this.firstEnemy = tog;
     }
+
+    /// <summary>
+    /// Called on Loading to create an enemy from player stats to continue game
+    /// </summary>
+    /// <param name="pHP"></param>
+    /// <param name="pNRG"></param>
+    /// <param name="pDMG"></param>
+    /// <param name="pARM"></param>
+    public void LoadNewEnemy(int pHP, int pNRG, int pDMG, int pARM)
+    {
+        // CARLO YOU SHOULD IMPLEMENT THE MATH HERE FOR SCALING ETC
+    }
+
     #endregion Setters
 
     #region Resetters

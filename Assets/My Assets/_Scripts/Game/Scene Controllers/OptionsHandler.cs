@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
 public class OptionsHandler : MonoBehaviour {
 
-    public Toggle muteAudio;
     public Slider audioLevel;
 
     public void GoBack()
@@ -20,6 +19,6 @@ public class OptionsHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        AudioManager.Instance.volumeFactor = audioLevel.value;
+        audioLevel.value = AudioManager.Instance.volumeFactor;
 	}
 }

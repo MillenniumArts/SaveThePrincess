@@ -183,7 +183,7 @@ public class MenuController : MonoBehaviour
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        LevelLoadHandler.Instance.LoadStartGame();
+        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP");
         //EscapeHandler.instance.ClearButtons();
         //Application.LoadLevel();
     }
@@ -199,7 +199,6 @@ public class MenuController : MonoBehaviour
     }
 
 
-    #region monobehaviour
     void UpdateText()
     {
         this.healthAmt.text = this.newHealth.ToString();
@@ -218,6 +217,7 @@ public class MenuController : MonoBehaviour
         this.numHpCredits.text = this.numHP.ToString();
         this.numNrgCredits.text = this.numNRG.ToString();
     }
+    #region monobehaviour
     // Use this for initialization
     void Start()
     {
@@ -231,13 +231,7 @@ public class MenuController : MonoBehaviour
         newPos = new Vector3(-12f, -2.5f);
         this.player.gameObject.transform.localPosition = newPos;
 
-
-
-        if (PlayerPrefs.GetInt("midgame") == 0)
-        {
-            
-        }
-        else
+        if (PlayerPrefs.GetInt("midgame") == 1)
         {
             this.backButton.gameObject.SetActive(false);
             this.numCredits = 1;

@@ -5,6 +5,7 @@ using System;
 public class SaveSystemHandler : MonoBehaviour
 {
     public PlayerController player;
+    public bool inBattle;
 
     #region Singleton
     private static SaveSystemHandler _instance;
@@ -41,7 +42,6 @@ public class SaveSystemHandler : MonoBehaviour
 
     #region Loading
 
-    // TODO: PARSE STAT STRING AFTER CONSTRUCTION
     // inB:0;PLVL:0;LVL:1;NEK:0;rHP:100;tHP:100;rNRG:100;tNRG:100;DMG:30;ARM:10;wDMG:3;wARM:0;aDMG:0;aARM:0;
     public void LoadGame()
     {
@@ -68,7 +68,13 @@ public class SaveSystemHandler : MonoBehaviour
                 {
                     case "inB":
                         // in Battle?
-                         //= pairs[1];
+                        if (Convert.ToInt32(pairs[1]) == 1)
+                        {
+                            this.inBattle = true;
+                        }
+                        else {
+                            this.inBattle = false;
+                        }
                         break;
                     case "PLVL":
                         // current battle no

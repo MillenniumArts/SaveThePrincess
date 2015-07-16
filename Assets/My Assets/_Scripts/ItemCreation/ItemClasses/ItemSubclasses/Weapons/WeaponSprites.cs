@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class WeaponSprites : MonoBehaviour {
@@ -14,20 +14,10 @@ public class WeaponSprites : MonoBehaviour {
     {
         _wSprites = GameObject.FindObjectOfType<SwapWeaponSprites>();
         currWeaponSprites = new Sprite[10];
-        RandomWeaponSprites();
         DisplaySprites();
+        RandomWeaponSprites();
     }
-    /*public bool go = true;
-    void LateUpdate()
-    {
-        if (go)
-        {
-            RandomWeaponSprites();
-            DisplaySprites();
-            go = false;
-        }
-    }*/
-
+    
     public void RandomWeaponSprites()
     {
         currWeaponSprites = new Sprite[10];

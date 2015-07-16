@@ -31,7 +31,7 @@ public class StartMenuController : MonoBehaviour {
 	public void StartGame(){
         AudioManager.Instance.PlaySFX("Button1");
         //EscapeHandler.instance.ClearButtons();
-		LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP");
+		LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP");
 	}
 
     public void HowToPlay()

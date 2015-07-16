@@ -64,9 +64,6 @@ public class SaveSystemHandler : MonoBehaviour
             {
                 // split key/value pairs
                 string[] pairs = data[i].Split(delim2);
-
-                Debug.Log(pairs[0] + " -> " + pairs[1] );
-
                 switch (pairs[0])
                 {
                     case "inB":
@@ -131,7 +128,7 @@ public class SaveSystemHandler : MonoBehaviour
                         break;
                     case "":
                         // Other
-                        Debug.Log(pairs[0] + " => " + Convert.ToInt32(pairs[1]));
+                        //Debug.Log(pairs[0] + " => " + Convert.ToInt32(pairs[1]));
                         break;
                 }
             }

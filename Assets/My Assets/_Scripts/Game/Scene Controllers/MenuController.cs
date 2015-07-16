@@ -235,10 +235,7 @@ public class MenuController : MonoBehaviour
 
         if (PlayerPrefs.GetInt("midgame") == 0)
         {
-            if (PlayerPrefs.GetInt("GameToLoad") == 1)
-            {   // load game
-                SaveSystemHandler.instance.LoadGame();
-            }
+            
         }
         else
         {

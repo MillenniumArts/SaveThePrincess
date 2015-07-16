@@ -100,10 +100,7 @@ public class PlayerController : PawnController
     /// <param name="w">The weapon to be transfered.</param>
     public void TransferPurchasedWeapon(Item w)
     {
-        //this.physicalDamage -= damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
-        //this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
-        //this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
         this.playerWeapon.SwapWeaponType(w.GetItemSubClass());
         this.playerWeapon.GetComponentInChildren<WeaponSprites>().SwapWeaponSprites(w.GetComponentInChildren<WeaponSprites>());
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
@@ -125,11 +122,8 @@ public class PlayerController : PawnController
     /// <param name="a">The armour to be transfered.</param>
     public void TransferPurchasedArmor(Item a)
     {
-        //this.armor -= armorMod;				// Remove the current defence stat modifier.
         Armor _a = (Armor)a;				// Casts the Item to Armor.  Used to access CopyTypeIndex().
         this.playerArmor.SwapTo(_a);		// Swaps all the stats from the new armor to the player's armor.
-        //this.armorMod = _a.GetDefMod();		// Gets the defence stat modifier.
-       // this.armor += armorMod;				// Add the defence stat modifier.
         if (this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false)
         {
             this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;

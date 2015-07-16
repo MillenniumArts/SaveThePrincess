@@ -190,7 +190,7 @@ public class MenuController : MonoBehaviour
 
     public void FirstEnemy()
     {
-        if (EnemyStats.GetInstance().GetFirstEnemyBool())
+        if (EnemyStats.GetInstance().IsFirstEnemy())
         {
             EnemyStats.GetInstance().SetEnemyBaseStats(100, 100, 15, 10);
             int _defaultDamageMod = Random.Range(0, 6);                 // Damage modifier for default weapon.

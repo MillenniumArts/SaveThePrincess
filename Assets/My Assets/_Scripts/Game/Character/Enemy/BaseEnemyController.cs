@@ -79,8 +79,8 @@ public class BaseEnemyController : PawnController {
 	private void EnemyStart(){
 		this.dollarBalance = 35;
         CreateStats();
-        remainingEnergy = totalEnergy;
-        remainingHealth = totalHealth;
+        //remainingEnergy = totalEnergy;
+        //remainingHealth = totalHealth;
 	}
 
 	/// <summary>

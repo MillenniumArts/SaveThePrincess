@@ -5,6 +5,7 @@ using System;
 public class SaveSystemHandler : MonoBehaviour
 {
     public PlayerController player;
+    public BaseEnemyController enemy;
     public bool inBattle;
 
     #region Singleton
@@ -42,99 +43,180 @@ public class SaveSystemHandler : MonoBehaviour
 
     #region Loading
 
-    // inB:0;PLVL:0;LVL:1;NEK:0;rHP:100;tHP:100;rNRG:100;tNRG:100;DMG:30;ARM:10;wDMG:3;wARM:0;aDMG:0;aARM:0;
+    // inB:0;PLVL:0;LVL:1;NEK:0;rHP:100;tHP:100;rNRG:100;tNRG:100;DMG:30;ARM:10;wDMG:3;wARM:0;aDMG:0;aARM:0;eHP:0;eNRG:0;eDMG:0;eARM:0;eHP:0;eNRG:0;eDMG:0;eARM:0;
     public void LoadGame()
     {
         // if there is a game to load
         if (PlayerPrefs.GetInt("GameToLoad") == 1)
         {
-
             Debug.Log("Loading game data...");
             // load player data
             string gameData = PlayerPrefs.GetString("GameData");
             Debug.Log(gameData);
 
+            char[] delim0 = { '_' };
             char[] delim1 = { ';' };
             char[] delim2 = { ':' };
 
-            // split the string into parts
-            string[] data = gameData.Split(delim1);
+            string[] data0 = gameData.Split(delim0);    // split on '_' to split game/player/LF/cP, gives groups of stats
 
-            for (int i = 0; i < data.Length; i++)
+            //for (int i = 0; i < data0.Length; i++ )
+            //  Debug.Log(data0[i] + " ");
+
+            string[] gameStats = data0[0].Split(delim1);        // gives STAT:### on each index
+            string[] playerStats = data0[1].Split(delim1);      // gives STAT:### on each index
+            string[] lastFoughtStats = data0[2].Split(delim1);  // gives STAT:### on each index
+            string[] checkpointStats = data0[3].Split(delim1);  // gives STAT:### on each index
+
+            int thp = 0, tnrg = 0, rhp = 0, rnrg = 0, dmg = 0, arm = 0;
+
+            for (int i = 0; i < data0.Length; i++)
             {
-                // split key/value pairs
-                string[] pairs = data[i].Split(delim2);
-                switch (pairs[0])
+                switch (i)
                 {
-                    case "inB":
-                        // in Battle?
-                        if (Convert.ToInt32(pairs[1]) == 1)
+                    // game data on data0[0];
+                    case 0:
+                        Debug.Log("Loading Game info...");
+                        for (int j = 0; j < gameStats.Length; j++)
                         {
-                            this.inBattle = true;
+                            string[] statSet = gameStats[j].Split(delim2); // Gives [0]:STAT [1]: ###
+
+                            switch (statSet[0])
+                            {
+                                case "inB":
+                                    // in Battle?
+                                    if (Convert.ToInt32(statSet[1]) == 1)
+                                    {
+                                        this.inBattle = true;
+                                    }
+                                    else
+                                    {
+                                        this.inBattle = false;
+                                    }
+                                    break;
+                                case "PLVL":
+                                    // current battle no
+                                    BattleCounter.GetInstance().SetCurrentBattleCount(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "LVL":
+                                    // remaining battles
+                                    BattleCounter.GetInstance().SetBattlesNeeded(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "NEK":
+                                    // num enemies killed
+                                    PlayerPrefs.SetInt("score", Convert.ToInt32(statSet[1]));
+                                    break;
+                            }
                         }
-                        else {
-                            this.inBattle = false;
+                        break;
+                    // player data on data0[1];
+                    case 1:
+                        Debug.Log("Loading Player info...");
+                        for (int j = 0; j < playerStats.Length; j++)
+                        {
+                            string[] statSet = playerStats[j].Split(delim2);// Gives [0]:STAT [1]: ###
+
+                            //Debug.Log(playerStats[j]);
+                            switch (statSet[0])
+                            {
+                                case "rHP":
+                                    // rem HP
+                                    this.player.remainingHealth = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "tHP":
+                                    // total HP
+                                    this.player.totalHealth = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "rNRG":
+                                    // rem NRG
+                                    this.player.remainingEnergy = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "tNRG":
+                                    // total NRG
+                                    this.player.totalEnergy = Convert.ToInt32(statSet[1]);
+                                    break;
+                                /*case "Magic"
+                                 * // magical damage
+                                 * this.player.magicalDamage= Convert.ToInt32(statSet[1]);
+                                 * break; */
+                                case "DMG":
+                                    // base physical damage
+                                    this.player.physicalDamage = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "ARM":
+                                    // base armor
+                                    this.player.armor = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "wDMG":
+                                    // weapon damage stat
+                                    this.player.playerWeapon.SetDamage(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "wARM":
+                                    // weapon armor stat
+                                    this.player.playerWeapon.SetArmor(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "aDMG":
+                                    //armor damage stat
+                                    this.player.playerArmor.SetDamage(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "aARM":
+                                    // armor armor stat
+                                    this.player.playerArmor.SetArmor(Convert.ToInt32(statSet[1]));
+                                    break;
+                            }
                         }
+
                         break;
-                    case "PLVL":
-                        // current battle no
-                        BattleCounter.GetInstance().SetCurrentBattleCount(Convert.ToInt32(pairs[1]));
+                    // last fought on data0[2];
+                    case 2:
+                        Debug.Log("Loading Enemy info...");
+                        for (int j = 0; j < lastFoughtStats.Length; j++)
+                        {
+                            string[] statSet = lastFoughtStats[j].Split(delim2);// Gives [0]:STAT [1]: ###
+                            switch (statSet[0])
+                            {
+                                case "etHP": thp = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "erHP": rhp = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "etNRG": tnrg = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "erNRG": rnrg = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "eDMG": dmg = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "eARM": arm = Convert.ToInt32(statSet[1]);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        // Recreates enemy
+                        EnemyStats.GetInstance().LoadNewEnemy(thp, rhp, rnrg, tnrg, dmg, arm);
                         break;
-                    case "LVL":
-                        // remaining battles
-                        BattleCounter.GetInstance().SetBattlesNeeded(Convert.ToInt32(pairs[1]));
+                    // check point on data0[3];
+                    case 3:
+                        Debug.Log("Loading CheckPoint info...");
+                        for (int j = 0; j < checkpointStats.Length; j++)
+                        {
+                            string[] statSet = lastFoughtStats[j].Split(delim2);// Gives [0]:STAT [1]: ###
+                            switch (statSet[0])
+                            {
+                                case "eHP": thp = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "eNRG": tnrg = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "eDMG": dmg = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "eARM": arm = Convert.ToInt32(statSet[1]);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        EnemyStats.GetInstance().SetCheckpointData(thp, tnrg, dmg, arm);
                         break;
-                    case "NEK":
-                        // num enemies killed
-                        PlayerPrefs.SetInt("score",Convert.ToInt32(pairs[1]));
-                        break;
-                    case "rHP":
-                        // rem HP
-                        this.player.remainingHealth = Convert.ToInt32(pairs[1]);
-                        break;
-                    case "tHP":
-                        // total HP
-                        this.player.totalHealth = Convert.ToInt32(pairs[1]);
-                        break;
-                    case "rNRG":
-                        // rem NRG
-                        this.player.remainingEnergy = Convert.ToInt32(pairs[1]);
-                        break;
-                    case "tNRG":
-                        // total NRG
-                        this.player.totalEnergy = Convert.ToInt32(pairs[1]);
-                        break;
-                    /*case "Magic"
-                     * // magical damage
-                     * this.player.magicalDamage= Convert.ToInt32(pairs[1]);
-                     * break; */
-                    case "DMG":
-                        // base physical damage
-                        this.player.physicalDamage = Convert.ToInt32(pairs[1]);
-                        break;
-                    case "ARM":
-                        // base armor
-                        this.player.armor = Convert.ToInt32(pairs[1]);
-                        break;
-                    case "wDMG":
-                        // weapon damage stat
-                        this.player.playerWeapon.SetDamage(Convert.ToInt32(pairs[1]));
-                        break;
-                    case "wARM":
-                        // weapon armor stat
-                        this.player.playerWeapon.SetArmor(Convert.ToInt32(pairs[1]));
-                        break;
-                    case "aDMG":
-                        //armor damage stat
-                        this.player.playerArmor.SetDamage(Convert.ToInt32(pairs[1]));
-                        break;
-                    case "aARM":
-                        // armor armor stat
-                        this.player.playerArmor.SetArmor(Convert.ToInt32(pairs[1]));
-                        break;
-                    case "":
-                        // Other
-                        //Debug.Log(pairs[0] + " => " + Convert.ToInt32(pairs[1]));
+                    default:
                         break;
                 }
             }
@@ -152,6 +234,7 @@ public class SaveSystemHandler : MonoBehaviour
     #region Saving
     public void SaveGame()
     {
+        EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
         if (this.player != null)
         {
             string statString = "";
@@ -180,6 +263,22 @@ public class SaveSystemHandler : MonoBehaviour
              * aARM
              */
 
+            // TODO: PLAYER INVENTORY!!***
+            //       HEAL TURNS
+
+            /* EnemyStats*/
+            /* Last Fought Enemy
+             * eHP
+             * eNRG
+             * eDMG
+             * eARM
+             */
+            /* Checkpoint Enemy
+             * eHP
+             * eNRG
+             * eDMG
+             * eARM
+             */
 
             if (this.player.inBattle)
                 statString += "inB:" + 1 + ";";
@@ -193,8 +292,31 @@ public class SaveSystemHandler : MonoBehaviour
             // Number Enemies Killed
             statString += "NEK:" + PlayerPrefs.GetInt("score") + ";";
 
+            // BREAK
+            statString += "_";
+
             // get player stats
-            statString += this.player.GetStatString();
+            statString += this.player.GetPlayerStatString();
+
+            // BREAK
+            statString += "_";
+
+            // get enemy stats
+            // SAVE LAST FOUGHT ENEMY stats
+            
+            // Last fought
+            statString += EnemyStats.GetInstance().GetLastFoughtEnemyStatString();
+
+            // BREAK
+            statString += "_";
+
+            // Checkpoint
+            if (EnemyStats.GetInstance().GetCheckpointEnemyString() == "")
+            {
+                // if no check point use player stats against himself
+                EnemyStats.GetInstance().SetCheckpointEnemyStatString(this.player.GetEnemyStatString());
+            }
+            statString += EnemyStats.GetInstance().GetCheckpointEnemyString();
 
             // Save to PlayerPrefs
             PlayerPrefs.SetString("GameData", statString);
@@ -204,24 +326,34 @@ public class SaveSystemHandler : MonoBehaviour
             // set flag for game to load next time
             PlayerPrefs.SetInt("GameToLoad", 1);
         }
-
+        
     }
 
     #endregion Saving
 
+    void GetPlayerEnemy()
+    {
+        this.player = FindObjectOfType<PlayerController>();
+        this.enemy = FindObjectOfType<BaseEnemyController>();
+    }
 
     // Use this for initialization
     void Start()
     {
         this.player = FindObjectOfType<PlayerController>();
+        this.enemy = FindObjectOfType<BaseEnemyController>();
+        if (this.enemy == null)
+        {
+
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.player == null)
+        if (this.player == null || this.enemy == null)
         {
-            this.player = FindObjectOfType<PlayerController>();
+            GetPlayerEnemy();
         }
     }
 }

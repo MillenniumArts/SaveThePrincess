@@ -863,7 +863,6 @@ public class GameController : MonoBehaviour
         if(currentBattle == 0)
             player.TriggerAnimation("enterbattle");
         enemy.InBattle(true);
-        //StartCoroutine("smalldelay");
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();

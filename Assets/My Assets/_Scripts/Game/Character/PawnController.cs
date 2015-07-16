@@ -578,7 +578,7 @@ public class PawnController : MonoBehaviour
     /// returns a string in format STAT:###;STAT:###;... for Load/Save
     /// </summary>
     /// <returns>string in format STAT:###;STAT:###</returns>
-    public string GetStatString()
+    public string GetPlayerStatString()
     {
         /* ORDER:
          * remHP
@@ -614,6 +614,31 @@ public class PawnController : MonoBehaviour
         // armor stats
         ret += "aDMG:" + this.playerArmor.GetAtkMod() + ";";
         ret += "aARM:" + this.playerArmor.GetDefMod() + ";";
+        return ret;
+    }
+
+    /// <summary>
+    /// returns a primitive string in format "STAT:###;" with base total stats to recreate enemies
+    /// </summary>
+    /// <returns>primitive string in format "STAT:###;" with base total stats to recreate enemies</returns>
+    public string GetEnemyStatString()
+    {
+        /* rHP
+         * tHP
+         * eNRG
+         * tNRG
+         * DMG
+         * ARM
+         */
+
+        string ret = "";
+        ret += "erHP:" + this.remainingHealth + ";";
+        ret += "etHP:" + this.totalHealth + ";";
+        ret += "erNRG:" + this.remainingEnergy + ";";
+        ret += "etNRG:" + this.totalEnergy+ ";";
+        ret += "eDMG:" + this.physicalDamage + ";";
+        ret += "eARM:" + this.armor + ";";
+
         return ret;
     }
 

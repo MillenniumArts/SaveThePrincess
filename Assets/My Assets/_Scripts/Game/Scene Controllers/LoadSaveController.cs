@@ -13,11 +13,6 @@ public class LoadSaveController : MonoBehaviour {
         // handle proper level loading from stats
         if (SaveSystemHandler.instance.inBattle)
         {
-            EnemyStats.GetInstance().LoadNewEnemy(this.player.totalHealth, 
-                                                  this.player.totalEnergy, 
-                                                  this.player.GetTotalDamage(), 
-                                                  this.player.GetTotalArmor()
-                                                  );
             LevelLoadHandler.Instance.LoadLevel("Battle_LVP");
         }
         else

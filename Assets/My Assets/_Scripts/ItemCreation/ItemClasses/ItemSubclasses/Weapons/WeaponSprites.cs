@@ -14,8 +14,8 @@ public class WeaponSprites : MonoBehaviour {
     {
         _wSprites = GameObject.FindObjectOfType<SwapWeaponSprites>();
         currWeaponSprites = new Sprite[10];
-        DisplaySprites();
         RandomWeaponSprites();
+        DisplaySprites();
     }
     
     public void RandomWeaponSprites()

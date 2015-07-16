@@ -329,5 +329,15 @@ public class Item : MonoBehaviour {
         atkMod = dmg;
         defMod = arm;
     }
+
+    public void SetDamage(int dmg)
+    {
+        this.atkMod = dmg;
+    }
+    public void SetArmor(int arm)
+    {
+        this.defMod = arm;
+    }
+
     #endregion Setters
 }

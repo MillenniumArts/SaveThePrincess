@@ -13,14 +13,7 @@ public class StartMenuController : MonoBehaviour {
 	void Start () {
         AudioManager.Instance.PlayNewSong("Main_Menu");
         EscapeHandler.instance.GetButtons();
-        if (PlayerPrefs.GetInt("GameToLoad") == 1)
-        {   // load game
-            SaveSystemHandler.instance.LoadGame();
-        }
-        else
-        {   // start new game
-            PlayerPrefs.SetInt("score", 0);
-        }
+        PlayerPrefs.SetInt("score", 0);
 	}
 
     void Awake()

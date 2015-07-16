@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class SaveSystemHandler : MonoBehaviour
 {
@@ -64,62 +65,77 @@ public class SaveSystemHandler : MonoBehaviour
                 // split key/value pairs
                 string[] pairs = data[i].Split(delim2);
 
-                Debug.Log(pairs[0]);
+                Debug.Log(pairs[0] + " -> " + pairs[1] );
 
                 switch (pairs[0])
                 {
                     case "inB":
                         // in Battle?
+                         //= pairs[1];
                         break;
                     case "PLVL":
                         // current battle no
+                        BattleCounter.GetInstance().SetCurrentBattleCount(Convert.ToInt32(pairs[1]));
                         break;
                     case "LVL":
                         // remaining battles
+                        BattleCounter.GetInstance().SetBattlesNeeded(Convert.ToInt32(pairs[1]));
                         break;
                     case "NEK":
                         // num enemies killed
+                        PlayerPrefs.SetInt("score",Convert.ToInt32(pairs[1]));
                         break;
                     case "rHP":
                         // rem HP
+                        this.player.remainingHealth = Convert.ToInt32(pairs[1]);
                         break;
                     case "tHP":
                         // total HP
+                        this.player.totalHealth = Convert.ToInt32(pairs[1]);
                         break;
                     case "rNRG":
                         // rem NRG
+                        this.player.remainingEnergy = Convert.ToInt32(pairs[1]);
                         break;
                     case "tNRG":
                         // total NRG
+                        this.player.totalEnergy = Convert.ToInt32(pairs[1]);
                         break;
                     /*case "Magic"
                      * // magical damage
+                     * this.player.magicalDamage= Convert.ToInt32(pairs[1]);
                      * break; */
                     case "DMG":
                         // base physical damage
+                        this.player.physicalDamage = Convert.ToInt32(pairs[1]);
                         break;
                     case "ARM":
                         // base armor
+                        this.player.armor = Convert.ToInt32(pairs[1]);
                         break;
                     case "wDMG":
                         // weapon damage stat
+                        this.player.playerWeapon.SetDamage(Convert.ToInt32(pairs[1]));
                         break;
                     case "wARM":
                         // weapon armor stat
+                        this.player.playerWeapon.SetArmor(Convert.ToInt32(pairs[1]));
                         break;
                     case "aDMG":
                         //armor damage stat
+                        this.player.playerArmor.SetDamage(Convert.ToInt32(pairs[1]));
                         break;
                     case "aARM":
                         // armor armor stat
+                        this.player.playerArmor.SetArmor(Convert.ToInt32(pairs[1]));
                         break;
                     case "":
                         // Other
+                        Debug.Log(pairs[0] + " => " + Convert.ToInt32(pairs[1]));
                         break;
                 }
-
             }
-
+            Debug.Log("Load Complete");
         }
         else
         {

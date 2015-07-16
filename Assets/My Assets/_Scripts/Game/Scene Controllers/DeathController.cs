@@ -31,8 +31,8 @@ public class DeathController : MonoBehaviour {
 	void UpdateText(){
         this.healthText.text = this.player.totalHealth.ToString();
         this.energyText.text = this.player.totalEnergy.ToString();
-        this.armorText.text = this.player.armor.ToString();
-        this.damageText.text = this.player.physicalDamage.ToString();
+        this.armorText.text = this.player.GetTotalArmor().ToString();
+        this.damageText.text = this.player.GetTotalDamage().ToString();
         this.moneyText.text = this.player.dollarBalance.ToString();
 		this.scoreText.text = PlayerPrefs.GetInt("score").ToString();
 	}

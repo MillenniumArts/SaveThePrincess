@@ -95,7 +95,7 @@ public class PawnController : MonoBehaviour
     /// <summary>
     /// The armor stat modifier.
     /// </summary>
-    public int armorMod;
+   // public int armorMod;
 
     /// <summary>
     /// The base physical damage for this player (BEFORE ENCHANTMENTS) 
@@ -105,7 +105,7 @@ public class PawnController : MonoBehaviour
     /// <summary>
     /// physicalDamage stat modifier.
     /// </summary>
-    public int damageMod;
+    //public int damageMod;
 
     /// <summary>
     /// The base magic damage for this player (BEFORE ENCHANTMENTS) 
@@ -552,7 +552,7 @@ public class PawnController : MonoBehaviour
     /// <returns></returns>
     public int GetTotalArmor()
     {
-        return this.armor;// + this.playerArmor.GetDefMod() + this.playerWeapon.GetDefMod();
+        return this.armor + this.playerArmor.GetDefMod();// + this.playerWeapon.GetDefMod();
     }
     /// <summary>
     /// Gets the total damage.
@@ -560,13 +560,45 @@ public class PawnController : MonoBehaviour
     /// <returns>The total damage.</returns>
     public int GetTotalDamage()
     {
-        return this.physicalDamage;// + this.playerArmor.GetAtkMod() + this.playerWeapon.GetAtkMod();
+        return this.physicalDamage + this.playerWeapon.GetAtkMod();// + this.playerArmor.GetAtkMod() ;
     }
-
+    /// <summary>
+    /// returns a sum of player's health and energy
+    /// </summary>
+    /// <returns>sum of player's health and energy</returns>
     public int GetTotalHeatlhEnergyStats()
     {
         int total = totalEnergy + totalHealth;
         return total;
+    }
+
+    /// <summary>
+    /// returns a string in format STAT:###;STAT:###;... for Load/Save
+    /// </summary>
+    /// <returns>string in format STAT:###;STAT:###</returns>
+    public string GetStatString()
+    {
+        string ret = "";
+        // HP
+        ret += "rHP:" + this.remainingHealth + ";";
+        ret += "tHP:" + this.totalHealth + ";";
+        // NRG
+        ret += "rNRG:" + this.remainingEnergy + ";";
+        ret += "tNRG:" + this.totalEnergy + ";";
+        //Magic
+        //ret += "MAG:" + this.player.magicalDamage = ";";  
+
+        // weapon/armor stats
+        ret += "WPA:" + this.playerWeapon.GetAtkMod() + ";";
+        ret += "WPD:" + this.playerWeapon.GetDefMod() + ";";
+
+        ret += "ARA:" + this.playerArmor.GetAtkMod() + ";";
+        ret += "ARD:" + this.playerArmor.GetDefMod() + ";";
+        // DMG
+        ret += "DMG:" + this.playerWeapon.GetAtkMod() + ";";
+        // ARM
+        ret += "ARM:" + this.playerArmor.GetDefMod() + ";";
+        return ret;
     }
 
     #endregion Public Functions

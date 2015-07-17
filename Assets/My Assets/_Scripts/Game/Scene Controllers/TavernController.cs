@@ -131,17 +131,17 @@ public class TavernController : MonoBehaviour
     {
         this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
         this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.playerBalance.text = "$" + this.player.dollarBalance;
+        this.playerBalance.text = this.player.dollarBalance.ToString();
 
         for (int i = 0; i < this.labelText.Length; i++)
         {
-            this.labelText[i].text = "$" + this.prices[i].ToString()+ " => " + this.stats[i].ToString()+"%";
+            this.labelText[i].text = this.prices[i].ToString()+ " => " + this.stats[i].ToString()+"%";
         }
 
             // disable buttons if no health needed
             if (totalHealthMissing > 0)
             {
-                this.sleepText.text = "Sleep: $" + (totalHealthMissing/2);
+                this.sleepText.text = "Sleep: " + (totalHealthMissing/2);
                 for (int i = 0; i < buttonText.Length; i++)
                 {
                     foodButtons[i].gameObject.SetActive(true);

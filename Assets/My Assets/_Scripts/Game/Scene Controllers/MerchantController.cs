@@ -196,7 +196,7 @@ public class MerchantController : MonoBehaviour {
 
         for (int i = 0; i < this.labelText.Length; i++ )
         {
-            this.labelText[i].text = "$" + this.prices[i].ToString() + " each";
+            this.labelText[i].text = this.prices[i].ToString();
         }
     }
 

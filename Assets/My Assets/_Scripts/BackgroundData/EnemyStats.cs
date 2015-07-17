@@ -132,6 +132,8 @@ public class EnemyStats
             Debug.Log("Increasing HP and NRG stats");
             currentEnemyTotalHP = previousEnemyHP + RandomIncrease(previousEnemyHP, (min + 0.05f), (max + 0.1f));
             currentEnemyTotalNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
+            
+            // CHECK HERE IF LOADED OR GENERATED TO DECIDE IF ENEMY STARTS WITH FULL HEALTH OR REDUCED!
 
             // Check the ATK and DEF.
             if (CheckStatGap(previousEnemyATK, previousEnemyDEF, player.physicalDamage, player.armor, MIN_gapFill_ATK_DEF, MAX_gapFill_ATK_DEF) == false)

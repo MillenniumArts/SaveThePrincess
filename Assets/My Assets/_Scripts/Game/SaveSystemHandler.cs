@@ -106,6 +106,11 @@ public class SaveSystemHandler : MonoBehaviour
                                     // num enemies killed
                                     PlayerPrefs.SetInt("score", Convert.ToInt32(statSet[1]));
                                     break;
+                                case "HTL":
+                                    // Healing turns left
+                                    this.player.numTurnsLeftToHeal = Convert.ToInt32(statSet[1]);
+                                    break;
+
                             }
                         }
                         break;
@@ -162,6 +167,26 @@ public class SaveSystemHandler : MonoBehaviour
                                 case "aARM":
                                     // armor armor stat
                                     this.player.playerArmor.SetArmor(Convert.ToInt32(statSet[1]));
+                                    break;
+                                case "iA":
+                                    // inventory: apples
+                                    this.player.inventory.Apples = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "iB":
+                                    // inventory: Bread
+                                    this.player.inventory.Bread = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "iC":
+                                    // inventory: Cheese
+                                    this.player.inventory.Cheese = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "iH":
+                                    // inventory: HPots
+                                    this.player.inventory.HealthPotions = Convert.ToInt32(statSet[1]);
+                                    break;
+                                case "iE":
+                                    // inventory: EPots
+                                    this.player.inventory.EnergyPotions = Convert.ToInt32(statSet[1]);
                                     break;
                             }
                         }
@@ -291,15 +316,24 @@ public class SaveSystemHandler : MonoBehaviour
             statString += "LVL:" + BattleCounter.GetInstance().GetBattlesNeeded() + ";";
             // Number Enemies Killed
             statString += "NEK:" + PlayerPrefs.GetInt("score") + ";";
+            // Healing Turns Left
+            statString += "HTL:" + this.player.numTurnsLeftToHeal +  ";";
 
-            // BREAK
-            statString += "_";
+        // BREAK
+        statString += "_";
 
             // get player stats
             statString += this.player.GetPlayerStatString();
 
-            // BREAK
-            statString += "_";
+            // Inventory
+            statString += "iA:" + this.player.inventory.Apples + ";";
+            statString += "iB:" + this.player.inventory.Bread + ";";
+            statString += "iC:" + this.player.inventory.Cheese + ";";
+            statString += "iH:" + this.player.inventory.HealthPotions + ";";
+            statString += "iE:" + this.player.inventory.EnergyPotions+ ";";
+
+        // BREAK
+        statString += "_";
 
             // get enemy stats
             // SAVE LAST FOUGHT ENEMY stats
@@ -307,8 +341,8 @@ public class SaveSystemHandler : MonoBehaviour
             // Last fought
             statString += EnemyStats.GetInstance().GetLastFoughtEnemyStatString();
 
-            // BREAK
-            statString += "_";
+        // BREAK
+        statString += "_";
 
             // Checkpoint
             if (EnemyStats.GetInstance().GetCheckpointEnemyString() == "")

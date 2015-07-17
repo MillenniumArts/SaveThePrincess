@@ -7,6 +7,7 @@ public class SaveSystemHandler : MonoBehaviour
     public PlayerController player;
     public BaseEnemyController enemy;
     public bool inBattle;
+    public bool enemyLoadedFromFile;
 
     #region Singleton
     private static SaveSystemHandler _instance;
@@ -218,6 +219,7 @@ public class SaveSystemHandler : MonoBehaviour
                         }
                         // Recreates enemy
                         EnemyStats.GetInstance().LoadNewEnemy(rhp, thp, rnrg, tnrg, dmg, arm);
+                        enemyLoadedFromFile = true;
                         //this.enemy.SetStats(thp, rhp, rnrg, tnrg, dmg, arm);
                         break;
                     // check point on data0[3];
@@ -315,13 +317,13 @@ public class SaveSystemHandler : MonoBehaviour
 
             if (this.player.inBattle){
                 statString += "inB:" + 1 + ";";
-                EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
             }
             else
             {
                 statString += "inB:" + 0 + ";";
-                EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.player.GetEnemyStatString());
             }
+            if (this.enemy != null)
+                EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
 
             // current battle number(10/15 battles)
             statString += "PLVL:" + BattleCounter.GetInstance().GetCurrentBattleCount() + ";";

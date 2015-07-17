@@ -5,18 +5,19 @@ using System.Collections;
 public class SceneFadeHandler : MonoBehaviour {
 
     public float alpha = 1.0f;
+    public float fadeSpeed = 0.02f;
     public Image fadeImg;
     public bool levelStarting = true;
 
 
     public void FadeToBlack()
     {
-        alpha+=0.01f;
+        alpha += fadeSpeed;
     }
 
     public void FadeToClear()
     {
-        alpha -= 0.01f;
+        alpha -= fadeSpeed;
     }
 
 	// Use this for initialization

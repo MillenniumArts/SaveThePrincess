@@ -162,9 +162,10 @@ public class EnemyStats
             currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
             currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
         }
-
-        enemy.SetStats(currentEnemyRemainingHP, currentEnemyTotalHP, currentEnemyRemainingNRG, currentEnemyTotalNRG, currentEnemyATK, currentEnemyDEF);
-        //enemy.SetStats(currentEnemyTotalHP, currentEnemyRemainingHP, currentEnemyTotalNRG, currentEnemyRemainingNRG, currentEnemyATK, currentEnemyDEF);
+        if (SaveSystemHandler.instance.enemyLoadedFromFile)
+            enemy.SetStats(currentEnemyRemainingHP, currentEnemyTotalHP, currentEnemyRemainingNRG, currentEnemyTotalNRG, currentEnemyATK, currentEnemyDEF);
+        else
+            enemy.SetStats(currentEnemyTotalHP, currentEnemyTotalHP, currentEnemyTotalNRG, currentEnemyTotalNRG, currentEnemyATK, currentEnemyDEF);
 
         StatFlip();
     }
@@ -245,6 +246,8 @@ public class EnemyStats
         // Increase the base stats for the first enemy.
         currentEnemyTotalHP = previousEnemyHP + RandomIncrease(previousEnemyHP, 0f, 0.1f);
         currentEnemyTotalNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, 0f, 0.1f);
+        currentEnemyRemainingHP = currentEnemyTotalHP;
+        currentEnemyRemainingNRG = currentEnemyTotalNRG;
         currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, 0f, 0.1f);
         currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, 0f, 0.1f);
         SetCheckpoint();

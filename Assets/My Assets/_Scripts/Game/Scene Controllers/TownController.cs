@@ -6,10 +6,12 @@ public class TownController : MonoBehaviour {
 	public PlayerController player;
 
 	public Text playerBalance, 
-                playerHealth;
+                playerHealth,
+                playerScore;
 
 	// Use this for initialization
 	void Start () {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         //EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
@@ -51,5 +53,6 @@ public class TownController : MonoBehaviour {
 	void Update () {
         this.playerBalance.text = this.player.dollarBalance.ToString();
         this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
+        this.playerScore.text = PlayerPrefs.GetInt("score").ToString();
 	}
 }

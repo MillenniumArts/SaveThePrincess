@@ -5,6 +5,7 @@ using System.Collections;
 public class OptionsHandler : MonoBehaviour {
 
     public Slider audioLevel;
+    public float volumeFactor;
 
     public void GoBack()
     {
@@ -14,11 +15,14 @@ public class OptionsHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SceneFadeHandler.Instance.levelStarting = true;
         audioLevel.maxValue = 1.0f;
+        volumeFactor = audioLevel.value;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        audioLevel.value = AudioManager.Instance.volumeFactor;
+        volumeFactor = audioLevel.value;
+        AudioManager.Instance.volumeFactor = volumeFactor;
 	}
 }

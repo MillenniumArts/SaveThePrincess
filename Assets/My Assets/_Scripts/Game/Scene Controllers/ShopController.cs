@@ -196,6 +196,7 @@ public class ShopController : MonoBehaviour
 
     void Start()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
 

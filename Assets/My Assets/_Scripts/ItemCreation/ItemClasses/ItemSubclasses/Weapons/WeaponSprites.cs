@@ -73,7 +73,7 @@ public class WeaponSprites : MonoBehaviour {
             s += temp;
             s += "+";
         }
-        Debug.Log(s);
+        //Debug.Log(s);
         //saved = s;
         return s;
     }
@@ -95,7 +95,7 @@ public class WeaponSprites : MonoBehaviour {
         string[] spriteNames = savedSprites.Split('+');
         for (int i = 0; i < (spriteNames.Length - 1); i++)
         {
-            Debug.Log(spriteNames[i]);
+            //Debug.Log(spriteNames[i]);
             currWeaponSprites[i] = _wSprites.SearchForSprites(weaponParts[i], spriteNames[i]);
         }
         DisplaySprites();

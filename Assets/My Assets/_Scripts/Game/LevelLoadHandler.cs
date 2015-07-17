@@ -17,9 +17,12 @@ public class LevelLoadHandler : MonoBehaviour
     /// </summary>
     public void LoadLevel(string level)
     {
+        SceneFadeHandler.Instance.levelStarting = false;
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel(level);
+        SceneFadeHandler.Instance.alpha = 1.0f;
+        SceneFadeHandler.Instance.levelStarting = true;
         Invoke("GetButtons", 0.02f);
     }
 
@@ -28,6 +31,7 @@ public class LevelLoadHandler : MonoBehaviour
     /// </summary>
     public void LoadStartGame()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
         Invoke("GetButtons", 0.02f);

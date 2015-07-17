@@ -111,7 +111,7 @@ public class MerchantController : MonoBehaviour {
         AudioManager.Instance.PlaySFX("Button1");
         //DontDestroyOnLoad(this.player);
         //EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("Town_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP");
     }
 
     /// <summary>
@@ -240,6 +240,7 @@ public class MerchantController : MonoBehaviour {
 
     void Start()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
         NotificationHandler.instance.MakeNotification("Merchant", "Welcome to the merchant! Feel free to buy yourself some food or potions to help sustain through battles!");

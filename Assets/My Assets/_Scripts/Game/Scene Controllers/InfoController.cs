@@ -7,6 +7,7 @@ public class InfoController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
     }

@@ -161,7 +161,9 @@ public class EnemyStats
             currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
         }
 
-        enemy.SetStats(currentEnemyTotalHP, currentEnemyTotalNRG, currentEnemyATK, currentEnemyDEF);
+        enemy.SetStats(currentEnemyRemainingHP, currentEnemyTotalHP, currentEnemyRemainingNRG, currentEnemyTotalNRG, currentEnemyATK, currentEnemyDEF);
+        //enemy.SetStats(currentEnemyTotalHP, currentEnemyRemainingHP, currentEnemyTotalNRG, currentEnemyRemainingNRG, currentEnemyATK, currentEnemyDEF);
+
         StatFlip();
     }
 
@@ -270,13 +272,13 @@ public class EnemyStats
     /// </summary>
     public void LoadNewEnemy(int erHP, int etHP, int erNRG, int etNRG, int eDMG, int eARM)
     {
-        // CARLO YOU SHOULD IMPLEMENT THE MATH HERE FOR SCALING ETC
         this.currentEnemyRemainingHP = erHP;
         this.currentEnemyTotalHP = etHP;
         this.currentEnemyRemainingNRG= erNRG;
         this.currentEnemyTotalNRG = etNRG;
         this.currentEnemyATK = eDMG;
         this.currentEnemyDEF = eARM;
+        Debug.Log("Enemy Stats loaded from file");
     }
 
     /// <summary>

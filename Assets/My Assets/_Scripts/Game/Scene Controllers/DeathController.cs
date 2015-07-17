@@ -11,6 +11,7 @@ public class DeathController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("Death");
         EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();

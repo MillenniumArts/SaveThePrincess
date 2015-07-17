@@ -47,15 +47,17 @@ public class BaseEnemyController : PawnController {
 		}
 	}
 
-    public void SetStats(int HP, int NRG, int ATK, int DEF)
+    public void SetStats(int remainingHP, int totalHP, int remainingNRG, int totalNRG, int ATK, int DEF)
     {
-        this.totalHealth = HP;
-        this.totalEnergy = NRG;
+        this.remainingHealth = remainingHP;
+        this.totalHealth = totalHP;
+        this.remainingEnergy = remainingNRG;
+        this.totalEnergy = totalNRG;
         this.physicalDamage = ATK;
         this.armor = DEF;
        /* Debug.Log(" EnemyTotalHealth: " + totalHealth +
             " EnemyTotalEnergy: " + totalEnergy +
-            " EnemyPhysicalDamaga: " + physicalDamage +
+            " EnemyPhysicalDamage: " + physicalDamage +
             " EnemyArmor: " + armor);*/
     }
 

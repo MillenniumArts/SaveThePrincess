@@ -30,6 +30,7 @@ public class LoadSaveController : MonoBehaviour {
     #region mono
     // Use this for initialization
 	void Start () {
+        SceneFadeHandler.Instance.levelStarting = true;
         this.player = FindObjectOfType<PlayerController>();
 	}
 	

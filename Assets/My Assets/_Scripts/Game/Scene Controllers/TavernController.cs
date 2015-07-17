@@ -29,9 +29,10 @@ public class TavernController : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Button1");
         this.player.gameObject.transform.localPosition = prevPos;
-        DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
-        Application.LoadLevel("Town_LVP");
+        //DontDestroyOnLoad(this.player);
+        //Application.LoadLevel("Town_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP");
     }
     /// <summary>
     /// called on meal purchase button click
@@ -164,6 +165,7 @@ public class TavernController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 5;

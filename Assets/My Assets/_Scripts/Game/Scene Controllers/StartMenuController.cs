@@ -11,6 +11,7 @@ public class StartMenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("Main_Menu");
         EscapeHandler.instance.GetButtons();
         PlayerPrefs.SetInt("score", 0);

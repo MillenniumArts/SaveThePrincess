@@ -805,6 +805,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestBattle");
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference

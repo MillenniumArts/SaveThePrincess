@@ -217,7 +217,8 @@ public class SaveSystemHandler : MonoBehaviour
                             }
                         }
                         // Recreates enemy
-                        EnemyStats.GetInstance().LoadNewEnemy(thp, rhp, rnrg, tnrg, dmg, arm);
+                        EnemyStats.GetInstance().LoadNewEnemy(rhp, thp, rnrg, tnrg, dmg, arm);
+                        //this.enemy.SetStats(thp, rhp, rnrg, tnrg, dmg, arm);
                         break;
                     // check point on data0[3];
                     case 3:

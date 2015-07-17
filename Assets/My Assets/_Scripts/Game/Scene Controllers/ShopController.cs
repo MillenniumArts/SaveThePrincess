@@ -177,7 +177,7 @@ public class ShopController : MonoBehaviour
     /// </summary>
     public void UpdateText()
     {
-        this.playerBalance.text = "Remaining Balance: $" + this.player.dollarBalance.ToString();
+        this.playerBalance.text = "Remaining Balance: " + this.player.dollarBalance.ToString();
         this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
             "DMG: " + player.playerWeapon.GetAtkMod() + " | " +
             "AMR: " + player.playerWeapon.GetDefMod() + "\n" +

@@ -692,13 +692,17 @@ public class GameController : MonoBehaviour
     private void RetreatFromBattle()
     {
         this.player.transform.localPosition = this.prevPos;
-        DontDestroyOnLoad(this.player);
         BattleCounter.GetInstance().ResetCurrentBattleCount();
-        EnemyStats.GetInstance().ResetCheckpoint();
         // Set the idle animation to town idle
         player.InBattle(false);
+
         if (!waiting)
         {
+            Debug.Log("Enemy Stats need to be reset to full");
+            SaveSystemHandler.instance.enemyLoadedFromFile = false;
+            //EnemyStats.GetInstance().GetEnemyBaseStats(this.enemy, this.player);
+            EnemyStats.GetInstance().ResetCheckpoint();
+            EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             this.player.inBattle = false;
@@ -858,7 +862,6 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
 
         // combat starts after initialization is finished
-        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
         // Set the idle animation to battle idle and trigger the entry animations.
         player.InBattle(true);
         if(currentBattle == 0)
@@ -867,6 +870,7 @@ public class GameController : MonoBehaviour
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();
+        combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
     /// <summary>
     /// Temporary fix to make the animations fit a bit better.  Better fix would be to change the animations.

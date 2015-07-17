@@ -33,7 +33,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < buttonText.Length; i++)
         {
-            buttonText[i].text = "$" + shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
+            buttonText[i].text = shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
         }
     }
 

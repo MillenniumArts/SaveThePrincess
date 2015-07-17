@@ -266,7 +266,7 @@ public class SaveSystemHandler : MonoBehaviour
     #region Saving
     public void SaveGame()
     {
-        EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
+        
         if (this.player != null)
         {
             string statString = "";
@@ -312,10 +312,15 @@ public class SaveSystemHandler : MonoBehaviour
              * eARM
              */
 
-            if (this.player.inBattle)
+            if (this.player.inBattle){
                 statString += "inB:" + 1 + ";";
+                EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
+            }
             else
+            {
                 statString += "inB:" + 0 + ";";
+                EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.player.GetEnemyStatString());
+            }
 
             // current battle number(10/15 battles)
             statString += "PLVL:" + BattleCounter.GetInstance().GetCurrentBattleCount() + ";";

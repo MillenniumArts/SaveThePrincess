@@ -241,6 +241,13 @@ public class SaveSystemHandler : MonoBehaviour
                         }
                         EnemyStats.GetInstance().SetCheckpointData(thp, tnrg, dmg, arm);
                         break;
+                    case 4:
+                        // Sprites
+                        
+                        // LoadSprites();
+
+                    
+                        break;
                     default:
                         break;
                 }
@@ -351,11 +358,20 @@ public class SaveSystemHandler : MonoBehaviour
                 EnemyStats.GetInstance().SetCheckpointEnemyStatString(this.player.GetEnemyStatString());
             }
             statString += EnemyStats.GetInstance().GetCheckpointEnemyString();
+            // BREAK
+            statString += "_";
+
+            
+            // get sprite info
+            
+            // statString += SaveSprites();
+
 
             // Save to PlayerPrefs
             PlayerPrefs.SetString("GameData", statString);
 
-            // get sprite info
+
+
             Debug.Log(statString);
             // set flag for game to load next time
             PlayerPrefs.SetInt("GameToLoad", 1);

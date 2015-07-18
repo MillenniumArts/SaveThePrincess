@@ -113,7 +113,7 @@ public class PlayerController : PawnController
             playerAnimator.SetBool("IsSpearAttack", false);
         }
 
-        SetWeaponHands(w.gameObject.GetComponentInChildren<WeaponCombination>());
+        SetWeaponHands(w.gameObject.GetComponentInChildren<WeaponCombination>(), true);
     }
 
     /// <summary>

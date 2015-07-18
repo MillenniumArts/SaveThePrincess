@@ -20,31 +20,31 @@ public class WeaponCombination : MonoBehaviour {
             if (dagger)
             {
                 IsDagger();
-                sprites[11].sortingLayerName = "WeaponHandleMiddle";
+                //sprites[11].sortingLayerName = "WeaponHandleMiddle";
                 oneHandGrip = true;
             }
             else if (hammer)
             {
                 IsHammer();
-                sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
                 oneHandGrip = false;
             }
             else if (axe)
             {
                 IsAxe();
-                sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
                 oneHandGrip = false;
             }
             else if (sword)
             {
                 IsSword();
-                sprites[11].sortingLayerName = "WeaponHandleMiddle";
+                ///sprites[11].sortingLayerName = "WeaponHandleMiddle";
                 oneHandGrip = true;
             }
             else if (spear)
             {
                 IsSpear();
-                sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
                 oneHandGrip = false;
             }
             else
@@ -205,5 +205,13 @@ public class WeaponCombination : MonoBehaviour {
     public bool GetWeaponGrip()
     {
         return oneHandGrip;
+    }
+
+    public void SwitchHandleLayer(bool calm)
+    {
+        if(false)
+            sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+        else
+            sprites[11].sortingLayerName = "WeaponHandleMiddle";
     }
 }

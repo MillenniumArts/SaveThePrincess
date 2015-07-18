@@ -545,6 +545,7 @@ public class PawnController : MonoBehaviour
     public void InBattle(bool b)
     {
         this.playerAnimator.SetBool("InBattle", b);
+        SetWeaponHands(playerWeapon.gameObject.GetComponentInChildren<WeaponCombination>(), !b);
     }
 
 
@@ -658,27 +659,61 @@ public class PawnController : MonoBehaviour
     }
 
     // Variables for Swap WeaponHands
-    protected GameObject frontThumb;
-    protected GameObject backThumb;
-    protected GameObject backFingers;
-    protected void SetWeaponHands(WeaponCombination _w)
+    public GameObject frontThumb;
+    public GameObject backThumb;
+    public GameObject backFingers;
+    public void SetWeaponHands(WeaponCombination _w, bool calm)
     {
+        if (!calm)
+        {
             if (_w.GetWeaponGrip() == true)
             {
                 // Set hands to one handed weapon
-                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.44f, 0f);
+                frontThumb.transform.localPosition = new Vector3(-0.22f, -0.59f, 0f);
                 backThumb.transform.localPosition = new Vector3(-0.15f, -0.43f, 0f);
                 backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+                backFingers.transform.localPosition = new Vector3(-0.07f, -0.71f, 0f);
                 playerHand.transform.localPosition = new Vector3(0f, -0.5f, 0f);
+                playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
+                Debug.Log("In Battle, One Hand");
             }
             else
             {
                 // Set hands to two handed weapon
-                frontThumb.transform.localPosition = new Vector3(-0.14f, -0.51f, 0f);
-                backThumb.transform.localPosition = new Vector3(-0.21f, -0.54f, 0f);
+                frontThumb.transform.localPosition = new Vector3(-0.22f, -0.59f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.11f, -0.56f, 0f);
                 backFingers.transform.localEulerAngles = new Vector3(0, 0, 45);
-                playerHand.transform.localPosition = new Vector3(0f, -0.2f, 0f);
+                backFingers.transform.localPosition = new Vector3(0.01f, -0.68f, 0f);
+                playerHand.transform.localPosition = new Vector3(0f, 0f, 0f);
+                playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(false);
+                Debug.Log("In Battle, Two Hand");
             }
+        }
+        else
+        {
+            if (_w.GetWeaponGrip() == true)
+            {
+                // Set hands to one handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.22f, -0.59f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.08f, -0.52f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+                backFingers.transform.localPosition = new Vector3(-0.07f, -0.71f, 0f);
+                playerHand.transform.localPosition = new Vector3(0f, -0.5f, 0f);
+                playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
+                Debug.Log("Out Battle, One Hand");
+            }
+            else
+            {
+                // Set hands to two handed weapon
+                frontThumb.transform.localPosition = new Vector3(-0.22f, -0.59f, 0f);
+                backThumb.transform.localPosition = new Vector3(-0.08f, -0.52f, 0f);
+                backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+                backFingers.transform.localPosition = new Vector3(-0.07f, -0.71f, 0f);
+                playerHand.transform.localPosition = new Vector3(0f, -0.5f, 0f);
+                playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
+                Debug.Log("Out Battle, Two Hand");
+            }
+        }
     }
 
     protected void SetArmor(string name)

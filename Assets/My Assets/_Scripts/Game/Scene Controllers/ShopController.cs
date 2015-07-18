@@ -111,11 +111,19 @@ public class ShopController : MonoBehaviour
         shopItems[0].transform.parent = spawn1.transform;
         shopItems[0].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
-        shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
+        int rand1 = Random.Range(0, 10);
+        if(rand1 < 5)
+            shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
+        else
+            shopItems[1] = factory.CreateWeapon(spawn2, "Axe");
         shopItems[1].transform.parent = spawn2.transform;
         shopItems[1].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
-        shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
+        int rand2 = Random.Range(0, 10);
+        if (rand2 < 5)
+            shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
+        else
+            shopItems[2] = factory.CreateWeapon(spawn3, "Dagger");
         shopItems[2].transform.parent = spawn3.transform;
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 

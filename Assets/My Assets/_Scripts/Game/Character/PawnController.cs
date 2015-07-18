@@ -669,6 +669,7 @@ public class PawnController : MonoBehaviour
                 frontThumb.transform.localPosition = new Vector3(-0.14f, -0.44f, 0f);
                 backThumb.transform.localPosition = new Vector3(-0.15f, -0.43f, 0f);
                 backFingers.transform.localEulerAngles = new Vector3(0, 0, 0);
+                playerHand.transform.localPosition = new Vector3(0f, -0.5f, 0f);
             }
             else
             {
@@ -676,6 +677,7 @@ public class PawnController : MonoBehaviour
                 frontThumb.transform.localPosition = new Vector3(-0.14f, -0.51f, 0f);
                 backThumb.transform.localPosition = new Vector3(-0.21f, -0.54f, 0f);
                 backFingers.transform.localEulerAngles = new Vector3(0, 0, 45);
+                playerHand.transform.localPosition = new Vector3(0f, -0.2f, 0f);
             }
     }
 

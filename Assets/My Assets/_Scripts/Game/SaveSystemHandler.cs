@@ -261,7 +261,6 @@ public class SaveSystemHandler : MonoBehaviour
         {
             Debug.Log("NO GAME TO BE LOADED");
         }
-
     }
 
     #endregion Loading

@@ -10,6 +10,7 @@ public class LoadSaveController : MonoBehaviour {
     public void LoadGame()
     {
         SaveSystemHandler.instance.LoadGame();
+
         // handle proper level loading from stats
         if (SaveSystemHandler.instance.inBattle)
         {
@@ -32,6 +33,10 @@ public class LoadSaveController : MonoBehaviour {
 	void Start () {
         SceneFadeHandler.Instance.levelStarting = true;
         this.player = FindObjectOfType<PlayerController>();
+        if (PlayerPrefs.GetInt("GameToLoad") == 0)
+        {
+            this.loadGame.gameObject.SetActive(false);
+        }
 	}
 	
 	// Update is called once per frame

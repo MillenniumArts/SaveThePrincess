@@ -80,7 +80,7 @@ public class MenuController : MonoBehaviour
 
     public void StatDown(int index)
     {
-        if (this.numCredits < this.MAX_CREDITS)
+        if (this.numCredits <= this.MAX_CREDITS)
         {
             switch (index)
             {
@@ -123,6 +123,8 @@ public class MenuController : MonoBehaviour
                         numCredits++;
                         this.numARM--;
                     }
+                break;
+                default:
                 break;
             }
         }

@@ -28,20 +28,26 @@ public class LoadSaveController : MonoBehaviour {
         LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP");
     }
 
+    public void ClearSaveData()
+    {
+        PlayerPrefs.SetString("GameData", "");
+        PlayerPrefs.SetInt("GameToLoad", 0);
+        Debug.Log(PlayerPrefs.GetInt("GameToLoad"));
+    }
+
     #region mono
     // Use this for initialization
 	void Start () {
         SceneFadeHandler.Instance.levelStarting = true;
         this.player = FindObjectOfType<PlayerController>();
-        if (PlayerPrefs.GetInt("GameToLoad") == 0)
-        {
-            this.loadGame.gameObject.SetActive(false);
-        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (PlayerPrefs.GetInt("GameToLoad") == 0)
+        {
+            this.loadGame.gameObject.SetActive(false);
+        }
     }
     #endregion mono
 }

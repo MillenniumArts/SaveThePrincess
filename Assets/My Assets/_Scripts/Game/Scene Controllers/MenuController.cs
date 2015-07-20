@@ -115,18 +115,15 @@ public class MenuController : MonoBehaviour
                     }
                     break;
                 case 3://ARM
-                    if (this.numCredits < MAX_CREDITS)
+                    if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
+                        this.newArmor = this.baseArmor;
+                    else
                     {
-                        if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
-                            this.newArmor = this.baseArmor;
-                        else
-                        {
-                            this.newArmor -= this.armorInc;
-                            numCredits++;
-                            this.numARM--;
-                        }
+                        this.newArmor -= this.armorInc;
+                        numCredits++;
+                        this.numARM--;
                     }
-                    break;
+                break;
             }
         }
     }

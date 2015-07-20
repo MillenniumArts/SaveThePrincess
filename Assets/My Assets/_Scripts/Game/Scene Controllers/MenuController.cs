@@ -45,121 +45,92 @@ public class MenuController : MonoBehaviour
     public ItemFactory itemFactory;
     Vector3 newPos, prevPos;
 
-
-    void ButtonInit()
+    public void StatUp(int index)
     {
-        this.healthUp.onClick.AddListener(() =>
-        {
-            if (this.numCredits > 0)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                numCredits--;
-                this.numHP++;
-                this.newHealth += this.healthInc;
-            }
-        });
-        this.damageUp.onClick.AddListener(() =>
-        {
-            if (this.numCredits > 0)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                numCredits--;
-                this.numDMG++;
-                this.newDamage += this.damageInc;
-            }
-        });
-        this.armorUp.onClick.AddListener(() =>
-        {
-            if (this.numCredits > 0)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                numCredits--;
-                this.numARM++;
-                this.newArmor += this.armorInc;
-            }
-        });
-        this.energyUp.onClick.AddListener(() =>
-        {
-            if (this.numCredits > 0)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                numCredits--;
-                this.numNRG++;
-                this.newEnergy += this.energyInc;
-            }
-        });
-
-
-        // DECREASE STATS
-        this.healthDown.onClick.AddListener(() =>
-        {
-            if (this.numCredits < MAX_CREDITS)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
-                    this.newHealth = this.baseHealth;
-                else
-                {
-                    this.newHealth -= this.healthInc;
-                    numCredits++;
-                    this.numHP--;
-                }
-            }
-        });
-        this.damageDown.onClick.AddListener(() =>
-        {
-            if (this.numCredits < MAX_CREDITS)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
-                    this.newDamage = this.baseDamage;
-                else
-                {
-                    this.newDamage -= this.damageInc;
-                    numCredits++;
-                    this.numDMG--;
-                }
-            }
-        });
-        this.armorDown.onClick.AddListener(() =>
-        {
-            if (this.numCredits < MAX_CREDITS)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
-                    this.newArmor = this.baseArmor;
-                else
-                {
-                    this.newArmor -= this.armorInc;
-                    numCredits++;
-                    this.numARM--;
-                }
-            }
-        });
-
-        this.energyDown.onClick.AddListener(() =>
-        {
-            if (this.numCredits < MAX_CREDITS)
-            {
-                AudioManager.Instance.PlaySFX("Button1");
-                if (this.newEnergy - this.energyInc < this.baseEnergy)	// make sure they can't go below base stats
-                    this.newEnergy = this.baseEnergy;
-                else
-                {
-                    this.newEnergy -= this.energyInc;
-                    numCredits++;
-                    this.numNRG--;
-                }
-            }
-        });
-
-        // LOAD NEXT SCENE WITH THIS PLAYER
-        this.confirm.onClick.AddListener(() =>
+        if (this.numCredits > 0)
         {
             AudioManager.Instance.PlaySFX("Button1");
-            Confirm();
-        });
+            switch (index)
+            {
+                case 0: // HP
+                    numCredits--;
+                    this.numHP++;
+                    this.newHealth += this.healthInc;
+                    break;
+                case 1:// NRG
+                    numCredits--;
+                    this.numNRG++;
+                    this.newEnergy += this.energyInc;
+                    break;
+                case 2:// DMG
+                    numCredits--;
+                    this.numDMG++;
+                    this.newDamage += this.damageInc;
+                    break;
+                case 3:// ARM
+                    numCredits--;
+                    this.numARM++;
+                    this.newArmor += this.armorInc;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+
+    public void StatDown(int index)
+    {
+        if (this.numCredits < this.MAX_CREDITS)
+        {
+            switch (index)
+            {
+                case 0://HP
+                    if (this.newHealth - this.healthInc < this.baseHealth)	// make sure they can't go below base stats
+                        this.newHealth = this.baseHealth;
+                    else
+                    {
+                        this.newHealth -= this.healthInc;
+                        numCredits++;
+                        this.numHP--;
+                    }
+                    break;
+                case 1://NRG
+                    if (this.newEnergy - this.energyInc < this.baseEnergy)	// make sure they can't go below base stats
+                        this.newEnergy = this.baseEnergy;
+                    else
+                    {
+                        this.newEnergy -= this.energyInc;
+                        numCredits++;
+                        this.numNRG--;
+                    }
+                    break;
+                case 2://DMG
+                    if (this.newDamage - this.damageInc < this.baseDamage)	// make sure they can't go below base stats
+                        this.newDamage = this.baseDamage;
+                    else
+                    {
+                        this.newDamage -= this.damageInc;
+                        numCredits++;
+                        this.numDMG--;
+                    }
+                    break;
+                case 3://ARM
+                    if (this.numCredits < MAX_CREDITS)
+                    {
+                        if (this.newArmor - this.armorInc < this.baseArmor)	// make sure they can't go below base stats
+                            this.newArmor = this.baseArmor;
+                        else
+                        {
+                            this.newArmor -= this.armorInc;
+                            numCredits++;
+                            this.numARM--;
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
 
     public void Confirm()
     {
@@ -221,7 +192,6 @@ public class MenuController : MonoBehaviour
     {
         SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
-        //EscapeHandler.instance.GetButtons();
 
         // initialize references
         this.player = FindObjectOfType<PlayerController>();
@@ -273,8 +243,6 @@ public class MenuController : MonoBehaviour
         this.armorInc = 5;
         this.energyInc = 10;
 
-        // button handling
-        ButtonInit();
         //first Enemy handling
         Invoke("FirstEnemy", 0.01f);
     }

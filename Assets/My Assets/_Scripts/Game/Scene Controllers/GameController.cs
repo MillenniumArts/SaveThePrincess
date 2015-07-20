@@ -806,24 +806,34 @@ public class GameController : MonoBehaviour
     }
     #endregion LevelLoading
     #region monobehaviour
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestBattle");
+        //AudioManager.Instance.PlayNewSong("ForestBattle");
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();
         // inventory animator
         this.invAnim = FindObjectOfType<InventoryAnimation>();
+
+        this.player = FindObjectOfType<PlayerController>();
+
+        this.enemy = FindObjectOfType<BaseEnemyController>();
+
+        currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
+        remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
+    }
+
+    // Use this for initialization
+    void Start()
+    {
         // INITIALIZE BATTLE SCENE
         combatController.setState(CombatController.BattleStates.START);
 
         this.confirmPanel.gameObject.SetActive(false);
 
         this.turn = 0;
-        currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
-        remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
+
         PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
         this.score = PlayerPrefs.GetInt("score");
@@ -839,20 +849,20 @@ public class GameController : MonoBehaviour
         enemyHasAttacked = false;
 
         // get playerController 
-        this.player = FindObjectOfType<PlayerController>();
-        this.player.inBattle = true;
+        //this.player = FindObjectOfType<PlayerController>();
+        this.player.InBattle(true);
+        this.enemy.InBattle(true);
 
         // carry over previous balance
         this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
         PlayerPrefs.SetInt("carryover", 0);
         // reposition player
         this.prevPos = this.player.transform.localPosition;
-        //Vector3 newSpot = new Vector3(-4.5f, -2.5f);
         Vector3 newSpot = new Vector3(-2.5f, -2f); // New Position
         this.player.gameObject.transform.localPosition = newSpot;
 
         // get enemy reference
-        this.enemy = FindObjectOfType<BaseEnemyController>();
+        //this.enemy = FindObjectOfType<BaseEnemyController>();
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
@@ -863,10 +873,10 @@ public class GameController : MonoBehaviour
 
         // combat starts after initialization is finished
         // Set the idle animation to battle idle and trigger the entry animations.
-        player.InBattle(true);
+        //player.InBattle(true);
+
         if(currentBattle == 0)
             player.TriggerAnimation("enterbattle");
-        enemy.InBattle(true);
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();

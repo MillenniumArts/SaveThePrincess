@@ -163,6 +163,7 @@ public class MenuController : MonoBehaviour
 
     public void Confirm()
     {
+        AudioManager.Instance.PlaySFX("Button1");
         if (numCredits == 0)
         {
             this.player.totalHealth = this.newHealth;
@@ -174,9 +175,6 @@ public class MenuController : MonoBehaviour
             this.player.remainingEnergy = this.newEnergy;
             this.player.armor = this.newArmor;
 
-            
-
-            //DontDestroyOnLoad(this.player);
             LevelLoadHandler.Instance.LoadLevel("Town_LVP");
         }
     }
@@ -228,8 +226,7 @@ public class MenuController : MonoBehaviour
         // initialize references
         this.player = FindObjectOfType<PlayerController>();
         this.prevPos = this.player.transform.localPosition;
-        //newPos = new Vector3(-7.5f, -2.5f);
-        newPos = new Vector3(-12f, -2.5f);
+        newPos = new Vector3(-14f, -2.5f);
         this.player.gameObject.transform.localPosition = newPos;
 
         if (PlayerPrefs.GetInt("midgame") == 1)

@@ -43,8 +43,6 @@ public class SaveSystemHandler : MonoBehaviour
     #endregion Singleton
 
     #region Loading
-
-    // inB:0;PLVL:0;LVL:1;NEK:0;rHP:100;tHP:100;rNRG:100;tNRG:100;DMG:30;ARM:10;wDMG:3;wARM:0;aDMG:0;aARM:0;eHP:0;eNRG:0;eDMG:0;eARM:0;eHP:0;eNRG:0;eDMG:0;eARM:0;
     public void LoadGame()
     {
         // if there is a game to load
@@ -262,7 +260,6 @@ public class SaveSystemHandler : MonoBehaviour
             Debug.Log("NO GAME TO BE LOADED");
         }
     }
-
     #endregion Loading
 
     #region Saving
@@ -353,16 +350,27 @@ public class SaveSystemHandler : MonoBehaviour
             // SAVE LAST FOUGHT ENEMY stats
             
             // Last fought
+            if (EnemyStats.GetInstance().GetLastFoughtEnemyStatString() == "" 
+             || EnemyStats.GetInstance().GetLastFoughtEnemyStatString() == null)
+            {
+                if (this.enemy != null)
+                    EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.enemy.GetEnemyStatString());
+                else
+                    EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.player.GetEnemyStatString());
+            }
             statString += EnemyStats.GetInstance().GetLastFoughtEnemyStatString();
 
         // BREAK
         statString += "_";
 
             // Checkpoint
-            if (EnemyStats.GetInstance().GetCheckpointEnemyString() == "")
+        if (EnemyStats.GetInstance().GetCheckpointEnemyString() == "" 
+         || EnemyStats.GetInstance().GetCheckpointEnemyString() == null)
             {
-                // if no check point use player stats against himself
-                EnemyStats.GetInstance().SetCheckpointEnemyStatString(this.player.GetEnemyStatString());
+                if (this.enemy != null)
+                    EnemyStats.GetInstance().SetCheckpointEnemyStatString(this.enemy.GetEnemyStatString());
+                else
+                    EnemyStats.GetInstance().SetLastFoughtEnemyStatString(this.player.GetEnemyStatString());
             }
             statString += EnemyStats.GetInstance().GetCheckpointEnemyString();
             // BREAK
@@ -373,11 +381,8 @@ public class SaveSystemHandler : MonoBehaviour
             
             // statString += SaveSprites();
 
-
             // Save to PlayerPrefs
             PlayerPrefs.SetString("GameData", statString);
-
-
 
             Debug.Log(statString);
             // set flag for game to load next time

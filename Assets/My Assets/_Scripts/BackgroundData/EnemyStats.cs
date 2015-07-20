@@ -301,7 +301,7 @@ public class EnemyStats
     /// <param name="cpeStats"></param>
     public void SetCheckpointEnemyStatString(string cpeStats)
     {
-        this.lastFoughtEnemySaveString = cpeStats;
+        this.checkpointEnemySaveString = cpeStats;
     }
 
     /// <summary>

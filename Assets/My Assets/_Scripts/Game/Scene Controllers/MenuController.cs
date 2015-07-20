@@ -80,6 +80,7 @@ public class MenuController : MonoBehaviour
 
     public void StatDown(int index)
     {
+        AudioManager.Instance.PlaySFX("Button1");
         if (this.numCredits <= this.MAX_CREDITS)
         {
             switch (index)

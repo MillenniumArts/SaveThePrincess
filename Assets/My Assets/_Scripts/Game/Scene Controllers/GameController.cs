@@ -507,40 +507,37 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void UpdateAttackBar()
     {
-        if (turn == 1)
+        int counter = 0;
+        if (attackBarMoving)
         {
-            int counter = 0;
-            if (attackBarMoving)
+            if (increasing && counter % BAR_SPEED == 0)
             {
-                if (increasing && counter % BAR_SPEED == 0)
-                {
-                    this.attackMeter.value++;
-                }
-                else if (!increasing && counter % BAR_SPEED == 0)
-                {
-                    this.attackMeter.value--;
-                }
-                else
-                {
-                    if (counter >= BAR_SPEED)
-                        counter = 0;
-                }
-                counter++;
-
-                // limit the values
-                if (this.attackMeter.value >= this.attackMeter.maxValue)
-                {
-                    this.attackMeter.value = this.attackMeter.maxValue;
-                    increasing = false;
-                }
-                else if (this.attackMeter.value <= 0)
-                {
-                    this.attackMeter.value = 0;
-                    increasing = true;
-                }
-                // set final value
-                this.attackAmount = this.attackMeter.value;
+                this.attackMeter.value++;
             }
+            else if (!increasing && counter % BAR_SPEED == 0)
+            {
+                this.attackMeter.value--;
+            }
+            else
+            {
+                if (counter >= BAR_SPEED)
+                    counter = 0;
+            }
+            counter++;
+
+            // limit the values
+            if (this.attackMeter.value >= this.attackMeter.maxValue)
+            {
+                this.attackMeter.value = this.attackMeter.maxValue;
+                increasing = false;
+            }
+            else if (this.attackMeter.value <= 0)
+            {
+                this.attackMeter.value = 0;
+                increasing = true;
+            }
+            // set final value
+            this.attackAmount = this.attackMeter.value;
         }
     }
 

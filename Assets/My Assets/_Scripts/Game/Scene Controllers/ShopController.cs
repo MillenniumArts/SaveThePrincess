@@ -12,6 +12,7 @@ public class ShopController : MonoBehaviour
     public Item[] shopItems;
     public int selectedItem = -1;
     public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
+    public GameObject[] receipt;
     public int HI_DOLLAR_VALUE;
     public int LO_DOLLAR_VALUE;
     
@@ -90,6 +91,7 @@ public class ShopController : MonoBehaviour
                 Debug.Log(shopItems[selectedItem].GetItemClass() + " is not a recognized Item Class!");
             }
             DestroyItem(selectedItem);
+            receipt[selectedItem].SetActive(true);
         }
         selectedItemStats.text = "";
         selectedItem = -1;

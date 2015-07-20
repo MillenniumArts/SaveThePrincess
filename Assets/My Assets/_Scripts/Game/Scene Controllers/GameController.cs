@@ -497,13 +497,9 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void UpdateBars()
     {
-        this.playerHealth.maxValue = this.player.totalHealth;
         this.playerHealth.value = this.player.remainingHealth;
-        this.playerMana.maxValue = this.player.totalEnergy;
         this.playerMana.value = this.player.remainingEnergy;
-        this.enemyHealth.maxValue = this.enemy.totalHealth;
         this.enemyHealth.value = this.enemy.remainingHealth;
-        this.enemyMana.maxValue = this.enemy.totalEnergy;
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
     /// <summary>
@@ -511,37 +507,40 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void UpdateAttackBar()
     {
-        int counter = 0;
-        if (attackBarMoving)
+        if (turn == 1)
         {
-            if (increasing && counter % BAR_SPEED == 0)
+            int counter = 0;
+            if (attackBarMoving)
             {
-                this.attackMeter.value++;
-            }
-            else if (!increasing && counter % BAR_SPEED == 0)
-            {
-                this.attackMeter.value--;
-            }
-            else
-            {
-                if (counter >= BAR_SPEED)
-                    counter = 0;
-            }
-            counter++;
+                if (increasing && counter % BAR_SPEED == 0)
+                {
+                    this.attackMeter.value++;
+                }
+                else if (!increasing && counter % BAR_SPEED == 0)
+                {
+                    this.attackMeter.value--;
+                }
+                else
+                {
+                    if (counter >= BAR_SPEED)
+                        counter = 0;
+                }
+                counter++;
 
-            // limit the values
-            if (this.attackMeter.value >= this.attackMeter.maxValue)
-            {
-                this.attackMeter.value = this.attackMeter.maxValue;
-                increasing = false;
+                // limit the values
+                if (this.attackMeter.value >= this.attackMeter.maxValue)
+                {
+                    this.attackMeter.value = this.attackMeter.maxValue;
+                    increasing = false;
+                }
+                else if (this.attackMeter.value <= 0)
+                {
+                    this.attackMeter.value = 0;
+                    increasing = true;
+                }
+                // set final value
+                this.attackAmount = this.attackMeter.value;
             }
-            else if (this.attackMeter.value <= 0)
-            {
-                this.attackMeter.value = 0;
-                increasing = true;
-            }
-            // set final value
-            this.attackAmount = this.attackMeter.value;
         }
     }
 
@@ -560,7 +559,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void UpdateText()
     {
-        // Battle stats
+        // Battle stats (Top UI)
         this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
         this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
         this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
@@ -576,13 +575,16 @@ public class GameController : MonoBehaviour
 
         // battles stat
         this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
-        // inventory text
-        this.apples.text = this.player.inventory.Apples.ToString();
-        this.bread.text = this.player.inventory.Bread.ToString();
-        this.cheese.text = this.player.inventory.Cheese.ToString();
-        this.hPots.text = this.player.inventory.HealthPotions.ToString();
-        this.ePots.text = this.player.inventory.EnergyPotions.ToString();
-        //this.campKits.text = this.player.inventory.CampKits.ToString();
+        if (this.inventoryToggleButton.isActiveAndEnabled)
+        {
+            // inventory text
+            this.apples.text = this.player.inventory.Apples.ToString();
+            this.bread.text = this.player.inventory.Bread.ToString();
+            this.cheese.text = this.player.inventory.Cheese.ToString();
+            this.hPots.text = this.player.inventory.HealthPotions.ToString();
+            this.ePots.text = this.player.inventory.EnergyPotions.ToString();
+            //this.campKits.text = this.player.inventory.CampKits.ToString();
+        }
     }
     /// <summary>
     /// Handles Retreat UI ("confirm Panel")
@@ -623,7 +625,7 @@ public class GameController : MonoBehaviour
             someoneIsDead = true;
             if (this.player.IsDead())
             {
-                Debug.Log("Player Dead!!");
+                //Debug.Log("Player Dead!!");
                 this.player.numTurnsLeftToHeal = 0;
                 DisableButtons();
             }
@@ -631,6 +633,7 @@ public class GameController : MonoBehaviour
         else
             someoneIsDead = false;
     }
+
     #endregion CalledOnTheTick
     #region level loading
     /// <summary>
@@ -822,6 +825,9 @@ public class GameController : MonoBehaviour
 
         currentBattle = BattleCounter.GetInstance().GetCurrentBattleCount();
         remainingBattles = BattleCounter.GetInstance().GetRemainingBattles();
+
+        _backgroundManager = FindObjectOfType<BackgroundManager>();
+        _backgroundManager.SetBackground();
     }
 
     // Use this for initialization
@@ -871,6 +877,11 @@ public class GameController : MonoBehaviour
         // set cancel button to invis
         this.cancelAttack.gameObject.SetActive(false);
 
+        this.playerHealth.maxValue = this.player.totalHealth;
+        this.playerMana.maxValue = this.player.totalEnergy;
+        this.enemyHealth.maxValue = this.enemy.totalHealth;
+        this.enemyMana.maxValue = this.enemy.totalEnergy;
+
         // combat starts after initialization is finished
         // Set the idle animation to battle idle and trigger the entry animations.
         //player.InBattle(true);
@@ -878,8 +889,6 @@ public class GameController : MonoBehaviour
         if(currentBattle == 0)
             player.TriggerAnimation("enterbattle");
 
-        _backgroundManager = FindObjectOfType<BackgroundManager>();
-        _backgroundManager.SetBackground();
         combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
     }
     /// <summary>

@@ -809,7 +809,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        //AudioManager.Instance.PlayNewSong("ForestBattle");
+        AudioManager.Instance.PlayNewSong("ForestBattle");
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();

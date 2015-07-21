@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: 8c65be3f738ebd748bf92d29a5c3ce01
+timeCreated: 1437496052
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Head_1_Dagger
+    21300002: Head_2_Needle
+    21300004: Head_3_Knife
+    21300006: Head_4_Dagger
+    21300008: Guard_1
+    21300010: Guard_2
+    21300012: Guard_3
+    21300014: Guard_4
+    21300016: Head_5_Knife
+    21300018: Head_6_Dagger
+    21300020: Head_7_Butcher's Knife
+    21300022: Head_8_Dagger
+    21300024: Guard_5
+    21300026: Guard_6
+    21300028: Guard_7
+    21300030: Guard_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Head_1_Dagger
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 774
+        width: 53
+        height: 176
+      alignment: 9
+      pivot: {x: .479071856, y: .0966488197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_2_Needle
+      rect:
+        serializedVersion: 2
+        x: 744
+        y: 782
+        width: 34
+        height: 160
+      alignment: 9
+      pivot: {x: .5, y: .0769893676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_3_Knife
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 763
+        width: 67
+        height: 195
+      alignment: 9
+      pivot: {x: .538787365, y: .106847204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_4_Dagger
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 752
+        width: 66
+        height: 214
+      alignment: 9
+      pivot: {x: .5, y: .124960929}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_1
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 658
+        width: 143
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_2
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 651
+        width: 94
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_3
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 632
+        width: 116
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_4
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 639
+        width: 78
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_5_Knife
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 279
+        width: 116
+        height: 229
+      alignment: 9
+      pivot: {x: .278108805, y: .0595168732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_6_Dagger
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 294
+        width: 184
+        height: 199
+      alignment: 9
+      pivot: {x: .500000358, y: .0805067495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_7_Butcher's Knife
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 298
+        width: 120
+        height: 188
+      alignment: 9
+      pivot: {x: .384444177, y: .0510313958}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_8_Dagger
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 294
+        width: 45
+        height: 203
+      alignment: 9
+      pivot: {x: .5, y: .0653820336}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_5
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 148
+        width: 97
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_6
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 152
+        width: 78
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_7
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 152
+        width: 102
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_8
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 111
+        width: 90
+        height: 86
+      alignment: 9
+      pivot: {x: .41291368, y: .198548958}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

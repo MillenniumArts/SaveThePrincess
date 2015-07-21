@@ -40,7 +40,7 @@ public class Weapon : Item {
 		}else{
 			Debug.Log("No Create Combination attached");
 		}
-		CreateWeaponCombination wc = GetComponentInChildren<CreateWeaponCombination>();
+		WeaponCombination wc = GetComponentInChildren<WeaponCombination>();
 		if(wc){
 			wc.SwapWeapon(weaponType);
 		}else{

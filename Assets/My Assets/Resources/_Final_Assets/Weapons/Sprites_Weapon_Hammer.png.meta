@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 225c102927616cf4084ad2fc88345b18
+timeCreated: 1437496197
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Head_1_Hammer
+    21300002: Head_2_Hammer
+    21300004: Head_3_Hammer
+    21300006: Head_4_Hammer
+    21300008: Guard_1
+    21300010: Guard_2
+    21300012: Guard_3
+    21300014: Guard_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Head_1_Hammer
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 459
+        width: 225
+        height: 162
+      alignment: 9
+      pivot: {x: .467638284, y: .0467885323}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_2_Hammer
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 448
+        width: 270
+        height: 176
+      alignment: 9
+      pivot: {x: .496695966, y: .0742411166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_3_Hammer
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 426
+        width: 225
+        height: 220
+      alignment: 9
+      pivot: {x: .450672746, y: .25962913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_4_Hammer
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 437
+        width: 259
+        height: 195
+      alignment: 9
+      pivot: {x: .462264717, y: .324579954}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_1
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 227
+        width: 131
+        height: 64
+      alignment: 9
+      pivot: {x: .487049729, y: .765079498}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_2
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 246
+        width: 105
+        height: 45
+      alignment: 9
+      pivot: {x: .492859483, y: .766545951}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_3
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 253
+        width: 113
+        height: 41
+      alignment: 9
+      pivot: {x: .495509326, y: .797043204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_4
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 227
+        width: 94
+        height: 64
+      alignment: 9
+      pivot: {x: .48012203, y: .840613365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

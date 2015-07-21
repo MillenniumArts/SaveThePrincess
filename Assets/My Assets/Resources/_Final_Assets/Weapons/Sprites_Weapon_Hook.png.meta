@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: d5387e71551bc1940b7d329d75831fe7
+timeCreated: 1437496587
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Head_1_Scythe
+    21300002: Head_2_Scythe
+    21300004: Head_3_Hook Blade
+    21300006: Head_4_Scythe
+    21300008: Head_5_Hook Blade
+    21300010: Guard_1
+    21300012: Guard_2
+    21300014: Guard_3
+    21300016: Guard_4
+    21300018: Guard_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Head_1_Scythe
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 422
+        width: 307
+        height: 292
+      alignment: 9
+      pivot: {x: .238134474, y: .0469457544}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_2_Scythe
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 444
+        width: 240
+        height: 252
+      alignment: 9
+      pivot: {x: .369033813, y: .0353822261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_3_Hook Blade
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 433
+        width: 120
+        height: 281
+      alignment: 9
+      pivot: {x: .187039182, y: .0462975539}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_4_Scythe
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 429
+        width: 267
+        height: 291
+      alignment: 9
+      pivot: {x: .611798108, y: .0366316848}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_5_Hook Blade
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 373
+        width: 144
+        height: 394
+      alignment: 9
+      pivot: {x: .204329595, y: .0358230658}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 201
+        width: 94
+        height: 67
+      alignment: 9
+      pivot: {x: .485310495, y: .890085697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_2
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 208
+        width: 94
+        height: 60
+      alignment: 9
+      pivot: {x: .500000656, y: .844511926}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_3
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 129
+        width: 128
+        height: 210
+      alignment: 9
+      pivot: {x: .19000864, y: .673831463}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_4
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 219
+        width: 176
+        height: 34
+      alignment: 9
+      pivot: {x: .497177124, y: .748422503}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_5
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 204
+        width: 120
+        height: 64
+      alignment: 9
+      pivot: {x: .448766083, y: .87464571}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

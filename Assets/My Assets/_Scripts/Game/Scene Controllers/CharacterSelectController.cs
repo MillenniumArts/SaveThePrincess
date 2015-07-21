@@ -15,7 +15,7 @@ public class CharacterSelectController : MonoBehaviour {
     /// </summary>
     public void NextSkin()
     {
-
+        AudioManager.Instance.PlaySFX("Button1");
     }
 
     /// <summary>
@@ -23,13 +23,13 @@ public class CharacterSelectController : MonoBehaviour {
     /// </summary>
     public void PrevSkin()
     {
-
+        AudioManager.Instance.PlaySFX("Button1");
     }
 
     public void Confirm()
     {
+        AudioManager.Instance.PlaySFX("Button1");
         // do something here before next load if needed
-
         LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
     }
     

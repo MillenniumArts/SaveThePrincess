@@ -168,7 +168,7 @@ public class StatSelectController : MonoBehaviour
     }
 
 
-    void UpdateText()
+    void UpdateHUD()
     {
         this.healthAmt.text = this.newHealth.ToString();
         this.armorAmt.text = this.newArmor.ToString();
@@ -185,6 +185,16 @@ public class StatSelectController : MonoBehaviour
         this.numDmgCredits.text = this.numDMG.ToString();
         this.numHpCredits.text = this.numHP.ToString();
         this.numNrgCredits.text = this.numNRG.ToString();
+
+        if (this.numCredits > 0)
+        {
+            this.confirm.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.confirm.gameObject.SetActive(true);
+        }
+
     }
     #region monobehaviour
     // Use this for initialization
@@ -250,7 +260,7 @@ public class StatSelectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateText();
+        UpdateHUD();
     }
     #endregion monobehaviour
 }

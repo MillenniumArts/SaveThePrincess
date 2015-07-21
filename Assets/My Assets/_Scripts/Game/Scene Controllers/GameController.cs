@@ -809,7 +809,6 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestBattle");
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
         this.combatController = FindObjectOfType<CombatController>();
@@ -832,6 +831,7 @@ public class GameController : MonoBehaviour
     {
         // INITIALIZE BATTLE SCENE
         combatController.setState(CombatController.BattleStates.START);
+        AudioManager.Instance.PlayNewSong("ForestBattle");
 
         this.confirmPanel.gameObject.SetActive(false);
 

@@ -14,11 +14,11 @@ public class StartMenuController : MonoBehaviour {
         SceneFadeHandler.Instance.levelStarting = true;
         EscapeHandler.instance.GetButtons();
         PlayerPrefs.SetInt("score", 0);
+        AudioManager.Instance.PlayNewSong("Main_Menu");
 	}
 
     void Awake()
     {
-        AudioManager.Instance.PlayNewSong("Main_Menu");
         PlayerPrefs.SetInt("midgame", 0);
         // reset to level 1
         DifficultyLevel.GetInstance().ResetDifficulty();

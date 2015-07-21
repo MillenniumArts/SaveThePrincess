@@ -66,6 +66,7 @@ public class NotificationHandler : MonoBehaviour {
 
     public void Confirm()
     {
+        AudioManager.Instance.PlaySFX("Button1");
         foreach (Button b in buttons)
         {
             if (!b.Equals(this.confirm))

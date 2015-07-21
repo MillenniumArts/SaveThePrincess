@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
     #region Singleton
     /// <summary>
@@ -36,7 +37,8 @@ public class AudioManager : MonoBehaviour {
     /// <summary>
     /// GameObject that holds the Audio Sources for the Sound Effects.
     /// </summary>
-    [SerializeField] private GameObject SFXParent;
+    [SerializeField]
+    private GameObject SFXParent;
     /// <summary>
     /// List of Audio Sources for the Sound Effects.
     /// </summary>
@@ -44,12 +46,14 @@ public class AudioManager : MonoBehaviour {
     /// <summary>
     /// Maximum amount of Audio Sources that can be on SFXParent.
     /// </summary>
-    [SerializeField] private int maxAudioSourceCount = 10;
+    [SerializeField]
+    private int maxAudioSourceCount = 10;
     /// <summary>
     /// The Audio Mixer that outputs the Sound Effects.
     /// Used to assign an output to newly created AudioSources.
     /// </summary>
-    [SerializeField] private AudioMixerGroup SFXmixer;
+    [SerializeField]
+    private AudioMixerGroup SFXmixer;
     /// <summary>
     /// The Audio Source for the Music.
     /// </summary>
@@ -75,7 +79,7 @@ public class AudioManager : MonoBehaviour {
     /// <param name="vol">The volume, between 0 and 1.</param>
     public void SetAudioVolume(float vol)
     {
-        Mathf.Clamp(vol,0,1);
+        Mathf.Clamp01(vol);
         this.volumeFactor = vol;
     }
 
@@ -85,12 +89,15 @@ public class AudioManager : MonoBehaviour {
     /// <param name="n">The Dictionary key to the file name.</param>
     public void PlaySFX(string n)
     {
-        AudioClip newClip = Resources.Load("_Audio/Sounds/" + _dictionary.GetSound(n)) as AudioClip;
-        if (newClip != null)
+        if (n != null)
         {
-            AudioSource newSource = GetAvailableSource();
-            newSource.clip = newClip;
-            PlaySound(newSource);
+            AudioClip newClip = Resources.Load("_Audio/Sounds/" + _dictionary.GetSound(n)) as AudioClip;
+            if (newClip != null)
+            {
+                AudioSource newSource = GetAvailableSource();
+                newSource.clip = newClip;
+                PlaySound(newSource);
+            }
         }
     }
 
@@ -100,19 +107,22 @@ public class AudioManager : MonoBehaviour {
     /// <param name="n">The Dictionary key to the file name.</param>
     public void PlayNewSong(string n)
     {
-        if (isSongPlaying)
+        if (n != null)
         {
-            if (_dictionary.GetMusic(n) != musicAudioSource.clip.name)  // If the current song is different from the song that is being called.
+            if (isSongPlaying)
             {
-                StopSound(musicAudioSource);      // Stop the previous song.
-                LoadPlaySongClip(n);        // And load and play the new song.
+                if (_dictionary.GetMusic(n) != musicAudioSource.clip.name)  // If the current song is different from the song that is being called.
+                {
+                    StopSound(musicAudioSource);      // Stop the previous song.
+                    LoadPlaySongClip(n);        // And load and play the new song.
+                }
             }
-        }
-        else
-        {
-            // Load and play the first song.
-            LoadPlaySongClip(n);
-            isSongPlaying = true; // A song is now playing.
+            else
+            {
+                // Load and play the first song.
+                LoadPlaySongClip(n);
+                isSongPlaying = true; // A song is now playing.
+            }
         }
     }
     #endregion Public Methods
@@ -124,9 +134,15 @@ public class AudioManager : MonoBehaviour {
     /// <param name="name">The dictionary key to the song's file name.</param>
     private void LoadPlaySongClip(string name)
     {
-        AudioClip newClip = Resources.Load("_Audio/Music/" + _dictionary.GetMusic(name)) as AudioClip;
-        musicAudioSource.clip = newClip;
-        PlaySound(musicAudioSource);
+        if (name != null)
+        {
+            AudioClip newClip = Resources.Load("_Audio/Music/" + _dictionary.GetMusic(name)) as AudioClip;
+            if (newClip != null)
+            {
+                musicAudioSource.clip = newClip;
+                PlaySound(musicAudioSource);
+            }
+        }
     }
 
     /// <summary>
@@ -206,9 +222,11 @@ public class AudioManager : MonoBehaviour {
     {
         // set volume of clips as needed
         if (this.musicAudioSource != null)
+        {
             musicAudioSource.volume = this.volumeFactor;
+        }
         if (this.sources.Count != 0)
-            foreach(AudioSource a in sources)
+            foreach (AudioSource a in sources)
                 a.volume = this.volumeFactor;
     }
     #endregion Monobehaviour

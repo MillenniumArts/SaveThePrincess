@@ -151,6 +151,15 @@ public class CreateCombination : MonoBehaviour {
 			Debug.Log ("Input is too large for " + this.gameObject.name + "'s combination array");
 		}
 	}
+
+    public void NewSpriteSheet(int s)
+    {
+        for(int i = 0; i < customCombo.Length; i++)
+        {
+            combo[i] = s;
+        }
+        character.LoadCombination(folder, spriteSheetName, combo, numOfElements);
+    }
 	
 	/// <summary>
 	/// Saves the current combination.

@@ -4,6 +4,8 @@ using System.Collections;
 public class CharacterSelectController : MonoBehaviour {
 
     public PlayerController player;
+    public int numOfChars;
+    public int currentChar = 0;
 
     void Awake()
     {
@@ -16,6 +18,15 @@ public class CharacterSelectController : MonoBehaviour {
     public void NextSkin()
     {
         AudioManager.Instance.PlaySFX("Button1");
+        if (currentChar < numOfChars)
+        {
+            currentChar++;
+        }
+        else if (currentChar >= numOfChars)
+        {
+            currentChar = 0;
+        }
+        player.GetComponentInChildren<CreateCombination>().NewSpriteSheet(currentChar);
     }
 
     /// <summary>
@@ -24,6 +35,15 @@ public class CharacterSelectController : MonoBehaviour {
     public void PrevSkin()
     {
         AudioManager.Instance.PlaySFX("Button1");
+        if (currentChar > 0)
+        {
+            currentChar--;
+        }
+        else if (currentChar <= 0)
+        {
+            currentChar = numOfChars;
+        }
+        player.GetComponentInChildren<CreateCombination>().NewSpriteSheet(currentChar);
     }
 
     public void Confirm()
@@ -35,7 +55,7 @@ public class CharacterSelectController : MonoBehaviour {
     
     // Use this for initialization
 	void Start () {
-	
+        numOfChars -= 1;
 	}
 	
 	// Update is called once per frame

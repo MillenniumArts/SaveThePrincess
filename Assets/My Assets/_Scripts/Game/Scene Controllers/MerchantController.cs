@@ -228,13 +228,16 @@ public class MerchantController : MonoBehaviour {
    /// </summary>
     void UpdateButtons()
     {
-        if (this.purchaseBalance > this.player.dollarBalance)
+        if (this.purchaseBalance > this.player.dollarBalance 
+         || (this.numPotionsPurchased == 0 && this.numFoodItemsPurchased == 0) )
         {
             this.purchaseButton.gameObject.SetActive(false);
+            this.cancelButton.gameObject.SetActive(false);
         }
         else
         {
             this.purchaseButton.gameObject.SetActive(true);
+            this.cancelButton.gameObject.SetActive(true);
         }
     }
 

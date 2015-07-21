@@ -25,7 +25,7 @@ public class LoadSaveController : MonoBehaviour {
     public void StartNewGame()
     {
         // start new game
-        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
+        LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP");
     }
 
     public void ClearSaveData()

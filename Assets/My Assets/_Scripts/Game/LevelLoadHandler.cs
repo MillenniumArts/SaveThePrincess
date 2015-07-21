@@ -23,9 +23,9 @@ public class LevelLoadHandler : MonoBehaviour
     public void LoadLevel(string level)
     {
         this.currentScene = level;
+        EscapeHandler.instance.ClearButtons();
         SceneFadeHandler.Instance.levelStarting = false;
         DontDestroyOnLoad(this.player);
-        EscapeHandler.instance.ClearButtons();
         Resources.UnloadUnusedAssets();
         Application.LoadLevel(level);
         SceneFadeHandler.Instance.alpha = 1.0f;

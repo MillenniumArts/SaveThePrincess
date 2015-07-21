@@ -44,11 +44,6 @@ public class NotificationHandler : MonoBehaviour {
 
     public void MakeNotification(string nTitle, string nContent)
     {
-        // enable panel
-        this.gameObject.SetActive(true);
-        // set up content/title
-        this.title.text = nTitle;
-        this.content.text = nContent;
         GetButtons();
         foreach (Button b in buttons)
         {
@@ -57,11 +52,11 @@ public class NotificationHandler : MonoBehaviour {
                 b.gameObject.SetActive(false);
             }
         }
-    }
-
-    public void Notify()
-    {
-        MakeNotification("Title", "CONTENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        // enable panel
+        this.gameObject.SetActive(true);
+        // set up content/title
+        this.title.text = nTitle;
+        this.content.text = nContent;
     }
 
     public void Confirm()

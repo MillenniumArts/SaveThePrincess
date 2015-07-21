@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MenuController : MonoBehaviour
+public class StatSelectController : MonoBehaviour
 {
     // used to handle menu options
     public string firstSceneToLoad;

@@ -10,8 +10,6 @@ public class EscapeHandler : MonoBehaviour {
     public Button exit;
     public Button[] buttons;
 
-    private SaveSystemHandler ssh;
-
     #region Singleton
     private static EscapeHandler _instance;
 
@@ -89,7 +87,12 @@ public class EscapeHandler : MonoBehaviour {
     {
         Debug.Log("Quitting Game. DOES NOT EXIT IN EDITOR!!!");
         // SAVE STATS NEEDED HERE!
-        SaveSystemHandler.instance.SaveGame();
+        if (LevelLoadHandler.Instance.currentScene != "StartMenu_LVP"
+         && LevelLoadHandler.Instance.currentScene != "CharacterSelect_LVP"
+         && LevelLoadHandler.Instance.currentScene != "LoadSave_LVP")
+        { 
+            SaveSystemHandler.instance.SaveGame();
+        }
 
         Application.Quit();
     }

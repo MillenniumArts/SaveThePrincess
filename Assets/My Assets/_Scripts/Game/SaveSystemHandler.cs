@@ -8,6 +8,7 @@ public class SaveSystemHandler : MonoBehaviour
     public BaseEnemyController enemy;
     public bool inBattle;
     public bool enemyLoadedFromFile;
+    public bool isGameToSave;
 
     #region Singleton
     private static SaveSystemHandler _instance;
@@ -404,10 +405,7 @@ public class SaveSystemHandler : MonoBehaviour
     {
         this.player = FindObjectOfType<PlayerController>();
         this.enemy = FindObjectOfType<BaseEnemyController>();
-        if (this.enemy == null)
-        {
-
-        }
+        
     }
 
     // Update is called once per frame

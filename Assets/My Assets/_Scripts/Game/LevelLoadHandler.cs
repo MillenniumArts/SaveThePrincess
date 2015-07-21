@@ -13,10 +13,16 @@ public class LevelLoadHandler : MonoBehaviour
     public PlayerController player;
 
     /// <summary>
+    /// The Current scene
+    /// </summary>
+    public string currentScene;
+
+    /// <summary>
     /// Loads the specified level
     /// </summary>
     public void LoadLevel(string level)
     {
+        this.currentScene = level;
         SceneFadeHandler.Instance.levelStarting = false;
         DontDestroyOnLoad(this.player);
         EscapeHandler.instance.ClearButtons();
@@ -47,6 +53,7 @@ public class LevelLoadHandler : MonoBehaviour
     void Start()
     {
         this.player = GameObject.FindObjectOfType<PlayerController>();
+        this.currentScene = "StartMenu_LVP";
     }
 
     // Update is called once per frame

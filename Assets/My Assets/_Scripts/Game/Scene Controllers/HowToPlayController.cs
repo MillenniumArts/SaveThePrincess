@@ -28,6 +28,6 @@ public class HowToPlayController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Button1");
        // EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
     }
 }

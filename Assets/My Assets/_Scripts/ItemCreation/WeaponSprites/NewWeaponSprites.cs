@@ -10,6 +10,8 @@ public class NewWeaponSprites : MonoBehaviour
     private SpriteRenderer[] heads, guards;
     [SerializeField]
     private List<Sprite> _Heads, _Guards;
+    [SerializeField]
+    private Sprite chosenHead, chosenGuard;
 
     void Start()
     {
@@ -27,12 +29,34 @@ public class NewWeaponSprites : MonoBehaviour
         LoadSprites();                                      // Loads the new sprites.
         int rand1 = RandomNumberGenerator(_Heads.Count);    // Gets a random number to pick the head of the weapon.
         int rand2 = RandomNumberGenerator(_Guards.Count);   // Gets a random number to pick the guard of the weapon.
-        SetSprites(heads, _Heads, rand1);                   // Sets the weapon head.
-        SetSprites(guards, _Guards, rand2);                 // Sets the weapon guard
+        SetSprites(heads, _Heads, rand1, chosenHead);                   // Sets the weapon head.
+        SetSprites(guards, _Guards, rand2, chosenGuard);                 // Sets the weapon guard
+        chosenHead = _Heads[rand1];
+        chosenGuard = _Guards[rand2];
         _Heads.Clear();                                     // Clears the sprite list.
         _Guards.Clear();                                    // Clears the sprite list.
         _Heads = new List<Sprite>();                        // Creates a new list.
         _Guards = new List<Sprite>();                       // Creates a new list.
+    }
+
+    public Sprite GetChosenHead()
+    {
+        return chosenHead;
+    }
+
+    public Sprite GetChosenGuard()
+    {
+        return chosenGuard;
+    }
+
+    public void SetNewSprites(NewWeaponSprites nWS)
+    {
+        chosenHead = nWS.GetChosenHead();
+        chosenGuard = nWS.GetChosenGuard();
+        for(int i = 0; i < heads.Length; i++){
+            heads[i].sprite = chosenHead;
+            guards[i].sprite = chosenGuard;
+        }
     }
 
     #region Private Methods
@@ -64,11 +88,20 @@ public class NewWeaponSprites : MonoBehaviour
         return r;
     }
 
-    private void SetSprites(SpriteRenderer[] rendererArray, List<Sprite> spriteList, int index)
+    private void SetSprites(SpriteRenderer[] rendererArray, List<Sprite> spriteList, int index, Sprite chosenSprite)
     {
         for (int i = 0; i < rendererArray.Length; i++)
         {
             rendererArray[i].sprite = spriteList[index];
+        }
+    }
+
+    private void SetSprites(SpriteRenderer[] rendererArray, Sprite chosenSprite)
+    {
+        Debug.Log(chosenSprite);
+        for (int i = 0; i < rendererArray.Length; i++)
+        {
+            rendererArray[i].sprite = chosenSprite;
         }
     }
     #endregion Private Methods

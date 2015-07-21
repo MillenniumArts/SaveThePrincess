@@ -102,7 +102,7 @@ public class PlayerController : PawnController
     {
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
         this.playerWeapon.SwapWeaponType(w.GetItemSubClass());
-        //this.playerWeapon.GetComponentInChildren<WeaponSprites>().SwapWeaponSprites(w.GetComponentInChildren<WeaponSprites>());
+        this.playerWeapon.GetComponentInChildren<NewWeaponSprites>().SetNewSprites(w.gameObject.GetComponentInChildren<NewWeaponSprites>());
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
         if (playerWeapon.GetItemSubClass() == "Spear")
         {

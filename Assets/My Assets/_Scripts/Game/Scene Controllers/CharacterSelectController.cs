@@ -28,7 +28,7 @@ public class CharacterSelectController : MonoBehaviour {
 
     public void Confirm()
     {
-        // do something here before next load
+        // do something here before next load if needed
 
         LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
     }

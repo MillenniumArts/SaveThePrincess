@@ -21,8 +21,7 @@ public class DeathController : MonoBehaviour {
             EnemyStats.GetInstance().ResetEnemyBaseStats();
             PlayerPrefs.SetInt("score", 0); // Reset the score to 0 for the next game.
             //EscapeHandler.instance.ClearButtons();
-			Destroy(this.player);
-            LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP");
+            LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP", true);
 		});
 	
 		UpdateText ();

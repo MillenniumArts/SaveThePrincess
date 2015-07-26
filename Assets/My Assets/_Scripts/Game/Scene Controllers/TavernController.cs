@@ -32,7 +32,7 @@ public class TavernController : MonoBehaviour
         EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
         //Application.LoadLevel("Town_LVP");
-        LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
     }
     /// <summary>
     /// called on meal purchase button click

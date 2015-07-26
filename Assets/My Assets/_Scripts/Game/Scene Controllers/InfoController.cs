@@ -22,6 +22,6 @@ public class InfoController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Button1");
        // EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP", false);
     }
 }

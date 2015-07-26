@@ -50,7 +50,7 @@ public class CharacterSelectController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Button1");
         // do something here before next load if needed
-        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
     }
     
     // Use this for initialization

@@ -32,21 +32,21 @@ public class StartMenuController : MonoBehaviour {
 	public void StartGame(){
         AudioManager.Instance.PlaySFX("Button1");
         //EscapeHandler.instance.ClearButtons();
-		LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP");
+		LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", false);
 	}
 
     public void HowToPlay()
     {
         AudioManager.Instance.PlaySFX("Button1");
         //EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("HowToPlay_LVP");
+        LevelLoadHandler.Instance.LoadLevel("HowToPlay_LVP", false);
     }
 
     public void Info()
     {
         AudioManager.Instance.PlaySFX("Button1");
         //EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("Options_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Options_LVP", false);
     }
 
 	public void ResetHiScore(){

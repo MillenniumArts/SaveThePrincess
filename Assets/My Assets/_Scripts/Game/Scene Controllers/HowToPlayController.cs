@@ -21,13 +21,13 @@ public class HowToPlayController : MonoBehaviour {
     {
         AudioManager.Instance.PlaySFX("Button1");
        // EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP",false);
     }
 
     public void StartGame()
     {
         AudioManager.Instance.PlaySFX("Button1");
        // EscapeHandler.instance.ClearButtons();
-        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP");
+        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP",false);
     }
 }

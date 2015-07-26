@@ -146,13 +146,16 @@ public class StatSelectController : MonoBehaviour
             this.player.remainingEnergy = this.newEnergy;
             this.player.armor = this.newArmor;
 
-            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
         }
     }
+    
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP");
+        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", true);
+        this.player.transform.localPosition = this.prevPos;
+
         //EscapeHandler.instance.ClearButtons();
         //Application.LoadLevel();
     }

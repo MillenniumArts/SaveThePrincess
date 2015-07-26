@@ -20,12 +20,15 @@ public class LevelLoadHandler : MonoBehaviour
     /// <summary>
     /// Loads the specified level
     /// </summary>
-    public void LoadLevel(string level)
+    public void LoadLevel(string level,bool deletePlayer)
     {
         this.currentScene = level;
         EscapeHandler.instance.ClearButtons();
         SceneFadeHandler.Instance.levelStarting = false;
-        DontDestroyOnLoad(this.player);
+        if (!deletePlayer)
+            DontDestroyOnLoad(this.player);
+        else
+            Destroy(this.player);
         Resources.UnloadUnusedAssets();
         Application.LoadLevel(level);
         SceneFadeHandler.Instance.alpha = 1.0f;

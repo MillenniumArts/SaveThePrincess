@@ -44,7 +44,7 @@ public class ShopController : MonoBehaviour
         this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
-        LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
     }
 
     #region purchasing items

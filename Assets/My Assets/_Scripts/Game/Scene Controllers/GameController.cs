@@ -660,7 +660,7 @@ public class GameController : MonoBehaviour
         if (!waiting)
         {
             // load death scene
-            LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP");
+            LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP", true);
         }
     }
 
@@ -681,7 +681,7 @@ public class GameController : MonoBehaviour
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             // reload battle scene
-            LevelLoadHandler.Instance.LoadLevel("Battle_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Battle_LVP", false);
         }
     }
 
@@ -705,7 +705,7 @@ public class GameController : MonoBehaviour
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             this.player.inBattle = false;
-            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
         }
     }
 
@@ -719,15 +719,13 @@ public class GameController : MonoBehaviour
         // transfer money
         // this.enemy.DropMoney();
         this.player.dollarBalance += this.enemy.DropMoney();
-
-        DontDestroyOnLoad(this.player);
         if (!waiting)
         {
             Debug.Log("Loading Town Scene");
             // restore player energy after battle
             this.player.remainingEnergy = this.player.totalEnergy;
             this.player.inBattle = false;
-            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
         }
     }
 
@@ -736,7 +734,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void LoadStatSelect()
     {
-        DontDestroyOnLoad(this.player);
         if (!waiting)
         {
             //Debug.Log("Loading Stat Scene");
@@ -749,7 +746,7 @@ public class GameController : MonoBehaviour
             this.player.transform.localPosition = this.prevPos;
             this.player.inBattle = false;
             PlayerPrefs.SetInt("midgame", 1);
-            LevelLoadHandler.Instance.LoadLevel("MidGameStatSelect_LVP");
+            LevelLoadHandler.Instance.LoadLevel("MidGameStatSelect_LVP", false);
         }
     }
 

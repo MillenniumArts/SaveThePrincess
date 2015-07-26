@@ -14,18 +14,18 @@ public class LoadSaveController : MonoBehaviour {
         // handle proper level loading from stats
         if (SaveSystemHandler.instance.inBattle)
         {
-            LevelLoadHandler.Instance.LoadLevel("Battle_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Battle_LVP", false);
         }
         else
         {
-            LevelLoadHandler.Instance.LoadLevel("Town_LVP");
+            LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
         }
     }
 
     public void StartNewGame()
     {
         // start new game
-        LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP");
+        LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP", false);
     }
 
     public void ClearSaveData()

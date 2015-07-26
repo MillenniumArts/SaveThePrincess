@@ -649,7 +649,6 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("hiscore", PlayerPrefs.GetInt("score"));
         }
         // reset score/turn
-        //PlayerPrefs.SetInt("score", 0);  // COMMENTED THIS OUT AND MOVED IT TO THE DEATH CONTROLLER.
         PlayerPrefs.SetInt("turn", 0);
         // reset difficulty
         DifficultyLevel.GetInstance().ResetDifficulty();
@@ -675,7 +674,7 @@ public class GameController : MonoBehaviour
         // player turn stored in local, 0 for playerTurn
         PlayerPrefs.SetInt("turn", turn);
         // enemy dead, fight another and keep player on screen
-        DontDestroyOnLoad(this.player);
+        //DontDestroyOnLoad(this.player);
         this.player.dollarBalance += this.enemy.DropMoney();
         if (!waiting)
         {

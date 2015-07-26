@@ -207,7 +207,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            PerformVictoryBehaviour();
+            //PerformVictoryBehaviour();
         }
         // MAGICAL DAMAGE
         if (this.magicalDamageToTake > 0)
@@ -235,7 +235,7 @@ public class PawnController : MonoBehaviour
         }
         else
         {
-            PerformVictoryBehaviour();
+            //PerformVictoryBehaviour();
         }
     }
 

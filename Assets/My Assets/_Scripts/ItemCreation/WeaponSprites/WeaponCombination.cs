@@ -143,11 +143,10 @@ public class WeaponCombination : MonoBehaviour {
     /// <param name="calm">Bool stating if the player is in town.</param>
     public void SwitchHandleLayer(bool calm)
     {
-       /*if (calm == false)
-            spriteRenderers[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+       if (calm == false)
+            spriteRenderers[12].sortingLayerName = "WeaponHandleMiddle_TwoHand";
         else
-            spriteRenderers[11].sortingLayerName = "WeaponHandleMiddle";
-        */
+            spriteRenderers[12].sortingLayerName = "WeaponHandleMiddle";
     }
 
     /// <summary>
@@ -205,8 +204,8 @@ public class WeaponCombination : MonoBehaviour {
         onOff[9] = false;
         onOff[10] = true;
         onOff[11] = true;
-        onOff[12] = false;
-        onOff[13] = true;
+        onOff[12] = true;
+        onOff[13] = false;
         onOff[14] = false;
         onOff[15] = false;
         onOff[16] = false;
@@ -228,8 +227,8 @@ public class WeaponCombination : MonoBehaviour {
         onOff[9] = false;
         onOff[10] = true;
         onOff[11] = true;
-        onOff[12] = false;
-        onOff[13] = true;
+        onOff[12] = true;
+        onOff[13] = false;
         onOff[14] = false;
         onOff[15] = false;
         onOff[16] = false;
@@ -295,7 +294,7 @@ public class WeaponCombination : MonoBehaviour {
         onOff[7] = false;
         onOff[8] = false;
         onOff[9] = false;
-        onOff[10] = true;
+        onOff[10] = false;
         onOff[11] = true;
         onOff[12] = false;
         onOff[13] = true;
@@ -303,7 +302,7 @@ public class WeaponCombination : MonoBehaviour {
         onOff[15] = true;
         onOff[16] = false;
         onOff[17] = false;
-        oneHandGrip = false;
+        oneHandGrip = true;
     }
 
     private void IsHook()

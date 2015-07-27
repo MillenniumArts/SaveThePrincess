@@ -107,9 +107,15 @@ public class ShopController : MonoBehaviour
     {
         // NEW ALGORITHM
         // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
-        
+
+        int rand3 = Random.Range(0, 12);
         GetRandomArmor();
-        shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
+        if(rand3 < 5)
+            shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
+        else if(rand3 < 9)
+            shopItems[0] = factory.CreateWeapon(spawn1, "Hook");
+        else
+            shopItems[0] = factory.CreateWeapon(spawn1, "Club");
         shopItems[0].transform.parent = spawn1.transform;
         shopItems[0].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 

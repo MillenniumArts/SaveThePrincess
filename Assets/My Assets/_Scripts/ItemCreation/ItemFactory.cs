@@ -45,6 +45,8 @@ public class ItemFactory : MonoBehaviour{
 	public Hammer blankHammerPrefab;
 	public Dagger blankDaggerPrefab;
 	public Spear blankSpearPrefab;
+    public Club blankClubPrefab;
+    public Hook blankHookPrefab;
 	public BodyArmor blankArmorPrefab;
 	public BodyArmor blankHeavyArmorPrefab;
 	public BodyArmor blankMediumArmorPrefab;
@@ -85,6 +87,10 @@ public class ItemFactory : MonoBehaviour{
 			break;
 		case "Spear": w = CreateSpear(spawnPoint);
 			break;
+        case "Club": w = CreateClub(spawnPoint);
+            break;
+        case "Hook": w = CreateHook(spawnPoint);
+            break;
 		default:
 			Debug.Log ("No weapons to create!");
 			break;
@@ -185,6 +191,16 @@ public class ItemFactory : MonoBehaviour{
 		Weapon i = Instantiate(blankSpearPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
 		return i;
 	}
+    private Weapon CreateClub(Transform spawnPoint)
+    {
+        Weapon i = Instantiate(blankClubPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
+        return i;
+    }
+    private Weapon CreateHook(Transform spawnPoint)
+    {
+        Weapon i = Instantiate(blankHookPrefab, spawnPoint.position, spawnPoint.transform.rotation) as Weapon;
+        return i;
+    }
 
 	// Armor Creators
 	private BodyArmor CreateHeavyArmor(Transform spawnPoint){

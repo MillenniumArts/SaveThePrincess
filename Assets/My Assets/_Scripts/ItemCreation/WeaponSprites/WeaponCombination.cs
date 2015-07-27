@@ -72,7 +72,7 @@ public class WeaponCombination : MonoBehaviour {
                     child.SwapSprites(spriteSheetNames[5]);
                 IsClub();
                 //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
-                oneHandGrip = false;
+                oneHandGrip = true;
             }
             else if (hook)
             {
@@ -80,7 +80,7 @@ public class WeaponCombination : MonoBehaviour {
                     child.SwapSprites(spriteSheetNames[6]);
                 IsHook();
                 //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
-                oneHandGrip = false;
+                oneHandGrip = true;
             }
             else
             {
@@ -294,7 +294,7 @@ public class WeaponCombination : MonoBehaviour {
         onOff[7] = false;
         onOff[8] = false;
         onOff[9] = false;
-        onOff[10] = false;
+        onOff[10] = true;
         onOff[11] = true;
         onOff[12] = false;
         onOff[13] = true;

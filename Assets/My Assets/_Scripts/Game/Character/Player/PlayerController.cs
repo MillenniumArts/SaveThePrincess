@@ -221,9 +221,6 @@ public class PlayerController : PawnController
     /// </summary>
     void Start()
     {
-        frontThumb = GameObject.Find("thumb_front_player");
-        backThumb = GameObject.Find("thumb_back_player");
-        backFingers = GameObject.Find("fingers_back_player");
         PawnControllerStart();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.dollarBalance = 50;

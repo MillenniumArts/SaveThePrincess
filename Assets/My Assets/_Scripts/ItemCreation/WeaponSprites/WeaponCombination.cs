@@ -143,10 +143,11 @@ public class WeaponCombination : MonoBehaviour {
     /// <param name="calm">Bool stating if the player is in town.</param>
     public void SwitchHandleLayer(bool calm)
     {
-        if (calm == false)
+       /*if (calm == false)
             spriteRenderers[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
         else
             spriteRenderers[11].sortingLayerName = "WeaponHandleMiddle";
+        */
     }
 
     /// <summary>

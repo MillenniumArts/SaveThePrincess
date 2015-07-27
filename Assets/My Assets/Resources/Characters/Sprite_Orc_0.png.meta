@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a5a139ef8ccaa6f42a4bf572bce3d17c
-timeCreated: 1436741941
+timeCreated: 1438003367
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -127,8 +127,8 @@ TextureImporter:
         y: 749
         width: 59
         height: 58
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .631333709, y: .381329775}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Hand_Front
       rect:

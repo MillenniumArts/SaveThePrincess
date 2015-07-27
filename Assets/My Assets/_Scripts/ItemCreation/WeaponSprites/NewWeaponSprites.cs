@@ -5,18 +5,20 @@ using System.Collections;
 public class NewWeaponSprites : MonoBehaviour
 {
     [SerializeField]
-    private string folder, spriteSheetName;
+    private string folder, spriteSheetName, handleSheetName;
     [SerializeField]
-    private SpriteRenderer[] heads, guards;
+    private SpriteRenderer[] heads, guards, handles, pommels;
     [SerializeField]
-    private List<Sprite> _Heads, _Guards;
+    private List<Sprite> _Heads, _Guards, _Handles, _Pommels;
     [SerializeField]
-    private Sprite chosenHead, chosenGuard;
+    private Sprite chosenHead, chosenGuard, chosenHandle, chosenPommel;
 
     void Start()
     {
         _Heads = new List<Sprite>();    // Creates the lists.
         _Guards = new List<Sprite>();   //
+        _Handles = new List<Sprite>();  //
+        _Pommels = new List<Sprite>();  //
     }
 
     /// <summary>
@@ -27,16 +29,27 @@ public class NewWeaponSprites : MonoBehaviour
     {
         SetSpriteSheetName(sheetName);                      // Sets the new sprite sheet name.
         LoadSprites();                                      // Loads the new sprites.
+        LoadHandles();
         int rand1 = RandomNumberGenerator(_Heads.Count);    // Gets a random number to pick the head of the weapon.
         int rand2 = RandomNumberGenerator(_Guards.Count);   // Gets a random number to pick the guard of the weapon.
+        int rand3 = RandomNumberGenerator(_Handles.Count);
+        int rand4 = RandomNumberGenerator(_Pommels.Count);
         SetSprites(heads, _Heads, rand1, chosenHead);                   // Sets the weapon head.
         SetSprites(guards, _Guards, rand2, chosenGuard);                 // Sets the weapon guard
+        SetSprites(handles, _Handles, rand3, chosenHandle);
+        SetSprites(pommels, _Pommels, rand4, chosenPommel);
         chosenHead = _Heads[rand1];
         chosenGuard = _Guards[rand2];
+        chosenHandle = _Handles[rand3];
+        chosenPommel = _Pommels[rand4];
         _Heads.Clear();                                     // Clears the sprite list.
         _Guards.Clear();                                    // Clears the sprite list.
+        _Handles.Clear();
+        _Pommels.Clear();
         _Heads = new List<Sprite>();                        // Creates a new list.
         _Guards = new List<Sprite>();                       // Creates a new list.
+        _Handles = new List<Sprite>();                      // Creates a new list.
+        _Pommels = new List<Sprite>();                      // Creates a new list.
     }
 
     public Sprite GetChosenHead()
@@ -49,13 +62,27 @@ public class NewWeaponSprites : MonoBehaviour
         return chosenGuard;
     }
 
+    public Sprite GetChosenHandle()
+    {
+        return chosenHandle;
+    }
+
+    public Sprite GetChosenPommel()
+    {
+        return chosenPommel;
+    }
+
     public void SetNewSprites(NewWeaponSprites nWS)
     {
         chosenHead = nWS.GetChosenHead();
         chosenGuard = nWS.GetChosenGuard();
+        chosenHandle = nWS.GetChosenHandle();
+        chosenPommel = nWS.GetChosenPommel();
         for(int i = 0; i < heads.Length; i++){
             heads[i].sprite = chosenHead;
             guards[i].sprite = chosenGuard;
+            handles[i].sprite = chosenHandle;
+            pommels[i].sprite = chosenPommel;
         }
     }
 
@@ -67,6 +94,7 @@ public class NewWeaponSprites : MonoBehaviour
 
     private void LoadSprites()
     {
+        Debug.Log("Called LoadSprites");
         Sprite[] _sprites = Resources.LoadAll<Sprite>("_Final_Assets/" + folder + "/" + spriteSheetName);
         for (int i = 0; i < _sprites.Length; i++)
         {
@@ -78,6 +106,24 @@ public class NewWeaponSprites : MonoBehaviour
             else
             {
                 _Guards.Add(_sprites[i]);
+            }
+        }
+    }
+
+    private void LoadHandles()
+    {
+        Debug.Log("Called LoadHandles");
+        Sprite[] _sprites = Resources.LoadAll<Sprite>("_Final_Assets/" + folder + "/" + handleSheetName);
+        for (int i = 0; i < _sprites.Length; i++)
+        {
+            string[] tempNames = _sprites[i].name.Split('_');
+            if (tempNames[0] == "Handle")
+            {
+                _Handles.Add(_sprites[i]);
+            }
+            else
+            {
+                _Pommels.Add(_sprites[i]);
             }
         }
     }

@@ -91,6 +91,7 @@ public class ShopController : MonoBehaviour
                 Debug.Log(shopItems[selectedItem].GetItemClass() + " is not a recognized Item Class!");
             }
             DestroyItem(selectedItem);
+            buttons[selectedItem + 6].interactable = false;
             receipt[selectedItem].SetActive(true);
         }
         selectedItemStats.text = "";

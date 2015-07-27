@@ -81,7 +81,13 @@ public class NewWeaponSprites : MonoBehaviour
         for(int i = 0; i < heads.Length; i++){
             heads[i].sprite = chosenHead;
             guards[i].sprite = chosenGuard;
+        }
+        for(int i = 0; i < handles.Length; i++)
+        {
             handles[i].sprite = chosenHandle;
+        }
+        for (int i = 0; i < pommels.Length; i++)
+        {
             pommels[i].sprite = chosenPommel;
         }
     }

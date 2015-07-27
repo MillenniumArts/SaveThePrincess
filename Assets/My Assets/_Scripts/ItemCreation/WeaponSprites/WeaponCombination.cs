@@ -14,6 +14,7 @@ public class WeaponCombination : MonoBehaviour {
     [SerializeField]
     private string[] spriteSheetNames;
     private bool isSpawned = true;
+    public string weaponType;
 
     #region Monobehaviour
     void Start()
@@ -30,56 +31,70 @@ public class WeaponCombination : MonoBehaviour {
             {
                 IsDagger();
                 if (isSpawned)
+                {
                     child.SwapSprites(spriteSheetNames[0]);
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle";
+                    GetName(0);
+                }
                 oneHandGrip = true;
             }
             else if (hammer)
             {
                 IsHammer();
                 if (isSpawned)
+                {
                     child.SwapSprites(spriteSheetNames[1]);
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                    GetName(2);
+                }
                 oneHandGrip = false;
             }
             else if (axe)
             {
-                if (isSpawned)
-                    child.SwapSprites(spriteSheetNames[2]);
                 IsAxe();
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                if (isSpawned)
+                {
+                    child.SwapSprites(spriteSheetNames[2]);
+                    GetName(4);
+                }
                 oneHandGrip = false;
             }
             else if (sword)
             {
                 IsSword();
                 if (isSpawned)
+                {
                     child.SwapSprites(spriteSheetNames[3]);
-                ///sprites[11].sortingLayerName = "WeaponHandleMiddle";
+                    GetName(6);
+                }
                 oneHandGrip = true;
             }
             else if (spear)
             {
-                if (isSpawned)
-                    child.SwapSprites(spriteSheetNames[4]);
                 IsSpear();
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                if (isSpawned)
+                {
+                    child.SwapSprites(spriteSheetNames[4]);
+                    GetName(8);
+                }
                 oneHandGrip = false;
             }
             else if (club)
             {
-                if (isSpawned)
-                    child.SwapSprites(spriteSheetNames[5]);
                 IsClub();
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                if (isSpawned)
+                {
+                    child.SwapSprites(spriteSheetNames[5]);
+                    GetName(14);
+                }
                 oneHandGrip = true;
             }
             else if (hook)
             {
-                if (isSpawned)
-                    child.SwapSprites(spriteSheetNames[6]);
                 IsHook();
-                //sprites[11].sortingLayerName = "WeaponHandleMiddle_TwoHand";
+                if (isSpawned)
+                {
+                    child.SwapSprites(spriteSheetNames[6]);
+                    GetName(16);
+                }
                 oneHandGrip = true;
             }
             else
@@ -163,6 +178,11 @@ public class WeaponCombination : MonoBehaviour {
     public void SwapNow()
     {
         swapNow = true;
+    }
+
+    public string GetWeaponType()
+    {
+        return weaponType;
     }
     #endregion Public Methods
 
@@ -362,6 +382,17 @@ public class WeaponCombination : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void GetName(int spriteNum)
+    {
+        string[] name = spriteRenderers[spriteNum].sprite.name.Split('_');
+        /*for (int i = 0; i < name.Length; i++)
+        {
+            Debug.Log(name[i]);
+        }*/
+        weaponType = name[2];
+        this.gameObject.transform.parent.gameObject.GetComponent<Weapon>().SetWeaponName();
     }
     #endregion Private Methods
 }

@@ -37,7 +37,7 @@ public class Club : Weapon
     {
         factory = FindObjectOfType<ItemFactory>();
         GetClubType();
-        SetItem(className, NameRandomizer.instance.GetPart1() + clubOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
+        SetItem(className, NameRandomizer.instance.GetPart1() + this.GetWeaponType() + NameRandomizer.instance.GetPart2(),
                 clubOptionsSprites[typeIndex], animationParameter, idleAnimParameter, "Club", clubOptionsTypes[typeIndex],
                 factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin, defMax),
                 factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));

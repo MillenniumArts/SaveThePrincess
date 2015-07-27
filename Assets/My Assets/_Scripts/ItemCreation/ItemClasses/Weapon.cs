@@ -60,4 +60,14 @@ public class Weapon : Item {
             Debug.Log("No WeaponCombination attached");
         }
     }
+
+    public string GetWeaponType()
+    {
+        return this.GetComponentInChildren<WeaponCombination>().GetWeaponType();
+    }
+
+    public void SetWeaponName()
+    {
+        itemName = NameRandomizer.instance.GetPart1() + this.GetWeaponType() + NameRandomizer.instance.GetPart2();
+    }
 }

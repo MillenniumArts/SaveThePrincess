@@ -100,7 +100,7 @@ public class NewWeaponSprites : MonoBehaviour
 
     private void LoadSprites()
     {
-        Debug.Log("Called LoadSprites");
+        //Debug.Log("Called LoadSprites");
         Sprite[] _sprites = Resources.LoadAll<Sprite>("_Final_Assets/" + folder + "/" + spriteSheetName);
         for (int i = 0; i < _sprites.Length; i++)
         {
@@ -116,22 +116,27 @@ public class NewWeaponSprites : MonoBehaviour
         }
     }
 
-    private void LoadHandles()
+   private void LoadHandles()
     {
-        Debug.Log("Called LoadHandles");
+        //Debug.Log("Called LoadHandles");
         Sprite[] _sprites = Resources.LoadAll<Sprite>("_Final_Assets/" + folder + "/" + handleSheetName);
+        //Debug.Log("Handle Sheet Name" + handleSheetName);
         for (int i = 0; i < _sprites.Length; i++)
         {
+            //Debug.Log("Handle sprite sheet loaded: " + _sprites[i].name);
             string[] tempNames = _sprites[i].name.Split('_');
             if (tempNames[0] == "Handle")
             {
                 _Handles.Add(_sprites[i]);
+                //Debug.Log("Added a handle: " + _sprites[i].name);
             }
             else
             {
                 _Pommels.Add(_sprites[i]);
+                //Debug.Log("Added a pommel: " + _sprites[i].name);
             }
         }
+        //Debug.Log("End of LoadHandles");
     }
 
     private int RandomNumberGenerator(int MAX)

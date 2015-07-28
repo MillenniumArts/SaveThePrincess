@@ -54,6 +54,8 @@ public class PawnController : MonoBehaviour
     /// whether or not player will spawn with weapon.
     /// </summary>
     public bool spawnWithArmor;
+
+    public PlayerPositionController posController;
     #endregion Rendering
 
     #region STATS
@@ -891,6 +893,7 @@ public class PawnController : MonoBehaviour
         this.body = GameObject.FindWithTag(this.tag).GetComponentInChildren<CreateCombination>();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.inBattle = false;
+        this.posController = this.gameObject.GetComponent<PlayerPositionController>();
         // initialize weapon if player is supposed to have one
         CallSetWeapon("Sword");
         if (!spawnWithWeapon)

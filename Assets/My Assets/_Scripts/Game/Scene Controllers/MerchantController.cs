@@ -251,8 +251,9 @@ public class MerchantController : MonoBehaviour {
         // get player
         this.player = FindObjectOfType<PlayerController>();
 
-        Vector3 newPos = new Vector3(-12f, -2.5f);
-        this.player.gameObject.transform.localPosition = newPos;
+        //Vector3 newPos = new Vector3(-12f, -2.5f);
+        //this.player.gameObject.transform.localPosition = newPos;
+        this.player.posController.MovePlayer(-30, -37);
 
         // set up items list
         this.items = new int[numItemsForSale];

@@ -28,7 +28,7 @@ public class TavernController : MonoBehaviour
     public void LeaveInn()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        this.player.gameObject.transform.localPosition = prevPos;
+      //  this.player.gameObject.transform.localPosition = prevPos;
         EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
         //Application.LoadLevel("Town_LVP");
@@ -173,9 +173,10 @@ public class TavernController : MonoBehaviour
         // get player
         this.player = FindObjectOfType<PlayerController>();
         // relocate player
-        this.prevPos = this.player.gameObject.transform.localPosition;
-        Vector3 newSpot = new Vector3(-4.5f, -2.5f);
-        this.player.gameObject.transform.localPosition = newSpot;
+      //  this.prevPos = this.player.gameObject.transform.localPosition;
+      //  Vector3 newSpot = new Vector3(-4.5f, -2.5f);
+      //  this.player.gameObject.transform.localPosition = newSpot;
+        this.player.posController.MovePlayer(22, 36);
         //init texts
         this.healthText.text = "";
         this.playerBalance.text = "";

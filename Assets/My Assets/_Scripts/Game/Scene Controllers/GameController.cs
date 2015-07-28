@@ -640,7 +640,7 @@ public class GameController : MonoBehaviour
     {
         // player dead
         TransferGoldOnDeath();
-        this.player.transform.localPosition = this.prevPos;
+      //  this.player.transform.localPosition = this.prevPos;
 
         // check for high score
         if (PlayerPrefs.GetInt("score") > PlayerPrefs.GetInt("hiscore"))
@@ -660,7 +660,7 @@ public class GameController : MonoBehaviour
         if (!waiting)
         {
             // load death scene
-            LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP", true);
+            LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP", false);
         }
     }
 
@@ -690,7 +690,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void RetreatFromBattle()
     {
-        this.player.transform.localPosition = this.prevPos;
+        //this.player.transform.localPosition = this.prevPos;
         BattleCounter.GetInstance().ResetCurrentBattleCount();
         // Set the idle animation to town idle
         player.InBattle(false);
@@ -715,7 +715,7 @@ public class GameController : MonoBehaviour
     private void GoToTown()
     {
         // reset position
-        this.player.transform.localPosition = this.prevPos;
+        //this.player.transform.localPosition = this.prevPos;
         // transfer money
         // this.enemy.DropMoney();
         this.player.dollarBalance += this.enemy.DropMoney();
@@ -743,7 +743,8 @@ public class GameController : MonoBehaviour
             this.player.totalHealth += 10;
             this.player.remainingHealth += 10;
             this.player.dollarBalance += this.enemy.DropMoney();
-            this.player.transform.localPosition = this.prevPos;
+          //  this.player.transform.localPosition = this.prevPos;
+            this.player.posController.MovePlayer(-30, -37);
             this.player.inBattle = false;
             PlayerPrefs.SetInt("midgame", 1);
             LevelLoadHandler.Instance.LoadLevel("MidGameStatSelect_LVP", false);
@@ -856,9 +857,11 @@ public class GameController : MonoBehaviour
         this.player.dollarBalance += PlayerPrefs.GetInt("carryover");
         PlayerPrefs.SetInt("carryover", 0);
         // reposition player
-        this.prevPos = this.player.transform.localPosition;
-        Vector3 newSpot = new Vector3(-2.5f, -2f); // New Position
-        this.player.gameObject.transform.localPosition = newSpot;
+    //    this.prevPos = this.player.transform.localPosition;
+    //    Vector3 newSpot = new Vector3(-2.5f, -2f); // New Position
+    //    this.player.gameObject.transform.localPosition = newSpot;
+        this.player.posController.MovePlayer(25, 37);
+        this.enemy.posController.MovePlayer(25, 87);
 
         // get enemy reference
         //this.enemy = FindObjectOfType<BaseEnemyController>();

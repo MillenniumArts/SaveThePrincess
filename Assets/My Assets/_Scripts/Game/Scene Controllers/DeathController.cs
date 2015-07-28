@@ -15,6 +15,7 @@ public class DeathController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("Death");
         EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
+        this.player.posController.MovePlayer(51, 63);
 
 		this.restartButton.onClick.AddListener (()=>{
             AudioManager.Instance.PlaySFX("Button1");

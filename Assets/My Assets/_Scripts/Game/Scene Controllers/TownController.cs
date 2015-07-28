@@ -16,8 +16,9 @@ public class TownController : MonoBehaviour {
         //EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
 
-        Vector3 newPos = new Vector3(-7.5f, -2.5f);
-        this.player.gameObject.transform.localPosition = newPos;
+        //Vector3 newPos = new Vector3(-7.5f, -2.5f);
+        //this.player.gameObject.transform.localPosition = newPos;
+        player.posController.MovePlayer(25, 25);
 	}
 
 	public void GoToBattle(){

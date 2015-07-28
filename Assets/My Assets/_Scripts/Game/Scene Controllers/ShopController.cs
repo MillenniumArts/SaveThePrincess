@@ -41,7 +41,7 @@ public class ShopController : MonoBehaviour
     public void ExitStore()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        this.player.gameObject.transform.localPosition = prevPos;
+      //  this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
         LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
@@ -219,11 +219,12 @@ public class ShopController : MonoBehaviour
 
         firstTick = false;
         this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.gameObject.transform.localPosition;
+      //  this.prevPos = this.player.gameObject.transform.localPosition;
 
         // relocate player
-        Vector3 newSpot = new Vector3(-5.7f, -2f);
-        this.player.gameObject.transform.localPosition = newSpot;
+      //  Vector3 newSpot = new Vector3(-5.7f, -2f);
+      //  this.player.gameObject.transform.localPosition = newSpot;
+        this.player.posController.MovePlayer(27, 30);
 
         this.playerBalance.text = this.player.dollarBalance.ToString();
 

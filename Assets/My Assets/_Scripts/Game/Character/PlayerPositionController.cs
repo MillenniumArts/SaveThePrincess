@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerPositionController : MonoBehaviour {
     private float width, height;
-    public void MovePlayer(int percentFormBottom, int percentFromLeft)
+    public void MovePlayer(int percentFromBottom, int percentFromLeft)
     {
-        float heightPercent = percentFormBottom * 0.01f;
+        float heightPercent = percentFromBottom * 0.01f;
         float widthPercent = percentFromLeft * 0.01f;
 
         height = 1 / heightPercent;

@@ -13,7 +13,9 @@ public class TavernController : MonoBehaviour
     public Button[] foodButtons;
     public Text sleepText;
     public Text[] buttonText;
-    public Text[] labelText;
+    public Text[] healthLabelText;
+    public Text[] moneyLabelText;
+
     // stats
     public int[] prices, stats;
     public Text healthText, playerBalance;
@@ -134,9 +136,10 @@ public class TavernController : MonoBehaviour
         this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
         this.playerBalance.text = this.player.dollarBalance.ToString();
 
-        for (int i = 0; i < this.labelText.Length; i++)
+        for (int i = 0; i < this.healthLabelText.Length; i++)
         {
-            this.labelText[i].text = this.prices[i].ToString()+ " => " + this.stats[i].ToString()+"%";
+            this.healthLabelText[i].text = this.stats[i].ToString()+"%";
+            this.moneyLabelText[i].text = this.prices[i].ToString();
         }
 
             // disable buttons if no health needed

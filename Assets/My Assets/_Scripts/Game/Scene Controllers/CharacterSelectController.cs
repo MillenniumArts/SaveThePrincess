@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CharacterSelectController : MonoBehaviour {
@@ -6,6 +7,7 @@ public class CharacterSelectController : MonoBehaviour {
     public PlayerController player;
     public int numOfChars;
     public int currentChar = 0;
+    public InputField playerName;
 
     void Awake()
     {
@@ -48,9 +50,16 @@ public class CharacterSelectController : MonoBehaviour {
 
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Button1");
-        // do something here before next load if needed
-        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
+        if (playerName.text != "")
+        {
+            AudioManager.Instance.PlaySFX("Button1");
+            this.player.name = this.playerName.text;
+            // do something here before next load if needed
+            LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
+        }
+        else {
+            NotificationHandler.instance.MakeNotification("Error!", "You need to enter a player name!");
+        }
     }
     
     // Use this for initialization

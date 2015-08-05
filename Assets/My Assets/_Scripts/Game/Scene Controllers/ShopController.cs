@@ -11,7 +11,7 @@ public class ShopController : MonoBehaviour
     public Text playerBalance;
     public Item[] shopItems;
     public int selectedItem = -1;
-    public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
+    public Transform spawn1, spawn2, spawn3;//, spawn4, spawn5, spawn6;
     public GameObject[] receipt;
     public int HI_DOLLAR_VALUE;
     public int LO_DOLLAR_VALUE;
@@ -34,7 +34,8 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < buttonText.Length; i++)
         {
-            buttonText[i].text = shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
+            if(buttonText[i] != null)
+                buttonText[i].text = shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
         }
     }
 
@@ -45,6 +46,19 @@ public class ShopController : MonoBehaviour
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
         LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
+    }
+
+    public void RefreshShop()
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            if(shopItems[i] != null)
+                Destroy(shopItems[i].gameObject);
+            buttons[i + 3].interactable = true;
+        }
+        selectedItemStats.text = " ";
+        PopulateShop();
+        Invoke("RandomizeCost", 0.01f);
     }
 
     #region purchasing items
@@ -91,8 +105,8 @@ public class ShopController : MonoBehaviour
                 Debug.Log(shopItems[selectedItem].GetItemClass() + " is not a recognized Item Class!");
             }
             DestroyItem(selectedItem);
-            buttons[selectedItem + 6].interactable = false;
-            receipt[selectedItem].SetActive(true);
+            buttons[selectedItem + 3].interactable = false;
+            //receipt[selectedItem].SetActive(true);
         }
         selectedItemStats.text = "";
         selectedItem = -1;
@@ -109,34 +123,40 @@ public class ShopController : MonoBehaviour
         // NEW ALGORITHM
         // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
 
-        int rand3 = Random.Range(0, 12);
-        GetRandomArmor();
-        if(rand3 < 5)
+        int rand3 = Random.Range(0, 16);
+        //GetRandomArmor();
+        if (rand3 < 5)
             shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
-        else if(rand3 < 9)
+        else if (rand3 < 9)
             shopItems[0] = factory.CreateWeapon(spawn1, "Hook");
-        else
+        else if (rand3 < 13)
             shopItems[0] = factory.CreateWeapon(spawn1, "Club");
+        else
+            shopItems[0] = factory.CreateWeapon(spawn1, "Dagger");
         shopItems[0].transform.parent = spawn1.transform;
         shopItems[0].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
-        int rand1 = Random.Range(0, 10);
+        int rand1 = Random.Range(0, 12);
         if(rand1 < 5)
             shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
-        else
+        else if(rand1 < 9)
             shopItems[1] = factory.CreateWeapon(spawn2, "Axe");
+        else
+            shopItems[1] = factory.CreateWeapon(spawn2, "Spear");
         shopItems[1].transform.parent = spawn2.transform;
         shopItems[1].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
         int rand2 = Random.Range(0, 10);
-        if (rand2 < 5)
-            shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
+        if (rand2 < 4)
+            shopItems[2] = factory.CreateArmor(spawn3, "LightArmor");
+        else if(rand2 < 7)
+            shopItems[2] = factory.CreateArmor(spawn3, "MediumArmor");
         else
-            shopItems[2] = factory.CreateWeapon(spawn3, "Dagger");
+            shopItems[2] = factory.CreateArmor(spawn3, "HeavyArmor");
         shopItems[2].transform.parent = spawn3.transform;
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
-        shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
+        /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
         shopItems[3].transform.parent = spawn4.transform;
         shopItems[3].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
@@ -146,7 +166,7 @@ public class ShopController : MonoBehaviour
 
         shopItems[5] = factory.CreateArmor(spawn6, "HeavyArmor");
         shopItems[5].transform.parent = spawn6.transform;
-        shopItems[5].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+        shopItems[5].SetDmgArm(GetRandomDamage(), GetRandomArmor());*/
 
     }
 

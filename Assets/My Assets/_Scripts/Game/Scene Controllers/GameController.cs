@@ -510,19 +510,15 @@ public class GameController : MonoBehaviour
         int counter = 0;
         if (attackBarMoving)
         {
-            if (increasing && counter % BAR_SPEED == 0)
+            if (increasing )
             {
                 this.attackMeter.value++;
             }
-            else if (!increasing && counter % BAR_SPEED == 0)
+            else if (!increasing )
             {
                 this.attackMeter.value--;
             }
-            else
-            {
-                if (counter >= BAR_SPEED)
-                    counter = 0;
-            }
+            
             counter++;
 
             // limit the values

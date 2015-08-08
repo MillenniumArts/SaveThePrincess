@@ -15,6 +15,7 @@ public class ShopController : MonoBehaviour
     public GameObject[] receipt;
     public int HI_DOLLAR_VALUE;
     public int LO_DOLLAR_VALUE;
+    public Image[] priceTags;
     
     private bool firstTick;
     //private string[] itemsToSpawn = { "Sword", "Hammer", "Spear" /*,"Axe","Bow","Dagger"*/ };
@@ -34,8 +35,8 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < buttonText.Length; i++)
         {
-            if(buttonText[i] != null)
-                buttonText[i].text = shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
+            if (buttonText[i] != null)
+                buttonText[i].text = shopItems[i].dollarCost.ToString();// +"\n" + shopItems[i].GetName();
         }
     }
 
@@ -59,6 +60,10 @@ public class ShopController : MonoBehaviour
         selectedItemStats.text = " ";
         PopulateShop();
         Invoke("RandomizeCost", 0.01f);
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            priceTags[i].color = Color.white;
+        }
     }
 
     #region purchasing items
@@ -80,6 +85,18 @@ public class ShopController : MonoBehaviour
         {
             // turn button gren
             buyButton.image.color = Color.green;
+        }
+
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            if (i == buttonNum)
+            {
+                priceTags[i].color = Color.green;
+            }
+            else
+            {
+                priceTags[i].color = Color.white;
+            }
         }
     }
 
@@ -154,6 +171,7 @@ public class ShopController : MonoBehaviour
         else
             shopItems[2] = factory.CreateArmor(spawn3, "HeavyArmor");
         shopItems[2].transform.parent = spawn3.transform;
+        shopItems[2].transform.localScale = new Vector3(2, 2, 2);
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
         /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");

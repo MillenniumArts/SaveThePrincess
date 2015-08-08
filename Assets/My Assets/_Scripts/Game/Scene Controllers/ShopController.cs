@@ -171,7 +171,9 @@ public class ShopController : MonoBehaviour
         else
             shopItems[2] = factory.CreateArmor(spawn3, "HeavyArmor");
         shopItems[2].transform.parent = spawn3.transform;
-        shopItems[2].transform.localScale = new Vector3(2, 2, 2);
+        Vector3 tempScale = shopItems[2].transform.localScale;
+        tempScale *= 1.6f;
+        shopItems[2].transform.localScale = tempScale;
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
 
         /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");

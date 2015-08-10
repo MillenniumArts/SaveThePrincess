@@ -213,7 +213,7 @@ public class ShopController : MonoBehaviour
         {
             int totalStats = shopItems[i].GetDefMod() + shopItems[i].GetAtkMod();
 
-            this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
+            this.LO_DOLLAR_VALUE = totalStats - (int)(totalStats * 0.2) + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
 
             int score = PlayerPrefs.GetInt("score");
 

@@ -39,15 +39,15 @@ public class EnemyStats
     /// <summary>
     /// Maximum stat increase %.
     /// </summary>
-    private float MAX_inc = 0.05f;
+    private float MAX_inc = 0.02f;  // prev 0.05f
     /// <summary>
     /// Minimum stat increase % for "boss" enemies.
     /// </summary>
-    private float MIN_inc_boss = 0.1f;
+    private float MIN_inc_boss = 0.05f; // prev 0.1f
     /// <summary>
     /// Maximum stat increase % for "boss" enemies.
     /// </summary>
-    private float MAX_inc_boss = 0.15f;
+    private float MAX_inc_boss = 0.08f; // prev 0.15f
     /// <summary>
     /// Minimum stat increase % for filling the stat gap between the player's and the enemy's HP and NRG.
     /// </summary>
@@ -379,7 +379,7 @@ public class EnemyStats
         int increase = (int)(stat * (Random.Range(min, max)));
         if (increase < 1)
         {
-            increase = Random.Range(1, 6);
+            increase = 1;// prev Random.Range(1, 6);
         }
         return increase;
     }

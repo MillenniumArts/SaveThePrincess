@@ -79,7 +79,11 @@ public class BaseEnemyController : PawnController {
     }
 
 	private void EnemyStart(){
-		this.dollarBalance = 35;
+        this.dollarBalance = 35 + (BattleCounter.GetInstance().GetCurrentBattleCount() * 10);
+        if (this.dollarBalance > 150)
+        {
+            this.dollarBalance = 150;
+        }
         CreateStats();
         //remainingEnergy = totalEnergy;
         //remainingHealth = totalHealth;

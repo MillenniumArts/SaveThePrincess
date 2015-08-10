@@ -53,7 +53,7 @@ public class CharacterSelectController : MonoBehaviour {
         if (playerName.text != "")
         {
             AudioManager.Instance.PlaySFX("Button1");
-            this.player.name = this.playerName.text;
+            this.player.playerName= this.playerName.text;
             // do something here before next load if needed
             LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
         }

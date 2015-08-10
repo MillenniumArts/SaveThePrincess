@@ -44,7 +44,7 @@ public class DeathController : MonoBehaviour {
 
     public void LoadHighScores()
     {
-
+        LevelLoadHandler.Instance.LoadLevel("HighScores_LVP", true);
     }
 
 	void UpdateText(){

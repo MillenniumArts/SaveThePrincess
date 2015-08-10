@@ -51,7 +51,7 @@ public class HighScoreController : MonoBehaviour {
             foreach (dreamloLeaderBoard.Score curScore in scoreList)
             {
                 scores[count].text = curScore.score.ToString();
-                names[count].text = count + ".  " + curScore.playerName.ToString();
+                names[count].text = count+1 + ".  " + curScore.playerName.ToString();
                 count++;
                 // max count
                 if (count >= maxToDisplay)

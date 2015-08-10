@@ -269,7 +269,8 @@ public class ShopController : MonoBehaviour
         this.playerBalance.text = this.player.dollarBalance.ToString();
 
         factory = FindObjectOfType<ItemFactory>();
-
+        this.selectedItemStats.text = "";
+        this.currentStatDisplay.text = "";
         PopulateShop();
     }
 

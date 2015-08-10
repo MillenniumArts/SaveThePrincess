@@ -113,8 +113,30 @@ public class BaseEnemyController : PawnController {
         isAnimating = false;
     }
 
-	void Update(){
+    bool weaponMod = true;
+
+    void Update()
+    {
         UpdateHealth();
+        if (playerArmor.GetDefMod() > 0 && playerWeapon.GetAtkMod() > 0)
+        {
+            if (weaponMod)
+            {
+                if (playerArmor != null)
+                {
+                    Debug.Log("Armor " + Mathf.FloorToInt(this.playerArmor.GetDefMod()));
+                    this.playerArmor.SetArmor(Mathf.FloorToInt(this.playerArmor.GetDefMod() * 0.75f));
+                    Debug.Log("Armor " + this.playerArmor.GetDefMod());
+                }
+                if (playerWeapon != null)
+                {
+                    Debug.Log("Damage " + Mathf.FloorToInt(this.playerWeapon.GetAtkMod()));
+                    this.playerWeapon.SetDamage(Mathf.FloorToInt(this.playerWeapon.GetAtkMod() * 0.75f));
+                    Debug.Log("Damage " + this.playerWeapon.GetAtkMod());
+                }
+                weaponMod = false;
+            }
+        }
 	}
 	#endregion MonoBehaviour
 }

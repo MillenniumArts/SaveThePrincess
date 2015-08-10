@@ -60,7 +60,7 @@ public class PawnController : MonoBehaviour
 
     #region STATS
     /// <summary>
-    /// The Maximum Mana for this player
+    /// The Player's name
     /// </summary>
     public string playerName;
 

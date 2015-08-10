@@ -59,6 +59,6 @@ public class DeathController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	    
+        UpdateText();
 	}
 }

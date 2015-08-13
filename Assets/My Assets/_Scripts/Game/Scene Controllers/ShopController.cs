@@ -131,7 +131,10 @@ public class ShopController : MonoBehaviour
 
     private void DestroyItem(int n)
     {
-        Destroy(buttons[n].gameObject);
+        if (buttons[n] != null)
+        {
+            Destroy(buttons[n].gameObject);
+        }
         Destroy(shopItems[n].gameObject);
     }
     #endregion purchasing items

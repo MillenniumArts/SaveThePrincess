@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 1fcc1a4f99914b34cb2d29898debfb2e
+timeCreated: 1439480976
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 0_Helmet
+    21300002: 0_ArmF
+    21300004: 1_Helmet
+    21300006: 1_ArmF
+    21300008: 2_Helmet
+    21300010: 2_ArmF
+    21300012: 3_Helmet
+    21300014: 3_ArmF
+    21300016: 4_Helmet
+    21300018: 4_ArmF
+    21300020: 0_Body_Medium Armour
+    21300022: 0_LegF
+    21300024: 0_LegB
+    21300026: 1_Body_Medium Armour
+    21300028: 1_LegB
+    21300030: 2_Body_Medium Armour
+    21300032: 2_LegF
+    21300034: 2_LegB
+    21300036: 3_Body_Medium Armour
+    21300038: 3_LegF
+    21300040: 4_Body_Medium Armour
+    21300042: 5_Helmet
+    21300044: 5_ArmF
+    21300046: 6_Helmet
+    21300048: 6_ArmF
+    21300050: 7_Helmet
+    21300052: 7_ArmF
+    21300054: 8_Helmet
+    21300056: 8_ArmF
+    21300058: 9_Helmet
+    21300060: 9_ArmF
+    21300062: 5_Body_Medium Armour
+    21300064: 6_ArmB
+    21300066: 8_Body_Medium Armour
+    21300068: 9_Body_Medium Armour
+    21300070: 9_ArmB
+    21300072: 5_LegF
+    21300074: 5_LegB
+    21300076: 6_Body_Medium Armour
+    21300078: 6_LegF
+    21300080: 6_LegB
+    21300082: 7_Body_Medium Armour
+    21300084: 7_LegF
+    21300086: 7_LegB
+    21300088: 8_LegF
+    21300090: 9_LegF
+    21300092: 9_LegB
+    21300094: 8_LegB
+    21300096: 8_ArmB
+    21300098: 7_ArmB
+    21300100: 5_ArmB
+    21300102: 0_ArmB
+    21300104: 1_ArmB
+    21300106: 1_LegF
+    21300108: 2_ArmB
+    21300110: 3_ArmB
+    21300112: 3_LegB
+    21300114: 4_LegF
+    21300116: 4_LegB
+    21300118: 4_ArmB
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: 0_Helmet
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 163
+        width: 40
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_ArmF
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 177
+        width: 36
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Helmet
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 165
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_ArmF
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 176
+        width: 42
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Helmet
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 173
+        width: 36
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_ArmF
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 182
+        width: 42
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Helmet
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 165
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_ArmF
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 178
+        width: 38
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Helmet
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 167
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_ArmF
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 184
+        width: 38
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 119
+        width: 38
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_LegF
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 119
+        width: 18
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_LegB
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 123
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 121
+        width: 34
+        height: 44
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_LegB
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 121
+        width: 16
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 129
+        width: 34
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_LegF
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 125
+        width: 18
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_LegB
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 123
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 119
+        width: 36
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_LegF
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 117
+        width: 17
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 113
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Helmet
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 55
+        width: 38
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_ArmF
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 71
+        width: 40
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Helmet
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 67
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_ArmF
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 71
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Helmet
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 55
+        width: 38
+        height: 44
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_ArmF
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 71
+        width: 36
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_Helmet
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 59
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_ArmF
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 71
+        width: 38
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Helmet
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 67
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_ArmF
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 69
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 3
+        width: 38
+        height: 52
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_ArmB
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 49
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 5
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 3
+        width: 38
+        height: 52
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_ArmB
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 51
+        width: 34
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_LegF
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 15
+        width: 20
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_LegB
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 11
+        width: 18
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 9
+        width: 36
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_LegF
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 9
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_LegB
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 7
+        width: 16
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Body_Medium Armour
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 9
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_LegF
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 15
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_LegB
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 13
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_LegF
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 11
+        width: 20
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_LegF
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 15
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_LegB
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 14
+        width: 15
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_LegB
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 10
+        width: 16
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_ArmB
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 54
+        width: 36
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_ArmB
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 55
+        width: 39
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_ArmB
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 56
+        width: 40
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_ArmB
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 161
+        width: 36
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_ArmB
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 159
+        width: 39
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_LegF
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 122
+        width: 15
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_ArmB
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 164
+        width: 38
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_ArmB
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 159
+        width: 35
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_LegB
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 120
+        width: 18
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_LegF
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 120
+        width: 13
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_LegB
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 117
+        width: 14
+        height: 42
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_ArmB
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 165
+        width: 38
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

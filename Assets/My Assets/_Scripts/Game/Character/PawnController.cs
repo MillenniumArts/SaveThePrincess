@@ -719,13 +719,13 @@ public class PawnController : MonoBehaviour
         this.playerArmor = ItemFactory.instance.CreateArmor(playerBody, name);	// Spawn specified Armor.
         this.playerArmor.transform.parent = playerBody;							// Make it the child of the body.
         this.playerArmor.transform.localScale = new Vector3(1, 1, 1);			// Fix the scale.
-        if (spawnWithArmor)
+        /*if (spawnWithArmor)
         {
             // Calls coroutine to that renders the armor.  Coroutine is the method below this one.
             StartCoroutine("RenderArmorAtEoF");
-        }
+        }*/
     }
-
+    /*
     /// <summary>
     /// Wait until the end of the frame before rendering the armor.
     /// </summary>
@@ -735,7 +735,7 @@ public class PawnController : MonoBehaviour
         yield return new WaitForEndOfFrame();
         // Renders the armor.
         this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
-    }
+    }*/
 
     /// <summary>
     /// Sets the animation parameter that determines if the idle animation is "tired" or not.

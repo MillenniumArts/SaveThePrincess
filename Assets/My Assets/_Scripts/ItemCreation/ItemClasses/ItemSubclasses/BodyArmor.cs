@@ -24,13 +24,11 @@ public class BodyArmor : Armor {
 	/// </summary>
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
-		GetBodyArmorType();
-		SetItem(className, NameRandomizer.instance.GetPart1() + armorOptionsTypes[typeIndex] + NameRandomizer.instance.GetPart2(),
-		        bodyArmorOptionsSprites[typeIndex], animationParameter, idleAnimParameter, subClassName, armorOptionsTypes[typeIndex],
-		        "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
-		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
+		//GetBodyArmorType();
+        //StartCoroutine("RenderArmorAtEoF");
+        ArmourStart();
 	}
-
+    /*
 	/// <summary>
 	/// Gets the complete armor sprites and renders them on the player.
 	/// </summary>
@@ -49,5 +47,43 @@ public class BodyArmor : Armor {
 	/// </summary>
 	private void GetBodyArmorType(){
 		typeIndex = Random.Range(0, armorOptionsTypes.Length);
-	}
+	}*/
+
+   // protected IEnumerator RenderArmorAtEoF()
+    private void ArmourStart()
+    {
+        //yield return new WaitForEndOfFrame();
+        RandomSetNum();
+        DisplayArmourInStore();
+        SetItem(className, NameRandomizer.instance.GetPart1() + /*armorOptionsTypes[typeIndex]*/ GetName() + NameRandomizer.instance.GetPart2(),
+            /*bodyArmorOptionsSprites[typeIndex]*/null, animationParameter, idleAnimParameter, subClassName, "None" /*armorOptionsTypes[typeIndex]*/,
+                "none", 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin, defMax),
+                factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));
+        SendArmourSetToRenderer();
+    }
+
+    private string GetName()
+    {
+        string name = " ";
+        if (this.gameObject.GetComponentInChildren<SpriteRenderer>().sprite != null)
+        {
+            name = this.gameObject.GetComponentInChildren<SpriteRenderer>().sprite.name;
+            string[] _name = name.Split('_');
+            if (_name.Length > 2)
+                name = _name[2];
+            else
+                name = "None";
+        }
+        return name;
+    }
+    //For Testing
+    /*public bool yee = false;
+    public string testSaveString;
+    void Update()
+    {
+        if (yee)
+        {
+            LoadArmourSprites(testSaveString);
+        }
+    }*/
 }

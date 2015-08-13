@@ -128,14 +128,14 @@ public class PlayerController : PawnController
         {
             this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
             // Renders the new armor.
-            this.playerArmor.SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
-            this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+            this.playerArmor.CopyOverSprites(_a);//SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
+            //this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
         }
         else
         {
             // Renders the new armor.
-            this.playerArmor.SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
-            this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+            this.playerArmor.CopyOverSprites(_a);//SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
+            //this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
         }
     }
 

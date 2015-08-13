@@ -24,13 +24,15 @@ public class GameController : MonoBehaviour
 
     public int score,
                turn;
+               
+    public float barDelta, BAR_SPEED = 4.0f;
+
     private int PLAYER_ENERGY_REGEN_AMT,
                 PLAYER_ENERGY_COST_AMT,
                 ENEMY_ENERGY_REGEN_AMT,
                 ENEMY_ENERGY_COST_AMT,
                 currentBattle,
-                remainingBattles,
-                BAR_SPEED = 30;
+                remainingBattles;
 
     private float MONEY_TRANSFER_PCT = 0.2f,
                   COOLDOWN_LENGTH = 2.0f;
@@ -507,24 +509,17 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void UpdateAttackBar()
     {
-        int counter = 0;
         if (attackBarMoving)
         {
-            if (increasing && counter % BAR_SPEED == 0)
+            if (increasing )
             {
-                this.attackMeter.value++;
+                this.attackMeter.value += barDelta;
             }
-            else if (!increasing && counter % BAR_SPEED == 0)
+            else if (!increasing )
             {
-                this.attackMeter.value--;
+                this.attackMeter.value -= barDelta;
             }
-            else
-            {
-                if (counter >= BAR_SPEED)
-                    counter = 0;
-            }
-            counter++;
-
+            
             // limit the values
             if (this.attackMeter.value >= this.attackMeter.maxValue)
             {
@@ -821,6 +816,9 @@ public class GameController : MonoBehaviour
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();
+
+       
+
     }
 
     // Use this for initialization
@@ -901,12 +899,13 @@ public class GameController : MonoBehaviour
     }*/
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         curTime = Time.time;
         UpdateDisplay();
         Cooldown();
         CheckDeath();
+        this.barDelta = this.attackMeter.maxValue * Time.fixedDeltaTime * BAR_SPEED;
 
         if (!waiting)
         {

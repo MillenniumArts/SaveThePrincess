@@ -39,15 +39,15 @@ public class EnemyStats
     /// <summary>
     /// Maximum stat increase %.
     /// </summary>
-    private float MAX_inc = 0.05f;
+    private float MAX_inc = 0.02f;  // prev 0.05f
     /// <summary>
     /// Minimum stat increase % for "boss" enemies.
     /// </summary>
-    private float MIN_inc_boss = 0.1f;
+    private float MIN_inc_boss = 0.05f; // prev 0.1f
     /// <summary>
     /// Maximum stat increase % for "boss" enemies.
     /// </summary>
-    private float MAX_inc_boss = 0.15f;
+    private float MAX_inc_boss = 0.08f; // prev 0.15f
     /// <summary>
     /// Minimum stat increase % for filling the stat gap between the player's and the enemy's HP and NRG.
     /// </summary>
@@ -109,27 +109,27 @@ public class EnemyStats
             // Check the HP and NRG.
             if (CheckStatGap(previousEnemyHP, previousEnemyNRG, player.totalHealth, player.totalEnergy, MIN_gapFill_HP_NRG, MAX_gapFill_HP_NRG) == false)
             {
-                Debug.Log("Not first enemy.");
+                //Debug.Log("Not first enemy.");
                 if (!CheckForBoss())
                 {
-                    Debug.Log("Not boss.");
+                    //Debug.Log("Not boss.");
                     min = MIN_inc;
                     max = MAX_inc;
                 }
                 else
                 {
-                    Debug.Log("Enemy is boss.");
+                    //Debug.Log("Enemy is boss.");
                     min = MIN_inc_boss;
                     max = MAX_inc_boss;
                 }
             }
             else
             {
-                Debug.Log("Stat gap fill HP and NRG");
+                //Debug.Log("Stat gap fill HP and NRG");
                 min = MIN_gapFill_HP_NRG;
                 max = MAX_gapFill_HP_NRG;
             }
-            Debug.Log("Increasing HP and NRG stats");
+            //Debug.Log("Increasing HP and NRG stats");
             currentEnemyTotalHP = previousEnemyHP + RandomIncrease(previousEnemyHP, (min + 0.05f), (max + 0.1f));
             currentEnemyTotalNRG = previousEnemyNRG + RandomIncrease(previousEnemyNRG, min, max);
             
@@ -138,27 +138,27 @@ public class EnemyStats
             // Check the ATK and DEF.
             if (CheckStatGap(previousEnemyATK, previousEnemyDEF, player.physicalDamage, player.armor, MIN_gapFill_ATK_DEF, MAX_gapFill_ATK_DEF) == false)
             {
-                Debug.Log("Not first enemy.");
+                //Debug.Log("Not first enemy.");
                 if (!CheckForBoss())
                 {
-                    Debug.Log("Not boss.");
+                    //Debug.Log("Not boss.");
                     min = MIN_inc;
                     max = MAX_inc;
                 }
                 else
                 {
-                    Debug.Log("Enemy is boss.");
+                    //Debug.Log("Enemy is boss.");
                     min = MIN_inc_boss;
                     max = MAX_inc_boss;
                 }
             }
             else
             {
-                Debug.Log("Stat gap fill ATK and DEF");
+                //Debug.Log("Stat gap fill ATK and DEF");
                 min = MIN_gapFill_ATK_DEF;
                 max = MAX_gapFill_ATK_DEF;
             }
-            Debug.Log("Increasing ATK and DEF stats");
+            //Debug.Log("Increasing ATK and DEF stats");
             currentEnemyATK = previousEnemyATK + RandomIncrease(previousEnemyATK, min, max);
             currentEnemyDEF = previousEnemyDEF + RandomIncrease(previousEnemyDEF, min, max);
         }
@@ -379,7 +379,7 @@ public class EnemyStats
         int increase = (int)(stat * (Random.Range(min, max)));
         if (increase < 1)
         {
-            increase = Random.Range(1, 6);
+            increase = 1;// prev Random.Range(1, 6);
         }
         return increase;
     }
@@ -460,7 +460,7 @@ public class EnemyStats
         float tempStatAvg = (float)(eStat1 + eStat2) / (float)(pStat1 + pStat2);
         //Debug.Log(eStat1 +  " + " + eStat2 + " / " + pStat1 + " + " + pStat2 + " = " + tempStatAvg);
 
-        Debug.Log("The stat Gap is " + tempStatAvg);
+        //Debug.Log("The stat Gap is " + tempStatAvg);
 
         if (tempStatAvg <= 0.15f)
         {

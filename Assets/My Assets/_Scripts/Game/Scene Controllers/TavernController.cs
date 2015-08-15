@@ -11,7 +11,7 @@ public class TavernController : MonoBehaviour
     public Button sleepForNight;
     public Button leaveInn;
     public Button[] foodButtons;
-    public Text sleepText;
+    public Text sleepText, sleepCost;
     public Text[] buttonText;
     public Text[] healthLabelText;
     public Text[] moneyLabelText;
@@ -145,7 +145,9 @@ public class TavernController : MonoBehaviour
             // disable buttons if no health needed
             if (totalHealthMissing > 0)
             {
-                this.sleepText.text = "Sleep: " + (totalHealthMissing/2);
+                this.sleepText.text = totalHealthMissing.ToString();
+                this.sleepCost.text = (totalHealthMissing/2).ToString();
+                
                 for (int i = 0; i < buttonText.Length; i++)
                 {
                     foodButtons[i].gameObject.SetActive(true);

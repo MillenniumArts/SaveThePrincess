@@ -1,0 +1,1672 @@
+fileFormatVersion: 2
+guid: 7d503f5b4c7d91740b50fbd0b3fb018c
+timeCreated: 1439930098
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: mega zord_0
+    21300002: mega zord_1
+    21300004: mega zord_2
+    21300006: mega zord_3
+    21300008: mega zord_4
+    21300010: mega zord_6
+    21300012: mega zord_7
+    21300014: mega zord_8
+    21300016: mega zord_9
+    21300018: mega zord_11
+    21300020: mega zord_12
+    21300022: mega zord_13
+    21300024: mega zord_14
+    21300026: mega zord_15
+    21300028: mega zord_18
+    21300030: mega zord_19
+    21300032: mega zord_20
+    21300034: mega zord_21
+    21300036: mega zord_22
+    21300038: mega zord_23
+    21300040: mega zord_24
+    21300042: mega zord_25
+    21300044: mega zord_26
+    21300046: mega zord_27
+    21300048: mega zord_29
+    21300050: mega zord_35
+    21300052: mega zord_43
+    21300054: mega zord_44
+    21300056: mega zord_45
+    21300058: mega zord_46
+    21300060: mega zord_47
+    21300062: mega zord_49
+    21300064: mega zord_50
+    21300066: mega zord_51
+    21300068: mega zord_52
+    21300070: mega zord_53
+    21300072: mega zord_54
+    21300074: mega zord_55
+    21300076: mega zord_56
+    21300078: mega zord_57
+    21300080: mega zord_58
+    21300082: mega zord_60
+    21300084: mega zord_61
+    21300086: mega zord_62
+    21300088: mega zord_64
+    21300090: mega zord_67
+    21300092: mega zord_68
+    21300094: mega zord_69
+    21300096: mega zord_70
+    21300098: mega zord_71
+    21300100: mega zord_73
+    21300102: mega zord_74
+    21300104: mega zord_75
+    21300106: mega zord_76
+    21300108: mega zord_77
+    21300110: mega zord_78
+    21300112: mega zord_79
+    21300114: mega zord_80
+    21300116: mega zord_81
+    21300118: mega zord_82
+    21300120: mega zord_83
+    21300122: mega zord_84
+    21300124: mega zord_85
+    21300126: mega zord_86
+    21300128: mega zord_87
+    21300130: mega zord_88
+    21300132: mega zord_89
+    21300134: mega zord_90
+    21300136: mega zord_91
+    21300138: mega zord_92
+    21300140: mega zord_93
+    21300142: mega zord_96
+    21300144: mega zord_97
+    21300146: mega zord_98
+    21300148: mega zord_99
+    21300150: mega zord_100
+    21300152: mega zord_101
+    21300154: mega zord_102
+    21300156: mega zord_103
+    21300158: mega zord_104
+    21300160: mega zord_105
+    21300162: mega zord_106
+    21300164: mega zord_107
+    21300166: mega zord_108
+    21300168: mega zord_109
+    21300170: mega zord_110
+    21300172: mega zord_111
+    21300174: mega zord_112
+    21300176: mega zord_113
+    21300178: mega zord_114
+    21300180: mega zord_115
+    21300182: mega zord_116
+    21300184: mega zord_117
+    21300186: mega zord_118
+    21300188: mega zord_119
+    21300190: mega zord_120
+    21300192: mega zord_121
+    21300194: mega zord_122
+    21300196: mega zord_123
+    21300198: mega zord_124
+    21300200: mega zord_125
+    21300202: mega zord_126
+    21300204: mega zord_127
+    21300206: mega zord_128
+    21300208: mega zord_129
+    21300210: mega zord_130
+    21300212: mega zord_131
+    21300214: mega zord_132
+    21300216: mega zord_133
+    21300218: mega zord_134
+    21300220: mega zord_135
+    21300222: mega zord_136
+    21300224: mega zord_137
+    21300226: mega zord_138
+    21300228: mega zord_139
+    21300230: mega zord_140
+    21300232: mega zord_141
+    21300234: mega zord_142
+    21300236: mega zord_143
+    21300238: mega zord_148
+    21300240: mega zord_149
+    21300242: mega zord_150
+    21300244: mega zord_151
+    21300246: mega zord_152
+    21300248: mega zord_153
+    21300250: mega zord_154
+    21300252: mega zord_155
+    21300254: mega zord_156
+    21300256: mega zord_157
+    21300258: mega zord_158
+    21300260: mega zord_159
+    21300262: mega zord_160
+    21300264: mega zord_161
+    21300266: mega zord_162
+    21300268: mega zord_163
+    21300270: mega zord_164
+    21300272: mega zord_165
+    21300274: mega zord_166
+    21300276: mega zord_167
+    21300278: mega zord_168
+    21300280: mega zord_169
+    21300282: mega zord_170
+    21300284: mega zord_5
+    21300286: mega zord_10
+    21300288: mega zord_16
+    21300290: mega zord_17
+    21300292: mega zord_28
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: mega zord_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 2914
+        width: 229
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 2924
+        width: 225
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_2
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 2924
+        width: 210
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_3
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 2905
+        width: 223
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_4
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 2924
+        width: 225
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_6
+      rect:
+        serializedVersion: 2
+        x: 2390
+        y: 2910
+        width: 118
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_7
+      rect:
+        serializedVersion: 2
+        x: 2866
+        y: 2905
+        width: 129
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_8
+      rect:
+        serializedVersion: 2
+        x: 3299
+        y: 2914
+        width: 118
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_9
+      rect:
+        serializedVersion: 2
+        x: 3752
+        y: 2878
+        width: 120
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_11
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 2637
+        width: 216
+        height: 250
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_12
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 2627
+        width: 197
+        height: 274
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_13
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 2632
+        width: 193
+        height: 259
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_14
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 2634
+        width: 202
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_15
+      rect:
+        serializedVersion: 2
+        x: 1467
+        y: 2597
+        width: 201
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_18
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 2597
+        width: 119
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_19
+      rect:
+        serializedVersion: 2
+        x: 2862
+        y: 2639
+        width: 128
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_20
+      rect:
+        serializedVersion: 2
+        x: 3298
+        y: 2607
+        width: 119
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_21
+      rect:
+        serializedVersion: 2
+        x: 3752
+        y: 2625
+        width: 115
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_22
+      rect:
+        serializedVersion: 2
+        x: 4175
+        y: 2609
+        width: 119
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_23
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 2322
+        width: 220
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_24
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 2346
+        width: 216
+        height: 224
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_25
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2317
+        width: 220
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_26
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 2317
+        width: 225
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_27
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 2344
+        width: 219
+        height: 226
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_29
+      rect:
+        serializedVersion: 2
+        x: 2398
+        y: 2410
+        width: 129
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_35
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 2400
+        width: 115
+        height: 120
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_43
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 2014
+        width: 211
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_44
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 2020
+        width: 202
+        height: 260
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_45
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 2022
+        width: 193
+        height: 263
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_46
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 2000
+        width: 192
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_47
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 2006
+        width: 216
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_49
+      rect:
+        serializedVersion: 2
+        x: 2398
+        y: 2143
+        width: 120
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_50
+      rect:
+        serializedVersion: 2
+        x: 2876
+        y: 2134
+        width: 123
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_51
+      rect:
+        serializedVersion: 2
+        x: 3302
+        y: 2106
+        width: 124
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_52
+      rect:
+        serializedVersion: 2
+        x: 3757
+        y: 2120
+        width: 124
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_53
+      rect:
+        serializedVersion: 2
+        x: 4184
+        y: 2106
+        width: 114
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_54
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1706
+        width: 225
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_55
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1713
+        width: 216
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_56
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 1693
+        width: 216
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_57
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 1729
+        width: 220
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_58
+      rect:
+        serializedVersion: 2
+        x: 1434
+        y: 1745
+        width: 271
+        height: 241
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_60
+      rect:
+        serializedVersion: 2
+        x: 2404
+        y: 1904
+        width: 136
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_61
+      rect:
+        serializedVersion: 2
+        x: 2894
+        y: 1899
+        width: 115
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_62
+      rect:
+        serializedVersion: 2
+        x: 3325
+        y: 1872
+        width: 124
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_64
+      rect:
+        serializedVersion: 2
+        x: 4202
+        y: 1863
+        width: 119
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_67
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1426
+        width: 210
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_68
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 1426
+        width: 216
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_69
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1422
+        width: 211
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_70
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 1431
+        width: 234
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_71
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 1417
+        width: 202
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_73
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 1458
+        width: 147
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_74
+      rect:
+        serializedVersion: 2
+        x: 2302
+        y: 1458
+        width: 151
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_75
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 1463
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_76
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 1463
+        width: 152
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_77
+      rect:
+        serializedVersion: 2
+        x: 2977
+        y: 1445
+        width: 146
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_78
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 1458
+        width: 156
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_79
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 1463
+        width: 151
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_80
+      rect:
+        serializedVersion: 2
+        x: 3633
+        y: 1463
+        width: 156
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_81
+      rect:
+        serializedVersion: 2
+        x: 3885
+        y: 1472
+        width: 152
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_82
+      rect:
+        serializedVersion: 2
+        x: 4106
+        y: 1472
+        width: 151
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_83
+      rect:
+        serializedVersion: 2
+        x: 4331
+        y: 1481
+        width: 146
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_84
+      rect:
+        serializedVersion: 2
+        x: 4546
+        y: 1481
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1101
+        width: 264
+        height: 270
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_86
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1109
+        width: 216
+        height: 262
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_87
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 1109
+        width: 308
+        height: 279
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_88
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1293
+        width: 133
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_89
+      rect:
+        serializedVersion: 2
+        x: 2761
+        y: 1302
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_90
+      rect:
+        serializedVersion: 2
+        x: 3211
+        y: 1302
+        width: 124
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_91
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 1311
+        width: 129
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_92
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 1307
+        width: 129
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_93
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 1316
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_96
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1068
+        width: 206
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_97
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 1054
+        width: 220
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_98
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 1018
+        width: 147
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_99
+      rect:
+        serializedVersion: 2
+        x: 2306
+        y: 1022
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_100
+      rect:
+        serializedVersion: 2
+        x: 2522
+        y: 1028
+        width: 175
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_101
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 1027
+        width: 161
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_102
+      rect:
+        serializedVersion: 2
+        x: 2981
+        y: 1031
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_103
+      rect:
+        serializedVersion: 2
+        x: 3197
+        y: 1029
+        width: 147
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_104
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 1036
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_105
+      rect:
+        serializedVersion: 2
+        x: 3637
+        y: 1036
+        width: 147
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_106
+      rect:
+        serializedVersion: 2
+        x: 3890
+        y: 1027
+        width: 147
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_107
+      rect:
+        serializedVersion: 2
+        x: 4106
+        y: 1022
+        width: 151
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_108
+      rect:
+        serializedVersion: 2
+        x: 4331
+        y: 1031
+        width: 151
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_109
+      rect:
+        serializedVersion: 2
+        x: 4542
+        y: 1031
+        width: 158
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_110
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 751
+        width: 202
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_111
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 765
+        width: 197
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_112
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 710
+        width: 202
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_113
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 779
+        width: 224
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_114
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 760
+        width: 197
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_115
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 857
+        width: 129
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_116
+      rect:
+        serializedVersion: 2
+        x: 2761
+        y: 866
+        width: 128
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_117
+      rect:
+        serializedVersion: 2
+        x: 3211
+        y: 866
+        width: 133
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_118
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 875
+        width: 129
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_119
+      rect:
+        serializedVersion: 2
+        x: 4124
+        y: 870
+        width: 133
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_120
+      rect:
+        serializedVersion: 2
+        x: 4565
+        y: 880
+        width: 128
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_121
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 361
+        width: 312
+        height: 307
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_122
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 420
+        width: 275
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_123
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 613
+        width: 147
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_124
+      rect:
+        serializedVersion: 2
+        x: 2302
+        y: 613
+        width: 147
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_125
+      rect:
+        serializedVersion: 2
+        x: 2518
+        y: 627
+        width: 156
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_126
+      rect:
+        serializedVersion: 2
+        x: 2738
+        y: 623
+        width: 160
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_127
+      rect:
+        serializedVersion: 2
+        x: 2972
+        y: 632
+        width: 151
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_128
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 632
+        width: 152
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_129
+      rect:
+        serializedVersion: 2
+        x: 3408
+        y: 636
+        width: 156
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_130
+      rect:
+        serializedVersion: 2
+        x: 3633
+        y: 636
+        width: 160
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_131
+      rect:
+        serializedVersion: 2
+        x: 3885
+        y: 636
+        width: 152
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_132
+      rect:
+        serializedVersion: 2
+        x: 4101
+        y: 632
+        width: 156
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_133
+      rect:
+        serializedVersion: 2
+        x: 4326
+        y: 636
+        width: 151
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_134
+      rect:
+        serializedVersion: 2
+        x: 4546
+        y: 632
+        width: 152
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_135
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 397
+        width: 193
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_136
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 411
+        width: 192
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_137
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 419
+        width: 197
+        height: 162
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_138
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 457
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_139
+      rect:
+        serializedVersion: 2
+        x: 2756
+        y: 466
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_140
+      rect:
+        serializedVersion: 2
+        x: 3201
+        y: 466
+        width: 138
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_141
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 475
+        width: 124
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_142
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 471
+        width: 129
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_143
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 480
+        width: 129
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_148
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 177
+        width: 184
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_149
+      rect:
+        serializedVersion: 2
+        x: 2297
+        y: 159
+        width: 170
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_150
+      rect:
+        serializedVersion: 2
+        x: 2504
+        y: 209
+        width: 170
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_151
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 209
+        width: 161
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_152
+      rect:
+        serializedVersion: 2
+        x: 2967
+        y: 209
+        width: 161
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_153
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 209
+        width: 152
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_154
+      rect:
+        serializedVersion: 2
+        x: 3408
+        y: 214
+        width: 156
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_155
+      rect:
+        serializedVersion: 2
+        x: 3624
+        y: 218
+        width: 169
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_156
+      rect:
+        serializedVersion: 2
+        x: 3862
+        y: 214
+        width: 175
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_157
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 214
+        width: 193
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_158
+      rect:
+        serializedVersion: 2
+        x: 4321
+        y: 223
+        width: 156
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_159
+      rect:
+        serializedVersion: 2
+        x: 4532
+        y: 223
+        width: 168
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_160
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 220
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_161
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 21
+        width: 202
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_162
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 16
+        width: 202
+        height: 285
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_163
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 25
+        width: 209
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_164
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 0
+        width: 192
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_165
+      rect:
+        serializedVersion: 2
+        x: 2541
+        y: 44
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_166
+      rect:
+        serializedVersion: 2
+        x: 2756
+        y: 44
+        width: 129
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_167
+      rect:
+        serializedVersion: 2
+        x: 3201
+        y: 48
+        width: 138
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_168
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 53
+        width: 124
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_169
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 53
+        width: 129
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_170
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 57
+        width: 128
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_5
+      rect:
+        serializedVersion: 2
+        x: 4189
+        y: 3019
+        width: 65
+        height: 77
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_10
+      rect:
+        serializedVersion: 2
+        x: 3693
+        y: 2389
+        width: 47
+        height: 94
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_16
+      rect:
+        serializedVersion: 2
+        x: 3204
+        y: 2406
+        width: 45
+        height: 107
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_17
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 2394
+        width: 49
+        height: 99
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mega zord_28
+      rect:
+        serializedVersion: 2
+        x: 3745
+        y: 1850
+        width: 30
+        height: 117
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

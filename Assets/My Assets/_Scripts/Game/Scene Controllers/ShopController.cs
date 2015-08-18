@@ -23,6 +23,7 @@ public class ShopController : MonoBehaviour
 
     public Text currentStatDisplay;
     public Text selectedItemStats;
+    public Text curBalanceText, remBalanceText, costText;
 
     private ItemFactory factory;
     private PlayerController player;
@@ -237,13 +238,24 @@ public class ShopController : MonoBehaviour
     /// </summary>
     public void UpdateText()
     {
-        this.playerBalance.text = "Remaining Balance: " + this.player.dollarBalance.ToString();
+        this.playerBalance.text = this.player.dollarBalance.ToString();
         this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
             "DMG: " + player.playerWeapon.GetAtkMod() + " | " +
             "AMR: " + player.playerWeapon.GetDefMod() + "\n" +
             "Armor: \n" + player.playerArmor.GetName() + "\n" +
             "DMG: " + player.playerArmor.GetAtkMod() + " | " +
             "AMR: " + player.playerArmor.GetDefMod();
+
+        this.curBalanceText.text = this.playerBalance.text;
+        if (selectedItem >= 0){
+            this.costText.text = this.shopItems[selectedItem].GetDollarCost().ToString();
+            this.remBalanceText.text = (this.player.dollarBalance - this.shopItems[selectedItem].GetDollarCost()).ToString();
+        }
+        else
+        {
+            this.costText.text = "0";
+            this.remBalanceText.text = this.playerBalance.text;
+        }
     }
 
     private void DoOnFirstTick()

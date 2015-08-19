@@ -15,11 +15,6 @@ public class TownController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         //EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
-        this.fadingIn = true;
-
-        this.inn.image.CrossFadeAlpha(0f, 0f, false);
-        this.store.image.CrossFadeAlpha(0f, 0f, false);
-        this.merchant.image.CrossFadeAlpha(0f, 0f, false);
 
         //Vector3 newPos = new Vector3(-7.5f, -2.5f);
         //this.player.gameObject.transform.localPosition = newPos;

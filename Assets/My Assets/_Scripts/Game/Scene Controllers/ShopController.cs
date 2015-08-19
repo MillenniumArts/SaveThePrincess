@@ -240,10 +240,10 @@ public class ShopController : MonoBehaviour
     {
         this.playerBalance.text = this.player.dollarBalance.ToString();
         this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
-            "DMG: " + player.playerWeapon.GetAtkMod() + " | " +
+            "DMG: " + player.playerWeapon.GetAtkMod() + "   " +
             "AMR: " + player.playerWeapon.GetDefMod() + "\n" +
             "Armor: \n" + player.playerArmor.GetName() + "\n" +
-            "DMG: " + player.playerArmor.GetAtkMod() + " | " +
+            "DMG: " + player.playerArmor.GetAtkMod() + "   " +
             "AMR: " + player.playerArmor.GetDefMod();
 
         this.curBalanceText.text = this.playerBalance.text;

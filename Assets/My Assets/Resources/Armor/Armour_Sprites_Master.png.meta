@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7d503f5b4c7d91740b50fbd0b3fb018c
-timeCreated: 1439945621
+timeCreated: 1439988697
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -77,10 +77,10 @@ TextureImporter:
     21300140: 10_Foot_
     21300142: 4_Helmet_Warrior Armour
     21300144: 5_Helmet_Monk Armour
-    21300146: 11_LegBack_
-    21300148: 11_LegFront_
-    21300150: 21_LegBack_
-    21300152: 21_LegFront_
+    21300146: a_LegBack_
+    21300148: a_LegFront_
+    21300150: _LegBack_
+    21300152: _LegFront_
     21300154: 12_LegBack_
     21300156: 12_LegFront_
     21300158: 0_LegBack_
@@ -94,58 +94,58 @@ TextureImporter:
     21300174: 15_Body_Outlaw Armour
     21300176: 4_Body_Warrior Armour
     21300178: 5_Body_ Monk Armour
-    21300180: 11_Foot_
-    21300182: 21_Foot_
+    21300180: a_Foot_
+    21300182: _Foot_
     21300184: 12_Foot_
     21300186: 0_Foot_
     21300188: 22_Foot_
     21300190: 13_Foot_
     21300192: 24_Helmet_Thief Armour
     21300194: 7_Helmet_Tunic
-    21300196: 23_LegBack_
-    21300198: 23_LegFront_
+    21300196: 21_LegBack_
+    21300198: 21_LegFront_
     21300200: 1_LegBack_
     21300202: 1_LegFront_
-    21300204: 2_LegBack_
-    21300206: 2_LegFront_
+    21300204: _LegBack_
+    21300206: _LegFront_
     21300208: 3_LegBack_
     21300210: 3_LegFront_
-    21300212: 14_LegBack_
-    21300214: 14_LegFront_
-    21300216: 15_LegBack_
-    21300218: 15_LegFront_
+    21300212: 23_LegBack_
+    21300214: 23_LegFront_
+    21300216: 4_LegBack_
+    21300218: 4_LegFront_
     21300220: 16_Helmet_Veteran's Armour
     21300222: 17_Helmet_Medic Armour
     21300224: 6_Helmet_Explorer Garb
-    21300226: 23_Foot_
+    21300226: 21_Foot_
     21300228: 1_Foot_
-    21300230: 2_Foot_
+    21300230: _Foot_
     21300232: 3_Foot_
-    21300234: 14_Foot_
-    21300236: 15_Foot_
-    21300238: 4_LegBack_
-    21300240: 4_LegFront_
+    21300234: 23_Foot_
+    21300236: 4_Foot_
+    21300238: 7_LegBack_
+    21300240: 7_LegFront_
     21300242: 5_LegBack_
     21300244: 5_LegFront_
     21300246: 16_LegBack_
     21300248: 16_LegFront_
-    21300250: 17_LegBack_
-    21300252: 17_LegFront_
-    21300254: 24_LegBack_
-    21300256: 24_LegFront_
-    21300258: 7_LegBack_
-    21300260: 7_LegFront_
+    21300250: a_LegBack_
+    21300252: a_LegFront_
+    21300254: 15_LegBack_
+    21300256: 15_LegFront_
+    21300258: 24_LegBack_
+    21300260: 24_LegFront_
     21300262: 16_Body_Veteran's Armour
     21300264: 17_Body_Medic Armour
     21300266: 24_Body_Thief Armour
     21300268: 6_Body_Explorer Garb
     21300270: 7_Body_Tunic
-    21300272: 4_Foot_
+    21300272: 7_Foot_
     21300274: 5_Foot_
     21300276: 16_Foot_
-    21300278: 17_Foot_
-    21300280: 24_Foot_
-    21300282: 7_Foot_
+    21300278: a_Foot_
+    21300280: 15_Foot_
+    21300282: 24_Foot_
     21300284: 20_Shoulder_
     21300286: 1_Shoulder_
     21300288: 23_Shoulder_
@@ -160,6 +160,18 @@ TextureImporter:
     21300306: Blank_LegBack_
     21300308: Blank_LegFront_
     21300310: Blank_Foot_
+    21300312: 17_LegBack_
+    21300314: 17_LegFront_
+    21300316: 2_LegBack_
+    21300318: 2_LegFront_
+    21300320: 17_Foot_
+    21300322: 2_Foot_
+    21300324: 14_LegBack_
+    21300326: 14_LegFront_
+    21300328: 11_LegBack_
+    21300330: 11_LegFront_
+    21300332: 14_Foot_
+    21300334: 11_Foot_
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -419,7 +431,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 728
-        y: 2317
+        y: 2312
         width: 220
         height: 257
       alignment: 9
@@ -725,7 +737,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .43549189, y: .763994455}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 18_LegBack_
+    - name: 1_LegBack_
       rect:
         serializedVersion: 2
         x: 2527
@@ -735,7 +747,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .454124808, y: .756229401}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 18_LegFront_
+    - name: 1_LegFront_
       rect:
         serializedVersion: 2
         x: 2742
@@ -865,7 +877,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .511267185, y: .882964432}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 18_Foot_
+    - name: 1_Foot_
       rect:
         serializedVersion: 2
         x: 2761
@@ -935,17 +947,17 @@ TextureImporter:
       alignment: 9
       pivot: {x: .451566398, y: .414528728}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 11_LegBack_
+    - name: 17_LegBack_
       rect:
         serializedVersion: 2
         x: 2086
-        y: 1018
+        y: 1023
         width: 147
         height: 197
       alignment: 9
       pivot: {x: .469271511, y: .770562351}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 11_LegFront_
+    - name: 17_LegFront_
       rect:
         serializedVersion: 2
         x: 2306
@@ -955,7 +967,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .438544661, y: .766808391}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 21_LegBack_
+    - name: 2_LegBack_
       rect:
         serializedVersion: 2
         x: 2522
@@ -965,7 +977,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .422565579, y: .74428761}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 21_LegFront_
+    - name: 2_LegFront_
       rect:
         serializedVersion: 2
         x: 2742
@@ -995,7 +1007,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .426252931, y: .764071882}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 0_LegBack_
+    - name: 13_LegBack_
       rect:
         serializedVersion: 2
         x: 3422
@@ -1005,7 +1017,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .444689691, y: .76212734}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 0_LegFront_
+    - name: 13_LegFront_
       rect:
         serializedVersion: 2
         x: 3637
@@ -1035,7 +1047,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .452138722, y: .774948955}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 13_LegBack_
+    - name: 0_LegBack_
       rect:
         serializedVersion: 2
         x: 4331
@@ -1045,7 +1057,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .464103252, y: .753813267}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 13_LegFront_
+    - name: 0_LegFront_
       rect:
         serializedVersion: 2
         x: 4542
@@ -1105,7 +1117,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .480331808, y: .119316131}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 11_Foot_
+    - name: 17_Foot_
       rect:
         serializedVersion: 2
         x: 2320
@@ -1115,7 +1127,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .528013706, y: .862680256}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 21_Foot_
+    - name: 2_Foot_
       rect:
         serializedVersion: 2
         x: 2761
@@ -1135,7 +1147,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .50679189, y: .862680256}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 0_Foot_
+    - name: 13_Foot_
       rect:
         serializedVersion: 2
         x: 3651
@@ -1155,7 +1167,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .5, y: .873145044}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 13_Foot_
+    - name: 0_Foot_
       rect:
         serializedVersion: 2
         x: 4565
@@ -1185,7 +1197,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .447163522, y: .20225288}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 23_LegBack_
+    - name: 21_LegBack_
       rect:
         serializedVersion: 2
         x: 2086
@@ -1195,7 +1207,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .444689691, y: .777282119}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 23_LegFront_
+    - name: 21_LegFront_
       rect:
         serializedVersion: 2
         x: 2302
@@ -1205,7 +1217,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .438544661, y: .772809923}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 1_LegBack_
+    - name: 18_LegBack_
       rect:
         serializedVersion: 2
         x: 2518
@@ -1215,7 +1227,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .476836383, y: .762127042}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 1_LegFront_
+    - name: 18_LegFront_
       rect:
         serializedVersion: 2
         x: 2738
@@ -1225,7 +1237,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .443537891, y: .774166882}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 2_LegBack_
+    - name: 14_LegBack_
       rect:
         serializedVersion: 2
         x: 2961
@@ -1235,7 +1247,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .505576074, y: .777608216}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 2_LegFront_
+    - name: 14_LegFront_
       rect:
         serializedVersion: 2
         x: 3192
@@ -1265,17 +1277,17 @@ TextureImporter:
       alignment: 9
       pivot: {x: .420951843, y: .764071882}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 14_LegBack_
+    - name: 23_LegBack_
       rect:
         serializedVersion: 2
         x: 3885
-        y: 636
+        y: 631
         width: 152
         height: 198
       alignment: 9
       pivot: {x: .458396524, y: .741819739}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 14_LegFront_
+    - name: 23_LegFront_
       rect:
         serializedVersion: 2
         x: 4101
@@ -1285,7 +1297,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .430507571, y: .74597621}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 15_LegBack_
+    - name: 11_LegBack_
       rect:
         serializedVersion: 2
         x: 4326
@@ -1295,7 +1307,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .452138722, y: .768337429}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 15_LegFront_
+    - name: 11_LegFront_
       rect:
         serializedVersion: 2
         x: 4546
@@ -1335,7 +1347,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .445911705, y: .320616543}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 23_Foot_
+    - name: 21_Foot_
       rect:
         serializedVersion: 2
         x: 2316
@@ -1345,7 +1357,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .521173477, y: .866598845}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 1_Foot_
+    - name: 18_Foot_
       rect:
         serializedVersion: 2
         x: 2756
@@ -1355,7 +1367,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .520377457, y: .873587489}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 2_Foot_
+    - name: 14_Foot_
       rect:
         serializedVersion: 2
         x: 3201
@@ -1375,7 +1387,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .521856487, y: .88038075}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 14_Foot_
+    - name: 23_Foot_
       rect:
         serializedVersion: 2
         x: 4119
@@ -1385,7 +1397,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .521011233, y: .866598845}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 15_Foot_
+    - name: 11_Foot_
       rect:
         serializedVersion: 2
         x: 4559
@@ -1395,17 +1407,17 @@ TextureImporter:
       alignment: 9
       pivot: {x: .528013706, y: .873587489}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 4_LegBack_
+    - name: 7_LegBack_
       rect:
         serializedVersion: 2
         x: 2049
-        y: 177
+        y: 172
         width: 184
         height: 225
       alignment: 9
       pivot: {x: .549994409, y: .755528688}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 4_LegFront_
+    - name: 7_LegFront_
       rect:
         serializedVersion: 2
         x: 2297
@@ -1455,7 +1467,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .441218317, y: .763383389}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 17_LegBack_
+    - name: 4_LegBack_
       rect:
         serializedVersion: 2
         x: 3408
@@ -1465,7 +1477,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .487271816, y: .767085671}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 17_LegFront_
+    - name: 4_LegFront_
       rect:
         serializedVersion: 2
         x: 3624
@@ -1475,7 +1487,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .451889843, y: .76212734}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 24_LegBack_
+    - name: 15_LegBack_
       rect:
         serializedVersion: 2
         x: 3862
@@ -1485,7 +1497,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .520650089, y: .761390805}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 24_LegFront_
+    - name: 15_LegFront_
       rect:
         serializedVersion: 2
         x: 4097
@@ -1495,7 +1507,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .378299057, y: .693286002}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 7_LegBack_
+    - name: 24_LegBack_
       rect:
         serializedVersion: 2
         x: 4322
@@ -1505,7 +1517,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .471044302, y: .752765238}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 7_LegFront_
+    - name: 24_LegFront_
       rect:
         serializedVersion: 2
         x: 4532
@@ -1565,7 +1577,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .474774033, y: .236109406}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 4_Foot_
+    - name: 7_Foot_
       rect:
         serializedVersion: 2
         x: 2541
@@ -1595,7 +1607,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .528774977, y: .873214602}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 17_Foot_
+    - name: 4_Foot_
       rect:
         serializedVersion: 2
         x: 3651
@@ -1605,7 +1617,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .521856487, y: .852391481}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 24_Foot_
+    - name: 15_Foot_
       rect:
         serializedVersion: 2
         x: 4119
@@ -1615,7 +1627,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .507002473, y: .893965185}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 7_Foot_
+    - name: 24_Foot_
       rect:
         serializedVersion: 2
         x: 4560

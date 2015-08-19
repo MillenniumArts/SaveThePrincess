@@ -44,7 +44,7 @@ public class Armor : Item {
     [SerializeField]
     private string tagName, folder, spriteSheetName;
     [SerializeField]
-    private int numberOfElements;
+    private int bottomIndexRange, topIndexRange;
     [SerializeField]
     private int armourSetNum;
     /*
@@ -142,7 +142,7 @@ public class Armor : Item {
 
     protected void RandomSetNum()
     {
-        armourSetNum = Random.Range(0, numberOfElements);
+        armourSetNum = Random.Range(bottomIndexRange, topIndexRange);
     }
 
     protected void DisplayArmourInStore()

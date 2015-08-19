@@ -11,6 +11,7 @@ public class ArmourRenderer : MonoBehaviour {
     private string folder, curSheetName, lastSheetName;
     [SerializeField]
     private int curSetNum/*, numOfElements*/;
+    private bool changeArmour = false;
 
     void Start()
     {
@@ -19,13 +20,14 @@ public class ArmourRenderer : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (curSheetName != lastSheetName)
+        if (changeArmour)
         {
             LoadSprites(curSetNum);
             RenderSprites();
             lastSheetName = curSheetName;
             chosenArmourSprites.Clear();
             chosenArmourSprites = new List<Sprite>();
+            changeArmour = false;
         }
     }
 
@@ -33,6 +35,7 @@ public class ArmourRenderer : MonoBehaviour {
     {
         curSheetName = sheetName;
         curSetNum = otherSetNum;
+        changeArmour = true;
     }
 
     private void LoadSprites(int _setNum)

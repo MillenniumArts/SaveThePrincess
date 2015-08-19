@@ -311,7 +311,7 @@ public class Item : MonoBehaviour {
 	public string GetStatsString(){
 		string statsString = GetName () + "\n" +
 			//"Type: " + GetItemSubClass() + "\n" +
-				"DMG: +" + GetAtkMod() + " | " + 
+				"DMG: +" + GetAtkMod() + "   " + 
 				"AMR: +" + GetDefMod() + "\n" +
 				"Cost: $" + GetDollarCost() + "\n";
 		return statsString;

@@ -31,11 +31,6 @@ public class CharacterSelectController : MonoBehaviour {
         player.GetComponentInChildren<CreateCombination>().NewSpriteSheet(currentChar);
     }
 
-    public void GoBack()
-    {
-        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", true);
-    }
-
     /// <summary>
     /// Previous skin button call
     /// </summary>

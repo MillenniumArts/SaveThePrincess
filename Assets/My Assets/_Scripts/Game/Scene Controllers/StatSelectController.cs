@@ -153,7 +153,7 @@ public class StatSelectController : MonoBehaviour
     public void GoBack()
     {
         AudioManager.Instance.PlaySFX("Button1");
-        LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP", true);
+        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", true);
         this.player.transform.localPosition = this.prevPos;
 
         //EscapeHandler.instance.ClearButtons();

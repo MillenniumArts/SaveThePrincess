@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 312065f68c198b14caa5fd7ad09acc21
-timeCreated: 1437497067
+timeCreated: 1440025642
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -77,7 +77,7 @@ TextureImporter:
         width: 198
         height: 319
       alignment: 9
-      pivot: {x: .495674223, y: .0489182435}
+      pivot: {x: .501827836, y: .0718355104}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_2_Trident
       rect:
@@ -87,7 +87,7 @@ TextureImporter:
         width: 187
         height: 251
       alignment: 9
-      pivot: {x: .504580557, y: .0666221827}
+      pivot: {x: .498064816, y: .105456837}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_3_Halberd
       rect:
@@ -97,7 +97,7 @@ TextureImporter:
         width: 203
         height: 293
       alignment: 9
-      pivot: {x: .360518128, y: .0319107622}
+      pivot: {x: .360518128, y: .0527031273}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_4_Spear
       rect:
@@ -107,7 +107,7 @@ TextureImporter:
         width: 101
         height: 267
       alignment: 9
-      pivot: {x: .5, y: .0498691499}
+      pivot: {x: .487935573, y: .0818131715}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_5_Halberd
       rect:
@@ -117,7 +117,7 @@ TextureImporter:
         width: 287
         height: 250
       alignment: 9
-      pivot: {x: .494835198, y: .0464160144}
+      pivot: {x: .494834334, y: .080532223}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Guard_1
       rect:
@@ -177,27 +177,27 @@ TextureImporter:
         width: 341
         height: 184
       alignment: 9
-      pivot: {x: .496880352, y: .0491440818}
+      pivot: {x: .500453413, y: .108741425}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_7_Spear
       rect:
         serializedVersion: 2
-        x: 508
+        x: 601
         y: 204
-        width: 173
+        width: 223
         height: 319
       alignment: 9
-      pivot: {x: .850776434, y: .0346608907}
+      pivot: {x: .237351224, y: .0592970401}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_8_Spear
       rect:
         serializedVersion: 2
         x: 883
         y: 182
-        width: 158
+        width: 183
         height: 371
       alignment: 9
-      pivot: {x: .573190033, y: .0324500985}
+      pivot: {x: .440027118, y: .0521552004}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_9_Spear
       rect:
@@ -207,17 +207,17 @@ TextureImporter:
         width: 207
         height: 292
       alignment: 9
-      pivot: {x: .486469656, y: .0523812287}
+      pivot: {x: .486469656, y: .0732448548}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_10_Halberd
       rect:
         serializedVersion: 2
-        x: 1626
+        x: 1627
         y: 182
-        width: 191
+        width: 257
         height: 360
       alignment: 9
-      pivot: {x: .637185276, y: .0357524455}
+      pivot: {x: .46176824, y: .0899052545}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Guard_6
       rect:

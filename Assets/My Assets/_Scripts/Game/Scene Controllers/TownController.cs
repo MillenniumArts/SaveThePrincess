@@ -15,10 +15,16 @@ public class TownController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         //EscapeHandler.instance.GetButtons();
         this.player = GameObject.FindObjectOfType<PlayerController>();
+        this.fadingIn = true;
+
+        this.inn.image.CrossFadeAlpha(0f, 0f, false);
+        this.store.image.CrossFadeAlpha(0f, 0f, false);
+        this.merchant.image.CrossFadeAlpha(0f, 0f, false);
 
         //Vector3 newPos = new Vector3(-7.5f, -2.5f);
         //this.player.gameObject.transform.localPosition = newPos;
         player.posController.MovePlayer(25, 25);
+
 	}
 
 	public void GoToBattle(){
@@ -55,5 +61,7 @@ public class TownController : MonoBehaviour {
         this.playerBalance.text = this.player.dollarBalance.ToString();
         this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
         this.playerScore.text = PlayerPrefs.GetInt("score").ToString();
+
+       
 	}
 }

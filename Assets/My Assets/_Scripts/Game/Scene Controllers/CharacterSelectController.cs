@@ -96,9 +96,9 @@ public class CharacterSelectController : MonoBehaviour {
 
     public void ChangeSpriteColour(float colourNum)
     {
-        Debug.Log("Called Change Sprite Colour.");
+        //Debug.Log("Called Change Sprite Colour.");
         Color newColour = new Color(colourNum, colourNum, colourNum);
-        Debug.Log(newColour);
+        //Debug.Log(newColour);
         foreach (SpriteRenderer renderer in player.gameObject.GetComponentsInChildren<SpriteRenderer>())
         {
             renderer.color = newColour;

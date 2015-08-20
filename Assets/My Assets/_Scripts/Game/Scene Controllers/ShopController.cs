@@ -21,8 +21,8 @@ public class ShopController : MonoBehaviour
     //private string[] itemsToSpawn = { "Sword", "Hammer", "Spear" /*,"Axe","Bow","Dagger"*/ };
 
 
-    public Text currentStatDisplay;
-    public Text selectedItemStats;
+    public Text currentStatDisplay, curStatTitle;
+    public Text selectedItemStats, selItemTitle;
     public Text curBalanceText, remBalanceText, costText;
 
     private ItemFactory factory;
@@ -243,22 +243,25 @@ public class ShopController : MonoBehaviour
 
         if (selectedItem == -1)
         {
-            this.currentStatDisplay.text = player.playerWeapon.GetName() + "\n" +
-                "DMG: " + player.playerWeapon.GetAtkMod() + "\n" +
-                player.playerArmor.GetName() + "\n" +
-                "AMR: " + player.playerArmor.GetDefMod();
+            this.selItemTitle.text = "";
+            this.curStatTitle.text = "";
+            this.currentStatDisplay.text = "";
         }
         else if (selectedItem == 0 || selectedItem == 1)
         {
+            this.curStatTitle.text = this.player.playerName + "'s Weapon stats";
+            this.selItemTitle.text = "Selected Weapon Stats";
             //weapon
             this.currentStatDisplay.text = player.playerWeapon.GetName() + "\n" +
                 "DMG: " + player.playerWeapon.GetAtkMod();
         }
         else if (selectedItem == 2)
         {
+            this.curStatTitle.text = this.player.playerName + "'s Armor stats";
+            this.selItemTitle.text = "Selected Weapon Stats";
             // armor
             this.currentStatDisplay.text = player.playerArmor.GetName() + "\n" +
-                "DMG: " + player.playerArmor.GetAtkMod();
+                "ARM: " + player.playerArmor.GetDefMod();
         }
 
 

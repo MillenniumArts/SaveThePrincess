@@ -566,7 +566,7 @@ public class GameController : MonoBehaviour
         //this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
-        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
+        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
         if (this.inventoryToggleButton.isActiveAndEnabled)
         {
             // inventory text

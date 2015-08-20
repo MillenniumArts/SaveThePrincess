@@ -163,6 +163,7 @@ public class GameController : MonoBehaviour
             this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);
+            this.turn = 1;
         }
     }
 
@@ -310,6 +311,7 @@ public class GameController : MonoBehaviour
         if (this.player.remainingHealth > 0){
             Invoke("PlayerRegen", (timeVal));
             this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+            this.turn = 0;
             this.playerHasEatenFoodThisTurn = false;
             this.enemyHasAttacked = false;
             this.playerHasAttacked = false;
@@ -595,6 +597,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void UpdateInventory()
+    {
+        if (this.turn == 0)
+        {
+            this.inventoryToggleButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.inventoryToggleButton.gameObject.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Updates UI
     /// </summary>
@@ -605,6 +619,7 @@ public class GameController : MonoBehaviour
         UpdateBars();
         UpdateAttackBar();
         UpdateConfirmPanel();
+        UpdateInventory();
     }
 
     /// <summary>
@@ -664,10 +679,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void LoadNextBattle()
     {
-        // VICTORY ANIMATION
-        turn = 0;
-        // player turn stored in local, 0 for playerTurn
-        PlayerPrefs.SetInt("turn", turn);
         // enemy dead, fight another and keep player on screen
         //DontDestroyOnLoad(this.player);
         this.player.dollarBalance += this.enemy.DropMoney();
@@ -832,7 +843,6 @@ public class GameController : MonoBehaviour
 
         this.turn = 0;
 
-        PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
         this.score = PlayerPrefs.GetInt("score");
 

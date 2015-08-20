@@ -700,7 +700,7 @@ public class GameController : MonoBehaviour
         BattleCounter.GetInstance().ResetCurrentBattleCount();
         // Set the idle animation to town idle
         player.InBattle(false);
-
+        PlayerPrefs.SetInt("retreated", 1);
         if (!waiting)
         {
             Debug.Log("Enemy Stats need to be reset to full");

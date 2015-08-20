@@ -19,8 +19,18 @@ public class TownController : MonoBehaviour {
 
         //Vector3 newPos = new Vector3(-7.5f, -2.5f);
         //this.player.gameObject.transform.localPosition = newPos;
-        player.posController.MovePlayer(25, 25);
-
+        this.player.posController.MovePlayer(25, 25);
+        
+        //animate if player won battles
+        if (PlayerPrefs.GetInt("retreated") == 0 && PlayerPrefs.GetInt("score") > 0)
+        {
+            this.player.TriggerAnimation("victory");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("retreated", 0);
+        }
+        
         this.apples.text = this.player.inventory.Apples.ToString() + "/3";
         this.bread.text = this.player.inventory.Bread.ToString() + "/3";
         this.cheese.text = this.player.inventory.Cheese.ToString() + "/3";

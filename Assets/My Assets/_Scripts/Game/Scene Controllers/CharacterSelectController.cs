@@ -13,6 +13,8 @@ public class CharacterSelectController : MonoBehaviour {
     public int[] unlockLevels;
     public bool[] skinUnlock;
 
+    public bool canContinue = true;
+
     void Awake()
     {
         this.player = FindObjectOfType<PlayerController>();
@@ -39,12 +41,14 @@ public class CharacterSelectController : MonoBehaviour {
             {
                 // Darken all the sprites.
                 ChangeSpriteColour(0.1f);
+                canContinue = false;
             }
         }
         else
         {
             // Lighten all the sprites.
             ChangeSpriteColour(1.0f);
+            canContinue = true;
         }
     }
 
@@ -69,10 +73,17 @@ public class CharacterSelectController : MonoBehaviour {
     {
         if (playerName.text != "")
         {
-            AudioManager.Instance.PlaySFX("Button1");
-            this.player.playerName= this.playerName.text;
-            // do something here before next load if needed
-            LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
+            if (canContinue)
+            {
+                AudioManager.Instance.PlaySFX("Button1");
+                this.player.playerName = this.playerName.text;
+                // do something here before next load if needed
+                LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);
+            }
+            else
+            {
+                NotificationHandler.instance.MakeNotification("Character Locked!", "You need to deafeat " + unlockLevels[currentChar-2] + " enemies in a row to unlock this character.\n Please choose another character.");
+            }
         }
         else {
             NotificationHandler.instance.MakeNotification("Error!", "You need to enter a player name!");

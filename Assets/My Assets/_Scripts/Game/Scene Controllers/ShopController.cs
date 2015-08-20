@@ -229,7 +229,7 @@ public class ShopController : MonoBehaviour
             {
                 this.HI_DOLLAR_VALUE = (DifficultyLevel.GetInstance().GetDifficultyMultiplier() + this.LO_DOLLAR_VALUE);
             }
-            shopItems[i].dollarCost = Random.Range(LO_DOLLAR_VALUE, HI_DOLLAR_VALUE);
+            shopItems[i].dollarCost = (int)(Random.Range(LO_DOLLAR_VALUE, HI_DOLLAR_VALUE) / 2);
         }
     }
 

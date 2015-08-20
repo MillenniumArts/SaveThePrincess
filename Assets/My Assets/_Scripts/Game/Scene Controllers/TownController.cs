@@ -8,6 +8,7 @@ public class TownController : MonoBehaviour {
 	public Text playerBalance, 
                 playerHealth,
                 playerScore;
+    public Text apples, bread, cheese, nrgPot, hPot, score;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,13 @@ public class TownController : MonoBehaviour {
         //this.player.gameObject.transform.localPosition = newPos;
         player.posController.MovePlayer(25, 25);
 
+        this.apples.text = this.player.inventory.Apples.ToString() + "/3";
+        this.bread.text = this.player.inventory.Bread.ToString() + "/3";
+        this.cheese.text = this.player.inventory.Cheese.ToString() + "/3";
+
+        this.nrgPot.text = this.player.inventory.EnergyPotions.ToString() + "/2";
+        this.hPot.text = this.player.inventory.HealthPotions.ToString() + "/2";
+        this.score.text = PlayerPrefs.GetInt("score").ToString();
 	}
 
 	public void GoToBattle(){
@@ -56,7 +64,5 @@ public class TownController : MonoBehaviour {
         this.playerBalance.text = this.player.dollarBalance.ToString();
         this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
         this.playerScore.text = PlayerPrefs.GetInt("score").ToString();
-
-       
 	}
 }

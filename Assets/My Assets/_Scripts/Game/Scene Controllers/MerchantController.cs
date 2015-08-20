@@ -8,6 +8,7 @@ public class MerchantController : MonoBehaviour {
     // player reference
     private PlayerController player;
 
+    public GameObject confirmPanel;
     // items for sale 
     public int[] items;
     
@@ -49,12 +50,7 @@ public class MerchantController : MonoBehaviour {
                   increaseFive,
                   decreaseFive;
 
-    // text to display amount of each item
-    public Text quantityOneText, 
-                quantityTwoText, 
-                quantityThreeText,
-                quantityFourText,
-                quantityFiveText;
+
 
     // total number of items purchased 
     public int numFoodItemsPurchased, numPotionsPurchased;
@@ -108,9 +104,35 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void LeaveMerchant()
     {
+        bool unPurchased = false;
         AudioManager.Instance.PlaySFX("Button1");
-        //DontDestroyOnLoad(this.player);
-        //EscapeHandler.instance.ClearButtons();
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] > 0)
+            {
+                unPurchased = true;
+                break;
+            }
+            else
+            {
+                ConfirmPanel();
+            }
+        }
+        if (unPurchased)
+        {
+            this.confirmPanel.gameObject.SetActive(true);
+        }
+    }
+
+    public void CancelPanel()
+    {
+        AudioManager.Instance.PlaySFX("Button1");
+        this.confirmPanel.gameObject.SetActive(false);
+    }
+
+    public void ConfirmPanel()
+    {
+        AudioManager.Instance.PlaySFX("Button1");
         LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
     }
 
@@ -134,10 +156,6 @@ public class MerchantController : MonoBehaviour {
                 items[index] += 1;
                 numPotionsPurchased += 1;
             }
-        }
-        else
-        {
-
         }
     }
 
@@ -180,19 +198,13 @@ public class MerchantController : MonoBehaviour {
         this.playerBalanceText.text = this.playerBalance.ToString();
         this.remainingBalanceText.text = this.remainingBalance.ToString();
         this.purchaseBalanceText.text = this.purchaseBalance.ToString();
-        
-        this.quantityOneText.text = this.items[0].ToString();
-        this.quantityTwoText.text = this.items[1].ToString();
-        this.quantityThreeText.text = this.items[2].ToString();
-        this.quantityFourText.text = this.items[3].ToString();
-        this.quantityFiveText.text = this.items[4].ToString();
 
         // update stock
-        this.playerApples.text = this.player.inventory.Apples.ToString();
-        this.playerBread.text = this.player.inventory.Bread.ToString();
-        this.playerCheese.text = this.player.inventory.Cheese.ToString();
-        this.playerHP.text = this.player.inventory.HealthPotions.ToString();
-        this.playerNRG.text = this.player.inventory.EnergyPotions.ToString();
+        this.playerApples.text = (this.player.inventory.Apples + this.items[0]).ToString();
+        this.playerBread.text = (this.player.inventory.Bread + this.items[1]).ToString();
+        this.playerCheese.text = (this.player.inventory.Cheese + this.items[2]).ToString();
+        this.playerHP.text = (this.player.inventory.HealthPotions + this.items[3]).ToString();
+        this.playerNRG.text = (this.player.inventory.EnergyPotions + this.items[4]).ToString();
 
         for (int i = 0; i < this.labelText.Length; i++ )
         {
@@ -247,6 +259,7 @@ public class MerchantController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
         NotificationHandler.instance.MakeNotification("Merchant", "Welcome to the merchant! Feel free to buy yourself some food or potions to help sustain through battles!");
+        this.confirmPanel.gameObject.SetActive(false);
 
         // get player
         this.player = FindObjectOfType<PlayerController>();

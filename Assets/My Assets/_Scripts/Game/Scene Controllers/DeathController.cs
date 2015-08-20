@@ -47,6 +47,7 @@ public class DeathController : MonoBehaviour {
     public void LoadHighScores()
     {
         LevelLoadHandler.Instance.LoadLevel("HighScores_LVP", false);
+        this.player.posController.MovePlayer(-50, -50);
     }
 
 	void UpdateText(){

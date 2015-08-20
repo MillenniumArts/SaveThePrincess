@@ -37,9 +37,10 @@ public class DeathController : MonoBehaviour {
     {
         if (dl.publicCode != "" && dl.privateCode != "")
         {
-            // TESTING:
-            //dl.AddScore("Jake", 999);
-            dl.AddScore(this.player.playerName, PlayerPrefs.GetInt("score"));
+            if (PlayerPrefs.GetInt("score") != 0) 
+            {
+                dl.AddScore(this.player.playerName, PlayerPrefs.GetInt("score"));
+            }
         }
     }
 

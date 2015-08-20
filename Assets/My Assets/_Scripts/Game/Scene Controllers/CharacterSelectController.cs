@@ -9,6 +9,10 @@ public class CharacterSelectController : MonoBehaviour {
     public int currentChar = 0;
     public InputField playerName;
 
+    public int unlockCharsMinIndex;
+    public int[] unlockLevels;
+    public bool[] skinUnlock;
+
     void Awake()
     {
         this.player = FindObjectOfType<PlayerController>();
@@ -29,6 +33,19 @@ public class CharacterSelectController : MonoBehaviour {
             currentChar = 0;
         }
         player.GetComponentInChildren<CreateCombination>().NewSpriteSheet(currentChar);
+        if (currentChar >= unlockCharsMinIndex)
+        {
+            if (skinUnlock[currentChar - 2] == false)
+            {
+                // Darken all the sprites.
+                ChangeSpriteColour(0.1f);
+            }
+        }
+        else
+        {
+            // Lighten all the sprites.
+            ChangeSpriteColour(1.0f);
+        }
     }
 
     /// <summary>
@@ -61,10 +78,38 @@ public class CharacterSelectController : MonoBehaviour {
             NotificationHandler.instance.MakeNotification("Error!", "You need to enter a player name!");
         }
     }
+
+    public void CheckUnlock()
+    {
+        if (currentChar >= unlockCharsMinIndex)
+        {
+            int charUnlock = PlayerPrefs.GetInt("CharUnlock");
+            for (int i = 0; i < unlockLevels.Length; i++)
+            {
+                if (charUnlock >= unlockLevels[i])
+                {
+                    skinUnlock[i] = true;
+                }
+            }
+        }
+    }
+
+    public void ChangeSpriteColour(float colourNum)
+    {
+        Debug.Log("Called Change Sprite Colour.");
+        Color newColour = new Color(colourNum, colourNum, colourNum);
+        Debug.Log(newColour);
+        foreach (SpriteRenderer renderer in player.gameObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.color = newColour;
+        }
+    }
     
     // Use this for initialization
 	void Start () {
         numOfChars -= 1;
+        skinUnlock = new bool[unlockLevels.Length];
+        CheckUnlock();
 	}
 	
 	// Update is called once per frame

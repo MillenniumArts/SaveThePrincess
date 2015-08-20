@@ -18,7 +18,8 @@ public class DeathController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("Death");
         EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
-        this.player.posController.MovePlayer(35, 65);	
+        this.player.posController.MovePlayer(35, 65);
+        PlayerPrefs.SetInt("CharUnlock", PlayerPrefs.GetInt("score"));
 	}
 
     public void Restart()

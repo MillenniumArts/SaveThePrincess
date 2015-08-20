@@ -183,7 +183,7 @@ public class StatSelectController : MonoBehaviour
         this.prevNRG.text = this.baseEnergy.ToString();
         this.prevHP.text = this.baseHealth.ToString();
 
-        this.creditText.text = "CREDITS: " + numCredits;
+        this.creditText.text = "Skill Points: " + numCredits;
         this.numArmCredits.text = this.numARM.ToString();
         this.numDmgCredits.text = this.numDMG.ToString();
         this.numHpCredits.text = this.numHP.ToString();

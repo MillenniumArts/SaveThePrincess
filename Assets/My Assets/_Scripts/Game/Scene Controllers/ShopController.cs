@@ -243,21 +243,21 @@ public class ShopController : MonoBehaviour
 
         if (selectedItem == -1)
         {
-            this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
+            this.currentStatDisplay.text = player.playerWeapon.GetName() + "\n" +
                 "DMG: " + player.playerWeapon.GetAtkMod() + "\n" +
-                "Armor: " + player.playerArmor.GetName() + "\n" +
+                player.playerArmor.GetName() + "\n" +
                 "AMR: " + player.playerArmor.GetDefMod();
         }
         else if (selectedItem == 0 || selectedItem == 1)
         {
             //weapon
-            this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
+            this.currentStatDisplay.text = player.playerWeapon.GetName() + "\n" +
                 "DMG: " + player.playerWeapon.GetAtkMod();
         }
         else if (selectedItem == 2)
         {
             // armor
-            this.currentStatDisplay.text = "Armor: " + player.playerArmor.GetName() + "\n" +
+            this.currentStatDisplay.text = player.playerArmor.GetName() + "\n" +
                 "DMG: " + player.playerArmor.GetAtkMod();
         }
 

@@ -58,7 +58,8 @@ public class ShopController : MonoBehaviour
                 Destroy(shopItems[i].gameObject);
             buttons[i + 3].interactable = true;
         }
-        selectedItemStats.text = " ";
+        selectedItemStats.text = "";
+        selectedItem = -1;
         PopulateShop();
         Invoke("RandomizeCost", 0.01f);
         for (int i = 0; i < priceTags.Length; i++)

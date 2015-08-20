@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5099d0aeb1651f3488ddc31f634e2a01
-timeCreated: 1434303143
+guid: 4200962219234e449b8b4c97093d2a65
+timeCreated: 1436414277
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -46,7 +46,11 @@ TextureImporter:
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: Web
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
   spriteSheet:
     sprites: []
   spritePackingTag: 

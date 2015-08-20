@@ -79,11 +79,11 @@ public class CharacterSelectController : MonoBehaviour {
         }
     }
 
-
     public void GoBack()
     {
-        LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", true);
+        LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", true);
     }
+
     public void CheckUnlock()
     {
         if (currentChar >= unlockCharsMinIndex)

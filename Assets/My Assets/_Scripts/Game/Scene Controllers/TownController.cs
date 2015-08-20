@@ -25,10 +25,8 @@ public class TownController : MonoBehaviour {
         if (PlayerPrefs.GetInt("retreated") == 0 && PlayerPrefs.GetInt("score") > 0)
         {
             this.player.TriggerAnimation("victory");
-        }
-        else
-        {
-            PlayerPrefs.SetInt("retreated", 0);
+            // only trigger once
+            PlayerPrefs.SetInt("retreated", 1); 
         }
         
         this.apples.text = this.player.inventory.Apples.ToString() + "/3";

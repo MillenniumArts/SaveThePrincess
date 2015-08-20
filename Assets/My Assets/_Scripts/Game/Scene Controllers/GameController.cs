@@ -811,6 +811,7 @@ public class GameController : MonoBehaviour
     #region monobehaviour
     void Awake()
     {
+        PlayerPrefs.SetInt("retreated", 0);
         SceneFadeHandler.Instance.levelStarting = true;
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference

@@ -240,12 +240,27 @@ public class ShopController : MonoBehaviour
     public void UpdateText()
     {
         this.playerBalance.text = this.player.dollarBalance.ToString();
-        this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
-            "DMG: " + player.playerWeapon.GetAtkMod() + "\n" +
-            "AMR: " + player.playerWeapon.GetDefMod() + "\n" +
-            "Armor: " + player.playerArmor.GetName() + "\n" +
-            "DMG: " + player.playerArmor.GetAtkMod() + "\n" +
-            "AMR: " + player.playerArmor.GetDefMod();
+
+        if (selectedItem == -1)
+        {
+            this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
+                "DMG: " + player.playerWeapon.GetAtkMod() + "\n" +
+                "Armor: " + player.playerArmor.GetName() + "\n" +
+                "AMR: " + player.playerArmor.GetDefMod();
+        }
+        else if (selectedItem == 0 || selectedItem == 1)
+        {
+            //weapon
+            this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
+                "DMG: " + player.playerWeapon.GetAtkMod();
+        }
+        else if (selectedItem == 2)
+        {
+            // armor
+            this.currentStatDisplay.text = "Armor: " + player.playerArmor.GetName() + "\n" +
+                "DMG: " + player.playerArmor.GetAtkMod();
+        }
+
 
         this.curBalanceText.text = this.playerBalance.text;
         if (selectedItem >= 0){

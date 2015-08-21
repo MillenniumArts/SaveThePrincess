@@ -67,6 +67,21 @@ public class CharacterSelectController : MonoBehaviour {
             currentChar = numOfChars;
         }
         player.GetComponentInChildren<CreateCombination>().NewSpriteSheet(currentChar);
+        if (currentChar >= unlockCharsMinIndex)
+        {
+            if (skinUnlock[currentChar - 2] == false)
+            {
+                // Darken all the sprites.
+                ChangeSpriteColour(0.1f);
+                canContinue = false;
+            }
+        }
+        else
+        {
+            // Lighten all the sprites.
+            ChangeSpriteColour(1.0f);
+            canContinue = true;
+        }
     }
 
     public void Confirm()

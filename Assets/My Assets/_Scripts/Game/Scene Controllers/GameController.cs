@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
         if (invAnim.open)
             invAnim.OpenClose();
 
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -187,7 +187,7 @@ public class GameController : MonoBehaviour
         attackMeter.value = Random.Range(0, attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         this.cancelAttack.gameObject.SetActive(false);
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -347,7 +347,7 @@ public class GameController : MonoBehaviour
             if (!this.enemy.IsDead())
                 waiting = false;
         }
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -538,7 +538,23 @@ public class GameController : MonoBehaviour
     public void UpdateBars()
     {
         this.playerHealth.value = this.player.remainingHealth;
+        if (((float)this.player.remainingHealth / (float)this.player.totalHealth) <= 0.25f)
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOff();
+        }
         this.playerMana.value = this.player.remainingEnergy;
+        if (((float)this.player.remainingEnergy / (float)this.player.totalEnergy) <= 0.25f)
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOff();
+        }
         this.enemyHealth.value = this.enemy.remainingHealth;
         this.enemyMana.value = this.enemy.remainingEnergy;
     }

@@ -580,9 +580,9 @@ public class GameController : MonoBehaviour
                 this.attackMeter.value = this.attackMeter.maxValue;
                 increasing = false;
             }
-            else if (this.attackMeter.value <= 0)
+            else if (this.attackMeter.value <= this.attackMeter.minValue)
             {
-                this.attackMeter.value = 0;
+                this.attackMeter.value = this.attackMeter.minValue;
                 increasing = true;
             }
             // set final value
@@ -935,6 +935,7 @@ public class GameController : MonoBehaviour
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
+        this.attackMeter.minValue = 50;
         //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         // set cancel button to invis

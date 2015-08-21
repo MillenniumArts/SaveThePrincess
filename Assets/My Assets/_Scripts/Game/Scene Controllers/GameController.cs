@@ -79,6 +79,8 @@ public class GameController : MonoBehaviour
 
     public GameObject confirmPanel = null;
 
+    public GameObject[] pulsingButtons;
+
     private BackgroundManager _backgroundManager;
 
     #region Retreat
@@ -122,6 +124,18 @@ public class GameController : MonoBehaviour
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();
+
+        for (int i = 0; i < pulsingButtons.Length; i++)
+        {
+            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOff();
+            }
+            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
+            }
+        }
 
         // toggle movement on click
         if (!attackBarMoving)
@@ -173,6 +187,17 @@ public class GameController : MonoBehaviour
         attackMeter.value = Random.Range(0, attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         this.cancelAttack.gameObject.SetActive(false);
+        for (int i = 0; i < pulsingButtons.Length; i++)
+        {
+            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+            }
+            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<SpritePulse>().PulseOn();
+            }
+        }
     }
 
     /// <summary>
@@ -321,6 +346,17 @@ public class GameController : MonoBehaviour
             this.combatController.setState(CombatController.BattleStates.LOSE);
             if (!this.enemy.IsDead())
                 waiting = false;
+        }
+        for (int i = 0; i < pulsingButtons.Length; i++)
+        {
+            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+            }
+            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<SpritePulse>().PulseOn();
+            }
         }
     }
 

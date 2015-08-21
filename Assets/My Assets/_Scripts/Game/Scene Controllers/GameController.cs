@@ -687,6 +687,10 @@ public class GameController : MonoBehaviour
                 //Debug.Log("Player Dead!!");
                 this.player.numTurnsLeftToHeal = 0;
                 DisableButtons();
+                foreach (SpriteRenderer renderer in this.player.playerWeapon.gameObject.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.gameObject.SetActive(false);
+                }
             }
         }
         else

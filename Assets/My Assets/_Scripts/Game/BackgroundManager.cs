@@ -12,7 +12,7 @@ public class BackgroundManager : MonoBehaviour {
 
     public void SetBackground()
     {
-        Debug.Log("SetBackground Called");
+        //Debug.Log("SetBackground Called");
         int newNum = PlayerPrefs.GetInt("BackgroundImageNum");
         if(newNum < numBackgrounds)
             backgroundNum = newNum;
@@ -21,7 +21,7 @@ public class BackgroundManager : MonoBehaviour {
 
     public void BackgroundChange()
     {
-        Debug.Log("BackgroundChange Called");
+        //Debug.Log("BackgroundChange Called");
         //Debug.Log("Yes BackgroundChange gets called.");
         backgroundNum = Random.Range(0, numBackgrounds);
         PlayerPrefs.SetInt("BackgroundImageNum", backgroundNum);

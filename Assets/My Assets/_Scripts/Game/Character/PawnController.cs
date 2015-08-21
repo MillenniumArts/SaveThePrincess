@@ -675,7 +675,7 @@ public class PawnController : MonoBehaviour
                 TwoHandGrip.SetActive(false);
                 playerHand.transform.localPosition = new Vector3(-0.08f, -0.36f, 0f);
                 playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
-                Debug.Log("In Battle, One Hand");
+                //Debug.Log("In Battle, One Hand");
             }
             else
             {
@@ -684,7 +684,7 @@ public class PawnController : MonoBehaviour
                 TwoHandGrip.SetActive(true);
                 playerHand.transform.localPosition = new Vector3(-0.08f, 0.17f, 0f);
                 playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(false);
-                Debug.Log("In Battle, Two Hand");
+                //Debug.Log("In Battle, Two Hand");
             }
         }
         else // Out of battle.
@@ -696,7 +696,7 @@ public class PawnController : MonoBehaviour
                 TwoHandGrip.SetActive(false);
                 playerHand.transform.localPosition = new Vector3(-0.08f, -0.36f, 0f);
                 playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
-                Debug.Log("Out Battle, One Hand");
+                //Debug.Log("Out Battle, One Hand");
             }
             else
             {
@@ -705,7 +705,7 @@ public class PawnController : MonoBehaviour
                 TwoHandGrip.SetActive(false);
                 playerHand.transform.localPosition = new Vector3(-0.08f, -0.36f, 0f);
                 playerWeapon.GetComponentInChildren<WeaponCombination>().SwitchHandleLayer(true);
-                Debug.Log("Out Battle, Two Hand");
+                //Debug.Log("Out Battle, Two Hand");
             }
         }
     }

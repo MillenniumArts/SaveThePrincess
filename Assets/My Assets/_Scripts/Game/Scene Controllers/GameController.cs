@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
         if (invAnim.open)
             invAnim.OpenClose();
 
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -187,7 +187,7 @@ public class GameController : MonoBehaviour
         attackMeter.value = Random.Range(0, attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         this.cancelAttack.gameObject.SetActive(false);
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -347,7 +347,7 @@ public class GameController : MonoBehaviour
             if (!this.enemy.IsDead())
                 waiting = false;
         }
-        for (int i = 0; i < pulsingButtons.Length; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
             {
@@ -538,7 +538,23 @@ public class GameController : MonoBehaviour
     public void UpdateBars()
     {
         this.playerHealth.value = this.player.remainingHealth;
+        if (((float)this.player.remainingHealth / (float)this.player.totalHealth) <= 0.25f)
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOff();
+        }
         this.playerMana.value = this.player.remainingEnergy;
+        if (((float)this.player.remainingEnergy / (float)this.player.totalEnergy) <= 0.25f)
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOff();
+        }
         this.enemyHealth.value = this.enemy.remainingHealth;
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
@@ -671,6 +687,10 @@ public class GameController : MonoBehaviour
                 //Debug.Log("Player Dead!!");
                 this.player.numTurnsLeftToHeal = 0;
                 DisableButtons();
+                foreach (SpriteRenderer renderer in this.player.playerWeapon.gameObject.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.gameObject.SetActive(false);
+                }
             }
         }
         else
@@ -733,7 +753,7 @@ public class GameController : MonoBehaviour
     private void RetreatFromBattle()
     {
         //this.player.transform.localPosition = this.prevPos;
-        BattleCounter.GetInstance().ResetCurrentBattleCount();
+        //BattleCounter.GetInstance().ResetCurrentBattleCount(); /// Commented out by Carlo, I think this is to keep the count even at a retreat.
         // Set the idle animation to town idle
         player.InBattle(false);
         PlayerPrefs.SetInt("retreated", 1);
@@ -840,6 +860,8 @@ public class GameController : MonoBehaviour
                 // check if player wants to camp out before next battle
                 // load camp kit check scene?
             }
+            // No more resetting stats on retreat.  So this is to save the stats after each battle.
+            EnemyStats.GetInstance().SetCheckpoint();
             LoadNextBattle();
         }
     }

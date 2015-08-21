@@ -753,7 +753,7 @@ public class GameController : MonoBehaviour
     private void RetreatFromBattle()
     {
         //this.player.transform.localPosition = this.prevPos;
-        BattleCounter.GetInstance().ResetCurrentBattleCount();
+        //BattleCounter.GetInstance().ResetCurrentBattleCount(); /// Commented out by Carlo, I think this is to keep the count even at a retreat.
         // Set the idle animation to town idle
         player.InBattle(false);
         PlayerPrefs.SetInt("retreated", 1);
@@ -860,6 +860,8 @@ public class GameController : MonoBehaviour
                 // check if player wants to camp out before next battle
                 // load camp kit check scene?
             }
+            // No more resetting stats on retreat.  So this is to save the stats after each battle.
+            EnemyStats.GetInstance().SetCheckpoint();
             LoadNextBattle();
         }
     }

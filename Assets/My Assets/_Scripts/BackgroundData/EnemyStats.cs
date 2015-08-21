@@ -139,7 +139,7 @@ public class EnemyStats
             if (CheckStatGap(previousEnemyATK, previousEnemyDEF, player.physicalDamage, player.armor, MIN_gapFill_ATK_DEF, MAX_gapFill_ATK_DEF) == false)
             {
                 //Debug.Log("Not first enemy.");
-                if (!CheckForBoss())
+                if (CheckForBoss() == false) // Used to be !CheckForBoss()
                 {
                     //Debug.Log("Not boss.");
                     min = MIN_inc;
@@ -389,7 +389,7 @@ public class EnemyStats
     /// </summary>
     private bool CheckForBoss()
     {
-        return BattleCounter.GetInstance().battlesNeeded == 1;
+        return false; // BattleCounter.GetInstance().battlesNeeded == 1; // Uncomment this to have a boss.
     }
 
     /*private bool CheckStatGap(PlayerController _player)

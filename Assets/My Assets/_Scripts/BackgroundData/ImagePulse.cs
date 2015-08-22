@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -47,27 +47,56 @@ public class ImagePulse : MonoBehaviour {
         switch (colourName)
         {
             case "red":
-                _colour = new Color(_colour.r, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), _colour.a);
+                _colour = new Color(_colour.r, 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    _colour.a
+                                    );
                 _image.color = _colour;
                 break;
             case "green":
-                _colour = new Color(Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), _colour.g, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), _colour.a);
+                _colour = new Color(
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha),
+                                    _colour.g, 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    _colour.a
+                                    );
                 _image.color = _colour;
                 break;
             case "blue":
-                _colour = new Color(Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), _colour.b, _colour.a);
+                _colour = new Color(
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    _colour.b, 
+                                    _colour.a
+                                    );
                 _image.color = _colour;
                 break;
             case "alpha":
-                _colour = new Color(_colour.r, _colour.g, _colour.b, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
+                _colour = new Color(
+                                    _colour.r, 
+                                    _colour.g, 
+                                    _colour.b, 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha)
+                                    );
                 _image.color = _colour;
                 break;
             case "black":
-                _colour = new Color(Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), _colour.a);
+                _colour = new Color(
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha),
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    _colour.a
+                                    );
                 _image.color = _colour;
                 break;
             default:
-                _colour = new Color(_colour.r, _colour.g, _colour.b, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
+                _colour = new Color(
+                                    _colour.r,
+                                    _colour.g, 
+                                    _colour.b, 
+                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha)
+                                    );
                 _image.color = _colour;
                 break;
         }

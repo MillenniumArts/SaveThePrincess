@@ -251,7 +251,7 @@ public class StatSelectController : MonoBehaviour
         this.creditText.text = "CREDITS: " + numCredits;
 
         // value per credit:
-        this.healthInc = 10;
+        this.healthInc = 25;
         this.damageInc = 5;
         this.armorInc = 5;
         this.energyInc = 10;

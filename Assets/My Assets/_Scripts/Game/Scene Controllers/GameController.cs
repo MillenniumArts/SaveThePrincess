@@ -582,9 +582,9 @@ public class GameController : MonoBehaviour
                 this.attackMeter.value = this.attackMeter.maxValue;
                 increasing = false;
             }
-            else if (this.attackMeter.value <= 0)
+            else if (this.attackMeter.value <= attackMeter.minValue)
             {
-                this.attackMeter.value = 0;
+                this.attackMeter.value = attackMeter.minValue;
                 increasing = true;
             }
             // set final value

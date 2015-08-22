@@ -164,14 +164,17 @@ public class GameController : MonoBehaviour
 
             NRGReductionFactor = Mathf.Clamp(NRGReductionFactor, 0.0f, 1.0f);
             // apply the percent damage from the bar (value/max) * NRGFactor
-            float damageToApply = NRGReductionFactor * (attackAmount / (attackMeter.maxValue - attackMeter.minValue)) * (float)this.player.GetTotalDamage();
+            float damageToApply = NRGReductionFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.GetTotalDamage();
 
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(
-                                    ((attackMeter.maxValue - attackMeter.value) / (attackMeter.maxValue - attackMeter.minValue)) * this.player.ATTACK_ENERGY_COST
+                                    ((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST
                                     );
             // energy cost is the remainder of the total cost - regen
-            PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;
+            PLAYER_ENERGY_COST_AMT = Mathf.RoundToInt(
+                                    (this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT) / 2
+                                    );
+
 
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);

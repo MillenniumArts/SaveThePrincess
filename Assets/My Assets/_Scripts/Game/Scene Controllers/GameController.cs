@@ -62,10 +62,9 @@ public class GameController : MonoBehaviour
                 rightArmorText,
                 leftDamageText,
                 rightDamageText,
-                numEnemiesKilledText,
                 healTurnsRemainText;
     // Inventory Text
-    public Text apples, bread, cheese, hPots, ePots, campKits;
+    public Text apples, bread, cheese, hPots, ePots;
 
     // battle counter text
     public Text battleText;
@@ -169,11 +168,11 @@ public class GameController : MonoBehaviour
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
             PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(
                                     ((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST
-                                    );
-            // energy cost is the remainder of the total cost - regen
+                                    ) ;
+            // energy cost is the remainder of the total cost - regen (divided by 2, because damage is limited to 50% output)
             PLAYER_ENERGY_COST_AMT = Mathf.RoundToInt(
-                                    (this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT) / 2
-                                    );
+                                    (this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT)
+                                    ) / 2;
 
 
             // start animation
@@ -940,6 +939,7 @@ public class GameController : MonoBehaviour
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
+        this.attackMeter.minValue = 50;
         //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         // set cancel button to invis

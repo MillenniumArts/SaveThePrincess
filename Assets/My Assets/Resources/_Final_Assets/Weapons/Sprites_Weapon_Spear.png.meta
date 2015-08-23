@@ -1,0 +1,275 @@
+fileFormatVersion: 2
+guid: 312065f68c198b14caa5fd7ad09acc21
+timeCreated: 1440025642
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Head_1_Spear
+    21300002: Head_2_Trident
+    21300004: Head_3_Halberd
+    21300006: Head_4_Spear
+    21300008: Head_5_Halberd
+    21300010: Guard_1
+    21300012: Guard_2
+    21300014: Guard_3
+    21300016: Guard_4
+    21300018: Guard_5
+    21300020: Head_6_Spear
+    21300022: Head_7_Spear
+    21300024: Head_8_Spear
+    21300026: Head_9_Spear
+    21300028: Head_10_Halberd
+    21300030: Guard_6
+    21300032: Guard_7
+    21300034: Guard_8
+    21300036: Guard_9
+    21300038: Guard_10
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Head_1_Spear
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 744
+        width: 198
+        height: 319
+      alignment: 9
+      pivot: {x: .501827836, y: .0718355104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_2_Trident
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 782
+        width: 187
+        height: 251
+      alignment: 9
+      pivot: {x: .498064816, y: .105456837}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_3_Halberd
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 759
+        width: 203
+        height: 293
+      alignment: 9
+      pivot: {x: .360518128, y: .0527031273}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_4_Spear
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 774
+        width: 101
+        height: 267
+      alignment: 9
+      pivot: {x: .487935573, y: .0818131715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_5_Halberd
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 778
+        width: 287
+        height: 250
+      alignment: 9
+      pivot: {x: .494834334, y: .080532223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 568
+        width: 105
+        height: 94
+      alignment: 9
+      pivot: {x: .5, y: .782968104}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 591
+        width: 169
+        height: 56
+      alignment: 9
+      pivot: {x: .495734036, y: .319770813}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_3
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 598
+        width: 101
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_4
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 594
+        width: 167
+        height: 53
+      alignment: 9
+      pivot: {x: .492307365, y: .693908691}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_5
+      rect:
+        serializedVersion: 2
+        x: 1644
+        y: 587
+        width: 172
+        height: 52
+      alignment: 9
+      pivot: {x: .494733244, y: .722956717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_6_Spear
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 272
+        width: 341
+        height: 184
+      alignment: 9
+      pivot: {x: .500453413, y: .108741425}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_7_Spear
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 204
+        width: 223
+        height: 319
+      alignment: 9
+      pivot: {x: .237351224, y: .0592970401}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_8_Spear
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 182
+        width: 183
+        height: 371
+      alignment: 9
+      pivot: {x: .440027118, y: .0521552004}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_9_Spear
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 216
+        width: 207
+        height: 292
+      alignment: 9
+      pivot: {x: .486469656, y: .0732448548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_10_Halberd
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 182
+        width: 257
+        height: 360
+      alignment: 9
+      pivot: {x: .46176824, y: .0899052545}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_6
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 43
+        width: 150
+        height: 68
+      alignment: 9
+      pivot: {x: .499999911, y: .811001956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_7
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 39
+        width: 123
+        height: 75
+      alignment: 9
+      pivot: {x: .497842431, y: .808590174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_8
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 39
+        width: 202
+        height: 75
+      alignment: 9
+      pivot: {x: .4815, y: .807266414}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_9
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 24
+        width: 79
+        height: 113
+      alignment: 9
+      pivot: {x: .485997468, y: .852430344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guard_10
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 24
+        width: 187
+        height: 102
+      alignment: 9
+      pivot: {x: .503120959, y: .774636865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

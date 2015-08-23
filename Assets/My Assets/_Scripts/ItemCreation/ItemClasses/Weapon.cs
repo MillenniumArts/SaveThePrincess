@@ -40,11 +40,34 @@ public class Weapon : Item {
 		}else{
 			Debug.Log("No Create Combination attached");
 		}
-		CreateWeaponCombination wc = GetComponentInChildren<CreateWeaponCombination>();
+		WeaponCombination wc = GetComponentInChildren<WeaponCombination>();
 		if(wc){
 			wc.SwapWeapon(weaponType);
 		}else{
 			Debug.Log("No Create Weapon Combination attached");
 		}
 	}
+
+    public void SwapWeaponType(string weaponType)
+    {
+        WeaponCombination wc = GetComponentInChildren<WeaponCombination>();
+        if (wc)
+        {
+            wc.SwapWeapon(weaponType);
+        }
+        else
+        {
+            Debug.Log("No WeaponCombination attached");
+        }
+    }
+
+    public string GetWeaponType()
+    {
+        return this.GetComponentInChildren<WeaponCombination>().GetWeaponType();
+    }
+
+    public void SetWeaponName()
+    {
+        itemName = NameRandomizer.instance.GetPart1() + this.GetWeaponType() + NameRandomizer.instance.GetPart2();
+    }
 }

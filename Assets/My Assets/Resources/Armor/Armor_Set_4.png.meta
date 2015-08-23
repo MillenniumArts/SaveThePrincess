@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 7df2d74b4e1448c4fb463891c65ad2bf
+timeCreated: 1437579983
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Light_Helmet
+    21300002: Medium_Helmet
+    21300004: Heavy_Helmet
+    21300006: Light_Body
+    21300008: Medium_Body
+    21300010: Heavy_Body
+    21300012: Light_FrontShoulder
+    21300014: Light_BackShoulder
+    21300016: Medium_FrontShoulder
+    21300018: Medium_BackShoulder
+    21300020: Heavy_FrontShoulder
+    21300022: Heavy_BackShoulder
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Light_Helmet
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 219
+        width: 126
+        height: 119
+      alignment: 9
+      pivot: {x: .495619208, y: .255637676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Medium_Helmet
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 216
+        width: 121
+        height: 98
+      alignment: 9
+      pivot: {x: .463504255, y: .432408541}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Heavy_Helmet
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 204
+        width: 132
+        height: 148
+      alignment: 9
+      pivot: {x: .483273119, y: .350811094}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light_Body
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 9
+        width: 124
+        height: 175
+      alignment: 9
+      pivot: {x: .379806459, y: .28550908}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Medium_Body
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 65
+        width: 111
+        height: 133
+      alignment: 9
+      pivot: {x: .415460795, y: .159670204}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Heavy_Body
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 49
+        width: 116
+        height: 139
+      alignment: 9
+      pivot: {x: .490483791, y: .20215854}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light_FrontShoulder
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 232
+        width: 28
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light_BackShoulder
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 174
+        width: 31
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Medium_FrontShoulder
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 39
+        width: 17
+        height: 57
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Medium_BackShoulder
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 41
+        width: 22
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Heavy_FrontShoulder
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 236
+        width: 25
+        height: 71
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Heavy_BackShoulder
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 171
+        width: 27
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

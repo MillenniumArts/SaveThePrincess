@@ -11,13 +11,19 @@ public class ShopController : MonoBehaviour
     public Text playerBalance;
     public Item[] shopItems;
     public int selectedItem = -1;
-    public Transform spawn1, spawn2, spawn3, spawn4, spawn5, spawn6;
+    public Transform spawn1, spawn2, spawn3;//, spawn4, spawn5, spawn6;
+    public GameObject[] receipt;
     public int HI_DOLLAR_VALUE;
     public int LO_DOLLAR_VALUE;
+    public Image[] priceTags;
+    
     private bool firstTick;
+    //private string[] itemsToSpawn = { "Sword", "Hammer", "Spear" /*,"Axe","Bow","Dagger"*/ };
 
-    public Text currentStatDisplay;
-    public Text selectedItemStats;
+
+    public Text currentStatDisplay, curStatTitle;
+    public Text selectedItemStats, selItemTitle;
+    public Text curBalanceText, remBalanceText, costText;
 
     private ItemFactory factory;
     private PlayerController player;
@@ -25,41 +31,47 @@ public class ShopController : MonoBehaviour
 
     //private bool start;
 
-    void Start()
-    {
-        firstTick = false;
-        //start = true;
-        this.player = FindObjectOfType<PlayerController>();
-        this.prevPos = this.player.gameObject.transform.localPosition;
-
-        // relocate player
-        Vector3 newSpot = new Vector3(-5.7f, -2f);
-        this.player.gameObject.transform.localPosition = newSpot;
-
-        this.playerBalance.text = this.player.dollarBalance.ToString();
-
-        factory = FindObjectOfType<ItemFactory>();
-
-        PopulateShop();
-    }
 
     private void ItemNameUpdate()
     {
         for (int i = 0; i < buttonText.Length; i++)
         {
-            buttonText[i].text = "$" + shopItems[i].dollarCost + "\n" + shopItems[i].GetName();
+            if (buttonText[i] != null)
+                buttonText[i].text = shopItems[i].dollarCost.ToString();// +"\n" + shopItems[i].GetName();
         }
     }
 
     public void ExitStore()
     {
-        this.player.gameObject.transform.localPosition = prevPos;
-        DontDestroyOnLoad(this.player);
-        Application.LoadLevel("Town_LVP");
+        AudioManager.Instance.PlaySFX("Button1");
+      //  this.player.gameObject.transform.localPosition = prevPos;
+        //EscapeHandler.instance.ClearButtons();
+        //DontDestroyOnLoad(this.player);
+        LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
     }
 
+    public void RefreshShop()
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+        {
+            if(shopItems[i] != null)
+                Destroy(shopItems[i].gameObject);
+            buttons[i + 3].interactable = true;
+        }
+        selectedItemStats.text = "";
+        selectedItem = -1;
+        PopulateShop();
+        Invoke("RandomizeCost", 0.01f);
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            priceTags[i].color = Color.white;
+        }
+    }
+
+    #region purchasing items
     public void SelectItem(int buttonNum)
     {
+        AudioManager.Instance.PlaySFX("Button1");
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
@@ -76,33 +88,44 @@ public class ShopController : MonoBehaviour
             // turn button gren
             buyButton.image.color = Color.green;
         }
+
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            if (i == buttonNum)
+            {
+                priceTags[i].color = Color.green;
+            }
+            else
+            {
+                priceTags[i].color = Color.white;
+            }
+        }
     }
 
     public void BuyItem()
     {
+        AudioManager.Instance.PlaySFX("Button1");
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")
-            {				// Armor
+            {	// Armor
                 player.TransferPurchasedArmor(shopItems[selectedItem]);
             }
             else if (shopItems[selectedItem].GetItemClass() == "Weapon")
-            {		// Weapon
+            {	// Weapon
                 player.TransferPurchasedWeapon(shopItems[selectedItem]);
             }
-            else if (shopItems[selectedItem].GetItemClass() == "Potion")
-            {		// Potion
-
-            }
             else if (shopItems[selectedItem].GetItemClass() == "Magic")
-            {		// Magic
+            {	// Magic
 
             }
             else
-            {															// Other
+            {	// Other
                 Debug.Log(shopItems[selectedItem].GetItemClass() + " is not a recognized Item Class!");
             }
             DestroyItem(selectedItem);
+            buttons[selectedItem + 3].interactable = false;
+            //receipt[selectedItem].SetActive(true);
         }
         selectedItemStats.text = "";
         selectedItem = -1;
@@ -110,24 +133,80 @@ public class ShopController : MonoBehaviour
 
     private void DestroyItem(int n)
     {
-        Destroy(buttons[n].gameObject);
+        if (buttons[n] != null)
+        {
+            Destroy(buttons[n].gameObject);
+        }
         Destroy(shopItems[n].gameObject);
     }
-
+    #endregion purchasing items
     private void PopulateShop()
     {
-        shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
+        // NEW ALGORITHM
+        // (Player level / 3 * Random.Range(0,10)) * prev.enemy.stat
+
+        int rand3 = Random.Range(0, 16);
+        //GetRandomArmor();
+        if (rand3 < 5)
+            shopItems[0] = factory.CreateWeapon(spawn1, "Sword");
+        else if (rand3 < 9)
+            shopItems[0] = factory.CreateWeapon(spawn1, "Hook");
+        else if (rand3 < 13)
+            shopItems[0] = factory.CreateWeapon(spawn1, "Club");
+        else
+            shopItems[0] = factory.CreateWeapon(spawn1, "Dagger");
         shopItems[0].transform.parent = spawn1.transform;
-        shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
+        shopItems[0].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
+        int rand1 = Random.Range(0, 12);
+        if(rand1 < 5)
+            shopItems[1] = factory.CreateWeapon(spawn2, "Hammer");
+        else if(rand1 < 9)
+            shopItems[1] = factory.CreateWeapon(spawn2, "Axe");
+        else
+            shopItems[1] = factory.CreateWeapon(spawn2, "Spear");
         shopItems[1].transform.parent = spawn2.transform;
-        shopItems[2] = factory.CreateWeapon(spawn3, "Spear");
+        shopItems[1].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
+        int rand2 = Random.Range(0, 10);
+        if (rand2 < 4)
+            shopItems[2] = factory.CreateArmor(spawn3, "LightArmor");
+        else if(rand2 < 7)
+            shopItems[2] = factory.CreateArmor(spawn3, "MediumArmor");
+        else
+            shopItems[2] = factory.CreateArmor(spawn3, "HeavyArmor");
         shopItems[2].transform.parent = spawn3.transform;
-        shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
+        Vector3 tempScale = shopItems[2].transform.localScale;
+        tempScale *= 1.2f;
+        shopItems[2].transform.localScale = tempScale;
+        shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
+        /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
         shopItems[3].transform.parent = spawn4.transform;
+        shopItems[3].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[4] = factory.CreateArmor(spawn5, "MediumArmor");
         shopItems[4].transform.parent = spawn5.transform;
+        shopItems[4].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+
         shopItems[5] = factory.CreateArmor(spawn6, "HeavyArmor");
         shopItems[5].transform.parent = spawn6.transform;
+        shopItems[5].SetDmgArm(GetRandomDamage(), GetRandomArmor());*/
+
+    }
+
+    private int GetRandomDamage()
+    {
+        return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
+            * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
+            * EnemyStats.GetInstance().GetCurrentEnemyATK());
+    }
+
+    private int GetRandomArmor()
+    {
+        return Mathf.RoundToInt(Random.Range(1.0f, 1.1f) 
+            * (DifficultyLevel.GetInstance().GetDifficultyMultiplier() / 3) 
+            * EnemyStats.GetInstance().GetCurrentEnemyDEF());
     }
 
     /// <summary>
@@ -138,11 +217,8 @@ public class ShopController : MonoBehaviour
         for (int i = 0; i < shopItems.Length; i++)
         {
             int totalStats = shopItems[i].GetDefMod() + shopItems[i].GetAtkMod();
-            /*+ shopItems[i].GetHpMod() + shopItems[i].GetManaMod() + shopItems[i].GetSpdMod();  // UNCOMMENT AFTER LVP!*/
 
-            // IF WEAPON STATS ARE NOT INITIATED HERE WE GET THE FIRESALE
-
-            this.LO_DOLLAR_VALUE = totalStats + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
+            this.LO_DOLLAR_VALUE = totalStats - (int)(totalStats * 0.2) + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
 
             int score = PlayerPrefs.GetInt("score");
 
@@ -154,7 +230,7 @@ public class ShopController : MonoBehaviour
             {
                 this.HI_DOLLAR_VALUE = (DifficultyLevel.GetInstance().GetDifficultyMultiplier() + this.LO_DOLLAR_VALUE);
             }
-            shopItems[i].dollarCost = Random.Range(LO_DOLLAR_VALUE, HI_DOLLAR_VALUE);
+            shopItems[i].dollarCost = (int)(Random.Range(LO_DOLLAR_VALUE, HI_DOLLAR_VALUE) / 2);
         }
     }
 
@@ -163,19 +239,73 @@ public class ShopController : MonoBehaviour
     /// </summary>
     public void UpdateText()
     {
-        this.playerBalance.text = "Remaining Balance: $" + this.player.dollarBalance.ToString();
-        this.currentStatDisplay.text = "Weapon: \n" + player.playerWeapon.GetName() + "\n" +
-            "DMG: " + player.playerWeapon.GetAtkMod() + " | " +
-            "AMR: " + player.playerWeapon.GetDefMod() + "\n" +
-            "Armor: \n" + player.playerArmor.GetName() + "\n" +
-            "DMG: " + player.playerArmor.GetAtkMod() + " | " +
-            "AMR: " + player.playerArmor.GetDefMod();
+        this.playerBalance.text = this.player.dollarBalance.ToString();
+
+        if (selectedItem == -1)
+        {
+            this.selItemTitle.text = "";
+            this.curStatTitle.text = "";
+            this.currentStatDisplay.text = "";
+        }
+        else if (selectedItem == 0 || selectedItem == 1)
+        {
+            this.curStatTitle.text = this.player.playerName + "'s Weapon stats";
+            this.selItemTitle.text = "Selected Weapon Stats";
+            //weapon
+            this.currentStatDisplay.text = player.playerWeapon.GetName() + "\n" +
+                "DMG: " + player.playerWeapon.GetAtkMod();
+        }
+        else if (selectedItem == 2)
+        {
+            this.curStatTitle.text = this.player.playerName + "'s Armor stats";
+            this.selItemTitle.text = "Selected Weapon Stats";
+            // armor
+            this.currentStatDisplay.text = player.playerArmor.GetName() + "\n" +
+                "ARM: " + player.playerArmor.GetDefMod();
+        }
+
+
+        this.curBalanceText.text = this.playerBalance.text;
+        if (selectedItem >= 0){
+            this.costText.text = this.shopItems[selectedItem].GetDollarCost().ToString();
+            this.remBalanceText.text = (this.player.dollarBalance - this.shopItems[selectedItem].GetDollarCost()).ToString();
+        }
+        else
+        {
+            this.costText.text = "0";
+            this.remBalanceText.text = this.playerBalance.text;
+        }
     }
 
     private void DoOnFirstTick()
     {
         firstTick = true;
-        RandomizeCost();
+        Invoke("RandomizeCost", 0.01f);
+    }
+
+    #region monobehaviour
+
+    void Start()
+    {
+        SceneFadeHandler.Instance.levelStarting = true;
+        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        EscapeHandler.instance.GetButtons();
+
+        firstTick = false;
+        this.player = FindObjectOfType<PlayerController>();
+      //  this.prevPos = this.player.gameObject.transform.localPosition;
+
+        // relocate player
+      //  Vector3 newSpot = new Vector3(-5.7f, -2f);
+      //  this.player.gameObject.transform.localPosition = newSpot;
+        this.player.posController.MovePlayer(27, 30);
+
+        this.playerBalance.text = this.player.dollarBalance.ToString();
+
+        factory = FindObjectOfType<ItemFactory>();
+        this.selectedItemStats.text = "";
+        this.currentStatDisplay.text = "";
+        PopulateShop();
     }
 
     public void Update()
@@ -190,3 +320,4 @@ public class ShopController : MonoBehaviour
         }
     }
 }
+#endregion monobehaviour

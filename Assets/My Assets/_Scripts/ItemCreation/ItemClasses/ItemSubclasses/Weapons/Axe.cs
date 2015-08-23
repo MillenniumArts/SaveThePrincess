@@ -35,7 +35,7 @@ public class Axe : Weapon {
 	void Start(){
 		factory = FindObjectOfType<ItemFactory>();
 		GetAxeType();
-		SetItem(className,NameRandomizer.instance.GetPart1() + axeOptionsTypes[subClassIndex] + NameRandomizer.instance.GetPart2(),
+        SetItem(className, NameRandomizer.instance.GetPart1() + this.GetWeaponType() + NameRandomizer.instance.GetPart2(),
 		        axeOptionsSprites[subClassIndex], animationParameter, idleAnimParameter, "Axe", axeOptionsTypes[subClassIndex],
 		        factory.GetStatusEffect(), 0, factory.GetModPwr(atkMin, atkMax), factory.GetModPwr(defMin,defMax),
 		        factory.GetModPwr(spdMin, spdMax), factory.GetModPwr(hpMin, hpMax), factory.GetModPwr(manaMin, manaMax));

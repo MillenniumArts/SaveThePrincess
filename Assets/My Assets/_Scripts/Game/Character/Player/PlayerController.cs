@@ -16,6 +16,10 @@ public class PlayerController : PawnController
     /// </summary>
     public int numUsableItems;
 
+    /// <summary>
+    /// The player's Inventory
+    /// </summary>
+    public PlayerInventory inventory;
     #endregion Variables
 
     #region Public functions
@@ -72,7 +76,7 @@ public class PlayerController : PawnController
     }
 
     /// <summary>
-    /// Purchases the item.
+    /// Purchases the item and returns true if player has enough money, returns false if not.
     /// </summary>
     /// <returns><c>true</c>, if item was purchased, <c>false</c> otherwise.</returns>
     /// <param name="itemCost">Item cost.</param>
@@ -85,7 +89,7 @@ public class PlayerController : PawnController
         }
         else
         {
-            Debug.Log("Not enough money for that!");
+            //Debug.Log("Not enough money for that!");
             return false;
         }
     }
@@ -96,13 +100,20 @@ public class PlayerController : PawnController
     /// <param name="w">The weapon to be transfered.</param>
     public void TransferPurchasedWeapon(Item w)
     {
-        this.physicalDamage = physicalDamage - damageMod;
         this.playerWeapon.SwapTo(w);							// Swaps all the stats.
-        this.playerWeapon.SetCombination(w.GetComponentInChildren<CreateCombination>().GetCurrentComboArray()); // Sets a combination.
-        this.playerWeapon.GiveCombination(w.GetItemSubClass());	// Swaps all the sprites to the new weapon.
+        this.playerWeapon.SwapWeaponType(w.GetItemSubClass());
+        this.playerWeapon.GetComponentInChildren<NewWeaponSprites>().SetNewSprites(w.gameObject.GetComponentInChildren<NewWeaponSprites>());
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
-        this.damageMod = w.GetAtkMod();
-        this.physicalDamage = physicalDamage + damageMod;
+        if (playerWeapon.GetItemSubClass() == "Spear")
+        {
+            playerAnimator.SetBool("IsSpearAttack", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsSpearAttack", false);
+        }
+
+        SetWeaponHands(w.gameObject.GetComponentInChildren<WeaponCombination>(), true);
     }
 
     /// <summary>
@@ -111,30 +122,23 @@ public class PlayerController : PawnController
     /// <param name="a">The armour to be transfered.</param>
     public void TransferPurchasedArmor(Item a)
     {
-        this.armor -= armorMod;				// Remove the current defence stat modifier.
         Armor _a = (Armor)a;				// Casts the Item to Armor.  Used to access CopyTypeIndex().
         this.playerArmor.SwapTo(_a);		// Swaps all the stats from the new armor to the player's armor.
-        this.armorMod = _a.GetDefMod();		// Gets the defence stat modifier.
-        this.armor += armorMod;				// Add the defence stat modifier.
         if (this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled == false)
         {
             this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
             // Renders the new armor.
-            this.playerArmor.SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
-            this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+            this.playerArmor.CopyOverSprites(_a);//SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
+            //this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
         }
         else
         {
             // Renders the new armor.
-            this.playerArmor.SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
-            this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
+            this.playerArmor.CopyOverSprites(_a);//SwapArmorSprites(_a); // Swaps armor sprites from the new armor to the player's armor.
+            //this.playerArmor.RenderCompleteArmor(playerBackShoulder, playerFrontShoulder, playerHead, playerArmor);
         }
     }
-    /// <summary>
-    /// Gets the total armor.
-    /// </summary>
-    /// <returns>The total armor.</returns>
-    
+
     #endregion Public functions
 
     #region Private functions
@@ -152,49 +156,48 @@ public class PlayerController : PawnController
                 {
                     if (playerWeapon != null)
                     {
-                        damageMod = playerWeapon.GetAtkMod();
-                        physicalDamage += damageMod;
+                        //damageMod = playerWeapon.GetAtkMod();
+                        playerWeapon.itemName = "Wooden Sword";
+                        //physicalDamage += damageMod;
                     }
                 }
                 else
                 {
                     playerWeapon.ClearStats();
-                    playerWeapon.itemName = "None";
+                    playerWeapon.itemName = "Fist";
                 }
 
                 if (spawnWithArmor)
                 {
                     if (playerArmor != null)
                     {
-                        armorMod = playerArmor.GetDefMod();
-                        armor += armorMod;
+                        //armorMod = playerArmor.GetDefMod();
+                        playerArmor.itemName = "Cloth";
+                        //armor += armorMod;
                     }
                 }
                 else
                 {
                     playerArmor.ClearStats();
-                    playerArmor.itemName = "None";
+                    playerArmor.itemName = "Naked Skin";
                 }
             }
             else
             {
-                this.damageMod = playerWeapon.GetAtkMod();
+                //this.damageMod = playerWeapon.GetAtkMod();
                 //this.physicalDamage = physicalDamage - damageMod;
-                this.physicalDamage += damageMod;
-                this.armorMod = playerArmor.GetDefMod();
+                //this.physicalDamage += damageMod;
+               // this.armorMod = playerArmor.GetDefMod();
                 //this.armor = armor - armorMod;
-                this.armor += armorMod;
+               // this.armor += armorMod;
                 playerWeapon.ClearStats();
                 playerArmor.ClearStats();
-                playerWeapon.itemName = "None";
-                playerArmor.itemName = "None";
-                damageMod = 0;
-                armorMod = 0;
+                playerWeapon.itemName = "Fist";
+                playerArmor.itemName = "Bare Skin";
+                //damageMod = 0;
+                //armorMod = 0;
                 this.playerWeapon.animParameter = "OneHandAttack";
             }
-            this.DMG_REDUCTION_FACTOR = 0.25f;
-            this.BASE_DMG = 10;
-
             firstTick = false;
         }
     }
@@ -221,12 +224,12 @@ public class PlayerController : PawnController
         PawnControllerStart();
         this.playerAnimator = GetComponentInChildren<PlayerMoveAnim>().gameObject.GetComponent<Animator>();
         this.dollarBalance = 50;
-        this.armorMod = playerArmor.GetDefMod();
-        //this.armor = armor - armorMod;
-        this.armor += armorMod;
+        
         playerArmor.ClearStats();
-        playerArmor.itemName = "None";
-        armorMod = 0;
+        playerArmor.itemName = "";
+        playerWeapon.itemName = "";
+        //damageMod = 0;
+        //armorMod = 0;
     }
 
     void Update()
@@ -236,7 +239,7 @@ public class PlayerController : PawnController
         {
             DoOnLastTick();
         }
-        playerAnimator.SetInteger("Health", remainingHealth);
+        UpdateHealth();
     }
     #endregion MonoBehaviour
 }

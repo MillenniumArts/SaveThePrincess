@@ -82,9 +82,9 @@ public class CreateCombination : MonoBehaviour {
 
 		// initiate all sprites
 		string[] temp = new string[numOfElements];
-		for(int i = 0; i < numOfElements; i++){
+		/*for(int i = 0; i < numOfElements; i++){
 			temp[i] = types[3];
-		}
+		}*/
 		SetCurrentCombo(temp);
 	}
 	
@@ -151,6 +151,15 @@ public class CreateCombination : MonoBehaviour {
 			Debug.Log ("Input is too large for " + this.gameObject.name + "'s combination array");
 		}
 	}
+
+    public void NewSpriteSheet(int s)
+    {
+        for(int i = 0; i < customCombo.Length; i++)
+        {
+            combo[i] = s;
+        }
+        character.LoadCombination(folder, spriteSheetName, combo, numOfElements);
+    }
 	
 	/// <summary>
 	/// Saves the current combination.

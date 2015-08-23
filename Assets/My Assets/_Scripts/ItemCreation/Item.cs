@@ -73,7 +73,7 @@ public class Item : MonoBehaviour {
 	/// <summary>
 	/// The mana modifier.  Adds to the player's base stats.
 	/// </summary>
-	public int manaMod;
+	public int energyMod;
 	/// <summary>
 	/// The dollar cost of the item in the store.
 	/// </summary>
@@ -101,8 +101,8 @@ public class Item : MonoBehaviour {
 	/// <param name="def">Def modifier.  Adds to the player's base stats.</param>
 	/// <param name="spd">Spd modifier.  Adds to the player's base stats.</param>
 	/// <param name="hp">Hp modifier.  Adds to the player's base stats.</param>
-	/// <param name="mana">Mana modifier.  Adds to the player's base stats.</param>
-	public void SetItem(string c, string n, Sprite s, string a, string ia, string sC, string ssC, string st, int h, int atk, int def, int spd, int hp, int mana){
+	/// <param name="energy">Mana modifier.  Adds to the player's base stats.</param>
+	public void SetItem(string c, string n, Sprite s, string a, string ia, string sC, string ssC, string st, int h, int atk, int def, int spd, int hp, int energy){
 		itemClass = c;
 		itemName = n;
 		image = s;
@@ -116,7 +116,7 @@ public class Item : MonoBehaviour {
 		defMod = def;
 		spdMod = spd;
 		hpMod = hp;
-		manaMod = mana;
+		energyMod = energy;
 		//dollarCost = 0;
 	}
 	
@@ -136,7 +136,7 @@ public class Item : MonoBehaviour {
 		defMod = 0;
 		spdMod = 0;
 		hpMod = 0;
-		manaMod = 0;
+		energyMod = 0;
 		dollarCost = 0;
 	}
 	
@@ -157,7 +157,7 @@ public class Item : MonoBehaviour {
 		defMod = i2.GetDefMod();
 		spdMod = i2.GetSpdMod();
 		hpMod = i2.GetHpMod();
-		manaMod = i2.GetManaMod();
+		energyMod = i2.GetManaMod();
 		dollarCost = i2.GetDollarCost ();
 		// If the intance of the item has a Sprite Renderer, swap the sprite.
 		if(this.GetComponent<SpriteRenderer>() == true){
@@ -215,7 +215,7 @@ public class Item : MonoBehaviour {
             {
                 if (p.remainingHealth < p.totalHealth)
                 {
-                    p.HealForAmount(this.GetHealEffect());
+                    p.GiveHealthAmount(this.GetHealEffect());
                     this.used = true;
                     return true;
                 }
@@ -226,7 +226,7 @@ public class Item : MonoBehaviour {
             {
                 if (p.remainingEnergy < p.totalEnergy)
                 {
-                    p.GiveEnergy(this.GetManaMod());
+                    p.GiveEnergyAmount(this.GetManaMod());
                     this.used = true;
                     return true;
                 }
@@ -241,7 +241,7 @@ public class Item : MonoBehaviour {
             {
                 if (this.GetItemSubClass() == "HealMagic")
                 {
-                    p.HealForPercent((this.GetHealEffect() / 100f));
+                    p.GiveHealthPercent((this.GetHealEffect() / 100f));
                 }
                 else if (this.GetItemSubClass() == "AttackMagic")
                 {
@@ -303,19 +303,50 @@ public class Item : MonoBehaviour {
 		return hpMod;
 	}
 	public int GetManaMod(){
-		return manaMod;
+		return energyMod;
 	}
 	public int GetDollarCost(){
 		return dollarCost;
 	}
 	public string GetStatsString(){
-		string statsString = GetName () + "\n" +
-			//"Type: " + GetItemSubClass() + "\n" +
-				"DMG: +" + GetAtkMod() + " | " + 
-				"AMR: +" + GetDefMod() + "\n" +
-				"Cost: $" + GetDollarCost() + "\n";
-		return statsString;
+        string statsString = "";
+        if (this.GetItemClass().ToLower() == "armor")
+        {
+            statsString = GetName() + "\n" +
+                "AMR: +" + GetDefMod() + "\n" +
+                "Cost: $" + GetDollarCost() + "\n";
+            
+        }
+        else if (this.GetItemClass().ToLower() == "weapon")
+        {
+            statsString = GetName() + "\n" +
+                "DMG: +" + GetAtkMod() + "\n" +
+                "Cost: $" + GetDollarCost() + "\n";
+        }
+    return statsString;
 	}
 	#endregion Getters
-	
+
+    #region Setters
+    /// <summary>
+    /// Set the item's Damage modifier stat and Armor modifier stat.
+    /// </summary>
+    /// <param name="dmg">The new damage stat.</param>
+    /// <param name="arm">The new armor stat.</param>
+    public void SetDmgArm(int dmg, int arm)
+    {
+        atkMod = dmg;
+        defMod = arm;
+    }
+
+    public void SetDamage(int dmg)
+    {
+        this.atkMod = dmg;
+    }
+    public void SetArmor(int arm)
+    {
+        this.defMod = arm;
+    }
+
+    #endregion Setters
 }

@@ -19,7 +19,7 @@ public class BaseEnemyController : PawnController {
 
     private PlayerController player;
 
-    private int totalStats;
+    private int healthEnergy;
 
 	#endregion Variables
 	
@@ -46,7 +46,21 @@ public class BaseEnemyController : PawnController {
 			this.playerArmor.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 		}
 	}
-	
+
+    public void SetStats(int remainingHP, int totalHP, int remainingNRG, int totalNRG, int ATK, int DEF)
+    {
+        this.remainingHealth = remainingHP;
+        this.totalHealth = totalHP;
+        this.remainingEnergy = remainingNRG;
+        this.totalEnergy = totalNRG;
+        this.physicalDamage = ATK;
+        this.armor = DEF;
+       /* Debug.Log(" EnemyTotalHealth: " + totalHealth +
+            " EnemyTotalEnergy: " + totalEnergy +
+            " EnemyPhysicalDamage: " + physicalDamage +
+            " EnemyArmor: " + armor);*/
+    }
+
 	#endregion Public functions
 
 	#region Protected Functions
@@ -61,35 +75,25 @@ public class BaseEnemyController : PawnController {
     /// </summary>
     private void CreateStats()
     {
-        int playerTotalStats = player.GetTotalStats();
-        totalStats = playerTotalStats + Mathf.FloorToInt((playerTotalStats * Random.Range(-0.2f, 0.1f)));
-        totalHealth = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
-        totalEnergy = Mathf.FloorToInt(totalStats * Random.Range(0.2f, 0.3f));
-
-        int remainingStats = totalStats - totalHealth - totalEnergy;
-        physicalDamage = Mathf.FloorToInt(remainingStats * Random.Range(0.3f, 0.7f));
-        armor = remainingStats - physicalDamage;
-
-        Debug.Log("PlayerTotalStats: " + playerTotalStats + 
-            " EnemyTotalStats: " + totalStats + 
-            " EnemyTotalHealth: " + totalHealth + 
-            " EnemyTotalEnergy: " + totalEnergy +
-            " EnemyPhysicalDamaga: " + physicalDamage + 
-            " EnemyArmor: " + armor);
+        EnemyStats.GetInstance().GetEnemyBaseStats(this, player);
     }
 
 	private void EnemyStart(){
-		this.dollarBalance = 25;
+        this.dollarBalance = 35 + (BattleCounter.GetInstance().GetCurrentBattleCount() * 10);
+        if (this.dollarBalance > 150)
+        {
+            this.dollarBalance = 150;
+        }
         CreateStats();
-        remainingEnergy = totalEnergy;
-        remainingHealth = totalHealth;
+        //remainingEnergy = totalEnergy;
+        //remainingHealth = totalHealth;
 	}
 
 	/// <summary>
 	/// Drops a random amount of money after enemy dies.
 	/// </summary>
 	public int DropMoney(){
-		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) , this.dollarBalance);
+		return Random.Range (Mathf.FloorToInt(this.dollarBalance/2) + 1 , this.dollarBalance);
 	}
 
 	#endregion Private functions
@@ -109,10 +113,30 @@ public class BaseEnemyController : PawnController {
         isAnimating = false;
     }
 
-	void Update(){
-        playerAnimator.SetInteger("Health", remainingHealth);
+    bool weaponMod = true;
+
+    void Update()
+    {
+        UpdateHealth();
+        if (playerArmor.GetDefMod() > 0 && playerWeapon.GetAtkMod() > 0)
+        {
+            if (weaponMod)
+            {
+                if (playerArmor != null)
+                {
+                    //Debug.Log("Armor " + Mathf.FloorToInt(this.playerArmor.GetDefMod()));
+                    this.playerArmor.SetArmor(Mathf.FloorToInt(this.playerArmor.GetDefMod() * 0.75f));
+                   // Debug.Log("Armor " + this.playerArmor.GetDefMod());
+                }
+                if (playerWeapon != null)
+                {
+                    //Debug.Log("Damage " + Mathf.FloorToInt(this.playerWeapon.GetAtkMod()));
+                    this.playerWeapon.SetDamage(Mathf.FloorToInt(this.playerWeapon.GetAtkMod() * 0.75f));
+                    //Debug.Log("Damage " + this.playerWeapon.GetAtkMod());
+                }
+                weaponMod = false;
+            }
+        }
 	}
 	#endregion MonoBehaviour
-
-
 }

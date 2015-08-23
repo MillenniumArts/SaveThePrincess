@@ -1,0 +1,1783 @@
+fileFormatVersion: 2
+guid: 7d503f5b4c7d91740b50fbd0b3fb018c
+timeCreated: 1439988697
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 8_Helmet_Guadian Armour
+    21300002: 18_Helmet_General Armour
+    21300004: 9_Helmet_Beserker Armour
+    21300006: 19_Helmet_Scout Armour
+    21300008: 20_Helmet_Hero's Armour
+    21300010: 8_Shoulder_
+    21300012: 18_Shoulder_
+    21300014: 9_Shoulder_
+    21300016: 19_Shoulder_
+    21300018: 8_Body_Guardian Armour
+    21300020: 18_Body_General Armour
+    21300022: 9_Body_Beserker Armour
+    21300024: 19_Body_Scout Armour
+    21300026: 20_Body_Hero's Armour
+    21300028: 10_Shoulder_
+    21300030: 11_Shoulder_
+    21300032: 21_Shoulder_
+    21300034: 12_Shoulder_
+    21300036: 0_Shoulder_
+    21300038: 10_Helmet_Tactitian's Armour
+    21300040: 11_Helmet_Grunt Armour
+    21300042: 21_Helmet_Defender Armour
+    21300044: 12_Helmet_Kight Armour
+    21300046: 0_Helmet_Soldier Armour
+    21300048: 22_Shoulder_
+    21300050: 2_Shoulder_
+    21300052: 10_Body_Tactitian's Armour
+    21300054: 11_Body_Grunt Armour
+    21300056: 21_Body_Defender Armour
+    21300058: 12_Body_Knight Armour
+    21300060: 0_Body_Soldier Armour
+    21300062: 3_Shoulder_
+    21300064: 14_Shoulder_
+    21300066: 15_Shoulder_
+    21300068: 4_Shoulder_
+    21300070: 5_Shoulder_
+    21300072: 22_Helmet_Hero Armour
+    21300074: 13_Helmet_Thief's Garb
+    21300076: 23_Helmet_Veteran Armour
+    21300078: 1_Helmet_Mercenary Armour
+    21300080: 2_Helmet_Sailor's Armour
+    21300082: 16_Shoulder_
+    21300084: 17_Shoulder_
+    21300086: 24_Shoulder_
+    21300088: 7_Shoulder_
+    21300090: 22_Body_Hero Armour
+    21300092: 13_Body_Thief's Garb
+    21300094: 23_Body_Veteran Armour
+    21300096: 1_Body_Mercenary Armour
+    21300098: 2_Body_Sailor's Armour
+    21300100: 8_LegBack_
+    21300102: 8_LegFront_
+    21300104: 18_LegBack_
+    21300106: 18_LegFront_
+    21300108: 9_LegBack_
+    21300110: 9_LegFront_
+    21300112: 19_LegBack_
+    21300114: 19_LegFront_
+    21300116: 20_LegBack_
+    21300118: 20_LegFront_
+    21300120: 10_LegBack_
+    21300122: 10_LegFront_
+    21300124: 3_Helmet_Captain's Armour
+    21300126: 14_Helmet_Paladin Armour
+    21300128: 15_Helmet_Outlaw Armour
+    21300130: 8_Foot_
+    21300132: 18_Foot_
+    21300134: 9_Foot_
+    21300136: 19_Foot_
+    21300138: 20_Foot_
+    21300140: 10_Foot_
+    21300142: 4_Helmet_Warrior Armour
+    21300144: 5_Helmet_Monk Armour
+    21300146: a_LegBack_
+    21300148: a_LegFront_
+    21300150: _LegBack_
+    21300152: _LegFront_
+    21300154: 12_LegBack_
+    21300156: 12_LegFront_
+    21300158: 0_LegBack_
+    21300160: 0_LegFront_
+    21300162: 22_LegBack_
+    21300164: 22_LegFront_
+    21300166: 13_LegBack_
+    21300168: 13_LegFront_
+    21300170: 3_Body_Captain's Armour
+    21300172: 14_Body_Paladin Armour
+    21300174: 15_Body_Outlaw Armour
+    21300176: 4_Body_Warrior Armour
+    21300178: 5_Body_ Monk Armour
+    21300180: a_Foot_
+    21300182: _Foot_
+    21300184: 12_Foot_
+    21300186: 0_Foot_
+    21300188: 22_Foot_
+    21300190: 13_Foot_
+    21300192: 24_Helmet_Thief Armour
+    21300194: 7_Helmet_Tunic
+    21300196: 21_LegBack_
+    21300198: 21_LegFront_
+    21300200: 1_LegBack_
+    21300202: 1_LegFront_
+    21300204: _LegBack_
+    21300206: _LegFront_
+    21300208: 3_LegBack_
+    21300210: 3_LegFront_
+    21300212: 23_LegBack_
+    21300214: 23_LegFront_
+    21300216: 4_LegBack_
+    21300218: 4_LegFront_
+    21300220: 16_Helmet_Veteran's Armour
+    21300222: 17_Helmet_Medic Armour
+    21300224: 6_Helmet_Explorer Garb
+    21300226: 21_Foot_
+    21300228: 1_Foot_
+    21300230: _Foot_
+    21300232: 3_Foot_
+    21300234: 23_Foot_
+    21300236: 4_Foot_
+    21300238: 7_LegBack_
+    21300240: 7_LegFront_
+    21300242: 5_LegBack_
+    21300244: 5_LegFront_
+    21300246: 16_LegBack_
+    21300248: 16_LegFront_
+    21300250: a_LegBack_
+    21300252: a_LegFront_
+    21300254: 15_LegBack_
+    21300256: 15_LegFront_
+    21300258: 24_LegBack_
+    21300260: 24_LegFront_
+    21300262: 16_Body_Veteran's Armour
+    21300264: 17_Body_Medic Armour
+    21300266: 24_Body_Thief Armour
+    21300268: 6_Body_Explorer Garb
+    21300270: 7_Body_Tunic
+    21300272: 7_Foot_
+    21300274: 5_Foot_
+    21300276: 16_Foot_
+    21300278: a_Foot_
+    21300280: 15_Foot_
+    21300282: 24_Foot_
+    21300284: 20_Shoulder_
+    21300286: 1_Shoulder_
+    21300288: 23_Shoulder_
+    21300290: 13_Shoulder_
+    21300292: 6_Shoulder_
+    21300294: 6_LegBack_
+    21300296: 6_LegFront_
+    21300298: 6_Foot_
+    21300300: Blank_Helmet_No Armour
+    21300302: Blank_Body_No Armour
+    21300304: Blank_Shoulder_
+    21300306: Blank_LegBack_
+    21300308: Blank_LegFront_
+    21300310: Blank_Foot_
+    21300312: 17_LegBack_
+    21300314: 17_LegFront_
+    21300316: 2_LegBack_
+    21300318: 2_LegFront_
+    21300320: 17_Foot_
+    21300322: 2_Foot_
+    21300324: 14_LegBack_
+    21300326: 14_LegFront_
+    21300328: 11_LegBack_
+    21300330: 11_LegFront_
+    21300332: 14_Foot_
+    21300334: 11_Foot_
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: 8_Helmet_Guadian Armour
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 2914
+        width: 229
+        height: 253
+      alignment: 9
+      pivot: {x: .457700133, y: .277933359}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_Helmet_General Armour
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 2924
+        width: 225
+        height: 252
+      alignment: 9
+      pivot: {x: .456947982, y: .234768331}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Helmet_Beserker Armour
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2914
+        width: 223
+        height: 175
+      alignment: 9
+      pivot: {x: .447874069, y: .400365502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_Helmet_Scout Armour
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 2905
+        width: 223
+        height: 262
+      alignment: 9
+      pivot: {x: .456561595, y: .311441422}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_Helmet_Hero's Armour
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 2924
+        width: 225
+        height: 247
+      alignment: 9
+      pivot: {x: .444032133, y: .245086551}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2390
+        y: 2910
+        width: 118
+        height: 115
+      alignment: 9
+      pivot: {x: .447741479, y: .666822374}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2866
+        y: 2905
+        width: 129
+        height: 110
+      alignment: 9
+      pivot: {x: .420330673, y: .674405158}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3299
+        y: 2914
+        width: 118
+        height: 101
+      alignment: 9
+      pivot: {x: .430322677, y: .642459691}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3752
+        y: 2878
+        width: 120
+        height: 128
+      alignment: 9
+      pivot: {x: .402935803, y: .708759308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_Body_Guardian Armour
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 2637
+        width: 216
+        height: 250
+      alignment: 9
+      pivot: {x: .477576882, y: .0970322266}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_Body_General Armour
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 2627
+        width: 197
+        height: 274
+      alignment: 9
+      pivot: {x: .470497251, y: .132328674}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Body_Beserker Armour
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 2632
+        width: 193
+        height: 259
+      alignment: 9
+      pivot: {x: .444790691, y: .118514717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_Body_Scout Armour
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 2634
+        width: 202
+        height: 262
+      alignment: 9
+      pivot: {x: .480818659, y: .104398072}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_Body_Hero's Armour
+      rect:
+        serializedVersion: 2
+        x: 1468
+        y: 2597
+        width: 201
+        height: 290
+      alignment: 9
+      pivot: {x: .490361899, y: .219419286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2389
+        y: 2597
+        width: 119
+        height: 161
+      alignment: 9
+      pivot: {x: .448180646, y: .772360861}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2862
+        y: 2639
+        width: 128
+        height: 119
+      alignment: 9
+      pivot: {x: .446472168, y: .615154386}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3298
+        y: 2607
+        width: 119
+        height: 142
+      alignment: 9
+      pivot: {x: .436664999, y: .750902653}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3752
+        y: 2625
+        width: 115
+        height: 115
+      alignment: 9
+      pivot: {x: .428505003, y: .684695542}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 4175
+        y: 2609
+        width: 119
+        height: 135
+      alignment: 9
+      pivot: {x: .44242385, y: .687783897}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_Helmet_Tactitian's Armour
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 2322
+        width: 220
+        height: 243
+      alignment: 9
+      pivot: {x: .447163314, y: .232918188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_Helmet_Grunt Armour
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 2346
+        width: 216
+        height: 224
+      alignment: 9
+      pivot: {x: .437215596, y: .149721414}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_Helmet_Defender Armour
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 2312
+        width: 220
+        height: 257
+      alignment: 9
+      pivot: {x: .455969512, y: .236159027}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_Helmet_Kight Armour
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 2317
+        width: 225
+        height: 244
+      alignment: 9
+      pivot: {x: .465558261, y: .257832497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_Helmet_Soldier Armour
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 2344
+        width: 219
+        height: 226
+      alignment: 9
+      pivot: {x: .46461466, y: .161394238}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2398
+        y: 2410
+        width: 129
+        height: 132
+      alignment: 9
+      pivot: {x: .40439719, y: .655717313}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 2400
+        width: 115
+        height: 120
+      alignment: 9
+      pivot: {x: .42254585, y: .637032092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_Body_Tactitian's Armour
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 2014
+        width: 206
+        height: 294
+      alignment: 9
+      pivot: {x: .452977121, y: .137572408}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_Body_Grunt Armour
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 2020
+        width: 202
+        height: 260
+      alignment: 9
+      pivot: {x: .490409315, y: .13861084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_Body_Defender Armour
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 2022
+        width: 193
+        height: 263
+      alignment: 9
+      pivot: {x: .474904746, y: .131683692}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_Body_Knight Armour
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 2000
+        width: 192
+        height: 280
+      alignment: 9
+      pivot: {x: .454593658, y: .202478901}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_Body_Soldier Armour
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 2006
+        width: 216
+        height: 302
+      alignment: 9
+      pivot: {x: .441700697, y: .163209632}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2398
+        y: 2143
+        width: 120
+        height: 156
+      alignment: 9
+      pivot: {x: .408644617, y: .570273399}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2876
+        y: 2134
+        width: 123
+        height: 142
+      alignment: 9
+      pivot: {x: .399733633, y: .620626092}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3302
+        y: 2106
+        width: 124
+        height: 151
+      alignment: 9
+      pivot: {x: .433694154, y: .781324387}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3757
+        y: 2120
+        width: 124
+        height: 137
+      alignment: 9
+      pivot: {x: .395015597, y: .695045173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 2107
+        width: 114
+        height: 142
+      alignment: 9
+      pivot: {x: .409847856, y: .741253912}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_Helmet_Hero Armour
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 1706
+        width: 225
+        height: 262
+      alignment: 9
+      pivot: {x: .456948072, y: .285561144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_Helmet_Thief's Garb
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1713
+        width: 216
+        height: 241
+      alignment: 9
+      pivot: {x: .428246379, y: .274914503}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_Helmet_Veteran Armour
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 1693
+        width: 216
+        height: 275
+      alignment: 9
+      pivot: {x: .441700399, y: .31683284}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Helmet_Mercenary Armour
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 1728
+        width: 220
+        height: 242
+      alignment: 9
+      pivot: {x: .420745283, y: .219805762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Helmet_Sailor's Armour
+      rect:
+        serializedVersion: 2
+        x: 1434
+        y: 1745
+        width: 271
+        height: 241
+      alignment: 9
+      pivot: {x: .471404463, y: .14629443}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2404
+        y: 1904
+        width: 136
+        height: 124
+      alignment: 9
+      pivot: {x: .44298777, y: .538400948}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2894
+        y: 1900
+        width: 115
+        height: 101
+      alignment: 9
+      pivot: {x: .428505003, y: .615323842}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3325
+        y: 1872
+        width: 124
+        height: 128
+      alignment: 9
+      pivot: {x: .389490932, y: .708759308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 4202
+        y: 1863
+        width: 119
+        height: 123
+      alignment: 9
+      pivot: {x: .425149351, y: .706105292}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_Body_Hero Armour
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1426
+        width: 210
+        height: 257
+      alignment: 9
+      pivot: {x: .467710853, y: .119316369}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_Body_Thief's Garb
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 1426
+        width: 216
+        height: 257
+      alignment: 9
+      pivot: {x: .473092675, y: .119316369}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_Body_Veteran Armour
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 1422
+        width: 211
+        height: 271
+      alignment: 9
+      pivot: {x: .518363476, y: .128258958}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Body_Mercenary Armour
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 1431
+        width: 234
+        height: 252
+      alignment: 9
+      pivot: {x: .508279383, y: .107918873}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Body_Sailor's Armour
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 1417
+        width: 202
+        height: 266
+      alignment: 9
+      pivot: {x: .471227676, y: .146762475}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 1458
+        width: 147
+        height: 189
+      alignment: 9
+      pivot: {x: .454126477, y: .77354598}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2302
+        y: 1458
+        width: 151
+        height: 193
+      alignment: 9
+      pivot: {x: .43549189, y: .763994455}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2527
+        y: 1463
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .454124808, y: .756229401}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 1463
+        width: 152
+        height: 193
+      alignment: 9
+      pivot: {x: .445775092, y: .756229401}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2977
+        y: 1445
+        width: 146
+        height: 215
+      alignment: 9
+      pivot: {x: .469206512, y: .785771132}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 1458
+        width: 156
+        height: 202
+      alignment: 9
+      pivot: {x: .437559456, y: .781906307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 1463
+        width: 151
+        height: 202
+      alignment: 9
+      pivot: {x: .465264112, y: .781906307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3633
+        y: 1463
+        width: 156
+        height: 202
+      alignment: 9
+      pivot: {x: .442360908, y: .778195798}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3885
+        y: 1472
+        width: 152
+        height: 193
+      alignment: 9
+      pivot: {x: .445775092, y: .763994455}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4106
+        y: 1472
+        width: 151
+        height: 193
+      alignment: 9
+      pivot: {x: .415643752, y: .767876685}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 4331
+        y: 1481
+        width: 146
+        height: 189
+      alignment: 9
+      pivot: {x: .435356259, y: .757762134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4546
+        y: 1481
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .445292562, y: .754636168}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Helmet_Captain's Armour
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1101
+        width: 264
+        height: 270
+      alignment: 9
+      pivot: {x: .419277608, y: .187872544}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_Helmet_Paladin Armour
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1109
+        width: 216
+        height: 262
+      alignment: 9
+      pivot: {x: .428246379, y: .1598562}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_Helmet_Outlaw Armour
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 1109
+        width: 308
+        height: 279
+      alignment: 9
+      pivot: {x: .433954209, y: .156277999}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 8_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1293
+        width: 133
+        height: 135
+      alignment: 9
+      pivot: {x: .511267185, y: .882964432}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2761
+        y: 1302
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: .47746563, y: .877456069}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 9_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3211
+        y: 1302
+        width: 124
+        height: 137
+      alignment: 9
+      pivot: {x: .512084961, y: .871903718}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 19_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 1311
+        width: 129
+        height: 134
+      alignment: 9
+      pivot: {x: .5, y: .863455236}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 1307
+        width: 129
+        height: 137
+      alignment: 9
+      pivot: {x: .523229301, y: .871903718}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 10_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 1316
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Helmet_Warrior Armour
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1068
+        width: 206
+        height: 220
+      alignment: 9
+      pivot: {x: .47178635, y: .385520786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Helmet_Monk Armour
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 1054
+        width: 220
+        height: 238
+      alignment: 9
+      pivot: {x: .451566398, y: .414528728}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 1023
+        width: 147
+        height: 197
+      alignment: 9
+      pivot: {x: .469271511, y: .770562351}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2306
+        y: 1022
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .438544661, y: .766808391}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2522
+        y: 1028
+        width: 175
+        height: 196
+      alignment: 9
+      pivot: {x: .422565579, y: .74428761}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2742
+        y: 1027
+        width: 161
+        height: 197
+      alignment: 9
+      pivot: {x: .43827641, y: .743047595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2981
+        y: 1031
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .438544661, y: .771488786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3197
+        y: 1029
+        width: 147
+        height: 195
+      alignment: 9
+      pivot: {x: .426252931, y: .764071882}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 1036
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .444689691, y: .76212734}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3637
+        y: 1036
+        width: 147
+        height: 193
+      alignment: 9
+      pivot: {x: .463126451, y: .766807735}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3890
+        y: 1027
+        width: 147
+        height: 202
+      alignment: 9
+      pivot: {x: .463126451, y: .772809625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4107
+        y: 1022
+        width: 151
+        height: 207
+      alignment: 9
+      pivot: {x: .452138722, y: .774948955}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 4331
+        y: 1031
+        width: 151
+        height: 210
+      alignment: 9
+      pivot: {x: .464103252, y: .753813267}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4542
+        y: 1031
+        width: 158
+        height: 211
+      alignment: 9
+      pivot: {x: .454259187, y: .748328626}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Body_Captain's Armour
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 751
+        width: 202
+        height: 271
+      alignment: 9
+      pivot: {x: .442455202, y: .149705723}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_Body_Paladin Armour
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 765
+        width: 197
+        height: 257
+      alignment: 9
+      pivot: {x: .475414455, y: .100470521}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_Body_Outlaw Armour
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 710
+        width: 202
+        height: 307
+      alignment: 9
+      pivot: {x: .490409315, y: .263353974}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Body_Warrior Armour
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 779
+        width: 224
+        height: 248
+      alignment: 9
+      pivot: {x: .430809557, y: .0508181676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Body_ Monk Armour
+      rect:
+        serializedVersion: 2
+        x: 1471
+        y: 760
+        width: 197
+        height: 257
+      alignment: 9
+      pivot: {x: .480331808, y: .119316131}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 857
+        width: 129
+        height: 137
+      alignment: 9
+      pivot: {x: .528013706, y: .862680256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 2_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2761
+        y: 866
+        width: 128
+        height: 133
+      alignment: 9
+      pivot: {x: .514116287, y: .873587489}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 12_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3211
+        y: 866
+        width: 133
+        height: 137
+      alignment: 9
+      pivot: {x: .50679189, y: .862680256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 875
+        width: 129
+        height: 133
+      alignment: 9
+      pivot: {x: .535016179, y: .88038075}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 22_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4124
+        y: 871
+        width: 133
+        height: 138
+      alignment: 9
+      pivot: {x: .5, y: .873145044}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 0_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4565
+        y: 880
+        width: 128
+        height: 133
+      alignment: 9
+      pivot: {x: .51411438, y: .893964946}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_Helmet_Thief Armour
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 361
+        width: 312
+        height: 307
+      alignment: 9
+      pivot: {x: .543466032, y: .354856908}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Helmet_Tunic
+      rect:
+        serializedVersion: 2
+        x: 1439
+        y: 419
+        width: 275
+        height: 244
+      alignment: 9
+      pivot: {x: .447163522, y: .20225288}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 613
+        width: 147
+        height: 202
+      alignment: 9
+      pivot: {x: .444689691, y: .777282119}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2302
+        y: 613
+        width: 147
+        height: 202
+      alignment: 9
+      pivot: {x: .438544661, y: .772809923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2518
+        y: 627
+        width: 156
+        height: 193
+      alignment: 9
+      pivot: {x: .476836383, y: .762127042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2738
+        y: 623
+        width: 160
+        height: 201
+      alignment: 9
+      pivot: {x: .443537891, y: .774166882}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2961
+        y: 631
+        width: 162
+        height: 192
+      alignment: 9
+      pivot: {x: .505576074, y: .777608216}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 632
+        width: 152
+        height: 197
+      alignment: 9
+      pivot: {x: .428678811, y: .747633576}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3408
+        y: 636
+        width: 156
+        height: 195
+      alignment: 9
+      pivot: {x: .5, y: .75943917}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3633
+        y: 636
+        width: 160
+        height: 195
+      alignment: 9
+      pivot: {x: .420951843, y: .764071882}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3885
+        y: 631
+        width: 152
+        height: 198
+      alignment: 9
+      pivot: {x: .458396524, y: .741819739}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4101
+        y: 632
+        width: 156
+        height: 202
+      alignment: 9
+      pivot: {x: .430507571, y: .74597621}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 4326
+        y: 636
+        width: 151
+        height: 202
+      alignment: 9
+      pivot: {x: .452138722, y: .768337429}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4546
+        y: 633
+        width: 152
+        height: 210
+      alignment: 9
+      pivot: {x: .422735929, y: .753812969}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_Helmet_Veteran's Armour
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 385
+        width: 202
+        height: 202
+      alignment: 9
+      pivot: {x: .454179674, y: .412941366}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_Helmet_Medic Armour
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 411
+        width: 192
+        height: 147
+      alignment: 9
+      pivot: {x: .463930607, y: .388648212}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Helmet_Explorer Garb
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 419
+        width: 197
+        height: 162
+      alignment: 9
+      pivot: {x: .445911705, y: .320616543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 21_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 457
+        width: 128
+        height: 138
+      alignment: 9
+      pivot: {x: .521173477, y: .866598845}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 18_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2756
+        y: 466
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: .520377457, y: .873587489}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 14_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3201
+        y: 466
+        width: 138
+        height: 138
+      alignment: 9
+      pivot: {x: .526186764, y: .860052109}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 3_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 475
+        width: 124
+        height: 133
+      alignment: 9
+      pivot: {x: .521856487, y: .88038075}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 471
+        width: 129
+        height: 138
+      alignment: 9
+      pivot: {x: .521011233, y: .866598845}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 11_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4559
+        y: 480
+        width: 129
+        height: 133
+      alignment: 9
+      pivot: {x: .528013706, y: .873587489}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2049
+        y: 172
+        width: 184
+        height: 225
+      alignment: 9
+      pivot: {x: .549994409, y: .755528688}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2297
+        y: 159
+        width: 170
+        height: 247
+      alignment: 9
+      pivot: {x: .414323866, y: .770011485}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2504
+        y: 209
+        width: 170
+        height: 193
+      alignment: 9
+      pivot: {x: .531565964, y: .766119897}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 2729
+        y: 208
+        width: 179
+        height: 193
+      alignment: 9
+      pivot: {x: .438993484, y: .762333393}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 2967
+        y: 209
+        width: 161
+        height: 193
+      alignment: 9
+      pivot: {x: .469168514, y: .772620976}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3192
+        y: 209
+        width: 152
+        height: 196
+      alignment: 9
+      pivot: {x: .441218317, y: .763383389}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3408
+        y: 214
+        width: 156
+        height: 197
+      alignment: 9
+      pivot: {x: .487271816, y: .767085671}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 3624
+        y: 218
+        width: 169
+        height: 193
+      alignment: 9
+      pivot: {x: .451889843, y: .76212734}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 3862
+        y: 214
+        width: 175
+        height: 197
+      alignment: 9
+      pivot: {x: .520650089, y: .761390805}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4097
+        y: 214
+        width: 193
+        height: 215
+      alignment: 9
+      pivot: {x: .378299057, y: .693286002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 4322
+        y: 223
+        width: 156
+        height: 193
+      alignment: 9
+      pivot: {x: .471044302, y: .752765238}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 4532
+        y: 223
+        width: 168
+        height: 197
+      alignment: 9
+      pivot: {x: .473112553, y: .752218962}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_Body_Veteran's Armour
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 45
+        width: 220
+        height: 271
+      alignment: 9
+      pivot: {x: .445306957, y: .100399002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 17_Body_Medic Armour
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 21
+        width: 202
+        height: 284
+      alignment: 9
+      pivot: {x: .45876199, y: .180612639}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_Body_Thief Armour
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 16
+        width: 202
+        height: 285
+      alignment: 9
+      pivot: {x: .5, y: .190705076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Body_Explorer Garb
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 25
+        width: 209
+        height: 271
+      alignment: 9
+      pivot: {x: .476825923, y: .171152353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Body_Tunic
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 0
+        width: 192
+        height: 301
+      alignment: 9
+      pivot: {x: .474774033, y: .236109406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 7_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2541
+        y: 44
+        width: 133
+        height: 133
+      alignment: 9
+      pivot: {x: .511527836, y: .903466463}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 5_Foot_
+      rect:
+        serializedVersion: 2
+        x: 2756
+        y: 39
+        width: 129
+        height: 143
+      alignment: 9
+      pivot: {x: .529713213, y: .871342719}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 16_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3201
+        y: 48
+        width: 138
+        height: 133
+      alignment: 9
+      pivot: {x: .528774977, y: .873214602}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 4_Foot_
+      rect:
+        serializedVersion: 2
+        x: 3651
+        y: 52
+        width: 124
+        height: 141
+      alignment: 9
+      pivot: {x: .521856487, y: .852391481}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 15_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4119
+        y: 53
+        width: 129
+        height: 133
+      alignment: 9
+      pivot: {x: .507002473, y: .893965185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 24_Foot_
+      rect:
+        serializedVersion: 2
+        x: 4560
+        y: 57
+        width: 128
+        height: 138
+      alignment: 9
+      pivot: {x: .528232574, y: .879691541}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 20_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 4189
+        y: 3019
+        width: 65
+        height: 77
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 1_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3693
+        y: 2389
+        width: 47
+        height: 94
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 23_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3204
+        y: 2406
+        width: 45
+        height: 107
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 13_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 2394
+        width: 49
+        height: 99
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 3745
+        y: 1850
+        width: 30
+        height: 117
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 1043
+        width: 46
+        height: 160
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 746
+        width: 50
+        height: 210
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: 6_Foot_
+      rect:
+        serializedVersion: 2
+        x: 1861
+        y: 431
+        width: 37
+        height: 174
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_Helmet_No Armour
+      rect:
+        serializedVersion: 2
+        x: 1778
+        y: 98
+        width: 46
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_Body_No Armour
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 88
+        width: 39
+        height: 44
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_Shoulder_
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 89
+        width: 61
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_LegBack_
+      rect:
+        serializedVersion: 2
+        x: 1773
+        y: 34
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_LegFront_
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 32
+        width: 36
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Blank_Foot_
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 22
+        width: 57
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

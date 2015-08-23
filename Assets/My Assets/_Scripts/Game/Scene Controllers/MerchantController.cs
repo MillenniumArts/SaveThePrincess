@@ -225,10 +225,6 @@ public class MerchantController : MonoBehaviour {
         for (int i = 0; i < items.Length; i++)
         {
             this.purchaseBalance += items[i] * prices[i];
-            //if (!this.player.PurchaseItem(prices[i]))
-            //{
-            //    // if can't afford item
-            //}
         }
 
         // calculate player's remaining balance
@@ -244,12 +240,10 @@ public class MerchantController : MonoBehaviour {
          || (this.numPotionsPurchased == 0 && this.numFoodItemsPurchased == 0) )
         {
             this.purchaseButton.gameObject.SetActive(false);
-            this.cancelButton.gameObject.SetActive(false);
         }
         else
         {
             this.purchaseButton.gameObject.SetActive(true);
-            this.cancelButton.gameObject.SetActive(true);
         }
     }
 

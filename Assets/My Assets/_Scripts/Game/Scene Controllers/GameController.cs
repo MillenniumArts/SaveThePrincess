@@ -73,8 +73,7 @@ public class GameController : MonoBehaviour
                   retreatButton = null,
                   confirmButton = null,
                   cancelButton = null,
-                  inventoryToggleButton = null,
-                  inventoryHandle = null;
+                  inventoryToggleButton = null;
 
     public GameObject confirmPanel = null;
 
@@ -521,7 +520,6 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
-        this.inventoryHandle.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -531,7 +529,6 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
-        this.inventoryHandle.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
     }
     #endregion buttons

@@ -131,7 +131,6 @@ public class StatSelectController : MonoBehaviour
         }
     }
 
-
     public void Confirm()
     {
         AudioManager.Instance.PlaySFX("Button1");
@@ -139,7 +138,7 @@ public class StatSelectController : MonoBehaviour
         {
             this.player.totalHealth = this.newHealth;
             //only set health to full if 1st time
-            if (PlayerPrefs.GetInt("midgame") == 0)
+            if (PlayerPrefs.GetInt("midgame") == 1)
                 this.player.remainingHealth = this.newHealth;
             this.player.physicalDamage = this.newDamage;
             this.player.totalEnergy = this.newEnergy;

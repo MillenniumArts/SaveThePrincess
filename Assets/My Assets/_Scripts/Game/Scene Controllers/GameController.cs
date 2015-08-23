@@ -73,8 +73,7 @@ public class GameController : MonoBehaviour
                   retreatButton = null,
                   confirmButton = null,
                   cancelButton = null,
-                  inventoryToggleButton = null,
-                  inventoryHandle = null;
+                  inventoryToggleButton = null;
 
     public GameObject confirmPanel = null;
 
@@ -178,7 +177,12 @@ public class GameController : MonoBehaviour
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-            this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
+			if (damageToApply > 0)
+				this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
+			else
+				this.player.TriggerAnimation("healmagic");
+
+
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);
             this.turn = 1;
@@ -521,7 +525,6 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
-        this.inventoryHandle.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -531,7 +534,6 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
-        this.inventoryHandle.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
     }
     #endregion buttons
@@ -890,9 +892,6 @@ public class GameController : MonoBehaviour
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();
-
-       
-
     }
 
     // Use this for initialization
@@ -939,8 +938,8 @@ public class GameController : MonoBehaviour
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
-        this.attackMeter.minValue = 50;
-        //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
+        
+		//this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         // set cancel button to invis
         this.cancelAttack.gameObject.SetActive(false);

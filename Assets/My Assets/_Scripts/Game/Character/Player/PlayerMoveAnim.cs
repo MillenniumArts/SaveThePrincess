@@ -13,4 +13,20 @@ public class PlayerMoveAnim : MonoBehaviour {
 		if(parentAnimator != null)
 			parentAnimator.SetTrigger("MoveBack");
 	}
+
+    public void RunFwd()
+    {
+        if (parentAnimator != null)
+        {
+            parentAnimator.SetTrigger("RunFwd");
+        }
+    }
+
+    public void RunBack()
+    {
+        if (parentAnimator != null)
+        {
+            parentAnimator.SetTrigger("RunBack");
+        }
+    }
 }

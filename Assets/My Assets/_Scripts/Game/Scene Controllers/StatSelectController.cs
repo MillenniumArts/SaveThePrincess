@@ -137,9 +137,7 @@ public class StatSelectController : MonoBehaviour
         if (numCredits == 0)
         {
             this.player.totalHealth = this.newHealth;
-            //only set health to full if 1st time
-            if (PlayerPrefs.GetInt("midgame") == 1)
-                this.player.remainingHealth = this.newHealth;
+            this.player.remainingHealth = this.newHealth;
             this.player.physicalDamage = this.newDamage;
             this.player.totalEnergy = this.newEnergy;
             this.player.remainingEnergy = this.newEnergy;

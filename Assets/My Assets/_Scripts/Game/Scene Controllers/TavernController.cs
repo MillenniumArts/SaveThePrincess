@@ -181,7 +181,7 @@ public class TavernController : MonoBehaviour
       //  this.prevPos = this.player.gameObject.transform.localPosition;
       //  Vector3 newSpot = new Vector3(-4.5f, -2.5f);
       //  this.player.gameObject.transform.localPosition = newSpot;
-        this.player.posController.MovePlayer(22, 36);
+        this.player.posController.MovePlayer(23, 40);
         //init texts
         this.healthText.text = "";
         this.playerBalance.text = "";

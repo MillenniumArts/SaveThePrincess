@@ -807,9 +807,9 @@ public class GameController : MonoBehaviour
             //Debug.Log("Loading Stat Scene");
             // restore player mana after battle
             this.player.remainingEnergy = this.player.totalEnergy;
-            //Give player extra 10 health
-            this.player.totalHealth += 10;
-            this.player.remainingHealth += 10;
+            //Give player extra 10 health // **Changed to 25**
+            this.player.totalHealth += 25;
+            this.player.remainingHealth += 25;
             this.player.dollarBalance += this.enemy.DropMoney();
           //  this.player.transform.localPosition = this.prevPos;
             this.player.posController.MovePlayer(-30, -37);

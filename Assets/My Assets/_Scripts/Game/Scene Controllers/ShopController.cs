@@ -29,6 +29,8 @@ public class ShopController : MonoBehaviour
     private PlayerController player;
     private Vector3 prevPos;
 
+    public GameObject armourPrefab;
+
     //private bool start;
 
 
@@ -75,18 +77,23 @@ public class ShopController : MonoBehaviour
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
-        buyButton.image.color = Color.white;
+        //buyButton.image.color = Color.white;
+        buyButton.gameObject.GetComponent<ImagePulse>().PulseOff();
 
         // if player cant afford item
         if (player.dollarBalance < shopItems[buttonNum].GetDollarCost())
         {
             // turn button red
             buyButton.image.color = Color.red;
+            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "red";
+            buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
         }
         else if (player.dollarBalance >= shopItems[buttonNum].GetDollarCost())
         {
             // turn button gren
             buyButton.image.color = Color.green;
+            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "green";
+            buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
         }
 
         for (int i = 0; i < priceTags.Length; i++)
@@ -127,6 +134,7 @@ public class ShopController : MonoBehaviour
             buttons[selectedItem + 3].interactable = false;
             //receipt[selectedItem].SetActive(true);
         }
+        buyButton.gameObject.GetComponent<ImagePulse>().PulseOff();
         selectedItemStats.text = "";
         selectedItem = -1;
     }
@@ -180,6 +188,8 @@ public class ShopController : MonoBehaviour
         tempScale *= 1.2f;
         shopItems[2].transform.localScale = tempScale;
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+        GameObject newArmourPrefab = Instantiate(armourPrefab, shopItems[2].transform.position, Quaternion.identity) as GameObject;
+        newArmourPrefab.transform.parent = shopItems[2].gameObject.transform;
 
         /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
         shopItems[3].transform.parent = spawn4.transform;

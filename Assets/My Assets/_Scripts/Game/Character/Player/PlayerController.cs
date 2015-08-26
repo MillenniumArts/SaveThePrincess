@@ -104,7 +104,7 @@ public class PlayerController : PawnController
         this.playerWeapon.SwapWeaponType(w.GetItemSubClass());
         this.playerWeapon.GetComponentInChildren<NewWeaponSprites>().SetNewSprites(w.gameObject.GetComponentInChildren<NewWeaponSprites>());
         this.playerAnimator.SetBool(w.idleAnimParameter, w.idleState);
-        if (playerWeapon.GetItemSubClass() == "Spear" || playerWeapon.GetItemSubClass() == "Dagger")
+        if (playerWeapon.GetItemSubClass() == "Spear")
         {
             playerAnimator.SetBool("IsSpearAttack", true);
         }

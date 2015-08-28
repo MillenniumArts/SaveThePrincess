@@ -11,6 +11,7 @@ public class ImagePulse : MonoBehaviour {
     public Image _image;
     private Color _colour;
     public string colourName;
+    public Vector4 colourNum = new Vector4(1, 1, 1, 1);
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class ImagePulse : MonoBehaviour {
         }
         else
         {
-            _colour = new Color(1, 1, 1, 1);
+            _colour = colourNum;//new Color(1, 1, 1, 1);
             _image.color = _colour;
         }
     }

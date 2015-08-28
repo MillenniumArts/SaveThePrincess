@@ -85,14 +85,14 @@ public class ShopController : MonoBehaviour
         {
             // turn button red
             buyButton.image.color = Color.red;
-            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "red";
-            buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
+            buyButton.gameObject.GetComponent<ImagePulse>().colourNum = Color.red;
+            //buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
         }
         else if (player.dollarBalance >= shopItems[buttonNum].GetDollarCost())
         {
             // turn button gren
             buyButton.image.color = Color.green;
-            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "green";
+            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "black";
             buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
         }
 

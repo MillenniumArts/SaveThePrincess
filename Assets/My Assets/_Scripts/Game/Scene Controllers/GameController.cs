@@ -612,10 +612,10 @@ public class GameController : MonoBehaviour
     private void UpdateText()
     {
         // Battle stats (Top UI)
-        this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
-        this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
-        this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
+        this.leftHealthText.text = this.player.remainingHealth + " / " + this.player.totalHealth;
+        this.rightHealthText.text = this.enemy.remainingHealth + " / " + this.enemy.totalHealth;
+        this.leftManaText.text = this.player.remainingEnergy + " / " + this.player.totalEnergy;
+        this.rightManaText.text = this.enemy.remainingEnergy + " / " + this.enemy.totalEnergy;
         this.leftArmorText.text = this.player.GetTotalArmor().ToString();
         this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
         this.leftDamageText.text = this.player.GetTotalDamage().ToString();
@@ -626,7 +626,7 @@ public class GameController : MonoBehaviour
         //this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
-        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
+        this.battleText.text = (currentBattle + 1) + " / " + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
         if (this.inventoryToggleButton.isActiveAndEnabled)
         {
             // inventory text

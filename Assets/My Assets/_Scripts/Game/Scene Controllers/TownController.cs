@@ -70,7 +70,7 @@ public class TownController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.playerBalance.text = this.player.dollarBalance.ToString();
-        this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
+        this.playerHealth.text = this.player.remainingHealth.ToString() + " / " + this.player.totalHealth.ToString();
         this.playerScore.text = PlayerPrefs.GetInt("score").ToString();
 	}
 }

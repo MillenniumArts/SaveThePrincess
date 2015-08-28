@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 40070239cf79ea848ac99f6ee6a56418
-timeCreated: 1437059475
+timeCreated: 1440783214
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -188,13 +188,43 @@ TextureImporter:
     - name: CART_SPRITE_V2_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 21
-        width: 730
-        height: 687
+        x: 105
+        y: 19
+        width: 749
+        height: 688
       alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 4, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CART_SPRITE_V2_1
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 368
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CART_SPRITE_V2_2
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 337
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: CART_SPRITE_V2_3
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 325
+        width: 15
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

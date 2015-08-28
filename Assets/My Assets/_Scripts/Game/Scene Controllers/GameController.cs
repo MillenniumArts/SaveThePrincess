@@ -123,18 +123,6 @@ public class GameController : MonoBehaviour
         if (invAnim.open)
             invAnim.OpenClose();
 
-        for (int i = 0; i < 2; i++)
-        {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
-            {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOff();
-            }
-            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
-            {
-                pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
-            }
-        }
-
         // toggle movement on click
         if (!attackBarMoving)
         {
@@ -149,6 +137,18 @@ public class GameController : MonoBehaviour
             // second click
             attackBarMoving = false;
             playerHasAttacked = true;
+            for (int i = 0; i < 2; i++)
+            {
+                if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<ImagePulse>().PulseOff();
+                }
+                else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
+                }
+            }
+
         }
         // After second click
         if (!attackBarMoving && playerHasAttacked)
@@ -197,9 +197,9 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
         for (int i = 0; i < 2; i++)
         {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
             }
             else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
             {
@@ -357,9 +357,9 @@ public class GameController : MonoBehaviour
         }
         for (int i = 0; i < 2; i++)
         {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
             }
             else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
             {

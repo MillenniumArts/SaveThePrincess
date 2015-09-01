@@ -19,6 +19,7 @@ public class AudioDictionary : MonoBehaviour{
         MusicFiles.Add("ForestBattle", "Audio_Music_Battle_Forest_MP3");
         MusicFiles.Add("Death", "Audio_Music_Death_MP3");
         MusicFiles.Add("Main_Menu", "AUDIO_BAR_VER2_WAV");
+        MusicFiles.Add("Shop", "Audio_Music_Shop_MP3");
     }
 
     public string GetSound(string s)

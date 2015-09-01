@@ -8,7 +8,7 @@ public class InfoController : MonoBehaviour {
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
         EscapeHandler.instance.GetButtons();
     }
 

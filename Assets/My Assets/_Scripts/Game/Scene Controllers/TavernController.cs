@@ -171,7 +171,7 @@ public class TavernController : MonoBehaviour
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
         EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 5;
         NUM_MEALS = 3;

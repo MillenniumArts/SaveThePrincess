@@ -78,22 +78,22 @@ public class ShopController : MonoBehaviour
         selectedItem = buttonNum;
         buyButton.enabled = true;
         //buyButton.image.color = Color.white;
-        buyButton.gameObject.GetComponent<ImagePulse>().PulseOff();
+        buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
 
         // if player cant afford item
         if (player.dollarBalance < shopItems[buttonNum].GetDollarCost())
         {
             // turn button red
-            buyButton.image.color = Color.red;
-            buyButton.gameObject.GetComponent<ImagePulse>().colourNum = Color.red;
-            //buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
+            ///buyButton.image.color = Color.red;  
+            buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "red";
+            buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
         }
         else if (player.dollarBalance >= shopItems[buttonNum].GetDollarCost())
         {
             // turn button gren
-            buyButton.image.color = Color.green;
-            buyButton.gameObject.GetComponent<ImagePulse>().colourName = "black";
-            buyButton.gameObject.GetComponent<ImagePulse>().PulseOn();
+            ///buyButton.image.color = Color.green;
+            buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "black";
+            buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
         }
 
         for (int i = 0; i < priceTags.Length; i++)
@@ -134,7 +134,7 @@ public class ShopController : MonoBehaviour
             buttons[selectedItem + 3].interactable = false;
             //receipt[selectedItem].SetActive(true);
         }
-        buyButton.gameObject.GetComponent<ImagePulse>().PulseOff();
+        buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
         selectedItemStats.text = "";
         selectedItem = -1;
     }
@@ -298,7 +298,7 @@ public class ShopController : MonoBehaviour
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
         EscapeHandler.instance.GetButtons();
 
         firstTick = false;

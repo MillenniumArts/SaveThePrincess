@@ -20,6 +20,7 @@ public class AudioDictionary : MonoBehaviour{
         SoundFiles.Add("OpenShop", "Audio_SoundFX_Open_Shop");
         SoundFiles.Add("OpenTavern", "Audio_SoundFX_Open_Tavern");
         SoundFiles.Add("Hit", "Audio_SoundFX_Battle_Hit");
+        SoundFiles.Add("HitLarge", "Audio_SoundFX_Battle_HitLarge");
 
         MusicFiles = new Dictionary<string, string>();
         

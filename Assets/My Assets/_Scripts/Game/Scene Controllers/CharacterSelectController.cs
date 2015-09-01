@@ -25,7 +25,7 @@ public class CharacterSelectController : MonoBehaviour {
     /// </summary>
     public void NextSkin()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         if (currentChar < numOfChars)
         {
             currentChar++;
@@ -57,7 +57,7 @@ public class CharacterSelectController : MonoBehaviour {
     /// </summary>
     public void PrevSkin()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         if (currentChar > 0)
         {
             currentChar--;
@@ -90,7 +90,7 @@ public class CharacterSelectController : MonoBehaviour {
         {
             if (canContinue)
             {
-                AudioManager.Instance.PlaySFX("Button1");
+                AudioManager.Instance.PlaySFX("SelectLarge");
                 this.player.playerName = this.playerName.text;
                 // do something here before next load if needed
                 LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP", false);

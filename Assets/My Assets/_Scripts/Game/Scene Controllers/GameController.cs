@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnRetreat()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         confirmed = true;
         hasSelected = true;
     }
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Cancel()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         confirmed = false;
         hasSelected = true;
     }
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();

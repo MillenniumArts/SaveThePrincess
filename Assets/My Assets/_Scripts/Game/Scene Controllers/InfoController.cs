@@ -20,7 +20,7 @@ public class InfoController : MonoBehaviour {
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
        // EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP", false);
     }

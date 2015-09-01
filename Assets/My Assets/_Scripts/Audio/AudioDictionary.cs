@@ -12,6 +12,14 @@ public class AudioDictionary : MonoBehaviour{
         SoundFiles.Add("Button1", "Audio_SoundEffect_Temp_Button_Select_WAV");
         SoundFiles.Add("Button2", "Audio_SoundEffect_Temp_Battle_OpenInventory_WAV");
         SoundFiles.Add("Hit1", "Audio_SoundEffect_Temp_Battle_Hit_WAV");
+        SoundFiles.Add("SelectSmall", "Audio_SoundFX_Select_Small");
+        SoundFiles.Add("SelectLarge", "Audio_SoundFX_Select_Large");
+        SoundFiles.Add("Return", "Audio_SoundFX_Return");
+        SoundFiles.Add("Inventory", "Audio_SoundFX_Backpack");
+        SoundFiles.Add("AcceptPurchase", "Audio_SoundFX_Coins");
+        SoundFiles.Add("OpenShop", "Audio_SoundFX_Open_Shop");
+        SoundFiles.Add("OpenTavern", "Audio_SoundFX_Open_Tavern");
+        SoundFiles.Add("Hit", "Audio_SoundFX_Battle_Hit");
 
         MusicFiles = new Dictionary<string, string>();
         

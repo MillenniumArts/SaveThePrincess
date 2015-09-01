@@ -34,6 +34,7 @@ public class HighScoreController : MonoBehaviour {
     public void ExitHighScores()
     {
         // delete player and load start menu level
+        AudioManager.Instance.PlaySFX("SelectSmall");
         this.player.posController.MovePlayer(35, 65);	
         LevelLoadHandler.Instance.LoadLevel("DeathScene_LVP", false);
     }

@@ -19,14 +19,14 @@ public class HowToPlayController : MonoBehaviour {
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
        // EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP",false);
     }
 
     public void StartGame()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
        // EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("StatSelect_LVP",false);
     }

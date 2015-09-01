@@ -45,7 +45,7 @@ public class ShopController : MonoBehaviour
 
     public void ExitStore()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
       //  this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
@@ -54,6 +54,7 @@ public class ShopController : MonoBehaviour
 
     public void RefreshShop()
     {
+        AudioManager.Instance.PlaySFX("Inventory");
         for (int i = 0; i < shopItems.Length; i++)
         {
             if(shopItems[i] != null)
@@ -73,7 +74,7 @@ public class ShopController : MonoBehaviour
     #region purchasing items
     public void SelectItem(int buttonNum)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
@@ -111,7 +112,8 @@ public class ShopController : MonoBehaviour
 
     public void BuyItem()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
+        AudioManager.Instance.PlaySFX("AcceptPurchase");
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")
@@ -299,6 +301,7 @@ public class ShopController : MonoBehaviour
     {
         SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("Shop");
+        AudioManager.Instance.PlaySFX("OpenShop");
         EscapeHandler.instance.GetButtons();
 
         firstTick = false;

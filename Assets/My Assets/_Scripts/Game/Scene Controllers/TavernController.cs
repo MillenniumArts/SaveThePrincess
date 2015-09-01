@@ -133,12 +133,12 @@ public class TavernController : MonoBehaviour
     private void UpdateText()
     {
         this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
+        this.healthText.text = this.player.remainingHealth + " / " + this.player.totalHealth;
         this.playerBalance.text = this.player.dollarBalance.ToString();
 
         for (int i = 0; i < this.healthLabelText.Length; i++)
         {
-            this.healthLabelText[i].text = this.stats[i].ToString()+"%";
+            this.healthLabelText[i].text = this.stats[i].ToString()+" %";
             this.moneyLabelText[i].text = this.prices[i].ToString();
         }
 

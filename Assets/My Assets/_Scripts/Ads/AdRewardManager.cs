@@ -20,12 +20,14 @@ public class AdRewardManager : MonoBehaviour {
 
     public void OpenAdDialog()
     {
+        AudioManager.Instance.PlaySFX("SelectSmall");
         notification.SetActive(true);
         showButton.SetActive(false);
     }
 
     public void AcceptAds(string zoneID = "")
     {
+        AudioManager.Instance.PlaySFX("SelectSmall");
         adManager.ShowAd(this, zoneID);
     }
 
@@ -49,6 +51,7 @@ public class AdRewardManager : MonoBehaviour {
 
     public void CancelAds()
     {
+        AudioManager.Instance.PlaySFX("Return");
         notification.SetActive(false);
         showButton.SetActive(true);
     }

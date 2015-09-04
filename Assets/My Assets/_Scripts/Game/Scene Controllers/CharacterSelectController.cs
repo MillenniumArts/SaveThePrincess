@@ -141,6 +141,7 @@ public class CharacterSelectController : MonoBehaviour {
         numOfChars -= 1;
         skinUnlock = new bool[unlockLevels.Length];
         CheckUnlock();
+        this.player.posController.MovePlayer(32, 50);
 	}
 	
 	// Update is called once per frame

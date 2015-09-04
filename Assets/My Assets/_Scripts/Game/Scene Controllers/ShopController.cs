@@ -45,6 +45,7 @@ public class ShopController : MonoBehaviour
 
     public void ExitStore()
     {
+        this.player.gameObject.transform.localScale = new Vector3(-1.25f, 1.25f, 1f);
         AudioManager.Instance.PlaySFX("SelectSmall");
       //  this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
@@ -79,22 +80,24 @@ public class ShopController : MonoBehaviour
         selectedItem = buttonNum;
         buyButton.enabled = true;
         //buyButton.image.color = Color.white;
-        buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
+        //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
 
         // if player cant afford item
         if (player.dollarBalance < shopItems[buttonNum].GetDollarCost())
         {
             // turn button red
             ///buyButton.image.color = Color.red;  
-            buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "red";
-            buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            //buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "red";
+            //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            buyButton.gameObject.SetActive(false);
         }
         else if (player.dollarBalance >= shopItems[buttonNum].GetDollarCost())
         {
             // turn button gren
             ///buyButton.image.color = Color.green;
-            buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "black";
-            buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            //buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "black";
+            //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            buyButton.gameObject.SetActive(true);
         }
 
         for (int i = 0; i < priceTags.Length; i++)
@@ -136,7 +139,12 @@ public class ShopController : MonoBehaviour
             buttons[selectedItem + 3].interactable = false;
             //receipt[selectedItem].SetActive(true);
         }
-        buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
+        //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
+        buyButton.gameObject.SetActive(false);
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            priceTags[i].color = Color.white;
+        }
         selectedItemStats.text = "";
         selectedItem = -1;
     }
@@ -311,7 +319,9 @@ public class ShopController : MonoBehaviour
         // relocate player
       //  Vector3 newSpot = new Vector3(-5.7f, -2f);
       //  this.player.gameObject.transform.localPosition = newSpot;
-        this.player.posController.MovePlayer(27, 30);
+        this.player.posController.MovePlayer(28, 33);
+
+        this.player.gameObject.transform.localScale = new Vector3(-1.5f, 1.5f, 1f);
 
         this.playerBalance.text = this.player.dollarBalance.ToString();
 

@@ -363,9 +363,14 @@ public class GameController : MonoBehaviour
             }
             else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<SpritePulse>().PulseOn();
+                Invoke("PulseNow",2f);
             }
         }
+    }
+
+    private void PulseNow()
+    {
+        pulsingButtons[0].GetComponent<SpritePulse>().PulseOn();
     }
 
     /// <summary>

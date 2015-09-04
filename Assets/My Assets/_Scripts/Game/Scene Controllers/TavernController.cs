@@ -53,7 +53,7 @@ public class TavernController : MonoBehaviour
         }
         else
         {
-            Debug.Log("You already have full stats! Go fight something!");
+            Debug.Log("You already have full stats ! Go fight something !");
             NotifyFullStats();
         }
     }
@@ -110,7 +110,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     void NotifyFullStats()
     {
-        string notTitle = "Full Stats!";
+        string notTitle = "Full Stats !";
         string notString = "You already have full stats! \nGo fight someone!";
         NotificationHandler.instance.MakeNotification(notTitle, notString);
     }

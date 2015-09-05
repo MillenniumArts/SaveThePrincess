@@ -61,6 +61,14 @@ public class ButtonPulse : MonoBehaviour {
                 _colour.normalColor = new Color(_colour.normalColor.r, _colour.normalColor.g, _colour.normalColor.b, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
                 _button.colors = _colour;
                 break;
+            case "black":
+                _colour.normalColor = new Color(Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha),
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    _colour.normalColor.a
+                                    );
+                _button.colors = _colour;
+                break;
             default:
                 _colour.normalColor = new Color(_colour.normalColor.r, _colour.normalColor.g, _colour.normalColor.b, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
                 _button.colors = _colour;

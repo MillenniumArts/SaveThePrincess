@@ -67,7 +67,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void CancelPurchase()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         for (int i = 0; i < items.Length; i++)
         {
             items[i] = 0;
@@ -81,7 +81,8 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     public void ConfirmPurchase()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
+        AudioManager.Instance.PlaySFX("AcceptPurchase");
         if (this.player.PurchaseItem(purchaseBalance)){
             this.player.inventory.Apples += this.items[0];
             this.player.inventory.Bread += this.items[1];
@@ -105,7 +106,7 @@ public class MerchantController : MonoBehaviour {
     public void LeaveMerchant()
     {
         bool unPurchased = false;
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] > 0)
@@ -126,13 +127,13 @@ public class MerchantController : MonoBehaviour {
 
     public void CancelPanel()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         this.confirmPanel.gameObject.SetActive(false);
     }
 
     public void ConfirmPanel()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
     }
 
@@ -142,7 +143,7 @@ public class MerchantController : MonoBehaviour {
     /// <param name="index"></param>
     public void IncreaseAmount(int index)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         if (index <= 2)
         {
             if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
@@ -164,7 +165,7 @@ public class MerchantController : MonoBehaviour {
     /// </summary>
     /// <param name="index"></param>
     public void DecreaseAmount(int index) {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         if (index <= 2)
         {
             if (items[index] - 1 <= 0)
@@ -236,7 +237,18 @@ public class MerchantController : MonoBehaviour {
    /// </summary>
     void UpdateButtons()
     {
-        if (this.purchaseBalance > this.player.dollarBalance 
+        bool objectsInCart = false;
+        for(int i = 0; i < items.Length; i++){
+            if(items[i] > 0){
+                objectsInCart = true;
+                break;
+            }
+        }
+        if (objectsInCart)
+        {
+            this.purchaseButton.gameObject.SetActive(true);
+        }
+        else if (this.purchaseBalance > this.player.dollarBalance 
          || (this.numPotionsPurchased == 0 && this.numFoodItemsPurchased == 0) )
         {
             this.purchaseButton.gameObject.SetActive(false);

@@ -39,21 +39,21 @@ public class TownController : MonoBehaviour {
 	}
 
 	public void GoToBattle(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         DontDestroyOnLoad(this.player);
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Battle_LVP", false);
 	}
 
 	public void GoToStore(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
 		//DontDestroyOnLoad (this.player);
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Store_LVP", false);
 	}
 
 	public void GoToInn(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
 		//DontDestroyOnLoad (this.player);
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Tavern_LVP", false);
@@ -61,7 +61,7 @@ public class TownController : MonoBehaviour {
 
     public void GoToMerchant()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         //DontDestroyOnLoad(this.player);
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Merchant_LVP", false);
@@ -70,7 +70,7 @@ public class TownController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         this.playerBalance.text = this.player.dollarBalance.ToString();
-        this.playerHealth.text = this.player.remainingHealth.ToString() + "/" + this.player.totalHealth.ToString();
+        this.playerHealth.text = this.player.remainingHealth.ToString() + " / " + this.player.totalHealth.ToString();
         this.playerScore.text = PlayerPrefs.GetInt("score").ToString();
 	}
 }

@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnRetreat()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         confirmed = true;
         hasSelected = true;
     }
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Cancel()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         confirmed = false;
         hasSelected = true;
     }
@@ -118,22 +118,10 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();
-
-        for (int i = 0; i < 2; i++)
-        {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
-            {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOff();
-            }
-            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
-            {
-                pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
-            }
-        }
 
         // toggle movement on click
         if (!attackBarMoving)
@@ -149,6 +137,18 @@ public class GameController : MonoBehaviour
             // second click
             attackBarMoving = false;
             playerHasAttacked = true;
+            for (int i = 0; i < 2; i++)
+            {
+                if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<ImagePulse>().PulseOff();
+                }
+                else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
+                }
+            }
+
         }
         // After second click
         if (!attackBarMoving && playerHasAttacked)
@@ -197,9 +197,9 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
         for (int i = 0; i < 2; i++)
         {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
             }
             else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
             {
@@ -357,15 +357,20 @@ public class GameController : MonoBehaviour
         }
         for (int i = 0; i < 2; i++)
         {
-            if (pulsingButtons[i].GetComponent<ButtonPulse>() == true)
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<ButtonPulse>().PulseOn();
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
             }
             else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
             {
-                pulsingButtons[i].GetComponent<SpritePulse>().PulseOn();
+                Invoke("PulseNow",2f);
             }
         }
+    }
+
+    private void PulseNow()
+    {
+        pulsingButtons[0].GetComponent<SpritePulse>().PulseOn();
     }
 
     /// <summary>
@@ -612,10 +617,10 @@ public class GameController : MonoBehaviour
     private void UpdateText()
     {
         // Battle stats (Top UI)
-        this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
-        this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
-        this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
+        this.leftHealthText.text = this.player.remainingHealth + " / " + this.player.totalHealth;
+        this.rightHealthText.text = this.enemy.remainingHealth + " / " + this.enemy.totalHealth;
+        this.leftManaText.text = this.player.remainingEnergy + " / " + this.player.totalEnergy;
+        this.rightManaText.text = this.enemy.remainingEnergy + " / " + this.enemy.totalEnergy;
         this.leftArmorText.text = this.player.GetTotalArmor().ToString();
         this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
         this.leftDamageText.text = this.player.GetTotalDamage().ToString();
@@ -626,7 +631,7 @@ public class GameController : MonoBehaviour
         //this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
-        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
+        this.battleText.text = (currentBattle + 1) + " / " + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
         if (this.inventoryToggleButton.isActiveAndEnabled)
         {
             // inventory text

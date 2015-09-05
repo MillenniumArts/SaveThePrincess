@@ -49,7 +49,7 @@ public class StatSelectController : MonoBehaviour
     {
         if (this.numCredits > 0)
         {
-            AudioManager.Instance.PlaySFX("Button1");
+            AudioManager.Instance.PlaySFX("SelectSmall");
             switch (index)
             {
                 case 0: // HP
@@ -80,7 +80,7 @@ public class StatSelectController : MonoBehaviour
 
     public void StatDown(int index)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         if (this.numCredits <= this.MAX_CREDITS)
         {
             switch (index)
@@ -133,13 +133,11 @@ public class StatSelectController : MonoBehaviour
 
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         if (numCredits == 0)
         {
             this.player.totalHealth = this.newHealth;
-            //only set health to full if 1st time
-            if (PlayerPrefs.GetInt("midgame") == 1)
-                this.player.remainingHealth = this.newHealth;
+            this.player.remainingHealth = this.newHealth;
             this.player.physicalDamage = this.newDamage;
             this.player.totalEnergy = this.newEnergy;
             this.player.remainingEnergy = this.newEnergy;
@@ -151,7 +149,7 @@ public class StatSelectController : MonoBehaviour
     
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", true);
         this.player.transform.localPosition = this.prevPos;
 

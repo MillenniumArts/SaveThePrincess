@@ -10,6 +10,7 @@ public class OptionsHandler : MonoBehaviour {
 
     public void GoBack()
     {
+        AudioManager.Instance.PlaySFX("Return");
         EscapeHandler.instance.ClearButtons();
         Application.LoadLevel("StartMenu_LVP");
     }

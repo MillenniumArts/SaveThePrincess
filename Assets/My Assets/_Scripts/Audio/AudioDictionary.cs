@@ -12,6 +12,15 @@ public class AudioDictionary : MonoBehaviour{
         SoundFiles.Add("Button1", "Audio_SoundEffect_Temp_Button_Select_WAV");
         SoundFiles.Add("Button2", "Audio_SoundEffect_Temp_Battle_OpenInventory_WAV");
         SoundFiles.Add("Hit1", "Audio_SoundEffect_Temp_Battle_Hit_WAV");
+        SoundFiles.Add("SelectSmall", "Audio_SoundFX_Select_Small");
+        SoundFiles.Add("SelectLarge", "Audio_SoundFX_Select_Large");
+        SoundFiles.Add("Return", "Audio_SoundFX_Return");
+        SoundFiles.Add("Inventory", "Audio_SoundFX_Backpack");
+        SoundFiles.Add("AcceptPurchase", "Audio_SoundFX_Coins");
+        SoundFiles.Add("OpenShop", "Audio_SoundFX_Open_Shop");
+        SoundFiles.Add("OpenTavern", "Audio_SoundFX_Open_Tavern");
+        SoundFiles.Add("Hit", "Audio_SoundFX_Battle_Hit");
+        SoundFiles.Add("HitLarge", "Audio_SoundFX_Battle_HitLarge");
 
         MusicFiles = new Dictionary<string, string>();
         
@@ -19,6 +28,7 @@ public class AudioDictionary : MonoBehaviour{
         MusicFiles.Add("ForestBattle", "Audio_Music_Battle_Forest_MP3");
         MusicFiles.Add("Death", "Audio_Music_Death_MP3");
         MusicFiles.Add("Main_Menu", "AUDIO_BAR_VER2_WAV");
+        MusicFiles.Add("Shop", "Audio_Music_Shop_MP3");
     }
 
     public string GetSound(string s)

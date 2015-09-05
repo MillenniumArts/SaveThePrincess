@@ -29,7 +29,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     public void LeaveInn()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
       //  this.player.gameObject.transform.localPosition = prevPos;
         EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
@@ -42,7 +42,7 @@ public class TavernController : MonoBehaviour
     /// <param name="index"></param>
     public void PurchaseMeal(int index)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         if (totalHealthMissing > 0)
         {
             if (player.PurchaseItem(prices[index]))
@@ -53,7 +53,7 @@ public class TavernController : MonoBehaviour
         }
         else
         {
-            Debug.Log("You already have full stats! Go fight something!");
+            Debug.Log("You already have full stats ! Go fight something !");
             NotifyFullStats();
         }
     }
@@ -63,7 +63,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     public void SleepForNight()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         // if player needs health OR mana
         if (totalHealthMissing > 0)
         {
@@ -110,7 +110,7 @@ public class TavernController : MonoBehaviour
     /// </summary>
     void NotifyFullStats()
     {
-        string notTitle = "Full Stats!";
+        string notTitle = "Full Stats !";
         string notString = "You already have full stats! \nGo fight someone!";
         NotificationHandler.instance.MakeNotification(notTitle, notString);
     }
@@ -133,12 +133,12 @@ public class TavernController : MonoBehaviour
     private void UpdateText()
     {
         this.totalHealthMissing = (this.player.totalHealth - this.player.remainingHealth);
-        this.healthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
+        this.healthText.text = this.player.remainingHealth + " / " + this.player.totalHealth;
         this.playerBalance.text = this.player.dollarBalance.ToString();
 
         for (int i = 0; i < this.healthLabelText.Length; i++)
         {
-            this.healthLabelText[i].text = this.stats[i].ToString()+"%";
+            this.healthLabelText[i].text = this.stats[i].ToString()+" %";
             this.moneyLabelText[i].text = this.prices[i].ToString();
         }
 
@@ -171,7 +171,8 @@ public class TavernController : MonoBehaviour
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
+        AudioManager.Instance.PlaySFX("OpenTavern");
         EscapeHandler.instance.GetButtons();
         BASE_MEAL_COST = 5;
         NUM_MEALS = 3;
@@ -181,7 +182,7 @@ public class TavernController : MonoBehaviour
       //  this.prevPos = this.player.gameObject.transform.localPosition;
       //  Vector3 newSpot = new Vector3(-4.5f, -2.5f);
       //  this.player.gameObject.transform.localPosition = newSpot;
-        this.player.posController.MovePlayer(22, 36);
+        this.player.posController.MovePlayer(23, 40);
         //init texts
         this.healthText.text = "";
         this.playerBalance.text = "";

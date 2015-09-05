@@ -8,7 +8,7 @@ public class InfoController : MonoBehaviour {
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
         EscapeHandler.instance.GetButtons();
     }
 
@@ -20,7 +20,7 @@ public class InfoController : MonoBehaviour {
 
     public void GoBack()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
        // EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP", false);
     }

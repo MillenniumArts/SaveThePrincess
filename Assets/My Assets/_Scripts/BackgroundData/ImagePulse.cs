@@ -11,6 +11,7 @@ public class ImagePulse : MonoBehaviour {
     public Image _image;
     private Color _colour;
     public string colourName;
+    public Vector4 colourNum = new Vector4(1, 1, 1, 1);
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class ImagePulse : MonoBehaviour {
         }
         else
         {
-            _colour = new Color(1, 1, 1, 1);
+            _colour = colourNum;//new Color(1, 1, 1, 1);
             _image.color = _colour;
         }
     }
@@ -48,25 +49,25 @@ public class ImagePulse : MonoBehaviour {
         {
             case "red":
                 _colour = new Color(_colour.r, 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
                                     _colour.a
                                     );
                 _image.color = _colour;
                 break;
             case "green":
                 _colour = new Color(
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha),
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha),
                                     _colour.g, 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
                                     _colour.a
                                     );
                 _image.color = _colour;
                 break;
             case "blue":
                 _colour = new Color(
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
                                     _colour.b, 
                                     _colour.a
                                     );
@@ -77,15 +78,15 @@ public class ImagePulse : MonoBehaviour {
                                     _colour.r, 
                                     _colour.g, 
                                     _colour.b, 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha)
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha)
                                     );
                 _image.color = _colour;
                 break;
             case "black":
                 _colour = new Color(
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha),
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha),
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
                                     _colour.a
                                     );
                 _image.color = _colour;
@@ -95,7 +96,7 @@ public class ImagePulse : MonoBehaviour {
                                     _colour.r,
                                     _colour.g, 
                                     _colour.b, 
-                                    Mathf.Clamp(Mathf.PingPong((Time.fixedDeltaTime * speed), time), minAlpha, maxAlpha)
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha)
                                     );
                 _image.color = _colour;
                 break;

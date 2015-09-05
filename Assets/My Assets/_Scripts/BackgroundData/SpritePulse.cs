@@ -9,6 +9,8 @@ public class SpritePulse : MonoBehaviour {
     public float minAlpha = 0.6f;
     public float maxAlpha = 1.0f;
     public bool isOn = false;
+    public string colour;
+    private Color newColour;
 
 	// Update is called once per frame
 	void Update () {
@@ -34,7 +36,23 @@ public class SpritePulse : MonoBehaviour {
 
     private void ChangeSpriteColour()
     {
-        Color newColour = new Color(1.0f, 1.0f, 1.0f, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
+        colour.ToLower();
+        switch (colour)
+        {
+            case "alpha":
+                newColour = new Color(1.0f, 1.0f, 1.0f, Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha));
+                break;
+            case "black":
+                newColour = new Color(Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha),
+                                    Mathf.Clamp(Mathf.PingPong((Time.time * speed), time), minAlpha, maxAlpha), 
+                                    1.0f
+                                    );
+                break;
+            default:
+                    Debug.Log("Choose a colour or spell the colour correctly.");
+                break;
+        }
         foreach (SpriteRenderer renderer in spriteParent.GetComponentsInChildren<SpriteRenderer>())
         {
             renderer.color = newColour;

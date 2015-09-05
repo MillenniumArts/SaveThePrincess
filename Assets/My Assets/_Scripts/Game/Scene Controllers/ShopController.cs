@@ -29,6 +29,8 @@ public class ShopController : MonoBehaviour
     private PlayerController player;
     private Vector3 prevPos;
 
+    public GameObject armourPrefab;
+
     //private bool start;
 
 
@@ -43,7 +45,8 @@ public class ShopController : MonoBehaviour
 
     public void ExitStore()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        this.player.gameObject.transform.localScale = new Vector3(-1.25f, 1.25f, 1f);
+        AudioManager.Instance.PlaySFX("SelectSmall");
       //  this.player.gameObject.transform.localPosition = prevPos;
         //EscapeHandler.instance.ClearButtons();
         //DontDestroyOnLoad(this.player);
@@ -52,6 +55,7 @@ public class ShopController : MonoBehaviour
 
     public void RefreshShop()
     {
+        AudioManager.Instance.PlaySFX("Inventory");
         for (int i = 0; i < shopItems.Length; i++)
         {
             if(shopItems[i] != null)
@@ -71,22 +75,29 @@ public class ShopController : MonoBehaviour
     #region purchasing items
     public void SelectItem(int buttonNum)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         selectedItemStats.text = shopItems[buttonNum].GetStatsString();
         selectedItem = buttonNum;
         buyButton.enabled = true;
-        buyButton.image.color = Color.white;
+        //buyButton.image.color = Color.white;
+        //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
 
         // if player cant afford item
         if (player.dollarBalance < shopItems[buttonNum].GetDollarCost())
         {
             // turn button red
-            buyButton.image.color = Color.red;
+            ///buyButton.image.color = Color.red;  
+            //buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "red";
+            //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            buyButton.gameObject.SetActive(false);
         }
         else if (player.dollarBalance >= shopItems[buttonNum].GetDollarCost())
         {
             // turn button gren
-            buyButton.image.color = Color.green;
+            ///buyButton.image.color = Color.green;
+            //buyButton.gameObject.GetComponent<ButtonPulse>().colourName = "black";
+            //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOn();
+            buyButton.gameObject.SetActive(true);
         }
 
         for (int i = 0; i < priceTags.Length; i++)
@@ -104,7 +115,8 @@ public class ShopController : MonoBehaviour
 
     public void BuyItem()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
+        AudioManager.Instance.PlaySFX("AcceptPurchase");
         if (this.player.PurchaseItem(shopItems[selectedItem].dollarCost))
         {	// can afford
             if (shopItems[selectedItem].GetItemClass() == "Armor")
@@ -126,6 +138,12 @@ public class ShopController : MonoBehaviour
             DestroyItem(selectedItem);
             buttons[selectedItem + 3].interactable = false;
             //receipt[selectedItem].SetActive(true);
+        }
+        //buyButton.gameObject.GetComponent<ButtonPulse>().PulseOff();
+        buyButton.gameObject.SetActive(false);
+        for (int i = 0; i < priceTags.Length; i++)
+        {
+            priceTags[i].color = Color.white;
         }
         selectedItemStats.text = "";
         selectedItem = -1;
@@ -180,6 +198,8 @@ public class ShopController : MonoBehaviour
         tempScale *= 1.2f;
         shopItems[2].transform.localScale = tempScale;
         shopItems[2].SetDmgArm(GetRandomDamage(), GetRandomArmor());
+        GameObject newArmourPrefab = Instantiate(armourPrefab, shopItems[2].transform.position, Quaternion.identity) as GameObject;
+        newArmourPrefab.transform.parent = shopItems[2].gameObject.transform;
 
         /*shopItems[3] = factory.CreateArmor(spawn4, "LightArmor");
         shopItems[3].transform.parent = spawn4.transform;
@@ -288,7 +308,8 @@ public class ShopController : MonoBehaviour
     void Start()
     {
         SceneFadeHandler.Instance.levelStarting = true;
-        AudioManager.Instance.PlayNewSong("ForestOverworld");
+        AudioManager.Instance.PlayNewSong("Shop");
+        AudioManager.Instance.PlaySFX("OpenShop");
         EscapeHandler.instance.GetButtons();
 
         firstTick = false;
@@ -298,7 +319,9 @@ public class ShopController : MonoBehaviour
         // relocate player
       //  Vector3 newSpot = new Vector3(-5.7f, -2f);
       //  this.player.gameObject.transform.localPosition = newSpot;
-        this.player.posController.MovePlayer(27, 30);
+        this.player.posController.MovePlayer(28, 33);
+
+        this.player.gameObject.transform.localScale = new Vector3(-1.5f, 1.5f, 1f);
 
         this.playerBalance.text = this.player.dollarBalance.ToString();
 

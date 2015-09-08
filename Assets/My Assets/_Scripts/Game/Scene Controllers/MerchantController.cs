@@ -143,20 +143,29 @@ public class MerchantController : MonoBehaviour {
     /// <param name="index"></param>
     public void IncreaseAmount(int index)
     {
-        AudioManager.Instance.PlaySFX("SelectSmall");
-        if (index <= 2)
+        if ((purchaseBalance + prices[index] <= playerBalance))
         {
-            if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
+            AudioManager.Instance.PlaySFX("SelectSmall");
+            if (index <= 2)
             {
-                items[index]+=1;
-                numFoodItemsPurchased+=1;
+                if (this.player.inventory.HasRoomInInventoryFor("food", numFoodItemsPurchased))
+                {
+                    items[index] += 1;
+                    numFoodItemsPurchased += 1;
+                }
             }
-        }else if (index > 2 && index <= 4){
-            if (this.player.inventory.HasRoomInInventoryFor("potion", numPotionsPurchased))
+            else if (index > 2 && index <= 4)
             {
-                items[index] += 1;
-                numPotionsPurchased += 1;
+                if (this.player.inventory.HasRoomInInventoryFor("potion", numPotionsPurchased))
+                {
+                    items[index] += 1;
+                    numPotionsPurchased += 1;
+                }
             }
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("Return");
         }
     }
 

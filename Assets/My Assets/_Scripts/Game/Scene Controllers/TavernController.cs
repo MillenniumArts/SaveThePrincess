@@ -16,6 +16,8 @@ public class TavernController : MonoBehaviour
     public Text[] healthLabelText;
     public Text[] moneyLabelText;
 
+    public Image[] foodPortraits;
+
     // stats
     public int[] prices, stats;
     public Text healthText, playerBalance;
@@ -151,6 +153,7 @@ public class TavernController : MonoBehaviour
                 for (int i = 0; i < buttonText.Length; i++)
                 {
                     foodButtons[i].gameObject.SetActive(true);
+                    foodPortraits[i].GetComponent<ImagePulse>().PulseOn();
                 }
                 this.sleepForNight.gameObject.SetActive(true);
             }
@@ -159,6 +162,7 @@ public class TavernController : MonoBehaviour
                 for (int i = 0; i < buttonText.Length; i++)
                 {
                     foodButtons[i].gameObject.SetActive(false);
+                    foodPortraits[i].GetComponent<ImagePulse>().PulseOff();
                 }
                 this.sleepForNight.gameObject.SetActive(false);
             }

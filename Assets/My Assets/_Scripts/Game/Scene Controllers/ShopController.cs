@@ -319,7 +319,7 @@ public class ShopController : MonoBehaviour
         // relocate player
       //  Vector3 newSpot = new Vector3(-5.7f, -2f);
       //  this.player.gameObject.transform.localPosition = newSpot;
-        this.player.posController.MovePlayer(28, 33);
+        this.player.posController.MovePlayer(28, 27);
 
         this.player.gameObject.transform.localScale = new Vector3(-1.5f, 1.5f, 1f);
 

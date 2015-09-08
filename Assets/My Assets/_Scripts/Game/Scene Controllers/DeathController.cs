@@ -18,12 +18,13 @@ public class DeathController : MonoBehaviour {
         AudioManager.Instance.PlayNewSong("Death");
         EscapeHandler.instance.GetButtons();
 		this.player = FindObjectOfType<PlayerController> ();
-        this.player.posController.MovePlayer(35, 65);	
+        this.player.posController.MovePlayer(35, 65);
+        PlayerPrefs.SetInt("CharUnlock", PlayerPrefs.GetInt("score"));
 	}
 
     public void Restart()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         EnemyStats.GetInstance().ResetEnemyBaseStats();
         PlayerPrefs.SetInt("score", 0); // Reset the score to 0 for the next game.
         LevelLoadHandler.Instance.LoadLevel("StartMenu_LVP", true);
@@ -36,15 +37,19 @@ public class DeathController : MonoBehaviour {
     {
         if (dl.publicCode != "" && dl.privateCode != "")
         {
-            // TESTING:
-            //dl.AddScore("Jake", 999);
-            dl.AddScore(this.player.playerName, PlayerPrefs.GetInt("score"));
+            if (PlayerPrefs.GetInt("score") != 0) 
+            {
+                AudioManager.Instance.PlaySFX("SelectSmall");
+                dl.AddScore(this.player.playerName, PlayerPrefs.GetInt("score"));
+            }
         }
     }
 
     public void LoadHighScores()
     {
-        LevelLoadHandler.Instance.LoadLevel("HighScores_LVP", true);
+        AudioManager.Instance.PlaySFX("SelectSmall");
+        LevelLoadHandler.Instance.LoadLevel("HighScores_LVP", false);
+        this.player.posController.MovePlayer(-50, -50);
     }
 
 	void UpdateText(){

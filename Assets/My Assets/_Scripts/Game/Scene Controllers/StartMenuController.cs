@@ -30,32 +30,39 @@ public class StartMenuController : MonoBehaviour {
     }
 
 	public void StartGame(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         //EscapeHandler.instance.ClearButtons();
 		LevelLoadHandler.Instance.LoadLevel("LoadSave_LVP", false);
 	}
 
     public void HowToPlay()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("HowToPlay_LVP", false);
     }
 
     public void Info()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Options_LVP", false);
     }
 
+    public void Credits()
+    {
+        AudioManager.Instance.PlaySFX("SelectSmall");
+        //EscapeHandler.instance.ClearButtons();
+        LevelLoadHandler.Instance.LoadLevel("InfoScene_LVP", false);
+    }
+
 	public void ResetHiScore(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         PlayerPrefs.SetInt("hiscore", 0);
 	}
 
 	public void ResetScore(){
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
 		PlayerPrefs.SetInt ("score", 0);
 	}
     

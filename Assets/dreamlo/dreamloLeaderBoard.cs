@@ -72,6 +72,14 @@ public class dreamloLeaderBoard : MonoBehaviour {
 		
 		WWW www = new WWW(dreamloWebserviceURL + privateCode + "/add-pipe/" + WWW.EscapeURL(playerName) + "/" + totalScore.ToString());
 		yield return www;
+        if (string.IsNullOrEmpty(www.error))
+        {
+            NotificationHandler.instance.MakeNotification("Success!", "High Score Uploaded!");
+        }
+        else
+        {
+            NotificationHandler.instance.MakeNotification("Error:", www.error);
+        }
 		highScores = www.text;
 	}
 	

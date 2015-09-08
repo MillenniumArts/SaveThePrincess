@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 4f9044c68363660428f401554385d4b0
+timeCreated: 1440031209
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Face
+    21300002: Head
+    21300004: Hair
+    21300006: Body
+    21300008: Shoulder
+    21300010: Hand_Back
+    21300012: Fingers
+    21300014: Hand_Front
+    21300016: Thigh
+    21300018: Calf
+    21300020: Thumb
+    21300022: Face_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Face
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 1719
+        width: 335
+        height: 250
+      alignment: 9
+      pivot: {x: .482338428, y: .319319814}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 1701
+        width: 355
+        height: 397
+      alignment: 9
+      pivot: {x: .471399963, y: .22100845}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hair
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 1666
+        width: 369
+        height: 395
+      alignment: 9
+      pivot: {x: .454975575, y: .137811199}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Body
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 851
+        width: 367
+        height: 602
+      alignment: 9
+      pivot: {x: .46785143, y: .201411754}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shoulder
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 1131
+        width: 203
+        height: 302
+      alignment: 9
+      pivot: {x: .404025674, y: .786432326}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_Back
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 661
+        width: 195
+        height: 321
+      alignment: 9
+      pivot: {x: .530314922, y: .931459963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fingers
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 652
+        width: 144
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Hand_Front
+      rect:
+        serializedVersion: 2
+        x: 1356
+        y: 641
+        width: 275
+        height: 331
+      alignment: 9
+      pivot: {x: .383486599, y: .964614749}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thigh
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 297
+        width: 263
+        height: 356
+      alignment: 9
+      pivot: {x: .352959573, y: .782938898}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Calf
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 19
+        width: 222
+        height: 238
+      alignment: 9
+      pivot: {x: .427080572, y: .874096096}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Thumb
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 743
+        width: 81
+        height: 65
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Face_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 1351
+        width: 325
+        height: 245
+      alignment: 9
+      pivot: {x: .529833496, y: .354709417}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -134,14 +134,14 @@ public class AudioManager : MonoBehaviour
     /// <param name="name">The dictionary key to the song's file name.</param>
     private void LoadPlaySongClip(string name)
     {
-        Debug.Log("Load/PlaySongClip, start.  Passed in string is: " + name);
+        //Debug.Log("Load/PlaySongClip, start.  Passed in string is: " + name);
         if (name != null)
         {
-            Debug.Log(name + " is found.");
+            //Debug.Log(name + " is found.");
             AudioClip newClip = Resources.Load("_Audio/Music/" + _dictionary.GetMusic(name)) as AudioClip;
             if (newClip != null)
             {
-                Debug.Log("The name of the clip is: " + newClip.name);
+                //Debug.Log("The name of the clip is: " + newClip.name);
                 musicAudioSource.clip = newClip;
                 PlaySound(musicAudioSource);
             }

@@ -309,12 +309,21 @@ public class Item : MonoBehaviour {
 		return dollarCost;
 	}
 	public string GetStatsString(){
-		string statsString = GetName () + "\n" +
-			//"Type: " + GetItemSubClass() + "\n" +
-				"DMG: +" + GetAtkMod() + " | " + 
-				"AMR: +" + GetDefMod() + "\n" +
-				"Cost: $" + GetDollarCost() + "\n";
-		return statsString;
+        string statsString = "";
+        if (this.GetItemClass().ToLower() == "armor")
+        {
+            statsString = GetName() + "\n" +
+                "AMR: +" + GetDefMod() + "\n" +
+                "Cost: $" + GetDollarCost() + "\n";
+            
+        }
+        else if (this.GetItemClass().ToLower() == "weapon")
+        {
+            statsString = GetName() + "\n" +
+                "DMG: +" + GetAtkMod() + "\n" +
+                "Cost: $" + GetDollarCost() + "\n";
+        }
+    return statsString;
 	}
 	#endregion Getters
 

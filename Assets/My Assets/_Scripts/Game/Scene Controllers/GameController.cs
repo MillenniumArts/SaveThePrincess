@@ -62,10 +62,9 @@ public class GameController : MonoBehaviour
                 rightArmorText,
                 leftDamageText,
                 rightDamageText,
-                numEnemiesKilledText,
                 healTurnsRemainText;
     // Inventory Text
-    public Text apples, bread, cheese, hPots, ePots, campKits;
+    public Text apples, bread, cheese, hPots, ePots;
 
     // battle counter text
     public Text battleText;
@@ -74,10 +73,11 @@ public class GameController : MonoBehaviour
                   retreatButton = null,
                   confirmButton = null,
                   cancelButton = null,
-                  inventoryToggleButton = null,
-                  inventoryHandle = null;
+                  inventoryToggleButton = null;
 
     public GameObject confirmPanel = null;
+
+    public GameObject[] pulsingButtons;
 
     private BackgroundManager _backgroundManager;
 
@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void OnRetreat()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         // open confirm panel
         this.confirmPanel.gameObject.SetActive(true);
     }
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Confirm()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectSmall");
         confirmed = true;
         hasSelected = true;
     }
@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Cancel()
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("Return");
         confirmed = false;
         hasSelected = true;
     }
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
     /// <param name="attacked">Attacked Player.</param>
     public void OnActionUsed(PawnController attacked)
     {
-        AudioManager.Instance.PlaySFX("Button1");
+        AudioManager.Instance.PlaySFX("SelectLarge");
         // close inv if open
         if (invAnim.open)
             invAnim.OpenClose();
@@ -137,6 +137,18 @@ public class GameController : MonoBehaviour
             // second click
             attackBarMoving = false;
             playerHasAttacked = true;
+            for (int i = 0; i < 2; i++)
+            {
+                if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<ImagePulse>().PulseOff();
+                }
+                else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+                {
+                    pulsingButtons[i].GetComponent<SpritePulse>().PulseOff();
+                }
+            }
+
         }
         // After second click
         if (!attackBarMoving && playerHasAttacked)
@@ -153,16 +165,27 @@ public class GameController : MonoBehaviour
             float damageToApply = NRGReductionFactor * (attackAmount / attackMeter.maxValue) * (float)this.player.GetTotalDamage();
 
             // regenerate the reciprocal ((max - value) / max) of the energy used on attack
-            PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST);
-            // energy cost is the remainder of the total cost - regen
-            PLAYER_ENERGY_COST_AMT = this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT;
+            PLAYER_ENERGY_REGEN_AMT = Mathf.RoundToInt(
+                                    ((attackMeter.maxValue - attackMeter.value) / attackMeter.maxValue) * this.player.ATTACK_ENERGY_COST
+                                    ) ;
+            // energy cost is the remainder of the total cost - regen (divided by 2, because damage is limited to 50% output)
+            PLAYER_ENERGY_COST_AMT = Mathf.RoundToInt(
+                                    (this.player.ATTACK_ENERGY_COST - PLAYER_ENERGY_REGEN_AMT)
+                                    ) / 2;
+
 
             // start animation
             combatController.setState(CombatController.BattleStates.PLAYERANIMATE);
             StartCooldown(COOLDOWN_LENGTH);
-            this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
+			if (damageToApply > 0)
+				this.player.Attack(attacked, Mathf.RoundToInt(damageToApply), PLAYER_ENERGY_COST_AMT);
+			else
+				this.player.TriggerAnimation("healmagic");
+
+
             // set bar to a random position for the next attack
             attackMeter.value = Random.Range(0, attackMeter.maxValue);
+            this.turn = 1;
         }
     }
 
@@ -172,6 +195,17 @@ public class GameController : MonoBehaviour
         attackMeter.value = Random.Range(0, attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         this.cancelAttack.gameObject.SetActive(false);
+        for (int i = 0; i < 2; i++)
+        {
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
+            }
+            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<SpritePulse>().PulseOn();
+            }
+        }
     }
 
     /// <summary>
@@ -310,6 +344,7 @@ public class GameController : MonoBehaviour
         if (this.player.remainingHealth > 0){
             Invoke("PlayerRegen", (timeVal));
             this.combatController.setState(CombatController.BattleStates.PLAYERCHOICE);
+            this.turn = 0;
             this.playerHasEatenFoodThisTurn = false;
             this.enemyHasAttacked = false;
             this.playerHasAttacked = false;
@@ -320,6 +355,22 @@ public class GameController : MonoBehaviour
             if (!this.enemy.IsDead())
                 waiting = false;
         }
+        for (int i = 0; i < 2; i++)
+        {
+            if (pulsingButtons[i].GetComponent<ImagePulse>() == true)
+            {
+                pulsingButtons[i].GetComponent<ImagePulse>().PulseOn();
+            }
+            else if (pulsingButtons[i].GetComponent<SpritePulse>() == true)
+            {
+                Invoke("PulseNow",2f);
+            }
+        }
+    }
+
+    private void PulseNow()
+    {
+        pulsingButtons[0].GetComponent<SpritePulse>().PulseOn();
     }
 
     /// <summary>
@@ -479,7 +530,6 @@ public class GameController : MonoBehaviour
         this.cancelAttack.gameObject.SetActive(false);
         this.retreatButton.gameObject.SetActive(false);
         this.inventoryToggleButton.gameObject.SetActive(false);
-        this.inventoryHandle.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -489,7 +539,6 @@ public class GameController : MonoBehaviour
     {
         this.leftPhysAttack.gameObject.SetActive(true);
         this.retreatButton.gameObject.SetActive(true);
-        this.inventoryHandle.gameObject.SetActive(true);
         this.inventoryToggleButton.gameObject.SetActive(true);
     }
     #endregion buttons
@@ -500,7 +549,23 @@ public class GameController : MonoBehaviour
     public void UpdateBars()
     {
         this.playerHealth.value = this.player.remainingHealth;
+        if (((float)this.player.remainingHealth / (float)this.player.totalHealth) <= 0.25f)
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[2].GetComponent<ImagePulse>().PulseOff();
+        }
         this.playerMana.value = this.player.remainingEnergy;
+        if (((float)this.player.remainingEnergy / (float)this.player.totalEnergy) <= 0.25f)
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOn();
+        }
+        else
+        {
+            pulsingButtons[3].GetComponent<ImagePulse>().PulseOff();
+        }
         this.enemyHealth.value = this.enemy.remainingHealth;
         this.enemyMana.value = this.enemy.remainingEnergy;
     }
@@ -526,9 +591,9 @@ public class GameController : MonoBehaviour
                 this.attackMeter.value = this.attackMeter.maxValue;
                 increasing = false;
             }
-            else if (this.attackMeter.value <= 0)
+            else if (this.attackMeter.value <= attackMeter.minValue)
             {
-                this.attackMeter.value = 0;
+                this.attackMeter.value = attackMeter.minValue;
                 increasing = true;
             }
             // set final value
@@ -552,10 +617,10 @@ public class GameController : MonoBehaviour
     private void UpdateText()
     {
         // Battle stats (Top UI)
-        this.leftHealthText.text = this.player.remainingHealth + "/" + this.player.totalHealth;
-        this.rightHealthText.text = this.enemy.remainingHealth + "/" + this.enemy.totalHealth;
-        this.leftManaText.text = this.player.remainingEnergy + "/" + this.player.totalEnergy;
-        this.rightManaText.text = this.enemy.remainingEnergy + "/" + this.enemy.totalEnergy;
+        this.leftHealthText.text = this.player.remainingHealth + " / " + this.player.totalHealth;
+        this.rightHealthText.text = this.enemy.remainingHealth + " / " + this.enemy.totalHealth;
+        this.leftManaText.text = this.player.remainingEnergy + " / " + this.player.totalEnergy;
+        this.rightManaText.text = this.enemy.remainingEnergy + " / " + this.enemy.totalEnergy;
         this.leftArmorText.text = this.player.GetTotalArmor().ToString();
         this.rightArmorText.text = this.enemy.GetTotalArmor().ToString();
         this.leftDamageText.text = this.player.GetTotalDamage().ToString();
@@ -566,7 +631,7 @@ public class GameController : MonoBehaviour
         //this.numEnemiesKilledText.text = score.ToString();
 
         // battles stat
-        this.battleText.text = (currentBattle + 1) + "/" + DifficultyLevel.GetInstance().GetDifficultyMultiplier() + " Battles";
+        this.battleText.text = (currentBattle + 1) + " / " + DifficultyLevel.GetInstance().GetDifficultyMultiplier();
         if (this.inventoryToggleButton.isActiveAndEnabled)
         {
             // inventory text
@@ -595,6 +660,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void UpdateInventory()
+    {
+        if (this.turn == 0)
+        {
+            this.inventoryToggleButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.inventoryToggleButton.gameObject.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Updates UI
     /// </summary>
@@ -605,6 +682,7 @@ public class GameController : MonoBehaviour
         UpdateBars();
         UpdateAttackBar();
         UpdateConfirmPanel();
+        UpdateInventory();
     }
 
     /// <summary>
@@ -620,6 +698,10 @@ public class GameController : MonoBehaviour
                 //Debug.Log("Player Dead!!");
                 this.player.numTurnsLeftToHeal = 0;
                 DisableButtons();
+                foreach (SpriteRenderer renderer in this.player.playerWeapon.gameObject.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.gameObject.SetActive(false);
+                }
             }
         }
         else
@@ -664,10 +746,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void LoadNextBattle()
     {
-        // VICTORY ANIMATION
-        turn = 0;
-        // player turn stored in local, 0 for playerTurn
-        PlayerPrefs.SetInt("turn", turn);
         // enemy dead, fight another and keep player on screen
         //DontDestroyOnLoad(this.player);
         this.player.dollarBalance += this.enemy.DropMoney();
@@ -686,10 +764,10 @@ public class GameController : MonoBehaviour
     private void RetreatFromBattle()
     {
         //this.player.transform.localPosition = this.prevPos;
-        BattleCounter.GetInstance().ResetCurrentBattleCount();
+        //BattleCounter.GetInstance().ResetCurrentBattleCount(); /// Commented out by Carlo, I think this is to keep the count even at a retreat.
         // Set the idle animation to town idle
         player.InBattle(false);
-
+        PlayerPrefs.SetInt("retreated", 1);
         if (!waiting)
         {
             Debug.Log("Enemy Stats need to be reset to full");
@@ -793,6 +871,8 @@ public class GameController : MonoBehaviour
                 // check if player wants to camp out before next battle
                 // load camp kit check scene?
             }
+            // No more resetting stats on retreat.  So this is to save the stats after each battle.
+            EnemyStats.GetInstance().SetCheckpoint();
             LoadNextBattle();
         }
     }
@@ -800,6 +880,7 @@ public class GameController : MonoBehaviour
     #region monobehaviour
     void Awake()
     {
+        PlayerPrefs.SetInt("retreated", 0);
         SceneFadeHandler.Instance.levelStarting = true;
         EscapeHandler.instance.GetButtons();
         // Combat AI Controller reference
@@ -816,9 +897,6 @@ public class GameController : MonoBehaviour
 
         _backgroundManager = FindObjectOfType<BackgroundManager>();
         _backgroundManager.SetBackground();
-
-       
-
     }
 
     // Use this for initialization
@@ -832,7 +910,6 @@ public class GameController : MonoBehaviour
 
         this.turn = 0;
 
-        PlayerPrefs.SetInt("turn", turn);
         this.scoredThisRound = false;
         this.score = PlayerPrefs.GetInt("score");
 
@@ -866,7 +943,8 @@ public class GameController : MonoBehaviour
 
         // Set Attack Meter Amount
         this.attackMeter.maxValue = 100;
-        //this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
+        
+		//this.attackMeter.value = (float)Random.Range(0, this.attackMeter.maxValue);
         this.attackMeter.gameObject.SetActive(false);
         // set cancel button to invis
         this.cancelAttack.gameObject.SetActive(false);

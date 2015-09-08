@@ -20,16 +20,19 @@ public class LoadSaveController : MonoBehaviour {
         {
             LevelLoadHandler.Instance.LoadLevel("Town_LVP", false);
         }
+        AudioManager.Instance.PlaySFX("SelectSmall");
     }
 
     public void StartNewGame()
     {
         // start new game
+        AudioManager.Instance.PlaySFX("SelectLarge");
         LevelLoadHandler.Instance.LoadLevel("CharacterSelect_LVP", false);
     }
 
     public void ClearSaveData()
     {
+        AudioManager.Instance.PlaySFX("SelectSmall");
         PlayerPrefs.SetString("GameData", "");
         PlayerPrefs.SetInt("GameToLoad", 0);
         Debug.Log(PlayerPrefs.GetInt("GameToLoad"));

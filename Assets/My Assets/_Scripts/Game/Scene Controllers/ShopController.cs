@@ -147,6 +147,7 @@ public class ShopController : MonoBehaviour
         }
         selectedItemStats.text = "";
         selectedItem = -1;
+        this.player.inBattle = false;
     }
 
     private void DestroyItem(int n)
@@ -301,6 +302,7 @@ public class ShopController : MonoBehaviour
     {
         firstTick = true;
         Invoke("RandomizeCost", 0.01f);
+        this.player.inBattle = false;
     }
 
     #region monobehaviour
@@ -333,6 +335,7 @@ public class ShopController : MonoBehaviour
 
     public void Update()
     {
+        this.player.inBattle = false;
         ItemNameUpdate();
         UpdateText();
         if (!firstTick)

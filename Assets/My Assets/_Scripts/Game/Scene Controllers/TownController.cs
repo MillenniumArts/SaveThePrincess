@@ -36,6 +36,7 @@ public class TownController : MonoBehaviour {
         this.nrgPot.text = this.player.inventory.EnergyPotions.ToString() + "/2";
         this.hPot.text = this.player.inventory.HealthPotions.ToString() + "/2";
         this.score.text = PlayerPrefs.GetInt("score").ToString();
+        this.player.inBattle = false;
 	}
 
 	public void GoToBattle(){
@@ -47,6 +48,7 @@ public class TownController : MonoBehaviour {
 
 	public void GoToStore(){
         AudioManager.Instance.PlaySFX("SelectSmall");
+        this.player.inBattle = false;
 		//DontDestroyOnLoad (this.player);
         //EscapeHandler.instance.ClearButtons();
         LevelLoadHandler.Instance.LoadLevel("Store_LVP", false);

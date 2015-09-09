@@ -250,8 +250,10 @@ public class StatSelectController : MonoBehaviour
         // value per credit:
         this.healthInc = 25;
         this.damageInc = 5;
-        this.armorInc = 5;
+        this.armorInc = 10;
         this.energyInc = 10;
+
+        this.player.InBattle(false);
 
         //first Enemy handling
         Invoke("FirstEnemy", 0.01f);

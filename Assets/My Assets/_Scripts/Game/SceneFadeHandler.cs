@@ -9,6 +9,9 @@ public class SceneFadeHandler : MonoBehaviour {
     public Image fadeImg;
     public bool levelStarting = true;
 
+    public int battleLevelIndex;
+    public float fadeSpeedMultiplier;
+
 
     public void FadeToBlack()
     {
@@ -18,6 +21,16 @@ public class SceneFadeHandler : MonoBehaviour {
     public void FadeToClear()
     {
         alpha -= fadeSpeed;
+    }
+
+    public void FadeToBlackSlow()
+    {
+        alpha += (fadeSpeed * fadeSpeedMultiplier);
+    }
+
+    public void FadeToClearSlow()
+    {
+        alpha -= (fadeSpeed * fadeSpeedMultiplier);
     }
 
 	// Use this for initialization
@@ -34,9 +47,27 @@ public class SceneFadeHandler : MonoBehaviour {
         fadeImg.color = temp;
 
         if (levelStarting)
-            FadeToClear();
+        {
+            if (Application.loadedLevel == battleLevelIndex)
+            {
+                FadeToClearSlow();
+            }
+            else
+            {
+                FadeToClear();
+            }
+        }
         else
-            FadeToBlack();
+        {
+            if (Application.loadedLevel == battleLevelIndex)
+            {
+                FadeToBlackSlow();
+            }
+            else
+            {
+                FadeToBlack();
+            }
+        }
 
         if (alpha < 0.0f || alpha > 1.0f)
         {

@@ -273,7 +273,7 @@ public class MerchantController : MonoBehaviour {
         SceneFadeHandler.Instance.levelStarting = true;
         AudioManager.Instance.PlayNewSong("ForestOverworld");
         EscapeHandler.instance.GetButtons();
-        NotificationHandler.instance.MakeNotification("Merchant", "Welcome to the merchant! Feel free to buy yourself some food or potions to help sustain through battles!");
+        NotificationHandler.instance.MakeNotification("Merchant", "Buy food or potions to help sustain through battles! The food will take effect on the next turn.");
         this.confirmPanel.gameObject.SetActive(false);
 
         // get player

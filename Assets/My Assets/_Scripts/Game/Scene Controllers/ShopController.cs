@@ -70,6 +70,7 @@ public class ShopController : MonoBehaviour
         {
             priceTags[i].color = Color.white;
         }
+		buyButton.gameObject.SetActive(false);
     }
 
     #region purchasing items
